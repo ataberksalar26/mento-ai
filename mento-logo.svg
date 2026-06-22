@@ -1,0 +1,33 @@
+﻿<svg width="214" height="58" viewBox="0 0 214 58" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Mento AI Logo</title>
+  <desc id="desc">Mento AI icin altin vurguya sahip koyu lacivert premium logo.</desc>
+  <defs>
+    <linearGradient id="gold" x1="6" y1="7" x2="50" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3C56D"/>
+      <stop offset="0.48" stop-color="#D4A24C"/>
+      <stop offset="1" stop-color="#9F6D2E"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="8" y1="5" x2="52" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182943"/>
+      <stop offset="1" stop-color="#0E1A2B"/>
+    </linearGradient>
+    <filter id="softShadow" x="0" y="0" width="62" height="62" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#0E1A2B" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <rect x="6" y="6" width="46" height="46" rx="13" fill="url(#ink)" stroke="#F7F3E8" stroke-opacity="0.18"/>
+    <path d="M17.5 39V19.4H22.1L29 30.4L35.9 19.4H40.5V39H36.1V27.1L30.8 35.4H27.2L21.9 27.1V39H17.5Z" fill="#F7F3E8"/>
+    <circle cx="43" cy="15" r="5.2" fill="url(#gold)"/>
+    <path d="M43 10.8V19.2M38.8 15H47.2" stroke="#0E1A2B" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+
+  <g>
+    <text x="66" y="35" fill="#F7F3E8" font-family="Fraunces, Georgia, serif" font-size="28" font-weight="650" letter-spacing="0">mento</text>
+    <text x="151" y="35" fill="#D4A24C" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="2.8">AI</text>
+    <path d="M67 43H141" stroke="#D4A24C" stroke-width="2" stroke-linecap="round" opacity="0.78"/>
+    <path d="M151 43H169" stroke="#F7F3E8" stroke-width="2" stroke-linecap="round" opacity="0.32"/>
+  </g>
+</svg>
+

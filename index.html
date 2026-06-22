@@ -1,0 +1,1092 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mento AI — Yanlışını gör, nedenini anla.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1A2B;
+    --ink-2:#15243A;
+    --ink-3:#1D3050;
+    --paper:#F2F4F7;
+    --paper-2:#E5E9EE;
+    --amber:#D4A24C;
+    --amber-deep:#B8853A;
+    --teal:#2B6F5C;
+    --teal-light:#3D8E76;
+    --muted-ink:#8B93A1;
+    --muted-paper:#5B6472;
+    --red-soft:#A85D4F;
+    --line-on-ink:rgba(247,243,232,0.12);
+    --line-on-paper:rgba(14,26,43,0.14);
+    --radius:14px;
+    --max:1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px;}
+
+  /* ===== BUTTONS ===== */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 26px;border-radius:999px;
+    font-weight:600;font-size:15px;
+    border:1px solid transparent;
+    cursor:pointer;transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-primary{background:var(--amber);color:var(--ink);}
+  .btn-primary:hover{background:var(--amber-deep);transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(212,162,76,0.55);}
+  .btn-ghost-light{border-color:var(--line-on-ink);color:var(--paper);}
+  .btn-ghost-light:hover{border-color:var(--paper);background:rgba(247,243,232,0.06);}
+  .btn-ghost-dark{border-color:var(--line-on-paper);color:var(--ink);}
+  .btn-ghost-dark:hover{border-color:var(--ink);background:rgba(14,26,43,0.04);}
+  .btn-full{width:100%;}
+
+  /* ===== HEADER ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,26,43,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-on-ink);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:600;color:var(--paper);font-family:'Fraunces',serif;}
+  .brand-logo{width:142px;height:auto;display:block;}
+  .app-nav .brand-logo{width:132px;}
+  .logo-dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 3px rgba(212,162,76,0.22);}
+  nav.links{display:flex;gap:34px;align-items:center;}
+  nav.links a{color:var(--muted-ink);font-size:14.5px;font-weight:500;transition:color .2s;}
+  nav.links a:hover{color:var(--paper);}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .nav-cta a.login{color:var(--paper);font-size:14.5px;font-weight:500;}
+  .menu-toggle{display:none;background:none;border:none;color:var(--paper);cursor:pointer;padding:6px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    background:var(--ink);
+    color:var(--paper);
+    padding:84px 0 96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;}
+  .hero-eyebrow{color:var(--amber);margin-bottom:18px;}
+  .hero h1{font-size:50px;line-height:1.08;margin-bottom:22px;color:var(--paper);}
+  .hero h1 em{font-style:italic;color:var(--amber);font-weight:500;}
+  .hero p.lead{color:var(--muted-ink);font-size:17.5px;max-width:480px;margin-bottom:34px;}
+  .hero-ctas{display:flex;gap:14px;margin-bottom:38px;}
+  .trust-row{display:flex;align-items:center;gap:14px;color:var(--muted-ink);font-size:13.5px;}
+  .trust-row .mono{color:var(--paper);font-weight:500;}
+  .trust-row .sep{color:var(--line-on-ink);}
+
+  /* answer sheet visual */
+  .sheet-wrap{position:relative;}
+  .sheet{
+    background:var(--ink-2);
+    border:1px solid var(--line-on-ink);
+    border-radius:18px;
+    padding:26px 24px 22px;
+    position:relative;
+    box-shadow:0 30px 60px -24px rgba(0,0,0,0.55);
+  }
+  .sheet-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line-on-ink);}
+  .sheet-head .mono{font-size:12px;color:var(--muted-ink);letter-spacing:0.06em;}
+  .scan-line{
+    position:absolute;left:24px;right:24px;height:2px;
+    background:linear-gradient(90deg, transparent, var(--amber), transparent);
+    top:78px;
+    animation:scan 2.6s cubic-bezier(.4,0,.2,1) 0.3s 1 forwards;
+    opacity:0;
+  }
+  .col-headers{display:grid;grid-template-columns:30px repeat(5,1fr);gap:0 10px;margin-bottom:8px;padding-left:2px;}
+  .col-headers span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted-ink);text-align:center;}
+  .row{display:grid;grid-template-columns:30px repeat(5,1fr);align-items:center;gap:0 10px;padding:7px 0;border-bottom:1px dashed var(--line-on-ink);}
+  .row:last-child{border-bottom:none;}
+  .row .qnum{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-ink);}
+  .bubble{
+    width:18px;height:18px;border-radius:50%;
+    border:1.5px solid var(--line-on-ink);
+    margin:0 auto;
+    position:relative;
+    opacity:0;
+    transform:scale(.4);
+  }
+  .row.reveal .bubble{animation:pop .35s ease forwards;}
+  .bubble.fill-amber{background:var(--amber);border-color:var(--amber);}
+  .bubble.fill-teal{background:var(--teal-light);border-color:var(--teal-light);}
+  .bubble.fill-wrong{border-color:var(--red-soft);}
+  .bubble.fill-wrong::before,.bubble.fill-wrong::after{
+    content:'';position:absolute;background:var(--red-soft);
+    width:11px;height:1.6px;top:50%;left:50%;
+  }
+  .bubble.fill-wrong::before{transform:translate(-50%,-50%) rotate(45deg);}
+  .bubble.fill-wrong::after{transform:translate(-50%,-50%) rotate(-45deg);}
+
+  .ai-tip{
+    position:absolute;
+    right:-18px;bottom:42px;
+    width:230px;
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:12px;
+    padding:14px 16px;
+    box-shadow:0 20px 40px -16px rgba(0,0,0,0.5);
+    opacity:0;
+    transform:translateY(8px);
+    animation:tipIn .5s ease 2.4s forwards;
+  }
+  .ai-tip .tip-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:var(--teal);text-transform:uppercase;margin-bottom:5px;display:block;}
+  .ai-tip p{font-size:13px;line-height:1.4;}
+
+  @keyframes pop{from{opacity:0;transform:scale(.4);}to{opacity:1;transform:scale(1);}}
+  @keyframes scan{0%{opacity:0;top:78px;}10%{opacity:1;}90%{opacity:1;}100%{opacity:0;top:340px;}}
+  @keyframes tipIn{to{opacity:1;transform:translateY(0);}}
+
+  @media (prefers-reduced-motion: reduce){
+    .row .bubble,.ai-tip,.scan-line{animation:none !important;opacity:1 !important;transform:none !important;}
+  }
+
+  /* ===== STATS BAND ===== */
+  .stats{background:var(--paper-2);border-bottom:1px solid var(--line-on-paper);}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);padding:40px 28px;gap:24px;}
+  .stat{border-left:1px solid var(--line-on-paper);padding-left:24px;}
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat .num{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:600;color:var(--ink);}
+  .stat .label{font-size:13.5px;color:var(--muted-paper);margin-top:4px;}
+
+  /* ===== SECTION GENERIC ===== */
+  section{padding:104px 0;}
+  .section-head{max-width:620px;margin-bottom:56px;}
+  .section-head .eyebrow{color:var(--teal);margin-bottom:14px;}
+  .section-head h2{font-size:36px;line-height:1.18;}
+  .section-head p{color:var(--muted-paper);margin-top:14px;font-size:16.5px;}
+
+  /* ===== BRANCHES ===== */
+  .branches{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .branch-card{
+    background:var(--ink);color:var(--paper);
+    border-radius:var(--radius);
+    padding:30px 26px;
+    display:flex;flex-direction:column;gap:16px;
+    transition:transform .3s ease;
+  }
+  .branch-card:hover{transform:translateY(-6px);}
+  .branch-card .tag{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);letter-spacing:0.08em;}
+  .branch-card h3{font-size:24px;color:var(--paper);}
+  .branch-card .full-name{font-size:13.5px;color:var(--muted-ink);}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;}
+  .chip{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--line-on-ink);color:var(--muted-ink);}
+  .branch-card p.desc{font-size:14px;color:var(--muted-ink);margin-top:auto;padding-top:8px;border-top:1px solid var(--line-on-ink);}
+
+  /* ===== HOW IT WORKS ===== */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line-on-paper);}
+  .step{padding:32px 24px 0;border-right:1px solid var(--line-on-paper);position:relative;}
+  .step:last-child{border-right:none;}
+  .step .step-num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--amber-deep);margin-bottom:14px;}
+  .step h3{font-size:19px;margin-bottom:10px;}
+  .step p{color:var(--muted-paper);font-size:14.5px;}
+
+  /* ===== FEATURES ===== */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-on-paper);border:1px solid var(--line-on-paper);border-radius:var(--radius);overflow:hidden;}
+  .feature{background:var(--paper);padding:32px 28px;transition:background .25s;}
+  .feature:hover{background:var(--paper-2);}
+  .feature .ficon{width:36px;height:36px;border-radius:9px;background:var(--ink);color:var(--amber);display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;}
+  .feature h3{font-size:17.5px;margin-bottom:8px;}
+  .feature p{font-size:14px;color:var(--muted-paper);}
+
+  /* ===== TESTIMONIALS ===== */
+  .testi-section{background:var(--ink-2);color:var(--paper);}
+  .testi-section .section-head .eyebrow{color:var(--amber);}
+  .testi-section .section-head p{color:var(--muted-ink);}
+  .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .testi-card{background:var(--ink-3);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:18px;}
+  .testi-card .quote{font-family:'Fraunces',serif;font-style:italic;font-size:17px;line-height:1.5;color:var(--paper);}
+  .testi-who{display:flex;align-items:center;gap:11px;}
+  .avatar{width:34px;height:34px;border-radius:50%;background:var(--amber);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;font-family:'JetBrains Mono',monospace;}
+  .testi-who .name{font-size:13.5px;font-weight:600;}
+  .testi-who .meta{font-size:12px;color:var(--muted-ink);}
+
+  /* ===== CTA BAND ===== */
+  .cta-band{background:var(--paper-2);}
+  .cta-band .wrap{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:60px 28px;}
+  .cta-band h2{font-size:32px;max-width:460px;line-height:1.2;}
+  .countdown-block{text-align:right;}
+  .countdown{display:flex;gap:18px;}
+  .countdown .unit{text-align:center;}
+  .countdown .unit .n{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:600;color:var(--ink);}
+  .countdown .unit .u{font-size:11px;color:var(--muted-paper);text-transform:uppercase;letter-spacing:0.06em;}
+  .countdown-note{font-size:12px;color:var(--muted-paper);margin-top:10px;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--ink);color:var(--muted-ink);padding:56px 0 32px;}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;padding-bottom:40px;border-bottom:1px solid var(--line-on-ink);}
+  .foot-brand .logo{margin-bottom:14px;}
+  .foot-brand p{font-size:14px;max-width:280px;color:var(--muted-ink);}
+  .foot-cols{display:flex;gap:60px;}
+  .foot-col h4{font-family:'Inter',sans-serif;font-size:13px;color:var(--paper);margin-bottom:14px;font-weight:600;}
+  .foot-col ul li{margin-bottom:10px;}
+  .foot-col ul li a{font-size:14px;color:var(--muted-ink);transition:color .2s;}
+  .foot-col ul li a:hover{color:var(--paper);}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:24px;font-size:13px;}
+
+  /* ===== AUTH + APP PREVIEW ===== */
+  body.modal-open{overflow:hidden;}
+  .auth-shell{
+    position:fixed;inset:0;z-index:100;
+    display:none;align-items:center;justify-content:center;
+    padding:24px;background:rgba(7,16,30,0.72);
+    backdrop-filter:blur(12px);
+  }
+  .auth-shell.is-open{display:flex;}
+  .auth-card{
+    width:min(940px,100%);
+    max-height:calc(100vh - 48px);
+    overflow:auto;
+    display:grid;grid-template-columns:0.92fr 1.08fr;
+    background:var(--paper);
+    border-radius:18px;
+    box-shadow:0 36px 90px -34px rgba(0,0,0,0.75);
+  }
+  .auth-side{
+    background:var(--ink);
+    color:var(--paper);
+    padding:34px;
+    display:flex;flex-direction:column;justify-content:space-between;gap:28px;
+  }
+  .auth-side .eyebrow{color:var(--amber);}
+  .auth-side h2{font-size:34px;line-height:1.12;margin:12px 0 14px;}
+  .auth-side p{color:var(--muted-ink);}
+  .auth-mini{
+    border:1px solid var(--line-on-ink);
+    border-radius:14px;
+    padding:18px;
+    display:grid;gap:14px;
+    background:rgba(255,255,255,0.03);
+  }
+  .auth-mini-row{display:flex;justify-content:space-between;gap:16px;font-size:13px;color:var(--muted-ink);}
+  .auth-mini-row strong{color:var(--paper);}
+  .auth-main{padding:32px;}
+  .auth-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:22px;}
+  .auth-top h2{font-size:28px;line-height:1.15;margin-bottom:7px;}
+  .auth-top p{color:var(--muted-paper);font-size:14px;}
+  .modal-close{
+    width:38px;height:38px;border-radius:999px;
+    border:1px solid var(--line-on-paper);
+    background:transparent;color:var(--ink);
+    cursor:pointer;font-size:22px;line-height:1;
+  }
+  .auth-tabs{display:grid;grid-template-columns:1fr 1fr;margin-bottom:22px;border:1px solid var(--line-on-paper);border-radius:999px;padding:4px;}
+  .auth-tabs button{
+    border:0;border-radius:999px;background:transparent;
+    padding:10px 12px;font-weight:700;color:var(--muted-paper);
+    cursor:pointer;
+  }
+  .auth-tabs button.active{background:var(--ink);color:var(--paper);}
+  .auth-form{display:none;gap:15px;}
+  .auth-form.active{display:grid;}
+  .field{display:grid;gap:7px;}
+  .field label{font-size:13px;font-weight:700;color:var(--ink);}
+  .field input,.field select{
+    width:100%;border:1px solid var(--line-on-paper);border-radius:12px;
+    padding:13px 14px;background:white;color:var(--ink);
+    font:inherit;
+  }
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .form-note{font-size:12px;color:var(--muted-paper);line-height:1.45;}
+  .switch-copy{text-align:center;font-size:13.5px;color:var(--muted-paper);}
+  .switch-copy button{border:0;background:transparent;color:var(--teal);font-weight:800;cursor:pointer;}
+
+  .app-modal{align-items:center;background:rgba(7,16,30,0.76);}
+  .app-modal .auth-card{
+    grid-template-columns:250px minmax(0,1fr);
+    width:min(1280px,calc(100vw - 44px));
+    min-height:min(760px,calc(100vh - 44px));
+    border:1px solid rgba(247,243,232,0.12);
+    border-radius:22px;
+    overflow:hidden;
+    background:#EEF2F6;
+  }
+  .app-nav{
+    background:linear-gradient(180deg,#0E1A2B,#101D31 62%,#091424);
+    color:var(--paper);
+    padding:28px 20px;
+    display:flex;flex-direction:column;gap:22px;
+  }
+  .app-user{border:1px solid rgba(247,243,232,0.14);border-radius:16px;padding:16px;background:rgba(255,255,255,0.035);}
+  .app-user strong{display:block;font-size:15px;}
+  .app-user span{font-size:12.5px;color:var(--muted-ink);}
+  .app-menu{display:grid;gap:8px;}
+  .app-menu button{
+    border:1px solid transparent;background:transparent;color:var(--muted-ink);
+    border-radius:12px;padding:12px 13px;text-align:left;font-weight:750;cursor:pointer;
+  }
+  .app-menu button.active{background:rgba(212,162,76,0.14);border-color:rgba(212,162,76,0.38);color:var(--paper);}
+  .app-nav-note{margin-top:auto;border-top:1px solid var(--line-on-ink);padding-top:18px;color:var(--muted-ink);font-size:12.5px;line-height:1.5;}
+  .app-main{padding:30px;background:linear-gradient(135deg,#F6F8FA,#E9EEF4);overflow:auto;}
+  .app-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px;}
+  .app-head h2{font-size:34px;margin-bottom:7px;}
+  .app-head p{color:var(--muted-paper);}
+  .app-grid{display:grid;grid-template-columns:minmax(0,1.25fr) 360px;gap:18px;align-items:stretch;}
+  .dash-card{background:rgba(255,255,255,0.92);border:1px solid rgba(14,26,43,0.12);border-radius:18px;padding:22px;box-shadow:0 18px 40px -32px rgba(14,26,43,0.7);}
+  .dash-card.dark{background:linear-gradient(180deg,#0E1A2B,#121F34);color:var(--paper);border-color:rgba(247,243,232,0.1);}
+  .dash-card.dark p,.dash-card.dark span{color:var(--muted-ink);}
+  .dash-card h3{font-size:21px;margin-bottom:14px;}
+  .plan-list{display:grid;gap:11px;}
+  .plan-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:13px;padding:14px;border-radius:14px;background:#F0F3F7;border:1px solid rgba(14,26,43,0.06);}
+  .plan-dot{width:30px;height:30px;border-radius:10px;background:var(--amber);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;color:var(--ink);}
+  .plan-item strong{display:block;font-size:14px;}
+  .plan-item span{font-size:12.5px;color:var(--muted-paper);}
+  .plan-time{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--teal);font-weight:800;}
+  .mini-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
+  .mini-stat{padding:16px;border-radius:16px;background:white;border:1px solid rgba(14,26,43,0.12);box-shadow:0 14px 30px -28px rgba(14,26,43,0.65);}
+  .mini-stat strong{display:block;font-family:'JetBrains Mono',monospace;font-size:24px;color:var(--ink);}
+  .mini-stat span{font-size:12px;color:var(--muted-paper);}
+  .focus-strip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+  .focus-card{border:1px solid rgba(14,26,43,0.1);background:#F8FAFC;border-radius:16px;padding:16px;}
+  .focus-card span{display:block;color:var(--teal);font-size:12px;font-weight:800;margin-bottom:6px;}
+  .focus-card strong{font-size:15px;}
+  .coach-bubble{background:rgba(255,255,255,0.08);border:1px solid var(--line-on-ink);border-radius:16px;padding:15px;margin-top:12px;color:var(--paper);line-height:1.48;white-space:pre-wrap;}
+  .coach-form{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:14px;}
+  .coach-form input{
+    min-width:0;border:1px solid rgba(247,243,232,0.18);border-radius:999px;
+    padding:13px 15px;background:rgba(255,255,255,0.08);
+    color:var(--paper);font:inherit;
+  }
+  .coach-form input::placeholder{color:var(--muted-ink);}
+  .coach-form button{padding:12px 18px;}
+  .coach-status{min-height:18px;margin-top:10px;font-size:12px;color:var(--muted-ink);line-height:1.45;}
+  .priority-list{display:grid;gap:10px;margin-top:16px;}
+  .priority-item{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line-on-ink);padding-top:10px;font-size:13px;}
+  .priority-item strong{color:var(--paper);}
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:980px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero h1{font-size:38px;}
+    .stats .wrap{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(3){border-left:none;padding-left:0;}
+    .branches{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .step{border-right:none;border-bottom:1px solid var(--line-on-paper);padding-bottom:28px;}
+    .features{grid-template-columns:1fr;}
+    .testimonials{grid-template-columns:1fr;}
+    .cta-band .wrap{flex-direction:column;align-items:flex-start;}
+    .countdown-block{text-align:left;}
+    .foot-top{flex-direction:column;gap:28px;}
+    .foot-cols{gap:36px;}
+    .auth-card,.app-modal .auth-card{grid-template-columns:1fr;}
+    .auth-side{display:none;}
+    .app-grid{grid-template-columns:1fr;}
+    .field-row,.mini-stats{grid-template-columns:1fr;}
+    .app-nav{display:none;}
+    .coach-form{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="#" class="logo" aria-label="Mento AI"><img class="brand-logo" src="mento-logo.svg" alt="Mento AI"></a>
+    <nav class="links">
+      <a href="#subeler">TYT · AYT · LGS</a>
+      <a href="#nasil-calisir">Nasıl Çalışır</a>
+      <a href="#ozellikler">Özellikler</a>
+      <a href="#yorumlar">Öğrenciler</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#" class="login js-open-login">Giriş Yap</a>
+      <a href="#" class="btn btn-primary js-open-signup">Ücretsiz Dene</a>
+    </div>
+    <button class="menu-toggle" aria-label="Menüyü aç">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-eyebrow eyebrow">AI destekli sınav koçu</div>
+      <h1>Türkiye'nin en iyi yapay zekalı <em>öğrenme koçu</em>.</h1>
+      <p class="lead">TYT, AYT ve LGS için kişisel yapay zeka destekli ders platformun. Mento yanlışlarını analiz eder, eksik konularını bulur ve sana özel çalışma planını her gün yeniler.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-primary js-open-signup">Ücretsiz Dene</a>
+        <a href="#nasil-calisir" class="btn btn-ghost-light">Nasıl Çalışır?</a>
+      </div>
+      <div class="trust-row">
+        <span class="mono">14.000+</span><span>öğrenci</span>
+        <span class="sep">·</span>
+        <span class="mono">980K+</span><span>çözülen soru</span>
+        <span class="sep">·</span>
+        <span>TYT · AYT · LGS</span>
+      </div>
+    </div>
+
+    <div class="sheet-wrap">
+      <div class="sheet">
+        <div class="sheet-head">
+          <span class="mono">OPTİK CEVAP KAĞIDI</span>
+          <span class="mono">AI TARAMA</span>
+        </div>
+        <div class="scan-line"></div>
+        <div class="col-headers">
+          <span></span><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span>
+        </div>
+
+        <div class="row reveal" style="animation-delay:.1s">
+          <span class="qnum">01</span><span></span><span></span>
+          <span class="bubble fill-amber" style="animation-delay:.15s"></span>
+          <span></span><span></span>
+        </div>
+        <div class="row reveal" style="animation-delay:.25s">
+          <span class="qnum">02</span>
+          <span class="bubble fill-amber" style="animation-delay:.3s"></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="row reveal" style="animation-delay:.4s">
+          <span class="qnum">03</span><span></span><span></span><span></span>
+          <span class="bubble fill-amber" style="animation-delay:.45s"></span><span></span>
+        </div>
+        <div class="row reveal" style="animation-delay:.55s">
+          <span class="qnum">04</span><span></span>
+          <span class="bubble fill-teal" style="animation-delay:.6s"></span>
+          <span></span><span></span><span></span>
+        </div>
+        <div class="row reveal" style="animation-delay:.7s">
+          <span class="qnum">05</span><span></span><span></span>
+          <span class="bubble fill-wrong" style="animation-delay:.75s"></span>
+          <span></span><span></span>
+        </div>
+        <div class="row reveal" style="animation-delay:.85s">
+          <span class="qnum">06</span><span></span><span></span><span></span>
+          <span class="bubble fill-amber" style="animation-delay:.9s"></span><span></span>
+        </div>
+        <div class="row reveal" style="animation-delay:1.0s">
+          <span class="qnum">07</span>
+          <span class="bubble fill-amber" style="animation-delay:1.05s"></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="row reveal" style="animation-delay:1.15s">
+          <span class="qnum">08</span><span></span><span></span>
+          <span class="bubble fill-teal" style="animation-delay:1.2s"></span><span></span><span></span>
+        </div>
+        <div class="row reveal" style="animation-delay:1.3s">
+          <span class="qnum">09</span><span></span>
+          <span class="bubble fill-amber" style="animation-delay:1.35s"></span>
+          <span></span><span></span><span></span>
+        </div>
+        <div class="row reveal" style="animation-delay:1.45s">
+          <span class="qnum">10</span><span></span><span></span><span></span><span></span>
+          <span class="bubble fill-amber" style="animation-delay:1.5s"></span>
+        </div>
+
+        <div class="ai-tip">
+          <span class="tip-label">Mento Notu</span>
+          <p>5. soru — üslü sayılarda işlem hatası. Bu konudan 3 benzer soru ekledim.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stat"><div class="num" data-count="14230">0</div><div class="label">aktif öğrenci</div></div>
+    <div class="stat"><div class="num" data-count="980000">0</div><div class="label">çözülen soru</div></div>
+    <div class="stat"><div class="num" data-count="18" data-suffix="+">0</div><div class="label">ortalama net artışı</div></div>
+    <div class="stat"><div class="num" data-count="94" data-suffix="%">0</div><div class="label">memnuniyet oranı</div></div>
+  </div>
+</section>
+
+<section id="subeler">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">SINAVLAR</div>
+      <h2>Hangi sınava hazırlanıyorsan, Mento o sınavı bilir.</h2>
+      <p>Her sınavın kendi müfredatı, kendi soru tarzı var. Mento, çalışma programını sınavına göre kurar — genel geçer bir şablon değil.</p>
+    </div>
+    <div class="branches">
+      <div class="branch-card">
+        <span class="tag">SINAV 01</span>
+        <h3>TYT</h3>
+        <span class="full-name">Temel Yeterlilik Testi</span>
+        <div class="chips">
+          <span class="chip">Türkçe</span><span class="chip">Matematik</span><span class="chip">Fen Bilimleri</span><span class="chip">Sosyal Bilimler</span>
+        </div>
+        <p class="desc">Tüm derslerin temelini sağlamlaştırır, AYT'ye taşıyacağın eksikleri burada kapatır.</p>
+      </div>
+      <div class="branch-card">
+        <span class="tag">SINAV 02</span>
+        <h3>AYT</h3>
+        <span class="full-name">Alan Yeterlilik Testi</span>
+        <div class="chips">
+          <span class="chip">Sayısal</span><span class="chip">Sözel</span><span class="chip">Eşit Ağırlık</span>
+        </div>
+        <p class="desc">Seçtiğin alana göre program kurulur; Matematik-Fen veya Edebiyat-Sosyal ağırlıklı çalışırsın.</p>
+      </div>
+      <div class="branch-card">
+        <span class="tag">SINAV 03</span>
+        <h3>LGS</h3>
+        <span class="full-name">Liselere Geçiş Sistemi</span>
+        <div class="chips">
+          <span class="chip">Türkçe</span><span class="chip">Matematik</span><span class="chip">Fen</span><span class="chip">İnkılap Tarihi</span><span class="chip">İngilizce</span>
+        </div>
+        <p class="desc">8. sınıf müfredatına birebir kapsam; konu konu, hafta hafta ilerleyen bir plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nasil-calisir" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">SÜREÇ</div>
+      <h2>Dört adımda çalışma düzenine kavuş.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num mono">01</div>
+        <h3>Seviyeni Ölç</h3>
+        <p>İlk deneme sonucunu yükle, Mento eksik konularını haritalar.</p>
+      </div>
+      <div class="step">
+        <div class="step-num mono">02</div>
+        <h3>Programını Al</h3>
+        <p>Haftalık, sana özel bir çalışma planı otomatik kurulur.</p>
+      </div>
+      <div class="step">
+        <div class="step-num mono">03</div>
+        <h3>Eksiğini Kapat</h3>
+        <p>Yanlış yaptığın her soru için benzer sorular ve video çözüm önerilir.</p>
+      </div>
+      <div class="step">
+        <div class="step-num mono">04</div>
+        <h3>Net'ini Takip Et</h3>
+        <p>Her deneme sonucu işlenir, ilerlemen grafikle önüne gelir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ozellikler">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">ÖZELLİKLER</div>
+      <h2>Bir koçun yapacağı her şeyi, ölçekte yapar.</h2>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="ficon">AI</div>
+        <h3>Akıllı Hata Analizi</h3>
+        <p>Her yanlış soruyu "kavram", "işlem" veya "dikkat hatası" olarak etiketler.</p>
+      </div>
+      <div class="feature">
+        <div class="ficon">PL</div>
+        <h3>Kişisel Çalışma Planı</h3>
+        <p>Hedefine ve mevcut hızına göre haftalık plan kendini günceller.</p>
+      </div>
+      <div class="feature">
+        <div class="ficon">QB</div>
+        <h3>Soru Bankası + Video</h3>
+        <p>Takıldığın her konu için seviyene uygun soru ve video çözüm önerilir.</p>
+      </div>
+      <div class="feature">
+        <div class="ficon">NT</div>
+        <h3>Net Takibi</h3>
+        <p>Tüm denemelerin tek grafikte; hangi derste yükseliyorsun, hangisinde duruyorsun görürsün.</p>
+      </div>
+      <div class="feature">
+        <div class="ficon">SR</div>
+        <h3>Sıralama Tahmini</h3>
+        <p>Güncel net ortalamana göre yaklaşık sıralama aralığını gösterir.</p>
+      </div>
+      <div class="feature">
+        <div class="ficon">VL</div>
+        <h3>Veli Paneli</h3>
+        <p>Ailen, baskı yapmadan ilerlemeni haftalık özetlerle takip edebilir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testi-section" id="yorumlar">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">ÖĞRENCİLER NE DİYOR</div>
+      <h2>Net'i artırmak, doğru yeri bulmakla başlıyor.</h2>
+    </div>
+    <div class="testimonials">
+      <div class="testi-card">
+        <p class="quote">"Yanlışlarımın çoğu dikkatsizlikten değil, aynı kavramdan geliyormuş. Bunu görünce nereye çalışacağımı netleştirdim."</p>
+        <div class="testi-who">
+          <div class="avatar">EY</div>
+          <div><div class="name">Elif Y.</div><div class="meta">12. Sınıf · AYT Sayısal</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="quote">"Plan hep değişiyordu, hiç oturmuyordu. Mento'nun haftalık planı ilk kez sonuna kadar bitirdiğim plan oldu."</p>
+        <div class="testi-who">
+          <div class="avatar">MK</div>
+          <div><div class="name">Mert K.</div><div class="meta">8. Sınıf · LGS</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="quote">"Sözel dersler için neye, ne kadar çalışacağımı hiç bilmiyordum. Şimdi her hafta net hedefim var."</p>
+        <div class="testi-who">
+          <div class="avatar">ZA</div>
+          <div><div class="name">Zeynep A.</div><div class="meta">12. Sınıf · AYT Sözel</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Bir deneme daha çözmeden önce, eksiğini Mento'ya göster.</h2>
+    <div class="countdown-block">
+      <div class="countdown mono">
+        <div class="unit"><div class="n" id="cd-days">00</div><div class="u">gün</div></div>
+        <div class="unit"><div class="n" id="cd-hours">00</div><div class="u">saat</div></div>
+        <div class="unit"><div class="n" id="cd-mins">00</div><div class="u">dk</div></div>
+        <div class="unit"><div class="n" id="cd-secs">00</div><div class="u">sn</div></div>
+      </div>
+      <div class="countdown-note">Örnek tarih — kendi sınav tarihini panelden ayarla.</div>
+      <a href="#" class="btn btn-ghost-dark js-open-signup" style="margin-top:18px;">Ücretsiz Dene</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#" class="logo" aria-label="Mento AI"><img class="brand-logo" src="mento-logo.svg" alt="Mento AI"></a>
+        <p>TYT, AYT ve LGS için yapay zeka destekli kişisel koçluk platformu.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Ürün</h4>
+          <ul>
+            <li><a href="#subeler">Sınavlar</a></li>
+            <li><a href="#ozellikler">Özellikler</a></li>
+            <li><a href="#nasil-calisir">Nasıl Çalışır</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Şirket</h4>
+          <ul>
+            <li><a href="#">Hakkımızda</a></li>
+            <li><a href="#">İletişim</a></li>
+            <li><a href="#">Kariyer</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Yasal</h4>
+          <ul>
+            <li><a href="#">Gizlilik</a></li>
+            <li><a href="#">Kullanım Şartları</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Mento AI</span>
+      <span>Yapay zeka, doğru yerde çalışmanı sağlar.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="auth-shell" id="authModal" aria-hidden="true">
+  <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <aside class="auth-side">
+      <div>
+        <div class="eyebrow">MENTO AI</div>
+        <h2>Çalışma düzenini ilk günden kişiselleştir.</h2>
+        <p>Sınavını, hedefini ve mevcut seviyeni seç. Mento sana ilk haftanın çalışma planını çıkarır.</p>
+      </div>
+      <div class="auth-mini">
+        <div class="auth-mini-row"><span>Bugünün önerisi</span><strong>Problemler</strong></div>
+        <div class="auth-mini-row"><span>Tahmini süre</span><strong>45 dk</strong></div>
+        <div class="auth-mini-row"><span>Odak sebebi</span><strong>işlem hatası</strong></div>
+      </div>
+    </aside>
+
+    <div class="auth-main">
+      <div class="auth-top">
+        <div>
+          <h2 id="authTitle">Mento'ya başla</h2>
+          <p>Demo akışıdır; bilgilerin tarayıcıdan dışarı gönderilmez.</p>
+        </div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Kapat">×</button>
+      </div>
+
+      <div class="auth-tabs" role="tablist" aria-label="Giriş seçenekleri">
+        <button class="active" type="button" data-auth-tab="signup">Ücretsiz dene</button>
+        <button type="button" data-auth-tab="login">Giriş yap</button>
+      </div>
+
+      <form class="auth-form active" id="signupForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="signupName">Ad Soyad</label>
+            <input id="signupName" name="name" placeholder="Ayşe Kaya" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="signupExam">Sınav</label>
+            <select id="signupExam" name="exam">
+              <option>TYT</option>
+              <option>AYT</option>
+              <option>LGS</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="signupGoal">Hedef</label>
+          <input id="signupGoal" name="goal" placeholder="İlk 20.000 / Fen lisesi / 80 net">
+        </div>
+        <div class="field">
+          <label for="signupEmail">E-posta</label>
+          <input id="signupEmail" name="email" type="email" placeholder="ornek@mail.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="signupPassword">Şifre</label>
+          <input id="signupPassword" name="password" type="password" placeholder="En az 6 karakter" autocomplete="new-password">
+        </div>
+        <button class="btn btn-primary btn-full" type="submit">Planımı oluştur</button>
+        <p class="form-note">Bu demo sürümde hesap oluşturma simülasyondur. Sonraki adımda gerçek üyelik sistemi bağlanabilir.</p>
+      </form>
+
+      <form class="auth-form" id="loginForm">
+        <div class="field">
+          <label for="loginEmail">E-posta</label>
+          <input id="loginEmail" name="email" type="email" placeholder="ornek@mail.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="loginPassword">Şifre</label>
+          <input id="loginPassword" name="password" type="password" placeholder="Şifren" autocomplete="current-password">
+        </div>
+        <button class="btn btn-primary btn-full" type="submit">Panele gir</button>
+        <p class="switch-copy">Hesabın yok mu? <button type="button" data-auth-tab="signup">Ücretsiz başla</button></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="auth-shell app-modal" id="appModal" aria-hidden="true">
+  <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="appTitle">
+    <aside class="app-nav">
+      <a href="#" class="logo" aria-label="Mento AI"><img class="brand-logo" src="mento-logo.svg" alt="Mento AI"></a>
+      <div class="app-user">
+        <strong id="studentName">Demo Öğrenci</strong>
+        <span id="studentGoal">TYT hedefi: ilk 20.000</span>
+      </div>
+      <div class="app-menu">
+        <button class="active" type="button">Bugün</button>
+        <button type="button">Denemeler</button>
+        <button type="button">Konular</button>
+        <button type="button">Koç</button>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="app-head">
+        <div>
+          <h2 id="appTitle">Bugünün planı hazır.</h2>
+          <p>Mento, eksiklerine göre ilk çalışma gününü aşağıdaki gibi kurdu.</p>
+        </div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Kapat">×</button>
+      </div>
+
+      <div class="mini-stats">
+        <div class="mini-stat"><strong>92 dk</strong><span>bugünkü hedef</span></div>
+        <div class="mini-stat"><strong>3</strong><span>odak görevi</span></div>
+        <div class="mini-stat"><strong>+8</strong><span>net potansiyeli</span></div>
+        <div class="mini-stat"><strong>74%</strong><span>haftalık ilerleme</span></div>
+      </div>
+
+      <div class="app-grid">
+        <section class="dash-card">
+          <h3>Akıllı çalışma listesi</h3>
+          <div class="plan-list">
+            <div class="plan-item">
+              <div class="plan-dot">1</div>
+              <div><strong>Paragraf hız testi</strong><span>20 soru, süre hedefi 18 dakika</span></div>
+              <div class="plan-time">18 dk</div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-dot">2</div>
+              <div><strong>Problemler konu tekrarı</strong><span>Yanlış sebebi: işlem ve denklem kurma</span></div>
+              <div class="plan-time">45 dk</div>
+            </div>
+            <div class="plan-item">
+              <div class="plan-dot">3</div>
+              <div><strong>Fen yanlış analizi</strong><span>Son denemedeki ortak hata kümeleri</span></div>
+              <div class="plan-time">29 dk</div>
+            </div>
+          </div>
+          <div class="focus-strip">
+            <div class="focus-card"><span>Bugünün ana odağı</span><strong>Problemler: denklem kurma ve işlem takibi</strong></div>
+            <div class="focus-card"><span>Mini hedef</span><strong>45 dakikada 12 seçilmiş soru + hata notu</strong></div>
+          </div>
+        </section>
+
+        <section class="dash-card dark">
+          <h3>Mento Koç</h3>
+          <p>Bugün kısa ama net ilerleyelim. En yüksek getirili alanın matematik problemleri.</p>
+          <div class="coach-bubble" id="coachAnswer">İlk 45 dakikayı bitirince sana benzer 12 soru daha önereceğim.</div>
+          <form class="coach-form" id="coachForm">
+            <input id="coachPrompt" name="prompt" placeholder="Koça sor: Bugün ne çalışmalıyım?" autocomplete="off">
+            <button class="btn btn-primary" type="submit">Sor</button>
+          </form>
+          <div class="coach-status" id="coachStatus"></div>
+          <div class="priority-list">
+            <div class="priority-item"><strong>Problemler</strong><span>yüksek öncelik</span></div>
+            <div class="priority-item"><strong>Paragraf</strong><span>süre pratiği</span></div>
+            <div class="priority-item"><strong>Fen analizi</strong><span>yanlış kümeleri</span></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  // mobile menu toggle
+  const toggle = document.querySelector('.menu-toggle');
+  const links = document.querySelector('nav.links');
+  toggle?.addEventListener('click', () => {
+    const open = links.style.display === 'flex';
+    links.style.display = open ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '76px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'rgba(14,26,43,0.98)';
+    links.style.padding = '20px 28px';
+    links.style.gap = '18px';
+  });
+
+  // count-up stats
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const statEls = document.querySelectorAll('.stat .num');
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    if (reduceMotion) { el.textContent = target.toLocaleString('tr-TR') + suffix; return; }
+    const duration = 1200;
+    const start = performance.now();
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const value = Math.floor(progress * target);
+      el.textContent = value.toLocaleString('tr-TR') + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  statEls.forEach(el => obs.observe(el));
+
+  // countdown — placeholder target date, swap with the real exam date
+  const targetDate = new Date('2027-06-20T10:00:00');
+  const cd = {
+    days: document.getElementById('cd-days'),
+    hours: document.getElementById('cd-hours'),
+    mins: document.getElementById('cd-mins'),
+    secs: document.getElementById('cd-secs'),
+  };
+  function updateCountdown(){
+    const diff = Math.max(0, targetDate - new Date());
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    cd.days.textContent = String(days).padStart(2,'0');
+    cd.hours.textContent = String(hours).padStart(2,'0');
+    cd.mins.textContent = String(mins).padStart(2,'0');
+    cd.secs.textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // auth modal + demo panel
+  const authModal = document.getElementById('authModal');
+  const appModal = document.getElementById('appModal');
+  const authTabs = document.querySelectorAll('[data-auth-tab]');
+  const signupForm = document.getElementById('signupForm');
+  const loginForm = document.getElementById('loginForm');
+  const studentName = document.getElementById('studentName');
+  const studentGoal = document.getElementById('studentGoal');
+  const coachForm = document.getElementById('coachForm');
+  const coachPrompt = document.getElementById('coachPrompt');
+  const coachAnswer = document.getElementById('coachAnswer');
+  const coachStatus = document.getElementById('coachStatus');
+
+  function openModal(modal){
+    modal?.classList.add('is-open');
+    modal?.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeModals(){
+    document.querySelectorAll('.auth-shell').forEach(modal => {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+    });
+    document.body.classList.remove('modal-open');
+  }
+
+  function setAuthTab(tab){
+    document.querySelectorAll('.auth-tabs button').forEach(button => {
+      button.classList.toggle('active', button.dataset.authTab === tab);
+    });
+    signupForm?.classList.toggle('active', tab === 'signup');
+    loginForm?.classList.toggle('active', tab === 'login');
+  }
+
+  document.querySelectorAll('.js-open-login').forEach(item => {
+    item.addEventListener('click', event => {
+      event.preventDefault();
+      setAuthTab('login');
+      openModal(authModal);
+    });
+  });
+
+  document.querySelectorAll('.js-open-signup').forEach(item => {
+    item.addEventListener('click', event => {
+      event.preventDefault();
+      setAuthTab('signup');
+      openModal(authModal);
+    });
+  });
+
+  authTabs.forEach(button => {
+    button.addEventListener('click', () => setAuthTab(button.dataset.authTab));
+  });
+
+  document.querySelectorAll('[data-close-modal]').forEach(button => {
+    button.addEventListener('click', closeModals);
+  });
+
+  document.querySelectorAll('.auth-shell').forEach(modal => {
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeModals();
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeModals();
+  });
+
+  signupForm?.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(signupForm);
+    const name = data.get('name')?.toString().trim() || 'Demo Öğrenci';
+    const exam = data.get('exam')?.toString() || 'TYT';
+    const goal = data.get('goal')?.toString().trim() || 'ilk 20.000';
+    studentName.textContent = name;
+    studentGoal.textContent = `${exam} hedefi: ${goal}`;
+    closeModals();
+    openModal(appModal);
+  });
+
+  loginForm?.addEventListener('submit', event => {
+    event.preventDefault();
+    studentName.textContent = 'Mento Öğrencisi';
+    studentGoal.textContent = 'TYT hedefi: ilk 20.000';
+    closeModals();
+    openModal(appModal);
+  });
+
+  coachForm?.addEventListener('submit', async event => {
+    event.preventDefault();
+    const question = coachPrompt.value.trim();
+    if (!question) return;
+
+    coachStatus.textContent = 'Mento düşünüyor...';
+    coachAnswer.textContent = 'Sorunu analiz ediyorum.';
+
+    try {
+      if (!['localhost:3000', '127.0.0.1:3000'].includes(window.location.host)) {
+        throw new Error('AI için siteyi http://localhost:3000 adresinden açmalısın. 127.0.0.1:5500 sadece tasarım önizlemesidir.');
+      }
+
+      const response = await fetch('/api/coach', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question,
+          student: {
+            name: studentName.textContent,
+            goal: studentGoal.textContent,
+            exam: studentGoal.textContent.split(' ')[0] || 'TYT'
+          }
+        })
+      });
+
+      const raw = await response.text();
+      const data = raw ? JSON.parse(raw) : {};
+      if (!response.ok) throw new Error(data.error || 'AI cevabı alınamadı.');
+
+      coachAnswer.textContent = data.answer;
+      coachStatus.textContent = 'AI yanıtı hazır.';
+      coachPrompt.value = '';
+    } catch (error) {
+      const message = error.message || '';
+      if (message.toLowerCase().includes('quota') || message.includes('429')) {
+        coachAnswer.textContent = 'OpenAI API kotası dolmuş görünüyor. API panelinde bakiye/faturalandırma aktif olunca Mento Koç cevap vermeye devam eder.';
+        coachStatus.textContent = 'API kotası veya ödeme limiti kontrol edilmeli.';
+      } else {
+        coachAnswer.textContent = 'Şimdilik bağlantı kurulamadı. API anahtarı ve yerel sunucunun açık olduğundan emin ol.';
+        coachStatus.textContent = message;
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
