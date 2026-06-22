@@ -1,4 +1,4 @@
-﻿const http = require('http');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
@@ -26,17 +26,7 @@ function sendJson(res, status, data) {
   res.end(JSON.stringify(data));
 }
 
-function serveStatic(req, res) {
-  const urlPath = new URL(req.url, `http://localhost:${PORT}`).pathname;
-  const safePath = urlPath === '/' ? '/index.html' : urlPath;
-  const filePath = path.normalize(path.join(ROOT, safePath));
-
-  if (!filePath.startsWith(ROOT)) {
-    res.writeHead(403);
-    res.end('Forbidden');
-    return;
-  }
-
+function sendFile(res, filePath) {
   fs.readFile(filePath, (err, content) => {
     if (err) {
       res.writeHead(404);
@@ -50,14 +40,56 @@ function serveStatic(req, res) {
       '.css': 'text/css; charset=utf-8',
       '.js': 'text/javascript; charset=utf-8',
       '.json': 'application/json; charset=utf-8',
+      '.xml': 'application/xml; charset=utf-8',
+      '.txt': 'text/plain; charset=utf-8',
       '.png': 'image/png',
       '.jpg': 'image/jpeg',
       '.jpeg': 'image/jpeg',
       '.svg': 'image/svg+xml'
     };
+
     res.writeHead(200, { 'Content-Type': contentTypes[ext] || 'application/octet-stream' });
     res.end(content);
   });
+}
+
+function serveStatic(req, res) {
+  const urlPath = new URL(req.url, `http://localhost:${PORT}`).pathname;
+
+  const staticRoutes = {
+    '/robots.txt': 'robots.txt',
+    '/sitemap.xml': 'sitemap.xml',
+
+    '/tyt-ai-koc': 'tyt-ai-koc.html',
+    '/tyt-ai-koc.html': 'tyt-ai-koc.html',
+
+    '/ayt-ai-koc': 'ayt-ai-koc.html',
+    '/ayt-ai-koc.html': 'ayt-ai-koc.html',
+
+    '/lgs-ai-koc': 'lgs-ai-koc.html',
+    '/lgs-ai-koc.html': 'lgs-ai-koc.html',
+
+    '/yapay-zekali-ogrenme-kocu': 'yapay-zekali-ogrenme-kocu.html',
+    '/yapay-zekali-ogrenme-kocu.html': 'yapay-zekali-ogrenme-kocu.html',
+
+    '/tyt-calisma-plani': 'tyt-calisma-plani.html',
+    '/tyt-calisma-plani.html': 'tyt-calisma-plani.html',
+
+    '/deneme-analizi': 'deneme-analizi.html',
+    '/deneme-analizi.html': 'deneme-analizi.html'
+  };
+
+  const routeFile = staticRoutes[urlPath];
+  const safePath = routeFile || (urlPath === '/' ? 'index.html' : urlPath);
+  const filePath = path.normalize(path.join(ROOT, safePath));
+
+  if (!filePath.startsWith(ROOT)) {
+    res.writeHead(403);
+    res.end('Forbidden');
+    return;
+  }
+
+  sendFile(res, filePath);
 }
 
 function readBody(req) {
