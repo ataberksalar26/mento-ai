@@ -384,6 +384,25 @@
   .priority-list{display:grid;gap:10px;margin-top:16px;}
   .priority-item{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line-on-ink);padding-top:10px;font-size:13px;}
   .priority-item strong{color:var(--paper);}
+
+  /* ===== FULL PAGE DASHBOARD MODE ===== */
+  body.app-mode{background:#EEF2F6;}
+  body.app-mode > header,
+  body.app-mode > section,
+  body.app-mode > footer,
+  body.app-mode > #authModal{display:none !important;}
+  body.app-mode #appModal{
+    position:static;inset:auto;z-index:auto;
+    display:flex !important;align-items:stretch;justify-content:stretch;
+    min-height:100vh;padding:0;background:#EEF2F6;backdrop-filter:none;
+  }
+  body.app-mode #appModal .auth-card{
+    width:100%;min-height:100vh;max-height:none;border:0;border-radius:0;
+    box-shadow:none;
+  }
+  body.app-mode #appModal .app-main{min-height:100vh;}
+  body.app-mode #appModal .modal-close{background:white;}
+
   /* ===== RESPONSIVE ===== */
   @media (max-width:980px){
     nav.links{display:none;}
@@ -1020,16 +1039,14 @@
     const goal = data.get('goal')?.toString().trim() || 'ilk 20.000';
     studentName.textContent = name;
     studentGoal.textContent = `${exam} hedefi: ${goal}`;
-    closeModals();
-    openModal(appModal);
+    openDashboard();
   });
 
   loginForm?.addEventListener('submit', event => {
     event.preventDefault();
     studentName.textContent = 'Mento Öğrencisi';
     studentGoal.textContent = 'TYT hedefi: ilk 20.000';
-    closeModals();
-    openModal(appModal);
+    openDashboard();
   });
 
   coachForm?.addEventListener('submit', async event => {
@@ -1041,10 +1058,9 @@
     coachAnswer.textContent = 'Sorunu analiz ediyorum.';
 
     try {
-      if (!['localhost:3000', '127.0.0.1:3000'].includes(window.location.host)) {
-        throw new Error('AI için siteyi http://localhost:3000 adresinden açmalısın. 127.0.0.1:5500 sadece tasarım önizlemesidir.');
+      if (window.location.protocol === 'file:' || window.location.port === '5500') {
+        throw new Error('AI için siteyi canlı domaininden veya http://localhost:3000 adresinden açmalısın. 127.0.0.1:5500 sadece tasarım önizlemesidir.');
       }
-
       const response = await fetch('/api/coach', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1080,13 +1096,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
