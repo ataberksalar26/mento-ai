@@ -1,0 +1,16 @@
+﻿// server.js içine static dosya okuma kısmında 404 vermeden önce eklenebilir:
+// Eğer /tyt-ai-koc gibi uzantısız URL gelirse tyt-ai-koc.html dosyasını sunar.
+if (!fs.existsSync(filePath) && !path.extname(filePath)) {
+  const htmlPath = `${filePath}.html`;
+  if (fs.existsSync(htmlPath)) {
+    return fs.readFile(htmlPath, (err, content) => {
+      if (err) {
+        res.writeHead(404);
+        res.end('Not found');
+        return;
+      }
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(content);
+    });
+  }
+}
