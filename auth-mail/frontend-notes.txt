@@ -1,0 +1,11 @@
+﻿index.html içinde kayıt formu submit kodunu gerçek üyelik için bağlamak gerekir:
+
+- /api/register: kayıt oluşturur ve öğrenciye doğrulama kodu gönderir, sana da yeni kullanıcı bildirimi gönderir.
+- /api/verify-code: öğrencinin e-postasına gelen 6 haneli kodu doğrular.
+- /api/login: doğrulanmış kullanıcı giriş yapar.
+
+Frontend tarafında en kolay ilk akış:
+1. Kayıt formu gönderilince /api/register çağır.
+2. Kullanıcıya prompt ile kodu sor veya modal içine kod inputu ekle.
+3. /api/verify-code çağır.
+4. Başarılıysa dashboard aç.

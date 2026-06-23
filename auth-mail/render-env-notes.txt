@@ -1,0 +1,7 @@
+﻿Render Environment Variables:
+
+RESEND_API_KEY=Resend panelinden aldığın key
+FROM_EMAIL=Mento AI <onboarding@resend.dev>
+ADMIN_EMAIL=seninmailin@example.com
+
+Not: RESEND_API_KEY'i koda yazma. Render Environment Variables içine ekle.
