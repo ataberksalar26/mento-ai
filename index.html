@@ -1800,11 +1800,11 @@
 
     .side-stack div,
     .mini-proof div {
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(248,190,67,.22);
       border-radius: 16px;
       padding: 13px 14px;
-      background: rgba(255,255,255,.055);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+      background: linear-gradient(145deg, rgba(7,17,30,.92), rgba(25,39,59,.86));
+      box-shadow: 0 16px 34px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.06);
     }
 
     .side-stack strong,
@@ -1817,7 +1817,7 @@
 
     .side-stack span,
     .mini-proof span {
-      color: #9faec5;
+      color: #c4d1e4;
       font-size: 12px;
       line-height: 1.45;
     }
@@ -2163,6 +2163,289 @@
       line-height: 1.45;
     }
 
+    .student-app {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      display: none;
+      grid-template-columns: 280px 1fr 360px;
+      color: #e9f0f7;
+      background: #07111e;
+    }
+
+    .student-app.open {
+      display: grid;
+    }
+
+    .app-sidebar {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 18px;
+      padding: 22px;
+      border-right: 1px solid rgba(255,255,255,.08);
+      background: #0b1626;
+    }
+
+    .app-logo {
+      font-size: 24px;
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+
+    .new-chat {
+      min-height: 46px;
+      border: 1px solid rgba(248,190,67,.42);
+      border-radius: 14px;
+      color: #07111e;
+      background: linear-gradient(180deg, #ffd36b, #f4b63e);
+      font-weight: 950;
+      cursor: pointer;
+    }
+
+    .chat-list {
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .chat-list button {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 13px;
+      padding: 12px;
+      color: #c8d4e5;
+      background: rgba(255,255,255,.04);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .chat-list button.active {
+      color: #fff;
+      background: rgba(248,190,67,.12);
+      border-color: rgba(248,190,67,.3);
+    }
+
+    .app-profile {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      background: rgba(255,255,255,.05);
+    }
+
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      color: #07111e;
+      background: linear-gradient(135deg, #ffd36b, #32c985);
+      font-weight: 950;
+    }
+
+    .app-profile strong,
+    .app-profile span {
+      display: block;
+    }
+
+    .app-profile span {
+      color: #93a3bb;
+      font-size: 12px;
+    }
+
+    .chat-main {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-width: 0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(248,190,67,.11), transparent 32%),
+        #091421;
+    }
+
+    .chat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 26px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .chat-top h2 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: -.03em;
+    }
+
+    .chat-top p {
+      margin: 4px 0 0;
+      color: #97a7bf;
+      font-size: 13px;
+    }
+
+    .app-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      background: rgba(255,255,255,.06);
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .messages {
+      display: grid;
+      align-content: start;
+      gap: 14px;
+      padding: 26px;
+      overflow: auto;
+    }
+
+    .message {
+      max-width: min(760px, 86%);
+      padding: 15px 17px;
+      border-radius: 18px;
+      line-height: 1.55;
+      color: #dce7f5;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .message.user {
+      justify-self: end;
+      color: #07111e;
+      background: #f5bd47;
+    }
+
+    .composer {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 18px 26px 24px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .photo-button,
+    .send-button {
+      min-height: 48px;
+      border: 0;
+      border-radius: 14px;
+      padding: 0 16px;
+      font-weight: 950;
+      cursor: pointer;
+    }
+
+    .photo-button {
+      color: #e9f0f7;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .send-button {
+      color: #07111e;
+      background: #f5bd47;
+    }
+
+    .composer textarea {
+      min-height: 52px;
+      max-height: 130px;
+      resize: vertical;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 15px;
+      color: #fff;
+      background: rgba(255,255,255,.06);
+      outline: none;
+      font: inherit;
+    }
+
+    .study-panel {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 16px;
+      padding: 22px;
+      border-left: 1px solid rgba(255,255,255,.08);
+      background: #0b1626;
+      overflow: auto;
+    }
+
+    .study-panel h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .quick-cards {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-card,
+    .topic-card {
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(255,255,255,.055);
+    }
+
+    .quick-card strong,
+    .topic-card strong {
+      display: block;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    .quick-card span,
+    .topic-card span,
+    .topic-card p {
+      color: #aebbd0;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .lesson-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .lesson-tabs button {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      padding: 8px 11px;
+      color: #c8d4e5;
+      background: rgba(255,255,255,.05);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .lesson-tabs button.active {
+      color: #07111e;
+      background: #f5bd47;
+    }
+
+    .topic-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .topic-card button {
+      margin-top: 10px;
+      width: 100%;
+      min-height: 38px;
+      border: 0;
+      border-radius: 11px;
+      color: #07111e;
+      background: #e9f0f7;
+      font-weight: 950;
+      cursor: pointer;
+    }
+
     .coach-loading {
       color: #fff;
       background: linear-gradient(145deg, #0c1727, #18283d);
@@ -2218,6 +2501,18 @@
 
     .wizard-actions .btn {
       min-width: 150px;
+    }
+
+    .wizard-actions .btn-dark {
+      color: #fff;
+      background: #132238;
+      border: 1px solid rgba(19,34,56,.65);
+      box-shadow: 0 16px 34px rgba(12,23,39,.18);
+    }
+
+    .wizard-actions .btn-dark:hover {
+      background: #0c1727;
+      border-color: rgba(224,166,63,.55);
     }
 
     .form-note {
@@ -2625,6 +2920,33 @@
 
       .footer-bottom {
         display: grid;
+      }
+
+      .student-app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      .app-sidebar,
+      .study-panel {
+        position: static;
+        border: 0;
+      }
+
+      .app-sidebar {
+        grid-template-rows: auto auto auto;
+      }
+
+      .chat-list {
+        grid-template-columns: 1fr;
+      }
+
+      .study-panel {
+        max-height: 420px;
+      }
+
+      .composer {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -3201,6 +3523,64 @@
       </div>
     </div>
   </div>
+
+  <section class="student-app" id="studentApp" aria-hidden="true">
+    <aside class="app-sidebar">
+      <div class="app-logo">mento ai</div>
+      <button class="new-chat" type="button" id="newChatButton">+ Yeni sohbet</button>
+      <div class="chat-list" id="chatList">
+        <button class="active" type="button">Bugünkü plan</button>
+        <button type="button">Fotoğrafla soru çöz</button>
+        <button type="button">LGS konu anlatımı</button>
+      </div>
+      <div class="app-profile">
+        <div class="avatar" id="profileAvatar">M</div>
+        <div><strong id="profileName">Mento Öğrencisi</strong><span>LGS hedef modu</span></div>
+      </div>
+    </aside>
+
+    <main class="chat-main">
+      <header class="chat-top">
+        <div>
+          <h2>Mento Koç</h2>
+          <p>Fotoğraf çek, soru sor, konu anlatımı iste. İlk sürüm LGS odaklıdır.</p>
+        </div>
+        <button class="app-close" type="button" id="closeStudentApp" aria-label="Paneli kapat">×</button>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="message">
+          Merhaba. Ben Mento Koç. Sorunu yazabilir, fotoğraf yükleyebilir veya sağdaki LGS konularından bir anlatım seçebilirsin.
+        </div>
+        <div class="message">
+          Fotoğrafla soru çözme ilk sürümde görseli alır ve açıklama kutusuna ekler. Yapay zeka API tarafını bağladığımızda görselden soruyu okuyup adım adım çözecek.
+        </div>
+      </div>
+
+      <div class="composer">
+        <label class="photo-button" for="questionPhoto">Fotoğraf</label>
+        <input id="questionPhoto" type="file" accept="image/*" capture="environment" hidden>
+        <textarea id="chatInput" placeholder="Örn. Bu matematik sorusunu adım adım çözer misin?"></textarea>
+        <button class="send-button" type="button" id="sendMessage">Sor</button>
+      </div>
+    </main>
+
+    <aside class="study-panel">
+      <div>
+        <h3>Konu anlatımı ve videolar</h3>
+        <p>Bir konuyu seçince kısa anlatım, örnek soru ve video çalışma önerisi sohbet alanına düşer.</p>
+      </div>
+      <div class="quick-cards">
+        <div class="quick-card"><strong>Bugünün video rotası</strong><span>1 konu anlatımı + 12 soru + yanlış sebebi notu.</span></div>
+        <div class="quick-card"><strong>Fotoğrafla çözüm</strong><span>Kamera veya galeriden soru yükle, çözüm akışını başlat.</span></div>
+      </div>
+      <div>
+        <div class="lesson-tabs" id="lessonTabs"></div>
+        <div class="topic-list" id="topicList"></div>
+      </div>
+    </aside>
+  </section>
+
   <script>
     const modal = document.getElementById('demoModal');
     const openButtons = document.querySelectorAll('[data-open-demo]');
@@ -3224,6 +3604,15 @@
     const coachTitle = document.getElementById('coachTitle');
     const coachText = document.getElementById('coachText');
     const coachLines = document.getElementById('coachLines');
+    const studentApp = document.getElementById('studentApp');
+    const messages = document.getElementById('messages');
+    const chatInput = document.getElementById('chatInput');
+    const sendMessage = document.getElementById('sendMessage');
+    const questionPhoto = document.getElementById('questionPhoto');
+    const lessonTabs = document.getElementById('lessonTabs');
+    const topicList = document.getElementById('topicList');
+    const profileName = document.getElementById('profileName');
+    const profileAvatar = document.getElementById('profileAvatar');
     const liveInputs = document.querySelectorAll('#liveExam, #trWrong, #trBlank, #matWrong, #matBlank, #fenWrong, #fenBlank, #sosWrong, #sosBlank');
     const liveFocusTitle = document.getElementById('liveFocusTitle');
     const liveInsight = document.getElementById('liveInsight');
@@ -3264,6 +3653,73 @@
     let selectedExam = 'TYT';
     let authMode = 'signup';
     let pendingVerificationEmail = '';
+    let activeLesson = 'Matematik';
+
+    const lgsTopics = {
+      Matematik: [
+        ['Çarpanlar ve Katlar', 'EBOB, EKOK, asal çarpanlar ve bölünebilme mantığı.'],
+        ['Üslü İfadeler', 'Tam sayı kuvvetleri, bilimsel gösterim ve işlem kuralları.'],
+        ['Kareköklü İfadeler', 'Kök dışına çıkarma, yaklaşık değer ve köklü işlemler.'],
+        ['Veri Analizi', 'Grafik okuma, tablo yorumlama ve ortalama karşılaştırma.'],
+        ['Basit Olayların Olma Olasılığı', 'İstenen durum / tüm durum mantığı ve olasılık yorumları.'],
+        ['Cebirsel İfadeler ve Özdeşlikler', 'Dağılma, çarpanlara ayırma ve özdeşlikleri tanıma.'],
+        ['Doğrusal Denklemler', 'Eğim, grafik, denklem kurma ve günlük yaşam problemleri.'],
+        ['Eşitsizlikler', 'Aralık gösterimi, sayı doğrusu ve problem çözme.'],
+        ['Üçgenler', 'Açı, kenar, yardımcı elemanlar ve benzer düşünme.'],
+        ['Eşlik ve Benzerlik', 'Benzerlik oranı, uzunluk ve alan ilişkileri.'],
+        ['Dönüşüm Geometrisi', 'Öteleme, yansıma ve dönme yorumları.'],
+        ['Geometrik Cisimler', 'Prizma, silindir, yüzey alanı ve hacim problemleri.']
+      ],
+      Türkçe: [
+        ['Sözcükte Anlam', 'Gerçek, mecaz, terim, deyim ve bağlamdan anlam çıkarma.'],
+        ['Cümlede Anlam', 'Neden-sonuç, amaç-sonuç, koşul ve karşılaştırma.'],
+        ['Paragrafta Anlam', 'Ana fikir, yardımcı fikir, başlık ve yapı soruları.'],
+        ['Görsel ve Grafik Yorumlama', 'Tablo, afiş, grafik ve çoklu metin okuma.'],
+        ['Fiilimsi', 'İsim-fiil, sıfat-fiil, zarf-fiil ve cümlede görevleri.'],
+        ['Cümlenin Ögeleri', 'Yüklem, özne, nesne, tümleç ve vurgu.'],
+        ['Söz Sanatları', 'Benzetme, kişileştirme, konuşturma ve abartma.'],
+        ['Yazım Kuralları', 'Büyük harf, birleşik kelime, sayı ve kısaltmalar.'],
+        ['Noktalama İşaretleri', 'Virgül, noktalı virgül, iki nokta ve tırnak kullanımı.'],
+        ['Metin Türleri', 'Hikaye, deneme, makale, biyografi ve haber metni.']
+      ],
+      Fen: [
+        ['Mevsimler ve İklim', 'Eksen eğikliği, mevsimler, iklim ve hava olayları.'],
+        ['DNA ve Genetik Kod', 'DNA yapısı, kalıtım, mutasyon, modifikasyon ve adaptasyon.'],
+        ['Basınç', 'Katı, sıvı, gaz basıncı ve günlük yaşam bağlantıları.'],
+        ['Madde ve Endüstri', 'Periyodik sistem, kimyasal bağlar, tepkimeler, asit-baz.'],
+        ['Basit Makineler', 'Kaldıraç, makara, eğik düzlem ve iş kolaylığı.'],
+        ['Enerji Dönüşümleri', 'Fotosentez, solunum, besin zinciri ve enerji akışı.'],
+        ['Elektrik Yükleri ve Elektrik Enerjisi', 'Elektriklenme, devreler, güç ve enerji ilişkisi.']
+      ],
+      İnkılap: [
+        ['Bir Kahraman Doğuyor', 'Atatürk’ün öğrenim hayatı, fikir dünyası ve yaşadığı şehirler.'],
+        ['Milli Uyanış', 'Mondros, cemiyetler, kongreler ve Misakımilli.'],
+        ['Ya İstiklal Ya Ölüm', 'Cepheler, antlaşmalar ve bağımsızlık mücadelesi.'],
+        ['Atatürkçülük ve Çağdaşlaşma', 'İlke, inkılap ve modernleşme adımları.'],
+        ['Demokratikleşme Çabaları', 'Çok partili hayat denemeleri ve siyasi gelişmeler.'],
+        ['Türk Dış Politikası', 'Lozan sonrası dış politika ve Hatay meselesi.'],
+        ['Atatürk’ün Ölümü ve Sonrası', 'Atatürk’ün vefatı ve II. Dünya Savaşı süreci.']
+      ],
+      Din: [
+        ['Kader İnancı', 'Kader, kaza, irade, sorumluluk ve tevekkül.'],
+        ['Zekat ve Sadaka', 'Paylaşma, yardımlaşma ve ibadet bilinci.'],
+        ['Din ve Hayat', 'Din, birey, toplum ve güzel ahlak ilişkisi.'],
+        ['Hz. Muhammed’in Örnekliği', 'Peygamberimizin davranışları ve örnek kişiliği.'],
+        ['Kur’an-ı Kerim ve Özellikleri', 'Kur’an’ın ana konuları ve rehberliği.']
+      ],
+      İngilizce: [
+        ['Friendship', 'Invitation, accepting/refusing and friendship vocabulary.'],
+        ['Teen Life', 'Daily routines, likes/dislikes and frequency expressions.'],
+        ['In The Kitchen', 'Recipes, process words and cooking verbs.'],
+        ['On The Phone', 'Phone conversations and communication phrases.'],
+        ['The Internet', 'Online habits, safety and internet vocabulary.'],
+        ['Adventures', 'Extreme sports, comparisons and preferences.'],
+        ['Tourism', 'Places, travel experiences and describing cities.'],
+        ['Chores', 'Household duties, responsibilities and requests.'],
+        ['Science', 'Inventions, discoveries and experiment language.'],
+        ['Natural Forces', 'Natural disasters, warnings and predictions.']
+      ]
+    };
 
     function numberValue(id) {
       const element = document.getElementById(id);
@@ -3364,6 +3820,53 @@
       wizardResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
+    function addMessage(text, type = 'ai') {
+      const bubble = document.createElement('div');
+      bubble.className = `message ${type === 'user' ? 'user' : ''}`;
+      bubble.textContent = text;
+      messages.appendChild(bubble);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function openStudentPanel() {
+      const name = document.getElementById('fullName').value.trim() || 'Mento Öğrencisi';
+      profileName.textContent = name;
+      profileAvatar.textContent = name.trim().charAt(0).toUpperCase() || 'M';
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      studentApp.classList.add('open');
+      studentApp.setAttribute('aria-hidden', 'false');
+    }
+
+    function renderLessonTabs() {
+      lessonTabs.innerHTML = Object.keys(lgsTopics).map(lesson => `
+        <button class="${lesson === activeLesson ? 'active' : ''}" type="button" data-lesson="${lesson}">${lesson}</button>
+      `).join('');
+      lessonTabs.querySelectorAll('[data-lesson]').forEach(button => {
+        button.addEventListener('click', () => {
+          activeLesson = button.dataset.lesson;
+          renderLessonTabs();
+          renderTopics();
+        });
+      });
+    }
+
+    function renderTopics() {
+      topicList.innerHTML = lgsTopics[activeLesson].map(([title, desc]) => `
+        <article class="topic-card">
+          <strong>${title}</strong>
+          <p>${desc}</p>
+          <button type="button" data-topic="${title}" data-desc="${desc}">Anlatımı aç</button>
+        </article>
+      `).join('');
+      topicList.querySelectorAll('[data-topic]').forEach(button => {
+        button.addEventListener('click', () => {
+          addMessage(`${activeLesson} - ${button.dataset.topic} konu anlatımı istiyorum.`, 'user');
+          addMessage(`${button.dataset.topic}: ${button.dataset.desc} Önce 7-10 dakikalık konu videosu izle, sonra 12 kolay-orta soru çöz. Yanlışların varsa hangi adımda takıldığını yaz; ben onu parçalayarak anlatayım.`);
+        });
+      });
+    }
+
     function setAuthMode(mode) {
       authMode = mode;
       document.querySelectorAll('[data-auth-tab]').forEach(item => item.classList.toggle('active', item.dataset.authTab === mode));
@@ -3407,6 +3910,7 @@
           await postJson('/api/login', { email, password });
           authStatus.textContent = 'Giriş başarılı. Planın açılıyor.';
           createLocalPlan();
+          setTimeout(openStudentPanel, 550);
           return;
         }
 
@@ -3439,6 +3943,7 @@
         await postJson('/api/verify-code', { email, code });
         authStatus.textContent = 'E-posta doğrulandı. İlk planın hazırlanıyor.';
         createLocalPlan();
+        setTimeout(openStudentPanel, 650);
       } catch (error) {
         authStatus.textContent = error.message;
       } finally {
@@ -3476,6 +3981,32 @@
     });
     calculatePlan.addEventListener('click', handleAuthSubmit);
     verifyCodeButton.addEventListener('click', handleVerifyCode);
+
+    sendMessage.addEventListener('click', () => {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      chatInput.value = '';
+      addMessage('Bunu ilk ürün sürümünde çalışma koçu mantığıyla yorumluyorum: soruyu konuya ayır, verilenleri yaz, çözüm yolunu 3 adıma böl. Yapay zeka API görsel/sohbet tarafına bağlanınca burada doğrudan adım adım çözüm üreteceğim.');
+    });
+
+    questionPhoto.addEventListener('change', () => {
+      const file = questionPhoto.files?.[0];
+      if (!file) return;
+      addMessage(`Fotoğraf yüklendi: ${file.name}`, 'user');
+      addMessage('Fotoğrafı aldım. Şimdi sorunun dersini ve takıldığın kısmı yazarsan çözüm akışını başlatırım. Görsel okuma API bağlantısı geldiğinde fotoğraftaki soruyu otomatik okuyacağım.');
+      questionPhoto.value = '';
+    });
+
+    document.getElementById('newChatButton').addEventListener('click', () => {
+      messages.innerHTML = '';
+      addMessage('Yeni sohbet açıldı. Bir soru yaz, fotoğraf yükle veya sağdan LGS konusu seç.');
+    });
+
+    document.getElementById('closeStudentApp').addEventListener('click', () => {
+      studentApp.classList.remove('open');
+      studentApp.setAttribute('aria-hidden', 'true');
+    });
 
     openButtons.forEach(button => {
       button.addEventListener('click', event => {
@@ -3556,6 +4087,8 @@
     liveInputs.forEach(input => input.addEventListener('input', buildLiveBrainPlan));
     renderSubjects();
     setStep(0);
+    renderLessonTabs();
+    renderTopics();
     buildLiveBrainPlan();
   </script>
 </body>
