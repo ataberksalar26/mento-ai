@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -1715,14 +1715,31 @@
       display: grid;
     }
 
+    .nav-links a {
+      min-width: 70px;
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 999px;
+      background: rgba(255,255,255,.045);
+      text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .nav-links a:hover {
+      border-color: rgba(248,190,67,.55);
+      color: #fff;
+      background: rgba(248,190,67,.1);
+    }
+
     .demo {
-      width: min(860px, 100%);
+      width: min(1040px, 100%);
       max-height: calc(100vh - 48px);
       overflow: auto;
       color: var(--ink);
-      background: #f7f8fb;
-      border-radius: 22px;
-      padding: 26px;
+      background: linear-gradient(135deg, #f2eee6 0%, #e8edf3 100%);
+      border: 1px solid rgba(255,255,255,.68);
+      border-radius: 26px;
+      padding: 28px;
       box-shadow: var(--shadow);
     }
 
@@ -1735,7 +1752,7 @@
 
     .demo h2 {
       margin: 0 0 6px;
-      font-size: 30px;
+      font-size: 32px;
       letter-spacing: -.03em;
     }
 
@@ -1759,6 +1776,261 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
       margin-bottom: 16px;
+    }
+
+    .wizard-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 18px 0 20px;
+    }
+
+    .wizard-step {
+      border: 1px solid #d3dbe6;
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,.52);
+      color: #6a7484;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .wizard-step.active {
+      color: #0d1a2b;
+      border-color: rgba(224,166,63,.72);
+      background: linear-gradient(135deg, rgba(255,202,84,.34), rgba(255,255,255,.72));
+      box-shadow: 0 12px 30px rgba(224,166,63,.13);
+    }
+
+    .wizard-panel {
+      display: none;
+      min-height: 430px;
+    }
+
+    .wizard-panel.active {
+      display: block;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .choice-card {
+      border: 1px solid #d8e0ea;
+      border-radius: 20px;
+      padding: 20px;
+      background: rgba(255,255,255,.62);
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .choice-card:hover,
+    .choice-card.selected {
+      transform: translateY(-2px);
+      border-color: rgba(224,166,63,.9);
+      box-shadow: 0 18px 42px rgba(20,31,48,.12);
+    }
+
+    .choice-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 25px;
+      color: #0f1b2d;
+    }
+
+    .choice-card span {
+      color: #617087;
+      line-height: 1.5;
+    }
+
+    .subject-table {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .subject-row {
+      display: grid;
+      grid-template-columns: 1.2fr repeat(3, minmax(86px, .55fr));
+      gap: 10px;
+      align-items: end;
+      padding: 12px;
+      border: 1px solid #d8e0ea;
+      border-radius: 16px;
+      background: rgba(255,255,255,.55);
+    }
+
+    .subject-name strong {
+      display: block;
+      color: #111b2a;
+      font-size: 16px;
+    }
+
+    .subject-name span {
+      color: #69778b;
+      font-size: 12px;
+    }
+
+    .mini-field label {
+      display: block;
+      margin-bottom: 6px;
+      color: #6b7688;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .mini-field input,
+    .goal-grid input,
+    .goal-grid select,
+    .auth-card input {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid #d6dee9;
+      border-radius: 13px;
+      padding: 0 12px;
+      color: #0f1b2d;
+      background: rgba(255,255,255,.74);
+      font-weight: 800;
+      outline: none;
+    }
+
+    .mini-field input:focus,
+    .goal-grid input:focus,
+    .auth-card input:focus {
+      border-color: rgba(224,166,63,.9);
+      box-shadow: 0 0 0 4px rgba(224,166,63,.14);
+    }
+
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .auth-layout {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .auth-card,
+    .coach-loading {
+      border-radius: 22px;
+      padding: 22px;
+      border: 1px solid #d8e0ea;
+      background: rgba(255,255,255,.62);
+    }
+
+    .auth-card h3,
+    .coach-loading h3 {
+      margin: 0 0 8px;
+      color: #0f1b2d;
+      font-size: 24px;
+    }
+
+    .auth-card p,
+    .coach-loading p {
+      margin: 0 0 16px;
+      line-height: 1.5;
+    }
+
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 5px;
+      border-radius: 16px;
+      background: rgba(16,29,47,.08);
+    }
+
+    .auth-tabs button {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px;
+      background: transparent;
+      color: #4f5d70;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .auth-tabs button.active {
+      color: #07111f;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(13,25,42,.1);
+    }
+
+    .auth-fields {
+      display: grid;
+      gap: 10px;
+    }
+
+    .coach-loading {
+      color: #fff;
+      background: linear-gradient(145deg, #0c1727, #18283d);
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .coach-loading h3 {
+      color: #fff;
+    }
+
+    .coach-loading p {
+      color: #b8c5d8;
+    }
+
+    .coach-lines {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .coach-lines span {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: #dce6f3;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .pulse-ring {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffd05c 0 27%, rgba(255,208,92,.2) 28% 55%, transparent 56%);
+      box-shadow: 0 0 0 0 rgba(255,208,92,.38);
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      70% { box-shadow: 0 0 0 20px rgba(255,208,92,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,208,92,0); }
+    }
+
+    .wizard-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .wizard-actions .btn {
+      min-width: 150px;
+    }
+
+    .form-note {
+      margin-top: 10px;
+      color: #69778b;
+      font-size: 12px;
+      line-height: 1.45;
     }
 
     .field label {
@@ -1967,8 +2239,30 @@
       .stats,
       .steps,
       .demo-form,
-      .demo-result {
+      .demo-result,
+      .wizard-steps,
+      .choice-grid,
+      .goal-grid,
+      .auth-layout {
         grid-template-columns: 1fr;
+      }
+
+      .demo {
+        padding: 18px;
+        border-radius: 20px;
+      }
+
+      .subject-row {
+        grid-template-columns: 1fr;
+      }
+
+      .wizard-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .wizard-actions .btn {
+        width: 100%;
       }
 
       .stats {
@@ -2560,50 +2854,124 @@
     <div class="demo" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
       <div class="demo-top">
         <div>
-          <h2 id="demoTitle">Demo plan oluştur</h2>
-          <p>Örnek deneme verisiyle Mento Brain'in çalışma planını gör.</p>
+          <h2 id="demoTitle">Kişisel planını oluştur</h2>
+          <p>Mento AI önce sınavını, sonra netlerini ve hedefini alır. Ardından sana özel ilk çalışma programını hazırlar.</p>
         </div>
         <button class="close" type="button" data-close-demo aria-label="Kapat">×</button>
       </div>
 
-      <form class="demo-form" id="demoForm">
-        <div class="field"><label for="exam">Sınav</label><select id="exam"><option>TYT</option><option>AYT</option><option>LGS</option></select></div>
-        <div class="field"><label for="mathWrong">Matematik yanlış</label><input id="mathWrong" type="number" value="10" min="0"></div>
-        <div class="field"><label for="mathBlank">Matematik boş</label><input id="mathBlank" type="number" value="18" min="0"></div>
-        <div class="field"><label for="turkishWrong">Türkçe yanlış</label><input id="turkishWrong" type="number" value="8" min="0"></div>
+      <div class="wizard-steps" aria-label="Plan oluşturma adımları">
+        <div class="wizard-step active" data-step-label="1">1. Sınav</div>
+        <div class="wizard-step" data-step-label="2">2. Netler</div>
+        <div class="wizard-step" data-step-label="3">3. Hedef</div>
+        <div class="wizard-step" data-step-label="4">4. Hesap</div>
+      </div>
+
+      <form id="demoForm">
+        <section class="wizard-panel active" data-panel="0">
+          <div class="choice-grid" id="examChoices">
+            <button class="choice-card selected" type="button" data-exam-choice="TYT">
+              <strong>TYT</strong>
+              <span>Temel yeterlilik, hızlı net artışı ve günlük karma çalışma planı.</span>
+            </button>
+            <button class="choice-card" type="button" data-exam-choice="AYT">
+              <strong>AYT</strong>
+              <span>Alan dersleri, konu hakimiyeti ve haftalık hedef rotası.</span>
+            </button>
+            <button class="choice-card" type="button" data-exam-choice="LGS">
+              <strong>LGS</strong>
+              <span>Kazanım takibi, yeni nesil soru pratiği ve veli özeti.</span>
+            </button>
+          </div>
+          <p class="form-note">İlk adımda sınavı seç. Sonraki ekranda sadece o sınavdaki dersler ve gerçek soru sayıları açılır.</p>
+        </section>
+
+        <section class="wizard-panel" data-panel="1">
+          <h3>Son deneme sonucunu gir</h3>
+          <p>Her derste doğru + yanlış toplamı, o dersin soru sayısını geçemez.</p>
+          <div class="subject-table" id="subjectTable"></div>
+        </section>
+
+        <section class="wizard-panel" data-panel="2">
+          <h3>Hedefini seç</h3>
+          <p>Mento AI hedefe göre günlük süreyi, öncelik dersini ve mini görevleri ayarlar.</p>
+          <div class="goal-grid">
+            <div class="field"><label for="targetSchool">Hedef okul / üniversite</label><input id="targetSchool" type="text" placeholder="Örn. Boğaziçi, Galatasaray Lisesi"></div>
+            <div class="field"><label for="targetScore">Alınması gereken puan / sıralama</label><input id="targetScore" type="text" placeholder="Örn. 480 puan veya ilk 20.000"></div>
+            <div class="field"><label for="dailyTime">Günlük çalışma süresi</label><select id="dailyTime"><option value="90">90 dk</option><option value="120" selected>120 dk</option><option value="150">150 dk</option><option value="180">180 dk</option></select></div>
+            <div class="field"><label for="studyStyle">Çalışma tarzı</label><select id="studyStyle"><option>Net artışı odaklı</option><option>Konu eksiği odaklı</option><option>Deneme analizi odaklı</option></select></div>
+          </div>
+        </section>
+
+        <section class="wizard-panel" data-panel="3">
+          <div class="auth-layout">
+            <div class="auth-card">
+              <div class="auth-tabs">
+                <button class="active" type="button" data-auth-tab="signup">Üye ol</button>
+                <button type="button" data-auth-tab="login">Giriş yap</button>
+              </div>
+              <div class="auth-fields">
+                <input id="fullName" type="text" placeholder="Ad soyad">
+                <input id="email" type="email" placeholder="E-posta">
+                <input id="password" type="password" placeholder="Şifre">
+                <button class="btn btn-gold" type="button" id="calculatePlan">Hesapla ve planı hazırla</button>
+              </div>
+              <p class="form-note" id="authNote">Üye olurken ileride doğrulama kodu ve plan özeti mail olarak gönderilecek.</p>
+            </div>
+            <div class="coach-loading">
+              <div class="pulse-ring"></div>
+              <h3 id="coachTitle">Özel koçun hazır bekliyor.</h3>
+              <p id="coachText">Bilgileri tamamladığında Mento AI senin için en mantıklı günlük çalışma programını çıkaracak.</p>
+              <div class="coach-lines" id="coachLines">
+                <span>Sınav türü seçiliyor</span>
+                <span>Derslere göre risk puanı hesaplanıyor</span>
+                <span>Hedefe uygun günlük plan kuruluyor</span>
+              </div>
+            </div>
+          </div>
+        </section>
       </form>
 
-      <div class="demo-result">
+      <div class="demo-result" id="wizardResult" style="display:none">
         <section class="result-dark">
           <h3 id="focusTitle">Matematik öncelikli</h3>
-          <p id="focusText">Boş sayısı yüksek olduğu için ilk çalışma alanı problem çözme ve denklem kurma.</p>
+          <p id="focusText">Boş ve yanlış yoğunluğu Matematikte. İlk hedef problem çözme ve işlem takibi.</p>
           <div class="result-kpis">
             <div><strong id="netPotential">+8</strong><span>net potansiyeli</span></div>
-            <div><strong id="dailyMinutes">92</strong><span>dakika hedef</span></div>
+            <div><strong id="dailyMinutes">120</strong><span>dakika hedef</span></div>
           </div>
         </section>
         <section class="result-light">
           <h3>Bugünün akıllı listesi</h3>
-          <ul id="planList">
-            <li><strong>Matematik: Problemler</strong><br>Denklem kurma ve işlem takibi.</li>
-            <li><strong>Paragraf hız pratiği</strong><br>20 soru, süre hedefi 18 dakika.</li>
-            <li><strong>Fen yanlış analizi</strong><br>Ortak hata kümelerini işaretle.</li>
-          </ul>
+          <ul id="planList"></ul>
         </section>
+      </div>
+
+      <div class="wizard-actions">
+        <button class="btn btn-dark" type="button" id="prevStep">Geri</button>
+        <button class="btn btn-gold" type="button" id="nextStep">Devam et</button>
       </div>
     </div>
   </div>
-
   <script>
     const modal = document.getElementById('demoModal');
-    const form = document.getElementById('demoForm');
     const openButtons = document.querySelectorAll('[data-open-demo]');
     const closeButton = document.querySelector('[data-close-demo]');
+    const wizardPanels = [...document.querySelectorAll('.wizard-panel')];
+    const wizardSteps = [...document.querySelectorAll('.wizard-step')];
+    const prevStep = document.getElementById('prevStep');
+    const nextStep = document.getElementById('nextStep');
+    const subjectTable = document.getElementById('subjectTable');
+    const wizardResult = document.getElementById('wizardResult');
     const focusTitle = document.getElementById('focusTitle');
     const focusText = document.getElementById('focusText');
     const netPotential = document.getElementById('netPotential');
     const dailyMinutes = document.getElementById('dailyMinutes');
     const planList = document.getElementById('planList');
+    const calculatePlan = document.getElementById('calculatePlan');
+    const coachTitle = document.getElementById('coachTitle');
+    const coachText = document.getElementById('coachText');
+    const coachLines = document.getElementById('coachLines');
     const liveInputs = document.querySelectorAll('#liveExam, #trWrong, #trBlank, #matWrong, #matBlank, #fenWrong, #fenBlank, #sosWrong, #sosBlank');
     const liveFocusTitle = document.getElementById('liveFocusTitle');
     const liveInsight = document.getElementById('liveInsight');
@@ -2614,42 +2982,179 @@
     const netChart = document.getElementById('netChart');
     const chartNote = document.getElementById('chartNote');
 
+    const exams = {
+      TYT: [
+        { key: 'turkce', name: 'Türkçe', questions: 40, topic: 'Paragraf hız pratiği' },
+        { key: 'matematik', name: 'Matematik', questions: 40, topic: 'Problemler ve denklem kurma' },
+        { key: 'sosyal', name: 'Sosyal Bilimler', questions: 20, topic: 'Kavram ve yorum tekrarı' },
+        { key: 'fen', name: 'Fen Bilimleri', questions: 20, topic: 'Fen yanlış analizi' }
+      ],
+      AYT: [
+        { key: 'matematik', name: 'Matematik', questions: 40, topic: 'Fonksiyon, problem ve işlem takibi' },
+        { key: 'fizik', name: 'Fizik', questions: 14, topic: 'Formül değil mantık analizi' },
+        { key: 'kimya', name: 'Kimya', questions: 13, topic: 'Konu hakimiyeti turu' },
+        { key: 'biyoloji', name: 'Biyoloji', questions: 13, topic: 'Kavram eşleştirme' },
+        { key: 'edebiyat', name: 'Edebiyat', questions: 24, topic: 'Eser-yazar ve dönem tekrarı' },
+        { key: 'tarih', name: 'Tarih', questions: 10, topic: 'Kronoloji ve yorum' },
+        { key: 'cografya', name: 'Coğrafya', questions: 6, topic: 'Harita ve kavram pratiği' }
+      ],
+      LGS: [
+        { key: 'turkce', name: 'Türkçe', questions: 20, topic: 'Paragraf ve yeni nesil soru' },
+        { key: 'matematik', name: 'Matematik', questions: 20, topic: 'Yeni nesil problem çözümü' },
+        { key: 'fen', name: 'Fen Bilimleri', questions: 20, topic: 'Kazanım analizi' },
+        { key: 'inkilap', name: 'İnkılap Tarihi', questions: 10, topic: 'Kavram ve yorum' },
+        { key: 'din', name: 'Din Kültürü', questions: 10, topic: 'Bilgi + yorum turu' },
+        { key: 'ingilizce', name: 'İngilizce', questions: 10, topic: 'Kelime ve anlam pratiği' }
+      ]
+    };
+
+    let currentStep = 0;
+    let selectedExam = 'TYT';
+
     function numberValue(id) {
-      return Math.max(0, Number(document.getElementById(id).value || 0));
+      const element = document.getElementById(id);
+      return Math.max(0, Number(element?.value || 0));
+    }
+
+    function setStep(step) {
+      currentStep = Math.max(0, Math.min(3, step));
+      wizardPanels.forEach((panel, index) => panel.classList.toggle('active', index === currentStep));
+      wizardSteps.forEach((item, index) => item.classList.toggle('active', index === currentStep));
+      prevStep.style.visibility = currentStep === 0 ? 'hidden' : 'visible';
+      nextStep.textContent = currentStep === 3 ? 'Planı hesapla' : 'Devam et';
+      wizardResult.style.display = 'none';
+    }
+
+    function renderSubjects() {
+      subjectTable.innerHTML = exams[selectedExam].map(subject => `
+        <div class="subject-row" data-subject="${subject.key}" data-max="${subject.questions}">
+          <div class="subject-name">
+            <strong>${subject.name}</strong>
+            <span>${subject.questions} soru · ${subject.topic}</span>
+          </div>
+          <div class="mini-field">
+            <label>Doğru</label>
+            <input type="number" min="0" max="${subject.questions}" value="0" data-score="correct">
+          </div>
+          <div class="mini-field">
+            <label>Yanlış</label>
+            <input type="number" min="0" max="${subject.questions}" value="0" data-score="wrong">
+          </div>
+          <div class="mini-field">
+            <label>Boş</label>
+            <input type="number" min="0" max="${subject.questions}" value="${subject.questions}" data-score="blank" readonly>
+          </div>
+        </div>
+      `).join('');
+
+      subjectTable.querySelectorAll('input[data-score]').forEach(input => {
+        input.addEventListener('input', () => clampSubjectRow(input.closest('.subject-row')));
+      });
+    }
+
+    function clampSubjectRow(row) {
+      const max = Number(row.dataset.max);
+      const correct = row.querySelector('[data-score="correct"]');
+      const wrong = row.querySelector('[data-score="wrong"]');
+      const blank = row.querySelector('[data-score="blank"]');
+      correct.value = Math.max(0, Math.min(max, Number(correct.value || 0)));
+      wrong.value = Math.max(0, Math.min(max, Number(wrong.value || 0)));
+      let total = Number(correct.value) + Number(wrong.value);
+      if (total > max) {
+        const overflow = total - max;
+        if (document.activeElement === wrong) wrong.value = Math.max(0, Number(wrong.value) - overflow);
+        else correct.value = Math.max(0, Number(correct.value) - overflow);
+        total = Number(correct.value) + Number(wrong.value);
+      }
+      blank.value = max - total;
+    }
+
+    function getSubjectScores() {
+      return [...subjectTable.querySelectorAll('.subject-row')].map(row => {
+        const meta = exams[selectedExam].find(item => item.key === row.dataset.subject);
+        const correct = Number(row.querySelector('[data-score="correct"]').value || 0);
+        const wrong = Number(row.querySelector('[data-score="wrong"]').value || 0);
+        const blank = Number(row.querySelector('[data-score="blank"]').value || 0);
+        return { ...meta, correct, wrong, blank, risk: wrong * 2.4 + blank * 1.15 };
+      }).sort((a, b) => b.risk - a.risk);
     }
 
     function createLocalPlan() {
-      const exam = document.getElementById('exam').value;
-      const mathWrong = numberValue('mathWrong');
-      const mathBlank = numberValue('mathBlank');
-      const turkishWrong = numberValue('turkishWrong');
-      const mathRisk = mathWrong * 2 + mathBlank;
-      const turkishRisk = turkishWrong * 2;
-      const focus = mathRisk >= turkishRisk ? 'Matematik' : 'Türkçe';
-      const potential = Math.max(4, Math.min(16, Math.round((mathWrong + turkishWrong) * .55 + mathBlank * .25)));
-      const minutes = exam === 'LGS' ? 80 : exam === 'AYT' ? 110 : 92;
+      const scores = getSubjectScores();
+      const focus = scores[0] || exams[selectedExam][0];
+      const second = scores[1] || focus;
+      const minutes = Number(document.getElementById('dailyTime').value || 120);
+      const target = document.getElementById('targetSchool').value.trim() || 'hedefine';
+      const potential = Math.max(4, Math.min(18, Math.round(focus.wrong * .9 + focus.blank * .35 + second.wrong * .25)));
+      const focusReason = focus.blank > focus.wrong
+        ? `${focus.name} dersinde boş sayısı yüksek. Önce konu tanıma ve doğru soru seçimi güçlendirilecek.`
+        : `${focus.name} dersinde yanlış yoğunluğu yüksek. Önce hata sebebi, işlem takibi ve tekrar eden soru tipi bulunacak.`;
 
-      focusTitle.textContent = `${focus} öncelikli`;
-      focusText.textContent = focus === 'Matematik'
-        ? 'Boş ve yanlış yoğunluğu Matematikte. İlk hedef problem çözme, denklem kurma ve işlem takibi.'
-        : 'Türkçe yanlışları net artışını sınırlıyor. İlk hedef paragraf hızı ve hata türlerini ayırmak.';
+      focusTitle.textContent = `${focus.name} öncelikli`;
+      focusText.textContent = `${focusReason} Mento AI planı ${target} hedefi için ${minutes} dakikalık ilk güne böldü.`;
       netPotential.textContent = `+${potential}`;
       dailyMinutes.textContent = minutes;
 
-      const items = focus === 'Matematik'
-        ? [
-            ['Matematik: Problemler', '10 dakika konu özeti, 20 seçilmiş soru.'],
-            ['Yanlış analizi', 'Hataları kavram, işlem, dikkat ve süre diye ayır.'],
-            ['Paragraf hız pratiği', '20 soru, süre hedefi 18 dakika.']
-          ]
-        : [
-            ['Paragraf hız pratiği', '20 soru, her paragrafta ana düşünceyi işaretle.'],
-            ['Dil bilgisi mini tekrar', 'Eksik kazanımdan 15 kısa soru çöz.'],
-            ['Matematik koruma turu', 'Problemden 12 soru ile ritmi kaybetme.']
-          ];
-
-      planList.innerHTML = items.map(([title, text]) => `<li><strong>${title}</strong><br>${text}</li>`).join('');
+      const tasks = [
+        [`${focus.name}: ${focus.topic}`, `${Math.round(minutes * .34)} dakika ana odak, seçilmiş soru ve kısa not.`],
+        ['Yanlış sebebi analizi', 'Hataları kavram, dikkat, işlem ve süre diye ayır.'],
+        [`${second.name}: destek turu`, `${second.topic} için kısa tekrar ve mini test.`],
+        ['Gün sonu kontrolü', '15 soruluk ölçümle planın yarına otomatik güncellensin.']
+      ];
+      planList.innerHTML = tasks.map(([title, text]) => `<li><strong>${title}</strong><br>${text}</li>`).join('');
+      wizardResult.style.display = 'grid';
+      wizardResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
+
+    document.querySelectorAll('[data-exam-choice]').forEach(button => {
+      button.addEventListener('click', () => {
+        selectedExam = button.dataset.examChoice;
+        document.querySelectorAll('[data-exam-choice]').forEach(item => item.classList.toggle('selected', item === button));
+        renderSubjects();
+      });
+    });
+
+    document.querySelectorAll('[data-auth-tab]').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('[data-auth-tab]').forEach(item => item.classList.toggle('active', item === button));
+        const mode = button.dataset.authTab;
+        document.getElementById('fullName').style.display = mode === 'login' ? 'none' : 'block';
+        document.getElementById('authNote').textContent = mode === 'login'
+          ? 'Giriş yapınca kayıtlı hedeflerin ve önceki planların açılır.'
+          : 'Üye olurken ileride doğrulama kodu ve plan özeti mail olarak gönderilecek.';
+      });
+    });
+
+    nextStep.addEventListener('click', () => {
+      if (currentStep < 3) setStep(currentStep + 1);
+      else {
+        coachTitle.textContent = 'Özel koçunuz sizin için en iyi programı hazırlıyor.';
+        coachText.textContent = 'Deneme sonuçları, hedef ve günlük süre birlikte değerlendiriliyor. İlk çalışma günü birkaç saniye içinde hazır.';
+        coachLines.innerHTML = '<span>Eksik dersler sıralandı</span><span>Net potansiyeli hesaplandı</span><span>Bugünün akıllı listesi oluşturuldu</span>';
+        setTimeout(createLocalPlan, 650);
+      }
+    });
+
+    prevStep.addEventListener('click', () => setStep(currentStep - 1));
+    calculatePlan.addEventListener('click', createLocalPlan);
+
+    openButtons.forEach(button => {
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        setStep(0);
+      });
+    });
+
+    closeButton.addEventListener('click', () => {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    });
+
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeButton.click();
+    });
 
     function buildLiveBrainPlan() {
       if (!liveFocusTitle) return;
@@ -2660,10 +3165,7 @@
         { name: 'Matematik', wrong: numberValue('matWrong'), blank: numberValue('matBlank'), topic: 'Problemler ve denklem kurma' },
         { name: 'Fen', wrong: numberValue('fenWrong'), blank: numberValue('fenBlank'), topic: 'Fen yanlış analizi' },
         { name: 'Sosyal', wrong: numberValue('sosWrong'), blank: numberValue('sosBlank'), topic: 'Kavram ve yorum tekrarı' }
-      ].map(lesson => ({
-        ...lesson,
-        risk: lesson.wrong * 2.2 + lesson.blank * 1.1
-      })).sort((a, b) => b.risk - a.risk);
+      ].map(lesson => ({ ...lesson, risk: lesson.wrong * 2.2 + lesson.blank * 1.1 })).sort((a, b) => b.risk - a.risk);
 
       const focus = lessons[0];
       const second = lessons[1];
@@ -2706,26 +3208,9 @@
       chartNote.textContent = `${focus.name} odağı korunursa 5 deneme içinde yaklaşık +${potential} netlik alan açılabilir.`;
     }
 
-    openButtons.forEach(button => {
-      button.addEventListener('click', event => {
-        event.preventDefault();
-        createLocalPlan();
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-      });
-    });
-
-    closeButton.addEventListener('click', () => {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-    });
-
-    modal.addEventListener('click', event => {
-      if (event.target === modal) closeButton.click();
-    });
-
-    form.addEventListener('input', createLocalPlan);
     liveInputs.forEach(input => input.addEventListener('input', buildLiveBrainPlan));
+    renderSubjects();
+    setStep(0);
     buildLiveBrainPlan();
   </script>
 </body>
