@@ -1705,10 +1705,10 @@
       inset: 0;
       z-index: 50;
       display: none;
-      place-items: center;
-      padding: 24px;
-      background: rgba(3,8,15,.72);
-      backdrop-filter: blur(12px);
+      place-items: stretch;
+      padding: 0;
+      background: #07111e;
+      backdrop-filter: none;
     }
 
     .modal.open {
@@ -1716,38 +1716,60 @@
     }
 
     .nav-links a {
-      min-width: 70px;
-      padding: 10px 18px;
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 999px;
-      background: rgba(255,255,255,.045);
+      position: relative;
+      min-width: auto;
+      padding: 10px 2px 14px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
       text-align: center;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+      box-shadow: none;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 4px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      transform: translateX(-50%);
+      transition: width .22s ease;
     }
 
     .nav-links a:hover {
-      border-color: rgba(248,190,67,.55);
       color: #fff;
-      background: rgba(248,190,67,.1);
+      background: transparent;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
     .demo {
-      width: min(1040px, 100%);
-      max-height: calc(100vh - 48px);
+      width: 100%;
+      min-height: 100vh;
+      max-height: 100vh;
       overflow: auto;
       color: var(--ink);
-      background: linear-gradient(135deg, #f2eee6 0%, #e8edf3 100%);
-      border: 1px solid rgba(255,255,255,.68);
-      border-radius: 26px;
-      padding: 28px;
-      box-shadow: var(--shadow);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(248,190,67,.2), transparent 28%),
+        linear-gradient(110deg, #07111e 0%, #0c1727 34%, #eef0f2 34.1%, #e7ebef 100%);
+      border: 0;
+      border-radius: 0;
+      padding: 42px max(28px, calc((100vw - 1180px) / 2));
+      box-shadow: none;
     }
 
     .demo-top {
       display: flex;
       justify-content: space-between;
       gap: 18px;
-      margin-bottom: 18px;
+      width: min(1180px, 100%);
+      margin: 0 auto 22px;
+      padding-left: min(36%, 420px);
     }
 
     .demo h2 {
@@ -1765,8 +1787,8 @@
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      border: 1px solid #d9e0ea;
-      background: var(--soft-card);
+      border: 1px solid rgba(16,29,47,.18);
+      background: rgba(255,255,255,.8);
       cursor: pointer;
       font-size: 24px;
     }
@@ -1782,7 +1804,9 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      margin: 18px 0 20px;
+      width: min(1180px, 100%);
+      margin: 18px auto 20px;
+      padding-left: min(36%, 420px);
     }
 
     .wizard-step {
@@ -1804,11 +1828,36 @@
 
     .wizard-panel {
       display: none;
-      min-height: 430px;
+      width: min(1180px, 100%);
+      min-height: 520px;
+      margin: 0 auto;
+      padding-left: min(36%, 420px);
     }
 
     .wizard-panel.active {
       display: block;
+    }
+
+    .wizard-panel::before {
+      content: "mento ai";
+      position: fixed;
+      left: max(28px, calc((100vw - 1180px) / 2));
+      top: 46px;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+
+    .wizard-panel::after {
+      content: "Sınav hedefini, deneme netlerini ve günlük çalışma gücünü tek yerde topla. Mento AI ilk planını buradan kurar.";
+      position: fixed;
+      left: max(28px, calc((100vw - 1180px) / 2));
+      top: 118px;
+      width: min(320px, 30vw);
+      color: #aebbd0;
+      font-size: 20px;
+      line-height: 1.45;
     }
 
     .choice-grid {
@@ -2019,7 +2068,9 @@
       display: flex;
       justify-content: space-between;
       gap: 12px;
-      margin-top: 20px;
+      width: min(1180px, 100%);
+      margin: 20px auto 0;
+      padding-left: min(36%, 420px);
     }
 
     .wizard-actions .btn {
@@ -2250,6 +2301,21 @@
       .demo {
         padding: 18px;
         border-radius: 20px;
+        min-height: 100vh;
+        max-height: 100vh;
+        background: linear-gradient(180deg, #f0eee8, #e8edf3);
+      }
+
+      .demo-top,
+      .wizard-steps,
+      .wizard-panel,
+      .wizard-actions {
+        padding-left: 0;
+      }
+
+      .wizard-panel::before,
+      .wizard-panel::after {
+        display: none;
       }
 
       .subject-row {
@@ -2432,7 +2498,7 @@
           <a href="#nasil-calisir">Nasıl Çalışır?</a>
         </div>
         <div class="nav-actions">
-          <a href="#" data-open-demo>Giriş</a>
+          <a href="#" data-open-demo="login">Giriş</a>
           <button class="btn btn-gold" type="button" data-open-demo>Ücretsiz Başla</button>
         </div>
       </nav>
@@ -3102,8 +3168,21 @@
         ['Gün sonu kontrolü', '15 soruluk ölçümle planın yarına otomatik güncellensin.']
       ];
       planList.innerHTML = tasks.map(([title, text]) => `<li><strong>${title}</strong><br>${text}</li>`).join('');
+      coachTitle.textContent = 'Hesabın ve ilk planın hazır.';
+      coachText.textContent = 'Bu ekrandaki verilerle öğrenci panelinde bugünün planı, hedef takibi ve deneme analizi açılacak.';
+      coachLines.innerHTML = '<span>Üyelik ekranı tamamlandı</span><span>Hedef bilgileri plana işlendi</span><span>Öğrenci paneline geçiş hazır</span>';
       wizardResult.style.display = 'grid';
       wizardResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function setAuthMode(mode) {
+      document.querySelectorAll('[data-auth-tab]').forEach(item => item.classList.toggle('active', item.dataset.authTab === mode));
+      document.getElementById('fullName').style.display = mode === 'login' ? 'none' : 'block';
+      document.getElementById('password').placeholder = mode === 'login' ? 'Şifren' : 'Şifre oluştur';
+      calculatePlan.textContent = mode === 'login' ? 'Giriş yap ve planı aç' : 'Kaydol ve planı hazırla';
+      document.getElementById('authNote').textContent = mode === 'login'
+        ? 'Giriş yapınca kayıtlı hedeflerin, önceki denemelerin ve bugünün planı açılır.'
+        : 'Kaydolunca doğrulama kodu, plan özeti ve ilk hedeflerin mail tarafına bağlanabilir.';
     }
 
     document.querySelectorAll('[data-exam-choice]').forEach(button => {
@@ -3116,12 +3195,7 @@
 
     document.querySelectorAll('[data-auth-tab]').forEach(button => {
       button.addEventListener('click', () => {
-        document.querySelectorAll('[data-auth-tab]').forEach(item => item.classList.toggle('active', item === button));
-        const mode = button.dataset.authTab;
-        document.getElementById('fullName').style.display = mode === 'login' ? 'none' : 'block';
-        document.getElementById('authNote').textContent = mode === 'login'
-          ? 'Giriş yapınca kayıtlı hedeflerin ve önceki planların açılır.'
-          : 'Üye olurken ileride doğrulama kodu ve plan özeti mail olarak gönderilecek.';
+        setAuthMode(button.dataset.authTab);
       });
     });
 
@@ -3143,7 +3217,13 @@
         event.preventDefault();
         modal.classList.add('open');
         modal.setAttribute('aria-hidden', 'false');
-        setStep(0);
+        if (button.dataset.openDemo === 'login') {
+          setAuthMode('login');
+          setStep(3);
+        } else {
+          setAuthMode('signup');
+          setStep(0);
+        }
       });
     });
 
