@@ -1,0 +1,16 @@
+{
+  "name": "Mento AI",
+  "short_name": "Mento",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07111D",
+  "theme_color": "#07111D",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
