@@ -1763,6 +1763,142 @@
       box-shadow: none;
     }
 
+    .wizard-side {
+      position: fixed;
+      left: max(28px, calc((100vw - 1180px) / 2));
+      top: 46px;
+      width: min(330px, 30vw);
+      color: #fff;
+    }
+
+    .wizard-brand {
+      margin-bottom: 28px;
+      font-size: 28px;
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+
+    .wizard-side h3 {
+      margin: 0 0 12px;
+      font-size: 36px;
+      line-height: 1.02;
+      letter-spacing: -.04em;
+    }
+
+    .wizard-side p {
+      margin: 0;
+      color: #aebbd0;
+      font-size: 18px;
+      line-height: 1.52;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .side-stack div,
+    .mini-proof div {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 13px 14px;
+      background: rgba(255,255,255,.055);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .side-stack strong,
+    .mini-proof strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .side-stack span,
+    .mini-proof span {
+      color: #9faec5;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .mini-proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .mini-proof div {
+      background: rgba(255,255,255,.62);
+      border-color: #d8e0ea;
+    }
+
+    .mini-proof strong {
+      color: #0f1b2d;
+    }
+
+    .mini-proof span {
+      color: #617087;
+    }
+
+    .starter-preview {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .starter-preview article {
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid rgba(16,29,47,.12);
+      background: rgba(255,255,255,.58);
+    }
+
+    .starter-preview article:first-child {
+      color: #fff;
+      background: linear-gradient(145deg, #0c1727, #1a2a40);
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .starter-preview h4 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: inherit;
+    }
+
+    .starter-preview p {
+      margin: 0;
+      color: #657184;
+      line-height: 1.55;
+    }
+
+    .starter-preview article:first-child p {
+      color: #b8c5d8;
+    }
+
+    .preview-list {
+      display: grid;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .preview-list span {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-top: 1px solid rgba(16,29,47,.1);
+      color: #536073;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .preview-list b {
+      color: #0f1b2d;
+    }
+
     .demo-top {
       display: flex;
       justify-content: space-between;
@@ -1839,25 +1975,11 @@
     }
 
     .wizard-panel::before {
-      content: "mento ai";
-      position: fixed;
-      left: max(28px, calc((100vw - 1180px) / 2));
-      top: 46px;
-      color: #fff;
-      font-size: 28px;
-      font-weight: 950;
-      letter-spacing: -.04em;
+      content: none;
     }
 
     .wizard-panel::after {
-      content: "Sınav hedefini, deneme netlerini ve günlük çalışma gücünü tek yerde topla. Mento AI ilk planını buradan kurar.";
-      position: fixed;
-      left: max(28px, calc((100vw - 1180px) / 2));
-      top: 118px;
-      width: min(320px, 30vw);
-      color: #aebbd0;
-      font-size: 20px;
-      line-height: 1.45;
+      content: none;
     }
 
     .choice-grid {
@@ -2018,6 +2140,27 @@
     .auth-fields {
       display: grid;
       gap: 10px;
+    }
+
+    .verify-box {
+      display: none;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid rgba(31,121,87,.22);
+      border-radius: 16px;
+      background: rgba(43,178,121,.08);
+    }
+
+    .verify-box.show {
+      display: grid;
+    }
+
+    .auth-status {
+      min-height: 20px;
+      color: #536073;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.45;
     }
 
     .coach-loading {
@@ -2294,7 +2437,9 @@
       .wizard-steps,
       .choice-grid,
       .goal-grid,
-      .auth-layout {
+      .auth-layout,
+      .starter-preview,
+      .mini-proof {
         grid-template-columns: 1fr;
       }
 
@@ -2314,7 +2459,8 @@
       }
 
       .wizard-panel::before,
-      .wizard-panel::after {
+      .wizard-panel::after,
+      .wizard-side {
         display: none;
       }
 
@@ -2918,6 +3064,17 @@
 
   <div class="modal" id="demoModal" aria-hidden="true">
     <div class="demo" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+      <aside class="wizard-side" aria-hidden="true">
+        <div class="wizard-brand">mento ai</div>
+        <h3>İlk planını birkaç adımda kur.</h3>
+        <p>Sınavını, hedefini ve deneme sonuçlarını gir. Mento AI hangi derse önce dokunman gerektiğini hesaplar.</p>
+        <div class="side-stack">
+          <div><strong>1. Sınav profili</strong><span>TYT, AYT veya LGS dersleri otomatik gelir.</span></div>
+          <div><strong>2. Net güvenliği</strong><span>Her ders kendi soru sayısıyla sınırlanır.</span></div>
+          <div><strong>3. Mail doğrulama</strong><span>Kaydolurken 6 haneli kod öğrencinin mail adresine gönderilir.</span></div>
+        </div>
+      </aside>
+
       <div class="demo-top">
         <div>
           <h2 id="demoTitle">Kişisel planını oluştur</h2>
@@ -2950,6 +3107,25 @@
             </button>
           </div>
           <p class="form-note">İlk adımda sınavı seç. Sonraki ekranda sadece o sınavdaki dersler ve gerçek soru sayıları açılır.</p>
+          <div class="mini-proof">
+            <div><strong>Gerçek sınav sayıları</strong><span>TYT, AYT ve LGS için ders limitleri ayrı çalışır.</span></div>
+            <div><strong>Hedefe göre plan</strong><span>Puan, okul ve günlük süre birlikte değerlendirilir.</span></div>
+            <div><strong>Koç ekranı</strong><span>Son adımda kişisel programın hazır hale gelir.</span></div>
+          </div>
+          <div class="starter-preview">
+            <article>
+              <h4>Mento AI ne hazırlayacak?</h4>
+              <p>Öncelik dersini, net potansiyelini, günlük çalışma süresini ve ilk 4 görevi tek planda toplayacak.</p>
+            </article>
+            <article>
+              <h4>İlk gün plan örneği</h4>
+              <div class="preview-list">
+                <span>Öncelik <b>Paragraf + Problemler</b></span>
+                <span>Takip <b>Net ve süre</b></span>
+                <span>Kayıt <b>6 haneli kod şart</b></span>
+              </div>
+            </article>
+          </div>
         </section>
 
         <section class="wizard-panel" data-panel="1">
@@ -2980,9 +3156,14 @@
                 <input id="fullName" type="text" placeholder="Ad soyad">
                 <input id="email" type="email" placeholder="E-posta">
                 <input id="password" type="password" placeholder="Şifre">
+                <div class="verify-box" id="verifyBox">
+                  <input id="verificationCode" type="text" inputmode="numeric" maxlength="6" placeholder="Mailine gelen 6 haneli kod">
+                  <button class="btn btn-dark" type="button" id="verifyCodeButton">Kodu onayla</button>
+                </div>
                 <button class="btn btn-gold" type="button" id="calculatePlan">Hesapla ve planı hazırla</button>
               </div>
-              <p class="form-note" id="authNote">Üye olurken ileride doğrulama kodu ve plan özeti mail olarak gönderilecek.</p>
+              <div class="auth-status" id="authStatus"></div>
+              <p class="form-note" id="authNote">Kaydolmak için mailine gelen 6 haneli kodu girmen zorunlu.</p>
             </div>
             <div class="coach-loading">
               <div class="pulse-ring"></div>
@@ -3015,6 +3196,7 @@
 
       <div class="wizard-actions">
         <button class="btn btn-dark" type="button" id="prevStep">Geri</button>
+        <button class="btn btn-dark" type="button" id="skipStep">Geç</button>
         <button class="btn btn-gold" type="button" id="nextStep">Devam et</button>
       </div>
     </div>
@@ -3027,6 +3209,7 @@
     const wizardSteps = [...document.querySelectorAll('.wizard-step')];
     const prevStep = document.getElementById('prevStep');
     const nextStep = document.getElementById('nextStep');
+    const skipStep = document.getElementById('skipStep');
     const subjectTable = document.getElementById('subjectTable');
     const wizardResult = document.getElementById('wizardResult');
     const focusTitle = document.getElementById('focusTitle');
@@ -3035,6 +3218,9 @@
     const dailyMinutes = document.getElementById('dailyMinutes');
     const planList = document.getElementById('planList');
     const calculatePlan = document.getElementById('calculatePlan');
+    const verifyBox = document.getElementById('verifyBox');
+    const verifyCodeButton = document.getElementById('verifyCodeButton');
+    const authStatus = document.getElementById('authStatus');
     const coachTitle = document.getElementById('coachTitle');
     const coachText = document.getElementById('coachText');
     const coachLines = document.getElementById('coachLines');
@@ -3076,6 +3262,8 @@
 
     let currentStep = 0;
     let selectedExam = 'TYT';
+    let authMode = 'signup';
+    let pendingVerificationEmail = '';
 
     function numberValue(id) {
       const element = document.getElementById(id);
@@ -3088,6 +3276,7 @@
       wizardSteps.forEach((item, index) => item.classList.toggle('active', index === currentStep));
       prevStep.style.visibility = currentStep === 0 ? 'hidden' : 'visible';
       nextStep.textContent = currentStep === 3 ? 'Planı hesapla' : 'Devam et';
+      skipStep.style.visibility = currentStep === 3 ? 'hidden' : 'visible';
       wizardResult.style.display = 'none';
     }
 
@@ -3176,13 +3365,85 @@
     }
 
     function setAuthMode(mode) {
+      authMode = mode;
       document.querySelectorAll('[data-auth-tab]').forEach(item => item.classList.toggle('active', item.dataset.authTab === mode));
       document.getElementById('fullName').style.display = mode === 'login' ? 'none' : 'block';
       document.getElementById('password').placeholder = mode === 'login' ? 'Şifren' : 'Şifre oluştur';
-      calculatePlan.textContent = mode === 'login' ? 'Giriş yap ve planı aç' : 'Kaydol ve planı hazırla';
+      calculatePlan.textContent = mode === 'login' ? 'Giriş yap ve planı aç' : 'Kodu gönder';
+      verifyBox.classList.remove('show');
+      authStatus.textContent = '';
       document.getElementById('authNote').textContent = mode === 'login'
         ? 'Giriş yapınca kayıtlı hedeflerin, önceki denemelerin ve bugünün planı açılır.'
-        : 'Kaydolunca doğrulama kodu, plan özeti ve ilk hedeflerin mail tarafına bağlanabilir.';
+        : 'Kayıt tamamlanmadan önce öğrencinin mailine gelen 6 haneli kod zorunlu.';
+    }
+
+    async function postJson(url, payload) {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || data.message || 'İşlem tamamlanamadı.');
+      return data;
+    }
+
+    async function handleAuthSubmit() {
+      const name = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const goal = `${document.getElementById('targetSchool').value.trim()} ${document.getElementById('targetScore').value.trim()}`.trim();
+
+      if (!email || !password || (authMode === 'signup' && !name)) {
+        authStatus.textContent = authMode === 'signup' ? 'Ad, e-posta ve şifre gerekli.' : 'E-posta ve şifre gerekli.';
+        return;
+      }
+
+      calculatePlan.disabled = true;
+      authStatus.textContent = authMode === 'signup' ? '6 haneli doğrulama kodu gönderiliyor...' : 'Giriş yapılıyor...';
+
+      try {
+        if (authMode === 'login') {
+          await postJson('/api/login', { email, password });
+          authStatus.textContent = 'Giriş başarılı. Planın açılıyor.';
+          createLocalPlan();
+          return;
+        }
+
+        await postJson('/api/register', { name, email, password, exam: selectedExam, goal });
+        pendingVerificationEmail = email;
+        verifyBox.classList.add('show');
+        authStatus.textContent = 'Kod öğrencinin mail adresine gönderildi. 6 haneli kod girilmeden kayıt tamamlanmaz.';
+        coachTitle.textContent = 'Doğrulama kodu gönderildi.';
+        coachText.textContent = 'Öğrenci mailine gelen 6 haneli kodu girince hesabı açılacak ve Mento AI ilk programını hazırlayacak.';
+      } catch (error) {
+        authStatus.textContent = error.message.includes('Failed to fetch')
+          ? 'Mail servisi için server.js yayına alınmalı. SITEYE-YUKLE.cmd ile tekrar yükle.'
+          : error.message;
+      } finally {
+        calculatePlan.disabled = false;
+      }
+    }
+
+    async function handleVerifyCode() {
+      const code = document.getElementById('verificationCode').value.trim();
+      const email = pendingVerificationEmail || document.getElementById('email').value.trim();
+      if (!email || code.length < 6) {
+        authStatus.textContent = '6 haneli doğrulama kodunu gir.';
+        return;
+      }
+
+      verifyCodeButton.disabled = true;
+      authStatus.textContent = 'Kod kontrol ediliyor...';
+      try {
+        await postJson('/api/verify-code', { email, code });
+        authStatus.textContent = 'E-posta doğrulandı. İlk planın hazırlanıyor.';
+        createLocalPlan();
+      } catch (error) {
+        authStatus.textContent = error.message;
+      } finally {
+        verifyCodeButton.disabled = false;
+      }
     }
 
     document.querySelectorAll('[data-exam-choice]').forEach(button => {
@@ -3205,12 +3466,16 @@
         coachTitle.textContent = 'Özel koçunuz sizin için en iyi programı hazırlıyor.';
         coachText.textContent = 'Deneme sonuçları, hedef ve günlük süre birlikte değerlendiriliyor. İlk çalışma günü birkaç saniye içinde hazır.';
         coachLines.innerHTML = '<span>Eksik dersler sıralandı</span><span>Net potansiyeli hesaplandı</span><span>Bugünün akıllı listesi oluşturuldu</span>';
-        setTimeout(createLocalPlan, 650);
+        handleAuthSubmit();
       }
     });
 
     prevStep.addEventListener('click', () => setStep(currentStep - 1));
-    calculatePlan.addEventListener('click', createLocalPlan);
+    skipStep.addEventListener('click', () => {
+      if (currentStep < 3) setStep(currentStep + 1);
+    });
+    calculatePlan.addEventListener('click', handleAuthSubmit);
+    verifyCodeButton.addEventListener('click', handleVerifyCode);
 
     openButtons.forEach(button => {
       button.addEventListener('click', event => {
