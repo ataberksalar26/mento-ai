@@ -2224,9 +2224,14 @@
       inset: 0;
       z-index: 70;
       display: none;
-      grid-template-columns: 280px 1fr 360px;
+      grid-template-columns: 280px 1fr 420px;
       color: #e9f0f7;
       background: #07111e;
+    }
+
+    .student-app.light {
+      color: #111c2d;
+      background: #edf2f7;
     }
 
     .student-app.open {
@@ -2243,9 +2248,34 @@
     }
 
     .app-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       font-size: 24px;
       font-weight: 950;
       letter-spacing: -.04em;
+    }
+
+    .app-logo-mark {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      color: #ffd36b;
+      background: rgba(248,190,67,.12);
+      border: 1px solid rgba(248,190,67,.34);
+      box-shadow: 0 14px 34px rgba(248,190,67,.12);
+    }
+
+    .app-logo-mark::after {
+      content: "✦";
+      position: absolute;
+      top: -9px;
+      right: -6px;
+      font-size: 12px;
+      color: #ffd36b;
     }
 
     .new-chat {
@@ -2274,6 +2304,9 @@
     }
 
     .chat-list button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       border: 1px solid rgba(255,255,255,.08);
       border-radius: 13px;
       padding: 12px;
@@ -2287,6 +2320,18 @@
       color: #fff;
       background: rgba(248,190,67,.12);
       border-color: rgba(248,190,67,.3);
+    }
+
+    .nav-ico {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 9px;
+      color: #07111e;
+      background: rgba(248,190,67,.9);
+      font-size: 13px;
+      flex: 0 0 auto;
     }
 
     .app-profile {
@@ -2309,6 +2354,56 @@
       color: #07111e;
       background: linear-gradient(135deg, #ffd36b, #32c985);
       font-weight: 950;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.18);
+      cursor: pointer;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sidebar-tools {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .tool-button {
+      min-height: 38px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px;
+      color: #dce7f5;
+      background: rgba(255,255,255,.055);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .settings-mini {
+      display: none;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      background: rgba(255,255,255,.05);
+    }
+
+    .settings-mini.show {
+      display: grid;
+      gap: 8px;
+    }
+
+    .settings-mini strong {
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .settings-mini span,
+    .settings-mini label {
+      color: #9fb0c8;
+      font-size: 12px;
+      line-height: 1.45;
     }
 
     .app-profile strong,
@@ -2328,6 +2423,45 @@
       background:
         radial-gradient(circle at 50% 0%, rgba(248,190,67,.11), transparent 32%),
         #091421;
+    }
+
+    .student-app.light .app-sidebar,
+    .student-app.light .study-panel {
+      color: #111c2d;
+      background: #f7fafc;
+      border-color: #d9e2ec;
+    }
+
+    .student-app.light .chat-main {
+      background: #edf2f7;
+    }
+
+    .student-app.light .message {
+      color: #172335;
+      background: #fff;
+      border-color: #dce5ef;
+    }
+
+    .student-app.light .message.user {
+      color: #07111e;
+      background: #f5bd47;
+    }
+
+    .student-app.light .chat-list button,
+    .student-app.light .tool-button,
+    .student-app.light .settings-mini,
+    .student-app.light .quick-card,
+    .student-app.light .topic-card,
+    .student-app.light .composer textarea,
+    .student-app.light .photo-button {
+      color: #172335;
+      background: #fff;
+      border-color: #dce5ef;
+    }
+
+    .student-app.light .chat-list button.active {
+      background: #fff2cc;
+      border-color: #f5bd47;
     }
 
     .chat-top {
@@ -2351,15 +2485,21 @@
       font-size: 13px;
     }
 
-    .app-close {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
       border: 1px solid rgba(255,255,255,.12);
       color: #fff;
       background: rgba(255,255,255,.06);
       cursor: pointer;
-      font-size: 22px;
+      font-size: 18px;
     }
 
     .messages {
@@ -2406,12 +2546,17 @@
     }
 
     .photo-button {
+      display: grid;
+      place-items: center;
       color: #e9f0f7;
       background: rgba(255,255,255,.09);
       border: 1px solid rgba(255,255,255,.1);
       min-width: 52px;
+      width: 52px;
+      height: 52px;
       padding-inline: 0;
       font-size: 20px;
+      line-height: 1;
     }
 
     .send-button {
@@ -2436,7 +2581,7 @@
       display: grid;
       grid-template-rows: auto auto 1fr;
       gap: 16px;
-      padding: 22px;
+      padding: 22px 28px 22px 22px;
       border-left: 1px solid rgba(255,255,255,.08);
       background: #0b1626;
       overflow: auto;
@@ -2444,15 +2589,17 @@
 
     .study-head {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
+      grid-template-columns: 1fr;
+      gap: 12px;
       align-items: start;
     }
 
     .study-controls {
       display: grid;
-      grid-template-columns: 82px 126px;
+      grid-template-columns: 92px minmax(150px, 1fr);
       gap: 8px;
+      justify-self: start;
+      width: min(100%, 288px);
     }
 
     .study-controls select {
@@ -3622,20 +3769,30 @@
 
   <section class="student-app" id="studentApp" aria-hidden="true">
     <aside class="app-sidebar">
-      <div class="app-logo">mento ai</div>
+      <div class="app-logo"><span class="app-logo-mark">M</span><span>mento ai</span></div>
       <button class="new-chat" type="button" id="newChatButton">+ Yeni sohbet</button>
       <div class="chat-list" id="chatList">
-        <button class="active" type="button" data-panel-route="/panel/bugunku-plan">Bugünkü plan</button>
-        <button type="button" data-panel-route="/panel/soru-coz">Soru görseliyle çöz</button>
-        <button type="button" data-panel-route="/panel/konu-anlatimi">Konu anlatımı</button>
+        <button class="active" type="button" data-panel-route="/panel/bugunku-plan"><span class="nav-ico">✓</span>Bugünkü plan</button>
+        <button type="button" data-panel-route="/panel/soru-coz"><span class="nav-ico">＋</span>Soru görseliyle çöz</button>
+        <button type="button" data-panel-route="/panel/konu-anlatimi"><span class="nav-ico">▤</span>Konu anlatımı</button>
         <div class="sidebar-label">Öğrenme yolları</div>
-        <button type="button" data-panel-route="/panel/ezber-kartlari">Ezber kartları</button>
-        <button type="button" data-panel-route="/panel/oyunlarla-ogren">Oyunlarla öğren</button>
-        <button type="button" data-panel-route="/panel/mini-testler">Mini testler</button>
-        <button type="button" data-panel-route="/panel/hedef-takibi">Hedef takibi</button>
+        <button type="button" data-panel-route="/panel/ezber-kartlari"><span class="nav-ico">◆</span>Ezber kartları</button>
+        <button type="button" data-panel-route="/panel/oyunlarla-ogren"><span class="nav-ico">▶</span>Oyunlarla öğren</button>
+        <button type="button" data-panel-route="/panel/mini-testler"><span class="nav-ico">?</span>Mini testler</button>
+        <button type="button" data-panel-route="/panel/hedef-takibi"><span class="nav-ico">↗</span>Hedef takibi</button>
+      </div>
+      <div class="sidebar-tools">
+        <button class="tool-button" type="button" id="themeToggle">☀ Tema</button>
+        <button class="tool-button" type="button" id="settingsButton">⚙ Ayarlar</button>
+      </div>
+      <div class="settings-mini" id="settingsPanel">
+        <strong>Profil ayarları</strong>
+        <label for="profilePhoto">Profil resmini değiştir</label>
+        <span>Tema, bildirim ve hedef modu bu panelden yönetilecek.</span>
       </div>
       <div class="app-profile">
-        <div class="avatar" id="profileAvatar">M</div>
+        <label class="avatar" id="profileAvatar" for="profilePhoto" title="Profil resmi seç">M</label>
+        <input id="profilePhoto" type="file" accept="image/*" hidden>
         <div><strong id="profileName">Mento Öğrencisi</strong><span id="profileMode">LGS hedef modu</span></div>
       </div>
     </aside>
@@ -3644,9 +3801,12 @@
       <header class="chat-top">
         <div>
           <h2>Mento Koç</h2>
-          <p>Soru görseli yükle, soru sor veya konu anlatımı iste. İlk sürüm LGS odaklıdır.</p>
+          <p>Soru görseli yükle, soru sor veya konu anlatımı iste. Mento Brain yerel koç motoru aktiftir.</p>
         </div>
-        <button class="app-close" type="button" id="closeStudentApp" aria-label="Paneli kapat">×</button>
+        <div class="top-actions">
+          <button class="top-icon" type="button" id="notifyButton" aria-label="Bildirimler">●</button>
+          <button class="top-icon" type="button" id="topThemeToggle" aria-label="Tema değiştir">◐</button>
+        </div>
       </header>
 
       <div class="messages" id="messages">
@@ -3654,7 +3814,7 @@
           Merhaba. Ben Mento Koç. Sorunu yazabilir, soru görseli yükleyebilir veya sağdaki LGS konularından bir anlatım seçebilirsin.
         </div>
         <div class="message">
-          Soru görseliyle çözüm ilk sürümde görseli alır ve açıklama kutusuna ekler. Yapay zeka API tarafını bağladığımızda görselden soruyu okuyup adım adım çözecek.
+          Mento Brain API kullanmadan çalışır: yazdığın soruyu konuya ayırır, hata sebebini tahmin eder ve ilk çözüm yolunu çıkarır.
         </div>
       </div>
 
@@ -3728,6 +3888,11 @@
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
     const profileMode = document.getElementById('profileMode');
+    const profilePhoto = document.getElementById('profilePhoto');
+    const settingsPanel = document.getElementById('settingsPanel');
+    const themeToggle = document.getElementById('themeToggle');
+    const topThemeToggle = document.getElementById('topThemeToggle');
+    const notifyButton = document.getElementById('notifyButton');
     const liveInputs = document.querySelectorAll('#liveExam, #trWrong, #trBlank, #matWrong, #matBlank, #fenWrong, #fenBlank, #sosWrong, #sosBlank');
     const liveFocusTitle = document.getElementById('liveFocusTitle');
     const liveInsight = document.getElementById('liveInsight');
@@ -3953,10 +4118,37 @@
       messages.scrollTop = messages.scrollHeight;
     }
 
+    function generateLocalBrainReply(text) {
+      const raw = text.toLowerCase('tr-TR');
+      const lessonHints = [
+        ['matematik', ['problem', 'denklem', 'oran', 'üslü', 'köklü', 'geometri', 'fonksiyon']],
+        ['Türkçe', ['paragraf', 'anlam', 'fiilimsi', 'cümle', 'sözcük', 'yazım']],
+        ['Fen', ['fen', 'dna', 'basınç', 'madde', 'iklim', 'elektrik', 'hücre']],
+        ['İngilizce', ['ingilizce', 'vocabulary', 'kelime', 'reading']],
+        ['İnkılap', ['inkılap', 'atatürk', 'milli', 'tarih']],
+        ['Din', ['din', 'kader', 'zekat', 'ahlak']]
+      ];
+      const found = lessonHints.find(([_, hints]) => hints.some(hint => raw.includes(hint)));
+      const lesson = found?.[0] || activeLesson || 'Matematik';
+      if (raw.includes('plan') || raw.includes('program') || raw.includes('çalış')) {
+        return `Mento Brain planı: Bugün ${lesson} için 25 dakika kısa konu tekrarı, 35 dakika seçilmiş soru, 15 dakika yanlış sebebi notu yap. Son 10 dakikada sadece takıldığın soru tipini yaz; yarınki planı ona göre sıkılaştır.`;
+      }
+      if (raw.includes('net') || raw.includes('deneme') || raw.includes('yanlış')) {
+        return `${lesson} tarafında net artırmak için önce yanlışlarını 3 etikete ayır: kavram eksikliği, işlem/dikkat, süre. En çok çıkan etiketten 12 soru çöz, sonra aynı konudan 5 dakikalık mini tekrar yap.`;
+      }
+      if (raw.includes('anlat') || raw.includes('konu')) {
+        return `${lesson} konu anlatımı: Önce tanımı tek cümleyle yaz, ardından 1 kolay örnek, 1 orta örnek çöz. Konuyu bitmiş saymak için aynı tipten 3 soruyu üst üste hatasız çözmen gerekiyor.`;
+      }
+      if (raw.includes('soru') || raw.includes('çöz')) {
+        return `${lesson} çözüm yolu: 1. Verilenleri ayır. 2. Senden isteneni tek satıra yaz. 3. Konu kuralını seç. 4. İşlemi kısa adımlarla ilerlet. Sorunun metnini veya görselini gönderirsen bu akışı o soruya özel parçalarım.`;
+      }
+      return `Mento Brain bunu ${lesson} odağıyla yorumladı: önce konuyu netleştir, sonra 10 seçilmiş soru çöz, en son yanlışının sebebini yaz. İstersen “bana bugün 90 dakikalık plan çıkar” diye yaz, direkt günlük program çıkarayım.`;
+    }
+
     function openStudentPanel(updateUrl = true) {
       const name = document.getElementById('fullName').value.trim() || 'Mento Öğrencisi';
       profileName.textContent = name;
-      profileAvatar.textContent = name.trim().charAt(0).toUpperCase() || 'M';
+      if (!profileAvatar.querySelector('img')) profileAvatar.textContent = name.trim().charAt(0).toUpperCase() || 'M';
       profileMode.textContent = `${selectedExam} hedef modu`;
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
@@ -4222,20 +4414,54 @@
       if (!text) return;
       addMessage(text, 'user');
       chatInput.value = '';
-      addMessage('Bunu ilk ürün sürümünde çalışma koçu mantığıyla yorumluyorum: soruyu konuya ayır, verilenleri yaz, çözüm yolunu 3 adıma böl. Yapay zeka API görsel/sohbet tarafına bağlanınca burada doğrudan adım adım çözüm üreteceğim.');
+      addMessage(generateLocalBrainReply(text));
+    });
+
+    chatInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage.click();
+      }
     });
 
     questionPhoto.addEventListener('change', () => {
       const file = questionPhoto.files?.[0];
       if (!file) return;
       addMessage(`Soru görseli yüklendi: ${file.name}`, 'user');
-      addMessage('Görseli aldım. Şimdi sorunun dersini ve takıldığın kısmı yazarsan çözüm akışını başlatırım. Görsel okuma API bağlantısı geldiğinde soruyu otomatik okuyacağım.');
+      addMessage(`Görsel alındı. Mento Brain bunu ${activeExamBank} ${activeLesson} konusu olarak işaretledi. Şimdi sorudaki verilenleri veya takıldığın adımı yaz; çözümü adım adım kuracağım.`);
       questionPhoto.value = '';
     });
 
     document.getElementById('newChatButton').addEventListener('click', () => {
       messages.innerHTML = '';
       addMessage('Yeni sohbet açıldı. Bir soru yaz, soru görseli yükle veya sağdan konu seç.');
+    });
+
+    function toggleTheme() {
+      studentApp.classList.toggle('light');
+      const light = studentApp.classList.contains('light');
+      themeToggle.textContent = light ? '☾ Tema' : '☀ Tema';
+      topThemeToggle.textContent = light ? '☾' : '◐';
+    }
+
+    themeToggle.addEventListener('click', toggleTheme);
+    topThemeToggle.addEventListener('click', toggleTheme);
+
+    notifyButton.addEventListener('click', () => {
+      addMessage('Bildirim merkezi: Bugünkü hedefin hazır. 20:30 için mini test, 21:00 için yanlış analizi hatırlatıcısı öneriyorum.');
+    });
+
+    document.getElementById('settingsButton').addEventListener('click', () => {
+      settingsPanel.classList.toggle('show');
+      addMessage('Ayarlar açıldı. Profil fotoğrafını sol alttaki avatar alanından seçebilir, tema modunu değiştirebilirsin.');
+    });
+
+    profilePhoto.addEventListener('change', () => {
+      const file = profilePhoto.files?.[0];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      profileAvatar.innerHTML = `<img src="${url}" alt="">`;
+      addMessage('Profil resmi güncellendi. Bu görsel bu cihazdaki oturumda kullanılacak.');
     });
 
     document.querySelectorAll('#chatList button').forEach(button => {
@@ -4247,20 +4473,14 @@
           'Bugünkü plan': 'Bugünkü plan: Önce en riskli konuyu kısa tekrar et, sonra süreli soru çöz, en son yanlış sebebini not al.',
           'Soru görseliyle çöz': 'Soru görselini alttaki + butonuyla yükle. Ardından dersini ve nerede takıldığını yaz.',
           'Konu anlatımı': 'Sağdaki ders ve konu listesinden istediğin konuyu seç. Sana kısa anlatım, örnek soru ve video rotası çıkarayım.',
-          'Ezber kartları': 'Ezber kartları modu: formül, kavram ve kelimeleri ön yüz-soru, arka yüz-cevap mantığıyla tekrar ettirecek.',
-          'Oyunlarla öğren': 'Oyunlarla öğren modu: doğru cevap serisi, süre yarışı ve seviye atlama ile konu pratiği yaptıracak.',
-          'Mini testler': 'Mini test modu: seçtiğin konudan 5-10 soruluk hızlı kontrol çıkaracak ve yanlışlarını etiketleyecek.',
-          'Hedef takibi': 'Hedef takibi: günlük dakika, çözülen soru, net artışı ve sınava kalan süreyi aynı ekranda izleyecek.'
+          'Ezber kartları': 'Ezber kartları modu açıldı. Seçili dersten 8 kart üretirim: ön yüzde kavram, arka yüzde kısa cevap ve 1 ipucu. Başlamak için “Matematik kart çıkar” yaz.',
+          'Oyunlarla öğren': 'Oyun modu açıldı. 5 doğru seri, süre yarışı ve seviye atlama mantığıyla çalışır. Başlamak için “oyunla paragraf çalıştır” yaz.',
+          'Mini testler': 'Mini test modu açıldı. Seçili konudan 5 soruluk hızlı kontrol, ardından yanlış etiketi ve tekrar planı üretirim.',
+          'Hedef takibi': 'Hedef takibi açıldı. Günlük süre, çözülen soru, net potansiyeli ve üst üste çalışma serini burada yorumlarım.'
         };
         addMessage(title, 'user');
         addMessage(replies[title] || 'Bu mod ilk ürün sürümü için hazırlandı. Bir konu seçince planına bağlayacağım.');
       });
-    });
-
-    document.getElementById('closeStudentApp').addEventListener('click', () => {
-      studentApp.classList.remove('open');
-      studentApp.setAttribute('aria-hidden', 'true');
-      writeRoute('/home');
     });
 
     openButtons.forEach(button => {

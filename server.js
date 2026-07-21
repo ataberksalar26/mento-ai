@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
 const USERS_FILE = path.join(ROOT, 'users.json');
-const APP_VERSION = 'panel-select-ai-next-2026-07-21-1915';
+const APP_VERSION = 'local-brain-panel-polish-2026-07-21-1955';
 
 loadEnv(path.join(ROOT, '.env'));
 
