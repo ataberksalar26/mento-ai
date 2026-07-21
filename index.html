@@ -3958,6 +3958,8 @@
         authStatus.textContent = error.message.includes('Failed to fetch')
           ? 'Mail servisi için server.js yayına alınmalı. SITEYE-YUKLE.cmd ile tekrar yükle.'
           : error.message;
+        coachTitle.textContent = 'Giriş tamamlanamadı.';
+        coachText.textContent = authStatus.textContent;
       } finally {
         calculatePlan.disabled = false;
       }
