@@ -3968,7 +3968,7 @@
           ? 'Mail servisi için server.js yayına alınmalı. SITEYE-YUKLE.cmd ile tekrar yükle.'
           : error.message;
         coachTitle.textContent = 'Giriş tamamlanamadı.';
-        coachText.textContent = authStatus.textContent;
+        coachText.textContent = `${authStatus.textContent} Devam ederse /api/auth-debug kontrolüyle server env durumuna bakalım.`;
       } finally {
         calculatePlan.disabled = false;
       }
