@@ -3801,7 +3801,7 @@
       <header class="chat-top">
         <div>
           <h2>Mento Koç</h2>
-          <p>Soru görseli yükle, soru sor veya konu anlatımı iste. Mento Brain yerel koç motoru aktiftir.</p>
+          <p>Soru görseli yükle, soru sor veya konu anlatımı iste. Mento Brain + ChatGPT koç motoru aktiftir.</p>
         </div>
         <div class="top-actions">
           <button class="top-icon" type="button" id="notifyButton" aria-label="Bildirimler">●</button>
@@ -3814,7 +3814,7 @@
           Merhaba. Ben Mento Koç. Sorunu yazabilir, soru görseli yükleyebilir veya sağdaki LGS konularından bir anlatım seçebilirsin.
         </div>
         <div class="message">
-          Mento Brain API kullanmadan çalışır: yazdığın soruyu konuya ayırır, hata sebebini tahmin eder ve ilk çözüm yolunu çıkarır.
+          Mento Brain önce kendi veri tabanından konuyu bulur; ChatGPT bağlantısı açıksa cevabı daha doğal ve adım adım hale getirir.
         </div>
       </div>
 
@@ -4409,12 +4409,26 @@
       });
     });
 
-    sendMessage.addEventListener('click', () => {
+    sendMessage.addEventListener('click', async () => {
       const text = chatInput.value.trim();
       if (!text) return;
       addMessage(text, 'user');
       chatInput.value = '';
-      addMessage(generateLocalBrainReply(text));
+      sendMessage.disabled = true;
+      try {
+        const data = await postJson('/api/brain/answer', {
+          question: text,
+          student: {
+            exam: activeExamBank,
+            lesson: activeLesson
+          }
+        });
+        addMessage(data.answer || generateLocalBrainReply(text));
+      } catch {
+        addMessage(generateLocalBrainReply(text));
+      } finally {
+        sendMessage.disabled = false;
+      }
     });
 
     chatInput.addEventListener('keydown', event => {

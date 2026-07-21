@@ -1,0 +1,83 @@
+{
+  "version": "mento-brain-dataset-001",
+  "items": [
+    {
+      "id": "lgs-mat-carpanlar-001",
+      "exam": "LGS",
+      "lesson": "Matematik",
+      "topic": "Çarpanlar ve Katlar",
+      "difficulty": "orta",
+      "type": "EBOB problemi",
+      "question": "Bir okulda 48 mavi ve 60 sarı kalem hiç artmayacak şekilde eşit sayıda kalem içeren paketlere ayrılacaktır. Her pakette yalnızca tek renk kalem olacaktır. Bir pakette en fazla kaç kalem olabilir?",
+      "answer": "12",
+      "solution": "48 ve 60 sayılarının ortak bölenlerinden en büyüğü istenir. 48 = 2^4 x 3, 60 = 2^2 x 3 x 5. Ortak çarpanlar 2^2 x 3 = 12 olur.",
+      "mistake": "Öğrenci EBOB yerine EKOK alabilir veya renklerin ayrı paketleneceğini kaçırabilir.",
+      "coach": "EBOB sorularında 'parçalama, paylaştırma, en fazla' kelimelerini yakala. Önce sayıları asal çarpanlara ayır, sonra ortakların en küçüğünü değil ortak çarpanların çarpımını al."
+    },
+    {
+      "id": "lgs-mat-uslu-001",
+      "exam": "LGS",
+      "lesson": "Matematik",
+      "topic": "Üslü İfadeler",
+      "difficulty": "kolay",
+      "type": "üs kuralları",
+      "question": "2^4 x 2^3 işleminin sonucu kaçtır?",
+      "answer": "128",
+      "solution": "Tabanlar aynı olduğu için üsler toplanır: 2^4 x 2^3 = 2^(4+3) = 2^7 = 128.",
+      "mistake": "Üsleri çarpmak veya tabanı da çarpmak yaygın hatadır.",
+      "coach": "Tabanlar aynı ve işlem çarpma ise üsleri topla. Bölme ise üsleri çıkar."
+    },
+    {
+      "id": "lgs-turk-paragraf-001",
+      "exam": "LGS",
+      "lesson": "Türkçe",
+      "topic": "Paragrafta Anlam",
+      "difficulty": "orta",
+      "type": "ana fikir",
+      "question": "Bir metinde yazar, teknolojinin hayatı kolaylaştırdığını ancak bilinçsiz kullanımın zamanı boşa harcattığını savunuyor. Bu metnin ana fikri nedir?",
+      "answer": "Teknoloji bilinçli kullanıldığında yararlıdır, bilinçsiz kullanıldığında zarar verebilir.",
+      "solution": "Metindeki iki yönlü bakış yakalanır: kolaylaştırma ve bilinçsiz kullanımın olumsuzluğu. Ana fikir bu dengeyi kapsamalıdır.",
+      "mistake": "Sadece teknolojinin yararlı olduğunu söylemek eksik cevap olur.",
+      "coach": "Ana fikir sorusunda metnin tamamını kapsayan yargıyı seç. Tek örneğe veya metnin yarısına takılma."
+    },
+    {
+      "id": "lgs-fen-dna-001",
+      "exam": "LGS",
+      "lesson": "Fen",
+      "topic": "DNA ve Genetik Kod",
+      "difficulty": "orta",
+      "type": "kavram ayırt etme",
+      "question": "DNA'nın görev birimi olarak bilinen yapı hangisidir?",
+      "answer": "Gen",
+      "solution": "DNA üzerinde belirli bir özelliğin oluşmasını sağlayan anlamlı bölümlere gen denir.",
+      "mistake": "Kromozom ile gen karıştırılabilir. Kromozom DNA'nın paketlenmiş halidir.",
+      "coach": "Sıralamayı unutma: nükleotid DNA'yı, DNA geni ve kromozomu oluşturur. Gen görev birimidir."
+    },
+    {
+      "id": "tyt-mat-problem-001",
+      "exam": "TYT",
+      "lesson": "Matematik",
+      "topic": "Problemler",
+      "difficulty": "orta",
+      "type": "yaş problemi",
+      "question": "Ali'nin yaşı Ayşe'nin yaşının 2 katıdır. 6 yıl sonra yaşları toplamı 48 olacaktır. Ali bugün kaç yaşındadır?",
+      "answer": "24",
+      "solution": "Ayşe'nin bugünkü yaşı x olsun. Ali 2x olur. 6 yıl sonra toplam: x+6+2x+6=48. 3x+12=48, x=12. Ali 24 yaşındadır.",
+      "mistake": "6 yılı iki kişiye de eklememek en yaygın hatadır.",
+      "coach": "Yaş problemlerinde tablo kur: bugün ve gelecek satırlarını ayrı yaz. Her kişiye zaman kadar ekleme yap."
+    },
+    {
+      "id": "tyt-turk-paragraf-001",
+      "exam": "TYT",
+      "lesson": "Türkçe",
+      "topic": "Paragraf",
+      "difficulty": "orta",
+      "type": "yardımcı düşünce",
+      "question": "Bir paragrafta şehir yaşamının hızından, insanların doğadan kopmasından ve bunun ruhsal yorgunluğa yol açmasından söz ediliyor. Bu paragrafta vurgulanan temel sorun nedir?",
+      "answer": "Şehir yaşamının insanı doğadan uzaklaştırarak ruhsal yorgunluk oluşturması.",
+      "solution": "Paragraftaki ortak bağ şehir hızı, doğadan kopuş ve ruhsal sonuçtur.",
+      "mistake": "Sadece şehirlerin kalabalık olmasına odaklanmak eksik yorumdur.",
+      "coach": "Paragrafta tekrar eden duygu ve sonuç ilişkisini yakala. Ana sorun çoğu zaman sonuca bağlanan ortak fikirdir."
+    }
+  ]
+}

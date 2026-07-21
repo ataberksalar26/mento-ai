@@ -6,7 +6,8 @@ const crypto = require('crypto');
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
 const USERS_FILE = path.join(ROOT, 'users.json');
-const APP_VERSION = 'local-brain-panel-polish-2026-07-21-1955';
+const BRAIN_DATA_FILE = path.join(ROOT, 'data', 'mento-brain-questions.json');
+const APP_VERSION = 'openai-hybrid-brain-2026-07-21-2045';
 
 loadEnv(path.join(ROOT, '.env'));
 
@@ -29,6 +30,122 @@ function sendJson(res, status, data) {
   res.end(JSON.stringify(data));
 }
 
+function readBrainItems() {
+  if (!fs.existsSync(BRAIN_DATA_FILE)) return [];
+  try {
+    const data = JSON.parse(fs.readFileSync(BRAIN_DATA_FILE, 'utf8'));
+    return Array.isArray(data.items) ? data.items : [];
+  } catch {
+    return [];
+  }
+}
+
+function normalizeText(value) {
+  return String(value || '')
+    .toLocaleLowerCase('tr-TR')
+    .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function scoreBrainItem(item, text, exam, lesson) {
+  const haystack = normalizeText([item.exam, item.lesson, item.topic, item.type, item.question, item.mistake].join(' '));
+  const words = normalizeText(text).split(' ').filter(word => word.length > 2);
+  let score = 0;
+  for (const word of words) {
+    if (haystack.includes(word)) score += word.length > 5 ? 3 : 1;
+  }
+  if (exam && item.exam === exam) score += 5;
+  if (lesson && item.lesson === lesson) score += 5;
+  return score;
+}
+
+function buildBrainAnswer(question, student = {}) {
+  const items = readBrainItems();
+  const exam = String(student.exam || '').trim();
+  const lesson = String(student.lesson || '').trim();
+  const ranked = items
+    .map(item => ({ item, score: scoreBrainItem(item, question, exam, lesson) }))
+    .sort((a, b) => b.score - a.score);
+  const best = ranked[0]?.score > 0 ? ranked[0].item : null;
+
+  if (!best) {
+    return {
+      answer: 'Mento Brain bu soruyu genel çalışma koçu mantığıyla ele aldı: önce konuyu belirle, verilenleri tek tek yaz, senden isteneni ayır ve çözümü 3 adıma böl. Soru metnini biraz daha net yazarsan veri tabanındaki en yakın konuya bağlayabilirim.',
+      matches: []
+    };
+  }
+
+  const answer = [
+    `${best.exam} ${best.lesson} - ${best.topic}`,
+    `Soru tipi: ${best.type}.`,
+    `Çözüm mantığı: ${best.solution}`,
+    `Sık hata: ${best.mistake}`,
+    `Koç önerisi: ${best.coach}`
+  ].join('\n\n');
+
+  return {
+    answer,
+    matches: ranked.slice(0, 3).filter(row => row.score > 0).map(row => ({
+      id: row.item.id,
+      exam: row.item.exam,
+      lesson: row.item.lesson,
+      topic: row.item.topic,
+      score: row.score
+    }))
+  };
+}
+
+function extractOpenAIText(data) {
+  return data.output_text || data.output?.flatMap(item => item.content || []).map(part => part.text || '').join('\n').trim();
+}
+
+async function askOpenAI({ question, student = {}, brainContext = null, maxOutputTokens = 650 }) {
+  if (!process.env.OPENAI_API_KEY) return null;
+
+  const response = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
+      max_output_tokens: maxOutputTokens,
+      input: [
+        {
+          role: 'system',
+          content: [
+            'Sen Mento AI adında Türkçe konuşan bir TYT, AYT ve LGS çalışma koçusun.',
+            'Cevapların kısa, net, uygulanabilir ve öğrenci dilinde olsun.',
+            'Sınav garantisi verme. Tıbbi, hukuki veya resmi garanti dili kullanma.',
+            'Önce konuyu bul, sonra çözüm yolunu 3-5 adıma böl, en sona kısa çalışma önerisi ekle.',
+            'Mento Brain bağlamı verilirse onu öncelikli kullan; yoksa genel sınav koçu gibi cevap ver.'
+          ].join(' ')
+        },
+        {
+          role: 'user',
+          content: [
+            `Öğrenci bilgisi: ${JSON.stringify(student)}`,
+            brainContext ? `Mento Brain bağlamı: ${JSON.stringify(brainContext)}` : '',
+            `Öğrencinin sorusu: ${question}`
+          ].filter(Boolean).join('\n')
+        }
+      ]
+    })
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    const message = data.error?.message || 'OpenAI isteği başarısız oldu.';
+    const error = new Error(message);
+    error.status = response.status;
+    throw error;
+  }
+
+  return extractOpenAIText(data);
+}
+
 function handleAuthDebug(req, res) {
   const adminEmail = normalizeEmail(firstEnv('ADMIN_USER_EMAIL', 'ADMIN_EMAIL', 'MENTO_ADMIN_EMAIL'));
   const adminPassword = String(firstEnv('ADMIN_USER_PASSWORD', 'ADMIN_PASSWORD', 'MENTO_ADMIN_PASSWORD')).trim();
@@ -40,7 +157,9 @@ function handleAuthDebug(req, res) {
     adminPasswordSet: Boolean(adminPassword),
     adminPasswordLength: adminPassword.length,
     resendSet: Boolean(process.env.RESEND_API_KEY),
-    fromEmailSet: Boolean(process.env.FROM_EMAIL)
+    fromEmailSet: Boolean(process.env.FROM_EMAIL),
+    openAISet: Boolean(process.env.OPENAI_API_KEY),
+    openAIModel: process.env.OPENAI_MODEL || 'gpt-4.1-mini'
   });
 }
 
@@ -506,10 +625,6 @@ function serveStatic(req, res) {
 }
 
 async function handleCoach(req, res) {
-  if (!process.env.OPENAI_API_KEY) {
-    sendJson(res, 500, { error: 'OPENAI_API_KEY .env dosyasında yok.' });
-    return;
-  }
   try {
     const body = JSON.parse(await readBody(req) || '{}');
     const question = String(body.question || '').trim();
@@ -518,36 +633,56 @@ async function handleCoach(req, res) {
       sendJson(res, 400, { error: 'Soru boş olamaz.' });
       return;
     }
-    const response = await fetch('https://api.openai.com/v1/responses', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
-        max_output_tokens: 450,
-        input: [
-          { role: 'system', content: 'Sen Mento AI adında Türkçe konuşan bir TYT, AYT ve LGS çalışma koçusun. Kısa, net, uygulanabilir cevap ver. Öğrenciyi motive et ama boş moral cümleleri kurma. Yanlış analizi, günlük plan, konu önceliği ve deneme yorumu yapabilirsin. Tıbbi, hukuki veya resmi sınav garantisi verme.' },
-          { role: 'user', content: `Öğrenci bilgisi: ${JSON.stringify(student)}\nÖğrencinin sorusu: ${question}` }
-        ]
-      })
-    });
-    const data = await response.json();
-    if (!response.ok) {
-      sendJson(res, response.status, { error: data.error?.message || 'OpenAI isteği başarısız oldu.' });
+    const fallback = buildBrainAnswer(question, student);
+    const answer = await askOpenAI({ question, student, brainContext: fallback.matches }) || fallback.answer;
+    sendJson(res, 200, { ok: true, source: process.env.OPENAI_API_KEY ? 'openai' : 'mento-brain', answer, matches: fallback.matches });
+  } catch (error) {
+    sendJson(res, error.status || 500, { error: error.message || 'Sunucu hatası.' });
+  }
+}
+
+async function handleBrainAnswer(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const question = String(body.question || '').trim();
+    const student = body.student || {};
+
+    if (!question) {
+      sendJson(res, 400, { error: 'Soru boş olamaz.' });
       return;
     }
-    const answer = data.output_text || data.output?.flatMap(item => item.content || []).map(part => part.text || '').join('\n').trim();
-    sendJson(res, 200, { answer: answer || 'Cevap üretilemedi.' });
+
+    const local = buildBrainAnswer(question, student);
+    if (!process.env.OPENAI_API_KEY) {
+      sendJson(res, 200, { ok: true, source: 'mento-brain', ...local });
+      return;
+    }
+
+    try {
+      const answer = await askOpenAI({
+        question,
+        student,
+        brainContext: {
+          localAnswer: local.answer,
+          matches: local.matches
+        }
+      });
+      sendJson(res, 200, { ok: true, source: 'openai+mento-brain', answer: answer || local.answer, matches: local.matches });
+    } catch (error) {
+      sendJson(res, 200, { ok: true, source: 'mento-brain-fallback', ...local, openAIError: error.message });
+    }
   } catch (error) {
-    sendJson(res, 500, { error: error.message || 'Sunucu hatası.' });
+    sendJson(res, 500, { error: error.message || 'Mento Brain hatası.' });
   }
 }
 
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/api/auth-debug') {
     handleAuthDebug(req, res);
+    return;
+  }
+  if (req.method === 'GET' && req.url === '/api/brain/questions') {
+    sendJson(res, 200, { ok: true, count: readBrainItems().length, items: readBrainItems() });
     return;
   }
   if (req.method === 'POST' && req.url === '/api/register') {
@@ -572,6 +707,10 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'POST' && req.url === '/api/coach') {
     handleCoach(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/brain/answer') {
+    handleBrainAnswer(req, res);
     return;
   }
   if (req.method === 'GET') {
