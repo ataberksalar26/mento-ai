@@ -2142,6 +2142,26 @@
       gap: 10px;
     }
 
+    .password-wrap {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .password-wrap input {
+      min-width: 0;
+    }
+
+    .show-password {
+      min-width: 64px;
+      border: 1px solid #d6dee9;
+      border-radius: 13px;
+      color: #0f1b2d;
+      background: rgba(255,255,255,.78);
+      font-weight: 950;
+      cursor: pointer;
+    }
+
     .verify-box {
       display: none;
       gap: 10px;
@@ -3490,7 +3510,10 @@
               <div class="auth-fields">
                 <input id="fullName" type="text" placeholder="Ad soyad">
                 <input id="email" type="email" placeholder="E-posta">
-                <input id="password" type="password" placeholder="Şifre">
+                <div class="password-wrap">
+                  <input id="password" type="password" placeholder="Şifre">
+                  <button class="show-password" type="button" data-toggle-password="password">Göster</button>
+                </div>
                 <div class="verify-box" id="verifyBox">
                   <input id="verificationCode" type="text" inputmode="numeric" maxlength="6" placeholder="Mailine gelen 6 haneli kod">
                   <button class="btn btn-dark" type="button" id="verifyCodeButton">Kodu onayla</button>
@@ -3498,7 +3521,10 @@
                 <button class="forgot-link" type="button" id="forgotPasswordButton">Şifremi unuttum</button>
                 <div class="verify-box" id="resetBox">
                   <input id="resetCode" type="text" inputmode="numeric" maxlength="6" placeholder="Mailine gelen sıfırlama kodu">
-                  <input id="newPassword" type="password" placeholder="Yeni şifre">
+                  <div class="password-wrap">
+                    <input id="newPassword" type="password" placeholder="Yeni şifre">
+                    <button class="show-password" type="button" data-toggle-password="newPassword">Göster</button>
+                  </div>
                   <button class="btn btn-dark" type="button" id="resetPasswordButton">Şifreyi yenile</button>
                 </div>
                 <button class="btn btn-gold" type="button" id="calculatePlan">Hesapla ve planı hazırla</button>
@@ -3963,17 +3989,25 @@
       const email = document.getElementById('email').value.trim();
       if (!email) {
         authStatus.textContent = 'Önce e-posta adresini yaz.';
+        coachTitle.textContent = 'E-posta adresi gerekli.';
+        coachText.textContent = 'Şifre sıfırlama kodunu gönderebilmem için giriş alanına e-posta adresini yaz.';
         return;
       }
 
       forgotPasswordButton.disabled = true;
       authStatus.textContent = 'Şifre sıfırlama kodu gönderiliyor...';
+      coachTitle.textContent = 'Şifre yenileme kodu hazırlanıyor.';
+      coachText.textContent = 'Mailine 6 haneli kod göndereceğim. Kod ve yeni şifre girilince hesabın açılır.';
       try {
         await postJson('/api/request-password-reset', { email });
         resetBox.classList.add('show');
         authStatus.textContent = 'Mailine 6 haneli sıfırlama kodu gönderildi.';
+        coachTitle.textContent = 'Kod mailine gönderildi.';
+        coachText.textContent = 'Gelen 6 haneli kodu ve yeni şifreni yaz. Sonra Şifreyi yenile butonuna bas.';
       } catch (error) {
         authStatus.textContent = error.message;
+        coachTitle.textContent = 'Kod gönderilemedi.';
+        coachText.textContent = error.message;
       } finally {
         forgotPasswordButton.disabled = false;
       }
@@ -4034,6 +4068,15 @@
     verifyCodeButton.addEventListener('click', handleVerifyCode);
     forgotPasswordButton.addEventListener('click', handleForgotPassword);
     resetPasswordButton.addEventListener('click', handleResetPassword);
+
+    document.querySelectorAll('[data-toggle-password]').forEach(button => {
+      button.addEventListener('click', () => {
+        const input = document.getElementById(button.dataset.togglePassword);
+        const show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        button.textContent = show ? 'Gizle' : 'Göster';
+      });
+    });
 
     sendMessage.addEventListener('click', () => {
       const text = chatInput.value.trim();
