@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
 const USERS_FILE = path.join(ROOT, 'users.json');
-const APP_VERSION = 'routes-profile-2026-07-21-1900';
+const APP_VERSION = 'panel-select-ai-next-2026-07-21-1915';
 
 loadEnv(path.join(ROOT, '.env'));
 

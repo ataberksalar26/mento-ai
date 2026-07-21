@@ -51,6 +51,15 @@
       overflow-x: hidden;
     }
 
+    * {
+      scrollbar-width: none;
+    }
+
+    *::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
     body::before {
       content: "";
       position: fixed;
@@ -2433,6 +2442,30 @@
       overflow: auto;
     }
 
+    .study-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .study-controls {
+      display: grid;
+      grid-template-columns: 82px 126px;
+      gap: 8px;
+    }
+
+    .study-controls select {
+      min-height: 38px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      color: #eef4fb;
+      background: rgba(255,255,255,.065);
+      padding: 0 10px;
+      font-weight: 900;
+      outline: none;
+    }
+
     .study-panel h3 {
       margin: 0;
       font-size: 20px;
@@ -2466,34 +2499,9 @@
       line-height: 1.5;
     }
 
-    .exam-mode-tabs,
-    .lesson-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .exam-mode-tabs button,
-    .lesson-tabs button {
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 999px;
-      padding: 8px 11px;
-      color: #c8d4e5;
-      background: rgba(255,255,255,.05);
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .exam-mode-tabs button.active,
-    .lesson-tabs button.active {
-      color: #07111e;
-      background: #f5bd47;
-    }
-
     .topic-list {
       display: grid;
       gap: 10px;
-      margin-top: 12px;
     }
 
     .topic-card button {
@@ -3659,17 +3667,25 @@
     </main>
 
     <aside class="study-panel">
-      <div>
-        <h3>Konu anlatımı ve videolar</h3>
-        <p>Bir konuyu seçince kısa anlatım, örnek soru ve video çalışma önerisi sohbet alanına düşer.</p>
+      <div class="study-head">
+        <div>
+          <h3>Konu anlatımı ve videolar</h3>
+          <p>Bir konuyu seçince kısa anlatım, örnek soru ve video çalışma önerisi sohbet alanına düşer.</p>
+        </div>
+        <div class="study-controls" aria-label="Sınav ve ders seçimi">
+          <select id="examSelectPanel" aria-label="Sınav seç">
+            <option value="LGS">LGS</option>
+            <option value="TYT">TYT</option>
+            <option value="AYT">AYT</option>
+          </select>
+          <select id="lessonSelectPanel" aria-label="Ders seç"></select>
+        </div>
       </div>
       <div class="quick-cards">
         <div class="quick-card"><strong>Bugünün video rotası</strong><span>1 konu anlatımı + 12 soru + yanlış sebebi notu.</span></div>
         <div class="quick-card"><strong>Görselle çözüm</strong><span>Kamera veya galeriden soru yükle, çözüm akışını başlat.</span></div>
       </div>
       <div>
-        <div class="exam-mode-tabs" id="examModeTabs"></div>
-        <div class="lesson-tabs" id="lessonTabs"></div>
         <div class="topic-list" id="topicList"></div>
       </div>
     </aside>
@@ -3706,8 +3722,8 @@
     const chatInput = document.getElementById('chatInput');
     const sendMessage = document.getElementById('sendMessage');
     const questionPhoto = document.getElementById('questionPhoto');
-    const examModeTabs = document.getElementById('examModeTabs');
-    const lessonTabs = document.getElementById('lessonTabs');
+    const examSelectPanel = document.getElementById('examSelectPanel');
+    const lessonSelectPanel = document.getElementById('lessonSelectPanel');
     const topicList = document.getElementById('topicList');
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
@@ -3950,31 +3966,13 @@
     }
 
     function renderExamModeTabs() {
-      examModeTabs.innerHTML = Object.keys(topicBanks).map(exam => `
-        <button class="${exam === activeExamBank ? 'active' : ''}" type="button" data-exam-bank="${exam}">${exam}</button>
-      `).join('');
-      examModeTabs.querySelectorAll('[data-exam-bank]').forEach(button => {
-        button.addEventListener('click', () => {
-          activeExamBank = button.dataset.examBank;
-          activeLesson = Object.keys(topicBanks[activeExamBank])[0];
-          renderExamModeTabs();
-          renderLessonTabs();
-          renderTopics();
-        });
-      });
+      examSelectPanel.value = activeExamBank;
     }
 
     function renderLessonTabs() {
-      lessonTabs.innerHTML = Object.keys(topicBanks[activeExamBank]).map(lesson => `
-        <button class="${lesson === activeLesson ? 'active' : ''}" type="button" data-lesson="${lesson}">${lesson}</button>
+      lessonSelectPanel.innerHTML = Object.keys(topicBanks[activeExamBank]).map(lesson => `
+        <option value="${lesson}" ${lesson === activeLesson ? 'selected' : ''}>${lesson}</option>
       `).join('');
-      lessonTabs.querySelectorAll('[data-lesson]').forEach(button => {
-        button.addEventListener('click', () => {
-          activeLesson = button.dataset.lesson;
-          renderLessonTabs();
-          renderTopics();
-        });
-      });
     }
 
     function renderTopics() {
@@ -4162,6 +4160,19 @@
       selectedExam = event.target.value;
       document.querySelectorAll('[data-exam-choice]').forEach(item => item.classList.toggle('selected', item.dataset.examChoice === selectedExam));
       renderSubjects();
+    });
+
+    examSelectPanel.addEventListener('change', event => {
+      activeExamBank = event.target.value;
+      activeLesson = Object.keys(topicBanks[activeExamBank])[0];
+      renderExamModeTabs();
+      renderLessonTabs();
+      renderTopics();
+    });
+
+    lessonSelectPanel.addEventListener('change', event => {
+      activeLesson = event.target.value;
+      renderTopics();
     });
 
     document.querySelectorAll('[data-auth-tab]').forEach(button => {
