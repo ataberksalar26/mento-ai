@@ -2155,6 +2155,16 @@
       display: grid;
     }
 
+    .forgot-link {
+      border: 0;
+      padding: 2px 0;
+      color: #2b7a66;
+      background: transparent;
+      text-align: left;
+      font-weight: 950;
+      cursor: pointer;
+    }
+
     .auth-status {
       min-height: 20px;
       color: #536073;
@@ -3485,6 +3495,12 @@
                   <input id="verificationCode" type="text" inputmode="numeric" maxlength="6" placeholder="Mailine gelen 6 haneli kod">
                   <button class="btn btn-dark" type="button" id="verifyCodeButton">Kodu onayla</button>
                 </div>
+                <button class="forgot-link" type="button" id="forgotPasswordButton">Şifremi unuttum</button>
+                <div class="verify-box" id="resetBox">
+                  <input id="resetCode" type="text" inputmode="numeric" maxlength="6" placeholder="Mailine gelen sıfırlama kodu">
+                  <input id="newPassword" type="password" placeholder="Yeni şifre">
+                  <button class="btn btn-dark" type="button" id="resetPasswordButton">Şifreyi yenile</button>
+                </div>
                 <button class="btn btn-gold" type="button" id="calculatePlan">Hesapla ve planı hazırla</button>
               </div>
               <div class="auth-status" id="authStatus"></div>
@@ -3604,6 +3620,9 @@
     const calculatePlan = document.getElementById('calculatePlan');
     const verifyBox = document.getElementById('verifyBox');
     const verifyCodeButton = document.getElementById('verifyCodeButton');
+    const forgotPasswordButton = document.getElementById('forgotPasswordButton');
+    const resetBox = document.getElementById('resetBox');
+    const resetPasswordButton = document.getElementById('resetPasswordButton');
     const authStatus = document.getElementById('authStatus');
     const coachTitle = document.getElementById('coachTitle');
     const coachText = document.getElementById('coachText');
@@ -3861,6 +3880,8 @@
       document.getElementById('password').placeholder = mode === 'login' ? 'Şifren' : 'Şifre oluştur';
       calculatePlan.textContent = mode === 'login' ? 'Giriş yap ve planı aç' : 'Kodu gönder';
       verifyBox.classList.remove('show');
+      resetBox.classList.remove('show');
+      forgotPasswordButton.style.display = mode === 'login' ? 'block' : 'none';
       authStatus.textContent = '';
       document.getElementById('authNote').textContent = mode === 'login'
         ? 'Giriş yapınca kayıtlı hedeflerin, önceki denemelerin ve bugünün planı açılır.'
@@ -3938,6 +3959,49 @@
       }
     }
 
+    async function handleForgotPassword() {
+      const email = document.getElementById('email').value.trim();
+      if (!email) {
+        authStatus.textContent = 'Önce e-posta adresini yaz.';
+        return;
+      }
+
+      forgotPasswordButton.disabled = true;
+      authStatus.textContent = 'Şifre sıfırlama kodu gönderiliyor...';
+      try {
+        await postJson('/api/request-password-reset', { email });
+        resetBox.classList.add('show');
+        authStatus.textContent = 'Mailine 6 haneli sıfırlama kodu gönderildi.';
+      } catch (error) {
+        authStatus.textContent = error.message;
+      } finally {
+        forgotPasswordButton.disabled = false;
+      }
+    }
+
+    async function handleResetPassword() {
+      const email = document.getElementById('email').value.trim();
+      const code = document.getElementById('resetCode').value.trim();
+      const password = document.getElementById('newPassword').value;
+      if (!email || code.length < 6 || password.length < 6) {
+        authStatus.textContent = 'E-posta, 6 haneli kod ve en az 6 karakter yeni şifre gerekli.';
+        return;
+      }
+
+      resetPasswordButton.disabled = true;
+      authStatus.textContent = 'Şifre yenileniyor...';
+      try {
+        await postJson('/api/reset-password', { email, code, password });
+        document.getElementById('password').value = password;
+        authStatus.textContent = 'Şifren yenilendi. Panel açılıyor.';
+        setTimeout(openStudentPanel, 550);
+      } catch (error) {
+        authStatus.textContent = error.message;
+      } finally {
+        resetPasswordButton.disabled = false;
+      }
+    }
+
     document.querySelectorAll('[data-exam-choice]').forEach(button => {
       button.addEventListener('click', () => {
         selectedExam = button.dataset.examChoice;
@@ -3968,6 +4032,8 @@
     });
     calculatePlan.addEventListener('click', handleAuthSubmit);
     verifyCodeButton.addEventListener('click', handleVerifyCode);
+    forgotPasswordButton.addEventListener('click', handleForgotPassword);
+    resetPasswordButton.addEventListener('click', handleResetPassword);
 
     sendMessage.addEventListener('click', () => {
       const text = chatInput.value.trim();
