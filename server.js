@@ -7,7 +7,7 @@ const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
 const USERS_FILE = path.join(ROOT, 'users.json');
 const BRAIN_DATA_FILE = path.join(ROOT, 'data', 'mento-brain-questions.json');
-const APP_VERSION = 'openai-hybrid-brain-2026-07-21-2135';
+const APP_VERSION = 'study-modes-ios-pwa-2026-07-21-2145';
 
 loadEnv(path.join(ROOT, '.env'));
 

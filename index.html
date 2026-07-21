@@ -6,8 +6,12 @@
   <title>Mento AI | Yapay Zekalı TYT, AYT ve LGS Koçu</title>
   <meta name="description" content="Mento AI deneme sonuçlarını analiz eder, eksik konularını bulur ve sana özel çalışma planı oluşturur.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="favicon.svg">
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#07111d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Mento AI">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
     :root {
       --bg: #07111d;
@@ -2227,6 +2231,7 @@
       grid-template-columns: 280px 1fr 420px;
       color: #e9f0f7;
       background: #07111e;
+      min-height: 100dvh;
     }
 
     .student-app.light {
@@ -2666,6 +2671,44 @@
       cursor: pointer;
     }
 
+    .learning-card select {
+      width: 100%;
+      min-height: 38px;
+      margin-bottom: 9px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 11px;
+      padding: 0 10px;
+      color: #e9f0f7;
+      background: #111e2e;
+      font: inherit;
+      font-weight: 850;
+      outline: none;
+    }
+
+    .learning-card.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.1fr repeat(3, minmax(130px, .55fr)) auto;
+      gap: 10px;
+      align-items: end;
+      border-color: rgba(248,190,67,.3);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(248,190,67,.14), transparent 32%),
+        rgba(255,255,255,.06);
+    }
+
+    .learning-card.featured p {
+      margin-bottom: 0;
+    }
+
+    .learning-card.featured label {
+      display: grid;
+      gap: 6px;
+      color: #aebbd0;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
     .student-app.light .learning-card {
       background: #eef3f8;
       border-color: #c8d4e2;
@@ -2680,12 +2723,29 @@
       color: #53677f;
     }
 
+    .student-app.light .learning-card select {
+      color: #172335;
+      background: #e3ebf4;
+      border-color: #c2cedc;
+    }
+
+    .student-app.light .learning-card.featured {
+      border-color: #ddb45f;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(248,190,67,.22), transparent 32%),
+        #eef3f8;
+    }
+
+    .student-app.light .learning-card.featured label {
+      color: #53677f;
+    }
+
     .composer {
       display: grid;
       grid-template-columns: auto 1fr auto;
       gap: 10px;
       align-items: center;
-      padding: 18px 26px 24px;
+      padding: 18px 26px max(24px, env(safe-area-inset-bottom));
       border-top: 1px solid rgba(255,255,255,.08);
     }
 
@@ -3319,6 +3379,14 @@
       .composer {
         grid-template-columns: 1fr;
       }
+
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .learning-card.featured {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -3928,14 +3996,14 @@
       <div class="sidebar-label">Sohbet geçmişi</div>
       <div class="history-list" id="historyList"></div>
       <div class="chat-list" id="chatList">
-        <button class="active" type="button" data-panel-route="/panel/bugunku-plan"><span class="nav-ico">✓</span>Bugünkü plan</button>
-        <button type="button" data-panel-route="/panel/soru-coz"><span class="nav-ico">＋</span>Soru görseliyle çöz</button>
-        <button type="button" data-panel-route="/panel/konu-anlatimi"><span class="nav-ico">▤</span>Konu anlatımı</button>
+        <button class="active" type="button" data-panel-route="/panel/bugunku-plan" data-panel-title="Bugünkü plan"><span class="nav-ico">✓</span>Bugünkü plan</button>
+        <button type="button" data-panel-route="/panel/soru-coz" data-panel-title="Soru görseliyle çöz"><span class="nav-ico">＋</span>Soru görseliyle çöz</button>
+        <button type="button" data-panel-route="/panel/konu-anlatimi" data-panel-title="Konu anlatımı"><span class="nav-ico">▤</span>Konu anlatımı</button>
         <div class="sidebar-label">Öğrenme yolları</div>
-        <button type="button" data-panel-route="/panel/ezber-kartlari"><span class="nav-ico">◆</span>Ezber kartları</button>
-        <button type="button" data-panel-route="/panel/oyunlarla-ogren"><span class="nav-ico">▶</span>Oyunlarla öğren</button>
-        <button type="button" data-panel-route="/panel/mini-testler"><span class="nav-ico">?</span>Mini testler</button>
-        <button type="button" data-panel-route="/panel/hedef-takibi"><span class="nav-ico">↗</span>Hedef takibi</button>
+        <button type="button" data-panel-route="/panel/ezber-kartlari" data-panel-title="Ezber kartları"><span class="nav-ico">◆</span>Ezber kartları</button>
+        <button type="button" data-panel-route="/panel/oyunlarla-ogren" data-panel-title="Oyunlarla öğren"><span class="nav-ico">▶</span>Oyunlarla öğren</button>
+        <button type="button" data-panel-route="/panel/mini-testler" data-panel-title="Mini testler"><span class="nav-ico">?</span>Mini testler</button>
+        <button type="button" data-panel-route="/panel/hedef-takibi" data-panel-title="Hedef takibi"><span class="nav-ico">↗</span>Hedef takibi</button>
       </div>
       <div class="sidebar-tools">
         <button class="tool-button" type="button" id="themeToggle">☀ Tema</button>
@@ -4094,6 +4162,7 @@
     let activeExamBank = 'LGS';
     let activeLesson = 'Matematik';
     let currentChatId = localStorage.getItem('mentoActiveChatId') || '';
+    let activeLearningMode = '';
     const chatStorageKey = 'mentoChatSessions';
     const wizardRoutes = ['/plan/sinav', '/plan/netler', '/plan/hedef', '/plan/hesap'];
     const routeSteps = {
@@ -4378,6 +4447,70 @@
     }
 
     function addLearningCards(mode) {
+      activeLearningMode = mode;
+      messages.querySelectorAll('.learning-grid').forEach(item => item.remove());
+      if (mode === 'Mini testler') {
+        const topics = (topicBanks[activeExamBank]?.[activeLesson] || []).map(([title]) => title);
+        const wrap = document.createElement('div');
+        wrap.className = 'learning-grid';
+        wrap.dataset.learningMode = mode;
+        wrap.innerHTML = `
+          <article class="learning-card featured">
+            <div>
+              <strong>Sana özel mini test oluştur</strong>
+              <p>${activeExamBank} ${activeLesson} konularından seçim yap. Mento AI seçtiğin konu, zorluk ve hedef bilgilerine göre test akışı hazırlasın.</p>
+            </div>
+            <label>Konu
+              <select id="miniTopicSelect">
+                ${topics.map(topic => `<option value="${topic}">${topic}</option>`).join('')}
+              </select>
+            </label>
+            <label>Zorluk
+              <select id="miniDifficultySelect">
+                <option value="orta">Orta</option>
+                <option value="kolay">Kolay</option>
+                <option value="zor">Zor</option>
+                <option value="karma">Karma</option>
+              </select>
+            </label>
+            <label>Soru
+              <select id="miniCountSelect">
+                <option value="5">5 soru</option>
+                <option value="8">8 soru</option>
+                <option value="10">10 soru</option>
+              </select>
+            </label>
+            <button type="button" id="startMiniTest">Testi hazırla</button>
+          </article>
+          <article class="learning-card">
+            <strong>Yanlış sebebi</strong>
+            <p>Test bitince yanlışlarını kavram, işlem, dikkat ve süre diye ayırır.</p>
+            <button type="button" data-learning-action="Yanlış sebebi analizi">Başlat</button>
+          </article>
+          <article class="learning-card">
+            <strong>Tekrar planı</strong>
+            <p>Mini test sonucuna göre 15 dakikalık toparlama planı oluşturur.</p>
+            <button type="button" data-learning-action="Tekrar planı">Başlat</button>
+          </article>
+        `;
+        messages.appendChild(wrap);
+        messages.scrollTop = messages.scrollHeight;
+        document.getElementById('startMiniTest').addEventListener('click', () => {
+          const topic = document.getElementById('miniTopicSelect').value;
+          const difficulty = document.getElementById('miniDifficultySelect').value;
+          const count = document.getElementById('miniCountSelect').value;
+          addMessage(`${activeExamBank} ${activeLesson} ${topic} için ${difficulty} seviyede ${count} soruluk mini test hazırla. Sonunda yanlış sebebi ve kısa tekrar planı ver.`, 'user');
+          addMessage(`${topic} mini testi hazırlanıyor: ${count} soru, ${difficulty} seviye. Cevapları verdikçe kontrol edeceğim; yanlış çıkarsa nedenini etiketleyip kısa tekrar planına bağlayacağım.`);
+        });
+        wrap.querySelectorAll('[data-learning-action]').forEach(button => {
+          button.addEventListener('click', () => {
+            addMessage(`Mini testler: ${button.dataset.learningAction} başlat`, 'user');
+            addMessage(`${button.dataset.learningAction} hazır. Son mini test sonucuna göre eksik kazanımı, yanlış sebebini ve yarınki tekrar sırasını çıkaracağım.`);
+          });
+        });
+        return;
+      }
+
       const sets = {
         'Ezber kartları': [
           ['Akıllı kart destesi', `${activeLesson} için 8 kavram kartı: ön yüzde soru, arka yüzde net tanım ve ipucu.`],
@@ -4846,9 +4979,18 @@
 
     document.querySelectorAll('#chatList button').forEach(button => {
       button.addEventListener('click', () => {
+        const wasActive = button.classList.contains('active');
         document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item === button));
         writeRoute(button.dataset.panelRoute || '/panel');
-        const title = button.textContent.trim();
+        const title = button.dataset.panelTitle || button.textContent.trim();
+        const learningModes = ['Ezber kartları', 'Oyunlarla öğren', 'Mini testler', 'Hedef takibi'];
+        if (wasActive && learningModes.includes(title) && activeLearningMode === title) {
+          const existing = messages.querySelector('.learning-grid');
+          if (existing) {
+            existing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+          }
+        }
         const replies = {
           'Bugünkü plan': 'Bugünkü plan: Önce en riskli konuyu kısa tekrar et, sonra süreli soru çöz, en son yanlış sebebini not al.',
           'Soru görseliyle çöz': 'Soru görselini alttaki + butonuyla yükle. Ardından dersini ve nerede takıldığını yaz.',
@@ -4860,7 +5002,7 @@
         };
         addMessage(title, 'user');
         addMessage(replies[title] || 'Bu mod ilk ürün sürümü için hazırlandı. Bir konu seçince planına bağlayacağım.');
-        if (['Ezber kartları', 'Oyunlarla öğren', 'Mini testler', 'Hedef takibi'].includes(title)) {
+        if (learningModes.includes(title)) {
           addLearningCards(title);
         }
       });
@@ -4958,7 +5100,10 @@
         const match = document.querySelector(`[data-panel-route="${route}"]`) || document.querySelector('[data-panel-route="/panel/bugunku-plan"]');
         if (match) {
           document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item === match));
-          if (route !== '/panel' && route !== '/panel/bugunku-plan') match.click();
+          const title = match.dataset.panelTitle || match.textContent.trim();
+          if (['Ezber kartları', 'Oyunlarla öğren', 'Mini testler', 'Hedef takibi'].includes(title)) {
+            addLearningCards(title);
+          }
         }
       }
     }
@@ -4973,6 +5118,11 @@
     bootChatHistory();
     checkBrainStatus();
     restoreRouteFromUrl();
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
     window.addEventListener('popstate', restoreRouteFromUrl);
     window.addEventListener('hashchange', restoreRouteFromUrl);
   </script>
