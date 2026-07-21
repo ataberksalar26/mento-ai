@@ -2407,12 +2407,14 @@
       line-height: 1.5;
     }
 
+    .exam-mode-tabs,
     .lesson-tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
     }
 
+    .exam-mode-tabs button,
     .lesson-tabs button {
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 999px;
@@ -2423,6 +2425,7 @@
       cursor: pointer;
     }
 
+    .exam-mode-tabs button.active,
     .lesson-tabs button.active {
       color: #07111e;
       background: #f5bd47;
@@ -3575,6 +3578,7 @@
         <div class="quick-card"><strong>Fotoğrafla çözüm</strong><span>Kamera veya galeriden soru yükle, çözüm akışını başlat.</span></div>
       </div>
       <div>
+        <div class="exam-mode-tabs" id="examModeTabs"></div>
         <div class="lesson-tabs" id="lessonTabs"></div>
         <div class="topic-list" id="topicList"></div>
       </div>
@@ -3609,6 +3613,7 @@
     const chatInput = document.getElementById('chatInput');
     const sendMessage = document.getElementById('sendMessage');
     const questionPhoto = document.getElementById('questionPhoto');
+    const examModeTabs = document.getElementById('examModeTabs');
     const lessonTabs = document.getElementById('lessonTabs');
     const topicList = document.getElementById('topicList');
     const profileName = document.getElementById('profileName');
@@ -3653,74 +3658,41 @@
     let selectedExam = 'TYT';
     let authMode = 'signup';
     let pendingVerificationEmail = '';
+    let activeExamBank = 'LGS';
     let activeLesson = 'Matematik';
 
-    const lgsTopics = {
-      Matematik: [
-        ['Çarpanlar ve Katlar', 'EBOB, EKOK, asal çarpanlar ve bölünebilme mantığı.'],
-        ['Üslü İfadeler', 'Tam sayı kuvvetleri, bilimsel gösterim ve işlem kuralları.'],
-        ['Kareköklü İfadeler', 'Kök dışına çıkarma, yaklaşık değer ve köklü işlemler.'],
-        ['Veri Analizi', 'Grafik okuma, tablo yorumlama ve ortalama karşılaştırma.'],
-        ['Basit Olayların Olma Olasılığı', 'İstenen durum / tüm durum mantığı ve olasılık yorumları.'],
-        ['Cebirsel İfadeler ve Özdeşlikler', 'Dağılma, çarpanlara ayırma ve özdeşlikleri tanıma.'],
-        ['Doğrusal Denklemler', 'Eğim, grafik, denklem kurma ve günlük yaşam problemleri.'],
-        ['Eşitsizlikler', 'Aralık gösterimi, sayı doğrusu ve problem çözme.'],
-        ['Üçgenler', 'Açı, kenar, yardımcı elemanlar ve benzer düşünme.'],
-        ['Eşlik ve Benzerlik', 'Benzerlik oranı, uzunluk ve alan ilişkileri.'],
-        ['Dönüşüm Geometrisi', 'Öteleme, yansıma ve dönme yorumları.'],
-        ['Geometrik Cisimler', 'Prizma, silindir, yüzey alanı ve hacim problemleri.']
-      ],
-      Türkçe: [
-        ['Sözcükte Anlam', 'Gerçek, mecaz, terim, deyim ve bağlamdan anlam çıkarma.'],
-        ['Cümlede Anlam', 'Neden-sonuç, amaç-sonuç, koşul ve karşılaştırma.'],
-        ['Paragrafta Anlam', 'Ana fikir, yardımcı fikir, başlık ve yapı soruları.'],
-        ['Görsel ve Grafik Yorumlama', 'Tablo, afiş, grafik ve çoklu metin okuma.'],
-        ['Fiilimsi', 'İsim-fiil, sıfat-fiil, zarf-fiil ve cümlede görevleri.'],
-        ['Cümlenin Ögeleri', 'Yüklem, özne, nesne, tümleç ve vurgu.'],
-        ['Söz Sanatları', 'Benzetme, kişileştirme, konuşturma ve abartma.'],
-        ['Yazım Kuralları', 'Büyük harf, birleşik kelime, sayı ve kısaltmalar.'],
-        ['Noktalama İşaretleri', 'Virgül, noktalı virgül, iki nokta ve tırnak kullanımı.'],
-        ['Metin Türleri', 'Hikaye, deneme, makale, biyografi ve haber metni.']
-      ],
-      Fen: [
-        ['Mevsimler ve İklim', 'Eksen eğikliği, mevsimler, iklim ve hava olayları.'],
-        ['DNA ve Genetik Kod', 'DNA yapısı, kalıtım, mutasyon, modifikasyon ve adaptasyon.'],
-        ['Basınç', 'Katı, sıvı, gaz basıncı ve günlük yaşam bağlantıları.'],
-        ['Madde ve Endüstri', 'Periyodik sistem, kimyasal bağlar, tepkimeler, asit-baz.'],
-        ['Basit Makineler', 'Kaldıraç, makara, eğik düzlem ve iş kolaylığı.'],
-        ['Enerji Dönüşümleri', 'Fotosentez, solunum, besin zinciri ve enerji akışı.'],
-        ['Elektrik Yükleri ve Elektrik Enerjisi', 'Elektriklenme, devreler, güç ve enerji ilişkisi.']
-      ],
-      İnkılap: [
-        ['Bir Kahraman Doğuyor', 'Atatürk’ün öğrenim hayatı, fikir dünyası ve yaşadığı şehirler.'],
-        ['Milli Uyanış', 'Mondros, cemiyetler, kongreler ve Misakımilli.'],
-        ['Ya İstiklal Ya Ölüm', 'Cepheler, antlaşmalar ve bağımsızlık mücadelesi.'],
-        ['Atatürkçülük ve Çağdaşlaşma', 'İlke, inkılap ve modernleşme adımları.'],
-        ['Demokratikleşme Çabaları', 'Çok partili hayat denemeleri ve siyasi gelişmeler.'],
-        ['Türk Dış Politikası', 'Lozan sonrası dış politika ve Hatay meselesi.'],
-        ['Atatürk’ün Ölümü ve Sonrası', 'Atatürk’ün vefatı ve II. Dünya Savaşı süreci.']
-      ],
-      Din: [
-        ['Kader İnancı', 'Kader, kaza, irade, sorumluluk ve tevekkül.'],
-        ['Zekat ve Sadaka', 'Paylaşma, yardımlaşma ve ibadet bilinci.'],
-        ['Din ve Hayat', 'Din, birey, toplum ve güzel ahlak ilişkisi.'],
-        ['Hz. Muhammed’in Örnekliği', 'Peygamberimizin davranışları ve örnek kişiliği.'],
-        ['Kur’an-ı Kerim ve Özellikleri', 'Kur’an’ın ana konuları ve rehberliği.']
-      ],
-      İngilizce: [
-        ['Friendship', 'Invitation, accepting/refusing and friendship vocabulary.'],
-        ['Teen Life', 'Daily routines, likes/dislikes and frequency expressions.'],
-        ['In The Kitchen', 'Recipes, process words and cooking verbs.'],
-        ['On The Phone', 'Phone conversations and communication phrases.'],
-        ['The Internet', 'Online habits, safety and internet vocabulary.'],
-        ['Adventures', 'Extreme sports, comparisons and preferences.'],
-        ['Tourism', 'Places, travel experiences and describing cities.'],
-        ['Chores', 'Household duties, responsibilities and requests.'],
-        ['Science', 'Inventions, discoveries and experiment language.'],
-        ['Natural Forces', 'Natural disasters, warnings and predictions.']
-      ]
+    const topicBanks = {
+      LGS: {
+        Matematik: [['Çarpanlar ve Katlar','EBOB, EKOK, asal çarpanlar ve bölünebilme mantığı.'],['Üslü İfadeler','Tam sayı kuvvetleri, bilimsel gösterim ve işlem kuralları.'],['Kareköklü İfadeler','Kök dışına çıkarma, yaklaşık değer ve köklü işlemler.'],['Veri Analizi','Grafik okuma, tablo yorumlama ve ortalama karşılaştırma.'],['Basit Olayların Olma Olasılığı','İstenen durum / tüm durum mantığı ve olasılık yorumları.'],['Cebirsel İfadeler ve Özdeşlikler','Dağılma, çarpanlara ayırma ve özdeşlikleri tanıma.'],['Doğrusal Denklemler','Eğim, grafik, denklem kurma ve günlük yaşam problemleri.'],['Eşitsizlikler','Aralık gösterimi, sayı doğrusu ve problem çözme.'],['Üçgenler','Açı, kenar, yardımcı elemanlar ve benzer düşünme.'],['Eşlik ve Benzerlik','Benzerlik oranı, uzunluk ve alan ilişkileri.'],['Dönüşüm Geometrisi','Öteleme, yansıma ve dönme yorumları.'],['Geometrik Cisimler','Prizma, silindir, yüzey alanı ve hacim problemleri.']],
+        Türkçe: [['Sözcükte Anlam','Gerçek, mecaz, terim, deyim ve bağlamdan anlam çıkarma.'],['Cümlede Anlam','Neden-sonuç, amaç-sonuç, koşul ve karşılaştırma.'],['Paragrafta Anlam','Ana fikir, yardımcı fikir, başlık ve yapı soruları.'],['Görsel ve Grafik Yorumlama','Tablo, afiş, grafik ve çoklu metin okuma.'],['Fiilimsi','İsim-fiil, sıfat-fiil, zarf-fiil ve cümlede görevleri.'],['Cümlenin Ögeleri','Yüklem, özne, nesne, tümleç ve vurgu.'],['Söz Sanatları','Benzetme, kişileştirme, konuşturma ve abartma.'],['Yazım Kuralları','Büyük harf, birleşik kelime, sayı ve kısaltmalar.'],['Noktalama İşaretleri','Virgül, noktalı virgül, iki nokta ve tırnak kullanımı.'],['Metin Türleri','Hikaye, deneme, makale, biyografi ve haber metni.']],
+        Fen: [['Mevsimler ve İklim','Eksen eğikliği, mevsimler, iklim ve hava olayları.'],['DNA ve Genetik Kod','DNA yapısı, kalıtım, mutasyon, modifikasyon ve adaptasyon.'],['Basınç','Katı, sıvı, gaz basıncı ve günlük yaşam bağlantıları.'],['Madde ve Endüstri','Periyodik sistem, kimyasal bağlar, tepkimeler, asit-baz.'],['Basit Makineler','Kaldıraç, makara, eğik düzlem ve iş kolaylığı.'],['Enerji Dönüşümleri','Fotosentez, solunum, besin zinciri ve enerji akışı.'],['Elektrik Yükleri ve Elektrik Enerjisi','Elektriklenme, devreler, güç ve enerji ilişkisi.']],
+        İnkılap: [['Bir Kahraman Doğuyor','Atatürk’ün öğrenim hayatı, fikir dünyası ve yaşadığı şehirler.'],['Milli Uyanış','Mondros, cemiyetler, kongreler ve Misakımilli.'],['Ya İstiklal Ya Ölüm','Cepheler, antlaşmalar ve bağımsızlık mücadelesi.'],['Atatürkçülük ve Çağdaşlaşma','İlke, inkılap ve modernleşme adımları.'],['Demokratikleşme Çabaları','Çok partili hayat denemeleri ve siyasi gelişmeler.'],['Türk Dış Politikası','Lozan sonrası dış politika ve Hatay meselesi.'],['Atatürk’ün Ölümü ve Sonrası','Atatürk’ün vefatı ve II. Dünya Savaşı süreci.']],
+        Din: [['Kader İnancı','Kader, kaza, irade, sorumluluk ve tevekkül.'],['Zekat ve Sadaka','Paylaşma, yardımlaşma ve ibadet bilinci.'],['Din ve Hayat','Din, birey, toplum ve güzel ahlak ilişkisi.'],['Hz. Muhammed’in Örnekliği','Peygamberimizin davranışları ve örnek kişiliği.'],['Kur’an-ı Kerim ve Özellikleri','Kur’an’ın ana konuları ve rehberliği.']],
+        İngilizce: [['Friendship','Invitation, accepting/refusing and friendship vocabulary.'],['Teen Life','Daily routines, likes/dislikes and frequency expressions.'],['In The Kitchen','Recipes, process words and cooking verbs.'],['On The Phone','Phone conversations and communication phrases.'],['The Internet','Online habits, safety and internet vocabulary.'],['Adventures','Extreme sports, comparisons and preferences.'],['Tourism','Places, travel experiences and describing cities.'],['Chores','Household duties, responsibilities and requests.'],['Science','Inventions, discoveries and experiment language.'],['Natural Forces','Natural disasters, warnings and predictions.']]
+      },
+      TYT: {
+        Türkçe: [['Sözcükte Anlam','Anlam ilişkileri, deyim, atasözü, terim ve bağlam yorumu.'],['Cümlede Anlam','Yargı, neden-sonuç, amaç-sonuç, koşul, karşılaştırma ve çıkarım.'],['Paragraf','Ana düşünce, yardımcı düşünce, yapı, akış, anlatım teknikleri ve soru kökü stratejisi.'],['Anlatım Bozukluğu','Anlama ve yapıya dayalı bozuklukları hızlı yakalama.'],['Ses Bilgisi','Ünlü düşmesi, ünsüz değişimi, kaynaştırma ve ses olayları.'],['Yazım Kuralları','Büyük harf, sayı, birleşik kelime, kısaltma ve ek yazımı.'],['Noktalama','Virgül, noktalı virgül, iki nokta, tırnak ve kısa çizgi kullanımı.'],['Sözcük Türleri','İsim, sıfat, zamir, zarf, edat, bağlaç, ünlem ve fiil.'],['Fiiller','Kip, kişi, çatı, ek fiil ve fiilimsi temeli.'],['Cümlenin Ögeleri','Yüklem, özne, nesne, dolaylı tümleç, zarf tümleci.'],['Cümle Türleri','Yüklemine, anlamına, yapısına ve öge dizilişine göre cümle.']],
+        Matematik: [['Temel Kavramlar','Sayı kümeleri, işlem önceliği, tek-çift, pozitif-negatif ve basamak.'],['Sayı Basamakları','Basamak değeri, çözümleme ve sayı oluşturma.'],['Bölme ve Bölünebilme','Bölünebilme kuralları, kalan, EBOB ve EKOK.'],['Rasyonel Sayılar','Kesir, ondalık, sıralama ve dört işlem.'],['Basit Eşitsizlikler','Sayı doğrusu, aralık ve eşitsizlik çözümü.'],['Mutlak Değer','Uzaklık mantığı, denklem ve eşitsizlik uygulamaları.'],['Üslü Sayılar','Üs kuralları, negatif üs, bilimsel gösterim.'],['Köklü Sayılar','Kök dışına çıkarma, eşlenik ve yaklaşık değer.'],['Çarpanlara Ayırma','Ortak çarpan, özdeşlik ve sadeleştirme.'],['Oran Orantı','Doğru-ters orantı, tablo ve problem kurma.'],['Denklem Çözme','Birinci dereceden denklem, yaş, sayı ve karışım problemleri.'],['Problemler','Sayı, kesir, yüzde, kar-zarar, hareket, işçi, havuz ve grafik problemleri.'],['Kümeler','Küme işlemleri, Venn şeması ve eleman sayısı.'],['Fonksiyonlar','Fonksiyon kavramı, değer bulma, grafik okuma.'],['Permütasyon-Kombinasyon','Sayma, sıralama, seçme ve temel olasılık.'],['Olasılık','Basit olay, koşullu düşünme ve olasılık yorumu.'],['Veri ve İstatistik','Ortalama, medyan, mod, grafik ve tablo yorumlama.']],
+        Geometri: [['Doğruda ve Üçgende Açılar','Açı ilişkileri, paralel doğrular ve üçgen iç-dış açı.'],['Üçgenler','Kenar-açı, eşlik, benzerlik, alan ve özel üçgenler.'],['Çokgenler ve Dörtgenler','Dörtgen, paralelkenar, eşkenar dörtgen, dikdörtgen, kare ve yamuk.'],['Çember ve Daire','Açı, yay, teğet, kiriş, alan ve çevre.'],['Analitik Geometri','Doğru denklemi, eğim, orta nokta ve uzaklık.'],['Katı Cisimler','Prizma, piramit, silindir, koni ve küre.']],
+        Tarih: [['Tarih Bilimine Giriş','Zaman, kaynak, olay-olgu ve tarih yazımı.'],['İlk Çağ Uygarlıkları','Mezopotamya, Mısır, Anadolu, Yunan ve Roma.'],['İslam Tarihi ve Uygarlığı','Hz. Muhammed dönemi, dört halife, Emevi-Abbasi.'],['Türk İslam Tarihi','İlk Türk devletleri, Karahanlı, Gazneli, Selçuklu.'],['Osmanlı Tarihi','Kuruluş, yükselme, duraklama, gerileme ve dağılma.'],['İnkılap Tarihi','Milli Mücadele, Atatürk ilke ve inkılapları.']],
+        Coğrafya: [['Doğa ve İnsan','Coğrafyanın bölümleri, insan-doğa etkileşimi.'],['Dünya’nın Şekli ve Hareketleri','Enlem, boylam, saat, mevsim ve iklim etkileri.'],['Harita Bilgisi','Ölçek, izohips, koordinat ve harita okuma.'],['İklim Bilgisi','Sıcaklık, basınç, rüzgar, yağış ve iklim tipleri.'],['Yer Şekilleri','İç-dış kuvvetler, akarsu, rüzgar, buzul ve kıyı şekilleri.'],['Nüfus ve Yerleşme','Nüfus dağılışı, göç, yerleşme tipleri.'],['Ekonomik Faaliyetler','Tarım, sanayi, ulaşım, ticaret ve turizm.']],
+        Felsefe: [['Felsefeye Giriş','Bilgi, düşünme, akıl yürütme ve felsefi soru.'],['Bilgi Felsefesi','Doğru bilgi, kaynak, doğruluk ve şüphe.'],['Varlık Felsefesi','Varlık, oluş, idealizm, materyalizm.'],['Ahlak Felsefesi','İyi, özgürlük, sorumluluk ve erdem.'],['Din Felsefesi','Tanrı, inanç, vahiy ve din-bilim ilişkisi.'],['Siyaset Felsefesi','Devlet, hak, adalet, özgürlük ve egemenlik.'],['Bilim Felsefesi','Bilimsel yöntem, yasa, teori ve paradigma.']],
+        Din: [['Bilgi ve İnanç','İslam’da bilgi kaynakları ve inanç ilişkisi.'],['İslam ve İbadet','İbadetin anlamı, temel ibadetler ve sorumluluk.'],['Ahlak ve Değerler','Güzel ahlak, hak, adalet ve kul hakkı.'],['Hz. Muhammed','Peygamberimizin örnekliği ve toplumsal mesajları.'],['Kur’an ve Yorumu','Kur’an’ın ana konuları ve temel kavramlar.']],
+        Fizik: [['Fizik Bilimine Giriş','Fizik alt alanları, büyüklükler ve ölçme.'],['Madde ve Özellikleri','Kütle, hacim, yoğunluk, dayanıklılık ve adezyon-kohezyon.'],['Hareket ve Kuvvet','Konum, hız, ivme, kuvvet ve Newton mantığı.'],['Enerji','İş, güç, mekanik enerji ve enerji korunumu.'],['Isı ve Sıcaklık','Isı alışverişi, genleşme, hal değişimi.'],['Elektrostatik','Elektrik yükleri, elektriklenme ve Coulomb mantığı.'],['Dalgalar','Dalga özellikleri, yay, su, ses ve deprem dalgaları.'],['Optik','Aydınlanma, gölge, yansıma, kırılma, mercek ve renk.']],
+        Kimya: [['Kimya Bilimi','Kimyanın alt alanları, laboratuvar ve güvenlik.'],['Atom ve Periyodik Sistem','Atom modelleri, proton-nötron-elektron, periyodik özellikler.'],['Kimyasal Türler Arası Etkileşimler','İyonik, kovalent, metalik ve zayıf etkileşimler.'],['Maddenin Halleri','Katı, sıvı, gaz, plazma ve hal değişimleri.'],['Doğa ve Kimya','Su, çevre, hava, toprak ve sürdürülebilirlik.'],['Karışımlar','Çözelti, derişim, ayırma yöntemleri.'],['Asit Baz Tuz','pH, nötrleşme, günlük yaşam örnekleri.']],
+        Biyoloji: [['Yaşam Bilimi Biyoloji','Canlıların ortak özellikleri ve bilimsel yöntem.'],['Canlıların Temel Bileşenleri','Karbonhidrat, yağ, protein, vitamin, mineral ve su.'],['Hücre','Hücre yapısı, organeller, zar ve madde geçişleri.'],['Canlıların Sınıflandırılması','Alemler, tür, taksonomi ve sınıflandırma mantığı.'],['Hücre Bölünmeleri','Mitoz, mayoz ve üreme hücreleri.'],['Kalıtım Temelleri','Gen, DNA, kromozom ve basit çaprazlama mantığı.'],['Ekoloji','Ekosistem, besin zinciri, madde döngüleri.']]
+      },
+      AYT: {
+        Matematik: [['Fonksiyonlar','Tanım, değer, grafik, bileşke ve ters fonksiyon.'],['Polinomlar','Derece, kalan, çarpan, kök ve bölme işlemi.'],['İkinci Dereceden Denklemler','Diskriminant, kökler, parabol ilişkisi.'],['Parabol','Tepe noktası, eksen, grafik ve eşitsizlik yorumu.'],['Trigonometri','Birim çember, trigonometrik oranlar, özdeşlikler ve denklemler.'],['Logaritma','Logaritma kuralları, grafik ve denklem çözümü.'],['Diziler','Aritmetik, geometrik dizi ve genel terim.'],['Limit','Limit kavramı, sağ-sol limit ve belirsizlikler.'],['Süreklilik','Süreklilik şartı ve grafik yorumlama.'],['Türev','Türev kuralları, teğet, artan-azalan, maksimum-minimum.'],['İntegral','Belirsiz-belirli integral, alan ve temel uygulamalar.'],['Karmaşık Sayılar','Sanal birim, işlem, eşlenik ve kutupsal düşünme.']],
+        Geometri: [['Analitik Geometri','Doğru, çember, parabol, elips ve hiperbol temelleri.'],['Çember ve Daire','Teğet, kiriş, açı, alan ve uzunluk.'],['Katı Cisimler','Prizma, piramit, silindir, koni, küre ve hacim.'],['Dönüşümler','Öteleme, simetri, dönme ve koordinat düzlemi.']],
+        Fizik: [['Vektörler ve Kuvvet','Vektör işlemleri, denge, tork ve ağırlık merkezi.'],['Basit Makineler','Kuvvet kazancı, iş kolaylığı ve verim.'],['Hareket','Doğrusal hareket, bağıl hareket, atışlar ve dairesel hareket.'],['Enerji ve Momentum','İş, güç, enerji, itme ve momentum korunumu.'],['Elektrik ve Manyetizma','Elektrik alan, potansiyel, devre, manyetik alan.'],['Dalgalar','Yay, su, ses, girişim, kırınım ve Doppler.'],['Optik','Ayna, mercek, prizma, kırılma ve aydınlanma.'],['Modern Fizik','Fotoelektrik, atom modelleri, dalga-parçacık, radyoaktivite.']],
+        Kimya: [['Modern Atom Teorisi','Orbital, kuantum sayıları, elektron dizilimi ve periyodik özellik.'],['Gazlar','Gaz yasaları, ideal gaz, kısmi basınç ve kinetik teori.'],['Sıvı Çözeltiler','Derişim, koligatif özellik ve çözünürlük.'],['Kimyasal Tepkimelerde Enerji','Entalpi, bağ enerjisi, tepkime ısısı.'],['Kimyasal Tepkimelerde Hız','Hız bağıntısı, mekanizma ve katalizör.'],['Kimyasal Denge','Denge sabiti, Le Chatelier ve denge hesapları.'],['Asit-Baz Dengesi','pH, pOH, tampon, hidroliz ve nötrleşme.'],['Çözünürlük Dengesi','Kçç, çökelme ve ortak iyon etkisi.'],['Elektrokimya','Redoks, pil, elektroliz ve Faraday.'],['Organik Kimya','Hidrokarbonlar, fonksiyonel gruplar, izomerlik ve tepkimeler.']],
+        Biyoloji: [['Sinir Sistemi','Nöron, impuls, merkezi ve çevresel sinir sistemi.'],['Endokrin Sistem','Hormonlar, bezler ve homeostasi.'],['Duyu Organları','Göz, kulak, burun, dil, deri ve reseptörler.'],['Destek ve Hareket','Kemik, kas, eklem ve kasılma mekanizması.'],['Sindirim Sistemi','Besinlerin sindirimi, enzimler ve emilim.'],['Dolaşım ve Bağışıklık','Kalp, damar, kan, lenf ve bağışıklık.'],['Solunum Sistemi','Gaz alışverişi, taşıma ve solunum kontrolü.'],['Üriner Sistem','Böbrek, nefron, süzülme ve geri emilim.'],['Üreme ve Gelişme','Üreme sistemleri, embriyonik gelişim.'],['Komünite ve Popülasyon Ekolojisi','Ekolojik niş, rekabet, madde döngüsü.'],['Genetik ve Biyoteknoloji','Kalıtım, DNA teknolojileri ve biyoteknolojik uygulamalar.']],
+        Edebiyat: [['Güzel Sanatlar ve Edebiyat','Edebiyatın sanatla ilişkisi, metin türleri ve edebi akımlar.'],['Şiir Bilgisi','Nazım birimi, ölçü, uyak, redif, söz sanatları.'],['Destan, Efsane, Masal','İslamiyet öncesi ve geçiş dönemi anlatı türleri.'],['Halk Edebiyatı','Anonim, aşık, tekke şiiri ve halk hikayesi.'],['Divan Edebiyatı','Nazım biçimleri, mazmunlar ve sanatlı söyleyiş.'],['Tanzimat Edebiyatı','Roman, tiyatro, gazete, eleştiri ve yenileşme.'],['Servetifünun ve Fecriati','Bireysel tema, ağır dil ve sanat anlayışı.'],['Milli Edebiyat','Sade dil, milli konular ve hikaye-roman gelişimi.'],['Cumhuriyet Dönemi Şiiri','Beş Hececiler, Garip, İkinci Yeni, toplumcu şiir.'],['Cumhuriyet Dönemi Roman ve Hikaye','Toplumcu, bireysel, modernist ve köy romanı.'],['Tiyatro ve Öğretici Metinler','Cumhuriyet tiyatrosu, deneme, makale, fıkra.']],
+        Tarih: [['Tarih ve Zaman','Tarih bilimi, kaynaklar, takvim ve dönemlendirme.'],['İnsanlığın İlk Dönemleri','İlk yerleşmeler, uygarlıklar ve devlet oluşumu.'],['Orta Çağ’da Dünya','Feodalite, ticaret yolları, siyasi güçler.'],['İlk ve Orta Çağlarda Türk Dünyası','İlk Türk devletleri, kültür ve göçler.'],['İslam Medeniyeti','İslamiyet’in doğuşu, yayılışı ve Türklerin İslamiyet’i kabulü.'],['Türklerin Anadolu’ya Yerleşmesi','Büyük Selçuklu, Anadolu Selçuklu ve beylikler.'],['Osmanlı Kuruluş ve Yükselme','Beylikten devlete, merkezi güç ve fetihler.'],['Osmanlı Değişim Süreci','Duraklama, ıslahatlar, diplomasi ve modernleşme.'],['Milli Mücadele','Kongreler, cepheler, TBMM ve antlaşmalar.'],['Atatürkçülük','İlkeler, inkılaplar ve çağdaşlaşma.'],['Çağdaş Türk ve Dünya Tarihi','XX. yüzyıl siyasi gelişmeleri ve Türkiye.']],
+        Coğrafya: [['Ekosistem ve Madde Döngüleri','Ekosistem, besin zinciri, karbon, azot ve su döngüsü.'],['Nüfus Politikaları','Nüfus artışı, göç, şehirleşme ve demografik yapı.'],['Ekonomik Faaliyetler','Üretim, dağıtım, tüketim, tarım, sanayi ve hizmet.'],['Türkiye’nin Yer Şekilleri','Dağ, ova, plato, akarsu, kıyı ve jeolojik yapı.'],['Türkiye Ekonomisi','Tarım, hayvancılık, maden, enerji, sanayi ve ulaşım.'],['Küresel Ortam','Ülkeler, bölgeler, ticaret, enerji ve jeopolitik.'],['Çevre ve Toplum','Doğal afetler, çevre sorunları ve sürdürülebilirlik.']]
+      }
     };
-
     function numberValue(id) {
       const element = document.getElementById(id);
       return Math.max(0, Number(element?.value || 0));
@@ -3838,8 +3810,23 @@
       studentApp.setAttribute('aria-hidden', 'false');
     }
 
+    function renderExamModeTabs() {
+      examModeTabs.innerHTML = Object.keys(topicBanks).map(exam => `
+        <button class="${exam === activeExamBank ? 'active' : ''}" type="button" data-exam-bank="${exam}">${exam}</button>
+      `).join('');
+      examModeTabs.querySelectorAll('[data-exam-bank]').forEach(button => {
+        button.addEventListener('click', () => {
+          activeExamBank = button.dataset.examBank;
+          activeLesson = Object.keys(topicBanks[activeExamBank])[0];
+          renderExamModeTabs();
+          renderLessonTabs();
+          renderTopics();
+        });
+      });
+    }
+
     function renderLessonTabs() {
-      lessonTabs.innerHTML = Object.keys(lgsTopics).map(lesson => `
+      lessonTabs.innerHTML = Object.keys(topicBanks[activeExamBank]).map(lesson => `
         <button class="${lesson === activeLesson ? 'active' : ''}" type="button" data-lesson="${lesson}">${lesson}</button>
       `).join('');
       lessonTabs.querySelectorAll('[data-lesson]').forEach(button => {
@@ -3852,7 +3839,7 @@
     }
 
     function renderTopics() {
-      topicList.innerHTML = lgsTopics[activeLesson].map(([title, desc]) => `
+      topicList.innerHTML = topicBanks[activeExamBank][activeLesson].map(([title, desc]) => `
         <article class="topic-card">
           <strong>${title}</strong>
           <p>${desc}</p>
@@ -3861,8 +3848,8 @@
       `).join('');
       topicList.querySelectorAll('[data-topic]').forEach(button => {
         button.addEventListener('click', () => {
-          addMessage(`${activeLesson} - ${button.dataset.topic} konu anlatımı istiyorum.`, 'user');
-          addMessage(`${button.dataset.topic}: ${button.dataset.desc} Önce 7-10 dakikalık konu videosu izle, sonra 12 kolay-orta soru çöz. Yanlışların varsa hangi adımda takıldığını yaz; ben onu parçalayarak anlatayım.`);
+          addMessage(`${activeExamBank} ${activeLesson} - ${button.dataset.topic} konu anlatımı istiyorum.`, 'user');
+          addMessage(`${button.dataset.topic}: ${button.dataset.desc} Önce kısa konu anlatımı izle, sonra 12 kolay-orta soru çöz. Yanlışların varsa hangi adımda takıldığını yaz; ben onu parçalayarak anlatayım.`);
         });
       });
     }
@@ -4087,6 +4074,7 @@
     liveInputs.forEach(input => input.addEventListener('input', buildLiveBrainPlan));
     renderSubjects();
     setStep(0);
+    renderExamModeTabs();
     renderLessonTabs();
     renderTopics();
     buildLiveBrainPlan();
