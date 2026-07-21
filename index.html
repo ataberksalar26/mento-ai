@@ -2230,8 +2230,10 @@
     }
 
     .student-app.light {
-      color: #111c2d;
-      background: #edf2f7;
+      color: #172235;
+      background:
+        radial-gradient(circle at 48% 0%, rgba(244,182,62,.16), transparent 28%),
+        linear-gradient(180deg, #e6ecf3 0%, #dce4ed 100%);
     }
 
     .student-app.open {
@@ -2427,24 +2429,29 @@
 
     .student-app.light .app-sidebar,
     .student-app.light .study-panel {
-      color: #111c2d;
-      background: #f7fafc;
-      border-color: #d9e2ec;
+      color: #172235;
+      background: #e9eff6;
+      border-color: #c6d1df;
+      box-shadow: inset 0 1px rgba(255,255,255,.72);
     }
 
     .student-app.light .chat-main {
-      background: #edf2f7;
+      background:
+        radial-gradient(circle at 54% 0%, rgba(31,121,87,.09), transparent 34%),
+        linear-gradient(180deg, #e2e9f1 0%, #d8e1eb 100%);
     }
 
     .student-app.light .message {
-      color: #172335;
-      background: #fff;
-      border-color: #dce5ef;
+      color: #152033;
+      background: #eef3f8;
+      border-color: #c8d4e2;
+      box-shadow: 0 12px 28px rgba(38,55,78,.08);
     }
 
     .student-app.light .message.user {
       color: #07111e;
-      background: #f5bd47;
+      background: linear-gradient(180deg, #ffd36b, #f0ad35);
+      border-color: #d99b2e;
     }
 
     .student-app.light .chat-list button,
@@ -2455,13 +2462,49 @@
     .student-app.light .composer textarea,
     .student-app.light .photo-button {
       color: #172335;
-      background: #fff;
-      border-color: #dce5ef;
+      background: #edf3f8;
+      border-color: #c7d3e1;
     }
 
     .student-app.light .chat-list button.active {
-      background: #fff2cc;
+      background: #f7e8bd;
       border-color: #f5bd47;
+    }
+
+    .student-app.light .chat-top,
+    .student-app.light .composer {
+      border-color: #c6d1df;
+      background: rgba(232,239,247,.78);
+      box-shadow: 0 18px 34px rgba(55,70,92,.08);
+    }
+
+    .student-app.light .chat-top p,
+    .student-app.light .app-profile span,
+    .student-app.light .settings-mini span,
+    .student-app.light .settings-mini label,
+    .student-app.light .topic-card p,
+    .student-app.light .quick-card p {
+      color: #53677f;
+    }
+
+    .student-app.light .sidebar-label {
+      color: #687b93;
+    }
+
+    .student-app.light .settings-mini strong,
+    .student-app.light .quick-card strong,
+    .student-app.light .topic-card strong {
+      color: #152033;
+    }
+
+    .student-app.light .composer textarea::placeholder {
+      color: #6d7f94;
+    }
+
+    .student-app.light .topic-card button {
+      color: #102033;
+      background: #dfe8f1;
+      border-color: #c2cedc;
     }
 
     .chat-top {
@@ -4118,10 +4161,40 @@
       messages.scrollTop = messages.scrollHeight;
     }
 
+    function solveSimpleMath(text) {
+      const normalized = text
+        .toLocaleLowerCase('tr-TR')
+        .replaceAll('artı', '+')
+        .replaceAll('arti', '+')
+        .replaceAll('eksi', '-')
+        .replaceAll('çarpı', '*')
+        .replaceAll('carpi', '*')
+        .replaceAll('kere', '*')
+        .replaceAll('bölü', '/')
+        .replaceAll('bolu', '/')
+        .replaceAll(',', '.');
+      if (!/^[\s\d.+\-*/()%=?kaçkacederneolur]+$/i.test(normalized)) return null;
+      const expression = normalized
+        .replace(/kaç|kac|eder|ne|olur|sonuç|sonuc|cevap|=/g, ' ')
+        .replace(/[^\d.+\-*/()%\s]/g, '')
+        .trim();
+      if (!expression || !/[+\-*/]/.test(expression)) return null;
+      try {
+        const result = Function(`"use strict"; return (${expression})`)();
+        if (!Number.isFinite(result)) return null;
+        const clean = Number.isInteger(result) ? String(result) : String(Number(result.toFixed(4)));
+        return `Cevap: ${clean}.\n\nKısa işlem: ${expression} = ${clean}. Böyle basit işlem sorularında önce sonucu net yazıp sonra gerekirse adımı açıklayacağım.`;
+      } catch {
+        return null;
+      }
+    }
+
     function generateLocalBrainReply(text) {
       const raw = text.toLowerCase('tr-TR');
+      const simpleMath = solveSimpleMath(text);
+      if (simpleMath) return simpleMath;
       const lessonHints = [
-        ['matematik', ['problem', 'denklem', 'oran', 'üslü', 'köklü', 'geometri', 'fonksiyon']],
+        ['Matematik', ['matematik', 'problem', 'denklem', 'oran', 'üslü', 'köklü', 'geometri', 'fonksiyon', 'ebob', 'ekok']],
         ['Türkçe', ['paragraf', 'anlam', 'fiilimsi', 'cümle', 'sözcük', 'yazım']],
         ['Fen', ['fen', 'dna', 'basınç', 'madde', 'iklim', 'elektrik', 'hücre']],
         ['İngilizce', ['ingilizce', 'vocabulary', 'kelime', 'reading']],
@@ -4130,6 +4203,9 @@
       ];
       const found = lessonHints.find(([_, hints]) => hints.some(hint => raw.includes(hint)));
       const lesson = found?.[0] || activeLesson || 'Matematik';
+      if (raw.includes('ebob') || raw.includes('ekok')) {
+        return 'EBOB/EKOK kısa anlatım: EBOB ortak bölenlerin en büyüğüdür, EKOK ortak katların en küçüğüdür. Sayıları asal çarpanlarına ayır; EBOB için ortak çarpanların küçük üslerini, EKOK için tüm çarpanların büyük üslerini al. Örnek: 48 = 2^4 x 3, 60 = 2^2 x 3 x 5. EBOB = 2^2 x 3 = 12, EKOK = 2^4 x 3 x 5 = 240.';
+      }
       if (raw.includes('plan') || raw.includes('program') || raw.includes('çalış')) {
         return `Mento Brain planı: Bugün ${lesson} için 25 dakika kısa konu tekrarı, 35 dakika seçilmiş soru, 15 dakika yanlış sebebi notu yap. Son 10 dakikada sadece takıldığın soru tipini yaz; yarınki planı ona göre sıkılaştır.`;
       }
@@ -4142,7 +4218,7 @@
       if (raw.includes('soru') || raw.includes('çöz')) {
         return `${lesson} çözüm yolu: 1. Verilenleri ayır. 2. Senden isteneni tek satıra yaz. 3. Konu kuralını seç. 4. İşlemi kısa adımlarla ilerlet. Sorunun metnini veya görselini gönderirsen bu akışı o soruya özel parçalarım.`;
       }
-      return `Mento Brain bunu ${lesson} odağıyla yorumladı: önce konuyu netleştir, sonra 10 seçilmiş soru çöz, en son yanlışının sebebini yaz. İstersen “bana bugün 90 dakikalık plan çıkar” diye yaz, direkt günlük program çıkarayım.`;
+      return `Bunu çözebilmem için soruyu biraz daha net yaz: hangi ders, hangi konu ve tam soru metni. Eğer kısa işlemse direkt sonucu vereceğim; konu anlatımı istiyorsan “${lesson} konusu anlat” diye yazabilirsin.`;
     }
 
     function openStudentPanel(updateUrl = true) {
