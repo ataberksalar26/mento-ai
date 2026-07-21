@@ -2057,7 +2057,8 @@
     .mini-field input,
     .goal-grid input,
     .goal-grid select,
-    .auth-card input {
+    .auth-card input,
+    .auth-card select {
       width: 100%;
       min-height: 44px;
       border: 1px solid #d6dee9;
@@ -2071,7 +2072,8 @@
 
     .mini-field input:focus,
     .goal-grid input:focus,
-    .auth-card input:focus {
+    .auth-card input:focus,
+    .auth-card select:focus {
       border-color: rgba(224,166,63,.9);
       box-shadow: 0 0 0 4px rgba(224,166,63,.14);
     }
@@ -2139,6 +2141,12 @@
 
     .auth-fields {
       display: grid;
+      gap: 10px;
+    }
+
+    .signup-extra-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
@@ -2245,6 +2253,15 @@
       display: grid;
       align-content: start;
       gap: 8px;
+    }
+
+    .sidebar-label {
+      margin: 6px 2px 2px;
+      color: #7f8ea6;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
     .chat-list button {
@@ -2383,6 +2400,9 @@
       color: #e9f0f7;
       background: rgba(255,255,255,.09);
       border: 1px solid rgba(255,255,255,.1);
+      min-width: 52px;
+      padding-inline: 0;
+      font-size: 20px;
     }
 
     .send-button {
@@ -3518,6 +3538,20 @@
               </div>
               <div class="auth-fields">
                 <input id="fullName" type="text" placeholder="Ad soyad">
+                <select id="signupExam" data-signup-only>
+                  <option value="TYT">TYT öğrencisiyim</option>
+                  <option value="AYT">AYT öğrencisiyim</option>
+                  <option value="LGS">LGS öğrencisiyim</option>
+                </select>
+                <div class="signup-extra-grid" data-signup-only>
+                  <input id="birthYear" type="number" min="1900" max="2026" placeholder="Doğum yılı">
+                  <select id="gender">
+                    <option value="">Cinsiyet</option>
+                    <option value="Kız">Kız</option>
+                    <option value="Erkek">Erkek</option>
+                    <option value="Belirtmek istemiyorum">Belirtmek istemiyorum</option>
+                  </select>
+                </div>
                 <input id="email" type="email" placeholder="E-posta">
                 <div class="password-wrap">
                   <input id="password" type="password" placeholder="Şifre">
@@ -3584,12 +3618,17 @@
       <button class="new-chat" type="button" id="newChatButton">+ Yeni sohbet</button>
       <div class="chat-list" id="chatList">
         <button class="active" type="button">Bugünkü plan</button>
-        <button type="button">Fotoğrafla soru çöz</button>
-        <button type="button">LGS konu anlatımı</button>
+        <button type="button">Soru görseliyle çöz</button>
+        <button type="button">Konu anlatımı</button>
+        <div class="sidebar-label">Öğrenme yolları</div>
+        <button type="button">Ezber kartları</button>
+        <button type="button">Oyunlarla öğren</button>
+        <button type="button">Mini testler</button>
+        <button type="button">Hedef takibi</button>
       </div>
       <div class="app-profile">
         <div class="avatar" id="profileAvatar">M</div>
-        <div><strong id="profileName">Mento Öğrencisi</strong><span>LGS hedef modu</span></div>
+        <div><strong id="profileName">Mento Öğrencisi</strong><span id="profileMode">LGS hedef modu</span></div>
       </div>
     </aside>
 
@@ -3597,22 +3636,22 @@
       <header class="chat-top">
         <div>
           <h2>Mento Koç</h2>
-          <p>Fotoğraf çek, soru sor, konu anlatımı iste. İlk sürüm LGS odaklıdır.</p>
+          <p>Soru görseli yükle, soru sor veya konu anlatımı iste. İlk sürüm LGS odaklıdır.</p>
         </div>
         <button class="app-close" type="button" id="closeStudentApp" aria-label="Paneli kapat">×</button>
       </header>
 
       <div class="messages" id="messages">
         <div class="message">
-          Merhaba. Ben Mento Koç. Sorunu yazabilir, fotoğraf yükleyebilir veya sağdaki LGS konularından bir anlatım seçebilirsin.
+          Merhaba. Ben Mento Koç. Sorunu yazabilir, soru görseli yükleyebilir veya sağdaki LGS konularından bir anlatım seçebilirsin.
         </div>
         <div class="message">
-          Fotoğrafla soru çözme ilk sürümde görseli alır ve açıklama kutusuna ekler. Yapay zeka API tarafını bağladığımızda görselden soruyu okuyup adım adım çözecek.
+          Soru görseliyle çözüm ilk sürümde görseli alır ve açıklama kutusuna ekler. Yapay zeka API tarafını bağladığımızda görselden soruyu okuyup adım adım çözecek.
         </div>
       </div>
 
       <div class="composer">
-        <label class="photo-button" for="questionPhoto">Fotoğraf</label>
+        <label class="photo-button" for="questionPhoto" aria-label="Soru görseli yükle" title="Soru görseli yükle">＋</label>
         <input id="questionPhoto" type="file" accept="image/*" capture="environment" hidden>
         <textarea id="chatInput" placeholder="Örn. Bu matematik sorusunu adım adım çözer misin?"></textarea>
         <button class="send-button" type="button" id="sendMessage">Sor</button>
@@ -3626,7 +3665,7 @@
       </div>
       <div class="quick-cards">
         <div class="quick-card"><strong>Bugünün video rotası</strong><span>1 konu anlatımı + 12 soru + yanlış sebebi notu.</span></div>
-        <div class="quick-card"><strong>Fotoğrafla çözüm</strong><span>Kamera veya galeriden soru yükle, çözüm akışını başlat.</span></div>
+        <div class="quick-card"><strong>Görselle çözüm</strong><span>Kamera veya galeriden soru yükle, çözüm akışını başlat.</span></div>
       </div>
       <div>
         <div class="exam-mode-tabs" id="examModeTabs"></div>
@@ -3672,6 +3711,7 @@
     const topicList = document.getElementById('topicList');
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
+    const profileMode = document.getElementById('profileMode');
     const liveInputs = document.querySelectorAll('#liveExam, #trWrong, #trBlank, #matWrong, #matBlank, #fenWrong, #fenBlank, #sosWrong, #sosBlank');
     const liveFocusTitle = document.getElementById('liveFocusTitle');
     const liveInsight = document.getElementById('liveInsight');
@@ -3858,6 +3898,7 @@
       const name = document.getElementById('fullName').value.trim() || 'Mento Öğrencisi';
       profileName.textContent = name;
       profileAvatar.textContent = name.trim().charAt(0).toUpperCase() || 'M';
+      profileMode.textContent = `${selectedExam} hedef modu`;
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
       studentApp.classList.add('open');
@@ -3912,6 +3953,9 @@
       authMode = mode;
       document.querySelectorAll('[data-auth-tab]').forEach(item => item.classList.toggle('active', item.dataset.authTab === mode));
       document.getElementById('fullName').style.display = mode === 'login' ? 'none' : 'block';
+      document.querySelectorAll('[data-signup-only]').forEach(item => {
+        item.style.display = mode === 'login' ? 'none' : '';
+      });
       document.getElementById('password').placeholder = mode === 'login' ? 'Şifren' : 'Şifre oluştur';
       calculatePlan.textContent = mode === 'login' ? 'Giriş yap ve planı aç' : 'Kodu gönder';
       verifyBox.classList.remove('show');
@@ -3936,12 +3980,23 @@
 
     async function handleAuthSubmit() {
       const name = document.getElementById('fullName').value.trim();
+      const signupExam = document.getElementById('signupExam').value;
+      const birthYear = Number(document.getElementById('birthYear').value || 0);
+      const gender = document.getElementById('gender').value;
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const goal = `${document.getElementById('targetSchool').value.trim()} ${document.getElementById('targetScore').value.trim()}`.trim();
 
       if (!email || !password || (authMode === 'signup' && !name)) {
         authStatus.textContent = authMode === 'signup' ? 'Ad, e-posta ve şifre gerekli.' : 'E-posta ve şifre gerekli.';
+        return;
+      }
+      if (authMode === 'signup' && (!birthYear || birthYear < 1900 || birthYear > new Date().getFullYear())) {
+        authStatus.textContent = 'Doğum yılını 1900 ile bugün arasında gir.';
+        return;
+      }
+      if (authMode === 'signup' && !gender) {
+        authStatus.textContent = 'Cinsiyet seçimini tamamla.';
         return;
       }
 
@@ -3957,7 +4012,7 @@
           return;
         }
 
-        await postJson('/api/register', { name, email, password, exam: selectedExam, goal });
+        await postJson('/api/register', { name, email, password, exam: signupExam || selectedExam, birthYear, gender, goal });
         pendingVerificationEmail = email;
         verifyBox.classList.add('show');
         authStatus.textContent = 'Kod öğrencinin mail adresine gönderildi. 6 haneli kod girilmeden kayıt tamamlanmaz.';
@@ -4050,9 +4105,16 @@
     document.querySelectorAll('[data-exam-choice]').forEach(button => {
       button.addEventListener('click', () => {
         selectedExam = button.dataset.examChoice;
+        document.getElementById('signupExam').value = selectedExam;
         document.querySelectorAll('[data-exam-choice]').forEach(item => item.classList.toggle('selected', item === button));
         renderSubjects();
       });
+    });
+
+    document.getElementById('signupExam').addEventListener('change', event => {
+      selectedExam = event.target.value;
+      document.querySelectorAll('[data-exam-choice]').forEach(item => item.classList.toggle('selected', item.dataset.examChoice === selectedExam));
+      renderSubjects();
     });
 
     document.querySelectorAll('[data-auth-tab]').forEach(button => {
@@ -4108,14 +4170,32 @@
     questionPhoto.addEventListener('change', () => {
       const file = questionPhoto.files?.[0];
       if (!file) return;
-      addMessage(`Fotoğraf yüklendi: ${file.name}`, 'user');
-      addMessage('Fotoğrafı aldım. Şimdi sorunun dersini ve takıldığın kısmı yazarsan çözüm akışını başlatırım. Görsel okuma API bağlantısı geldiğinde fotoğraftaki soruyu otomatik okuyacağım.');
+      addMessage(`Soru görseli yüklendi: ${file.name}`, 'user');
+      addMessage('Görseli aldım. Şimdi sorunun dersini ve takıldığın kısmı yazarsan çözüm akışını başlatırım. Görsel okuma API bağlantısı geldiğinde soruyu otomatik okuyacağım.');
       questionPhoto.value = '';
     });
 
     document.getElementById('newChatButton').addEventListener('click', () => {
       messages.innerHTML = '';
-      addMessage('Yeni sohbet açıldı. Bir soru yaz, fotoğraf yükle veya sağdan LGS konusu seç.');
+      addMessage('Yeni sohbet açıldı. Bir soru yaz, soru görseli yükle veya sağdan konu seç.');
+    });
+
+    document.querySelectorAll('#chatList button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item === button));
+        const title = button.textContent.trim();
+        const replies = {
+          'Bugünkü plan': 'Bugünkü plan: Önce en riskli konuyu kısa tekrar et, sonra süreli soru çöz, en son yanlış sebebini not al.',
+          'Soru görseliyle çöz': 'Soru görselini alttaki + butonuyla yükle. Ardından dersini ve nerede takıldığını yaz.',
+          'Konu anlatımı': 'Sağdaki ders ve konu listesinden istediğin konuyu seç. Sana kısa anlatım, örnek soru ve video rotası çıkarayım.',
+          'Ezber kartları': 'Ezber kartları modu: formül, kavram ve kelimeleri ön yüz-soru, arka yüz-cevap mantığıyla tekrar ettirecek.',
+          'Oyunlarla öğren': 'Oyunlarla öğren modu: doğru cevap serisi, süre yarışı ve seviye atlama ile konu pratiği yaptıracak.',
+          'Mini testler': 'Mini test modu: seçtiğin konudan 5-10 soruluk hızlı kontrol çıkaracak ve yanlışlarını etiketleyecek.',
+          'Hedef takibi': 'Hedef takibi: günlük dakika, çözülen soru, net artışı ve sınava kalan süreyi aynı ekranda izleyecek.'
+        };
+        addMessage(title, 'user');
+        addMessage(replies[title] || 'Bu mod ilk ürün sürümü için hazırlandı. Bir konu seçince planına bağlayacağım.');
+      });
     });
 
     document.getElementById('closeStudentApp').addEventListener('click', () => {

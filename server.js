@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
 const USERS_FILE = path.join(ROOT, 'users.json');
-const APP_VERSION = 'auth-debug-2026-07-21-1818';
+const APP_VERSION = 'profile-fields-2026-07-21-1845';
 
 loadEnv(path.join(ROOT, '.env'));
 
@@ -151,10 +151,24 @@ async function handleRegister(req, res) {
     const email = normalizeEmail(body.email);
     const password = String(body.password || '');
     const exam = String(body.exam || 'TYT').trim();
+    const birthYear = Number(body.birthYear || 0);
+    const gender = String(body.gender || '').trim();
     const goal = String(body.goal || '').trim();
 
     if (!name || !email || !password) {
       sendJson(res, 400, { error: 'Ad, e-posta ve şifre zorunlu.' });
+      return;
+    }
+    if (!['TYT', 'AYT', 'LGS'].includes(exam)) {
+      sendJson(res, 400, { error: 'Sınav seçimi geçersiz.' });
+      return;
+    }
+    if (!birthYear || birthYear < 1900 || birthYear > new Date().getFullYear()) {
+      sendJson(res, 400, { error: 'Doğum yılı 1900 ile bu yıl arasında olmalı.' });
+      return;
+    }
+    if (!gender) {
+      sendJson(res, 400, { error: 'Cinsiyet seçimi zorunlu.' });
       return;
     }
     if (password.length < 6) {
@@ -178,6 +192,8 @@ async function handleRegister(req, res) {
       name,
       email,
       exam,
+      birthYear,
+      gender,
       goal,
       passwordSalt: salt,
       passwordHash: hash,
@@ -408,6 +424,8 @@ function publicUser(user) {
     name: user.name,
     email: user.email,
     exam: user.exam,
+    birthYear: user.birthYear,
+    gender: user.gender,
     goal: user.goal,
     verified: user.verified
   };
