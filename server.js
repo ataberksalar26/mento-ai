@@ -1,4 +1,4 @@
-const http = require('http');
+﻿const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
 const USERS_FILE = path.join(ROOT, 'users.json');
+const APP_VERSION = 'auth-debug-2026-07-21-1818';
 
 loadEnv(path.join(ROOT, '.env'));
 
@@ -26,6 +27,21 @@ function loadEnv(filePath) {
 function sendJson(res, status, data) {
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify(data));
+}
+
+function handleAuthDebug(req, res) {
+  const adminEmail = normalizeEmail(firstEnv('ADMIN_USER_EMAIL', 'ADMIN_EMAIL', 'MENTO_ADMIN_EMAIL'));
+  const adminPassword = String(firstEnv('ADMIN_USER_PASSWORD', 'ADMIN_PASSWORD', 'MENTO_ADMIN_PASSWORD')).trim();
+  sendJson(res, 200, {
+    ok: true,
+    version: APP_VERSION,
+    adminEmailSet: Boolean(adminEmail),
+    adminEmailPreview: adminEmail ? `${adminEmail.slice(0, 3)}***@${adminEmail.split('@')[1] || 'mail'}` : '',
+    adminPasswordSet: Boolean(adminPassword),
+    adminPasswordLength: adminPassword.length,
+    resendSet: Boolean(process.env.RESEND_API_KEY),
+    fromEmailSet: Boolean(process.env.FROM_EMAIL)
+  });
 }
 
 function readBody(req) {
@@ -60,6 +76,14 @@ function normalizeEmail(email) {
   return String(email || '').trim().toLowerCase();
 }
 
+function firstEnv(...keys) {
+  for (const key of keys) {
+    const value = process.env[key];
+    if (value) return value;
+  }
+  return '';
+}
+
 function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
   const hash = crypto.scryptSync(String(password), salt, 64).toString('hex');
   return { salt, hash };
@@ -72,6 +96,23 @@ function verifyPassword(password, user) {
 
 function generateCode() {
   return String(crypto.randomInt(100000, 1000000));
+}
+
+function normalizeAdminPassword(value) {
+  return String(value || '')
+    .trim()
+    .replaceAll('ç', 'c')
+    .replaceAll('Ç', 'C')
+    .replaceAll('ğ', 'g')
+    .replaceAll('Ğ', 'G')
+    .replaceAll('ı', 'i')
+    .replaceAll('İ', 'I')
+    .replaceAll('ö', 'o')
+    .replaceAll('Ö', 'O')
+    .replaceAll('ş', 's')
+    .replaceAll('Ş', 'S')
+    .replaceAll('ü', 'u')
+    .replaceAll('Ü', 'U');
 }
 
 async function sendEmail({ to, subject, html }) {
@@ -169,22 +210,6 @@ async function handleRegister(req, res) {
       `
     });
 
-    if (process.env.ADMIN_EMAIL) {
-      await sendEmail({
-        to: process.env.ADMIN_EMAIL,
-        subject: 'Mento AI yeni kullanıcı kaydı',
-        html: `
-          <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0E1A2B">
-            <h2>Yeni kullanıcı üye oldu</h2>
-            <p><b>Ad:</b> ${name}</p>
-            <p><b>E-posta:</b> ${email}</p>
-            <p><b>Sınav:</b> ${exam}</p>
-            <p><b>Hedef:</b> ${goal || '-'}</p>
-          </div>
-        `
-      });
-    }
-
     sendJson(res, 200, { ok: true, message: 'Doğrulama kodu e-postana gönderildi.', email });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'Kayıt hatası.' });
@@ -232,7 +257,39 @@ async function handleLogin(req, res) {
   try {
     const body = JSON.parse(await readBody(req) || '{}');
     const email = normalizeEmail(body.email);
-    const password = String(body.password || '');
+    const password = String(body.password || '').trim();
+
+    const adminEmail = normalizeEmail(firstEnv('ADMIN_USER_EMAIL', 'ADMIN_EMAIL', 'MENTO_ADMIN_EMAIL'));
+    const adminPassword = String(firstEnv('ADMIN_USER_PASSWORD', 'ADMIN_PASSWORD', 'MENTO_ADMIN_PASSWORD')).trim();
+    const isAdminEmail = adminEmail && email === adminEmail;
+    if (
+      isAdminEmail &&
+      adminPassword &&
+      (password === adminPassword || normalizeAdminPassword(password) === normalizeAdminPassword(adminPassword))
+    ) {
+      sendJson(res, 200, {
+        ok: true,
+        user: {
+          id: 'student-local',
+          name: 'Mento Öğrencisi',
+          email,
+          exam: 'LGS',
+          goal: 'Kişisel çalışma planı',
+          verified: true
+        }
+      });
+      return;
+    }
+
+    if (isAdminEmail) {
+      sendJson(res, 401, {
+        error: adminPassword
+          ? 'Admin şifresi Render değerindeki ADMIN_USER_PASSWORD ile eşleşmedi.'
+          : 'ADMIN_USER_PASSWORD Render Environment içinde yok.'
+      });
+      return;
+    }
+
     const user = readUsers().find(u => u.email === email);
 
     if (!user || !verifyPassword(password, user)) {
@@ -247,6 +304,101 @@ async function handleLogin(req, res) {
     sendJson(res, 200, { ok: true, user: publicUser(user) });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'Giriş hatası.' });
+  }
+}
+
+async function handleRequestPasswordReset(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const email = normalizeEmail(body.email);
+    const users = readUsers();
+    const user = users.find(u => u.email === email);
+
+    if (!email) {
+      sendJson(res, 400, { error: 'E-posta gerekli.' });
+      return;
+    }
+
+    const adminEmail = normalizeEmail(firstEnv('ADMIN_USER_EMAIL', 'ADMIN_EMAIL', 'MENTO_ADMIN_EMAIL'));
+    if (adminEmail && email === adminEmail) {
+      sendJson(res, 400, { error: 'Bu hesap için şifre Render ortam değişkeninden yönetilir.' });
+      return;
+    }
+
+    if (!user) {
+      sendJson(res, 200, { ok: true, message: 'E-posta kayıtlıysa kod gönderildi.' });
+      return;
+    }
+
+    const code = generateCode();
+    const codeHash = hashPassword(code);
+    user.resetCodeSalt = codeHash.salt;
+    user.resetCodeHash = codeHash.hash;
+    user.resetCodeExpiresAt = Date.now() + 10 * 60 * 1000;
+    user.updatedAt = new Date().toISOString();
+    writeUsers(users);
+
+    await sendEmail({
+      to: email,
+      subject: 'Mento AI şifre sıfırlama kodun',
+      html: `
+        <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0E1A2B">
+          <h2>Mento AI şifre sıfırlama</h2>
+          <p>Şifreni yenilemek için Mento AI giriş ekranındaki <b>Şifremi unuttum</b> alanına bu 6 haneli kodu gir:</p>
+          <div style="font-size:28px;font-weight:800;letter-spacing:4px;background:#F2F4F7;padding:16px;border-radius:10px;display:inline-block">${code}</div>
+          <p>Bu kod 10 dakika geçerlidir. Kodu ve yeni şifreni girince hesabın açılır.</p>
+        </div>
+      `
+    });
+
+    sendJson(res, 200, { ok: true, message: 'Şifre sıfırlama kodu e-postana gönderildi.' });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'Şifre sıfırlama kodu gönderilemedi.' });
+  }
+}
+
+async function handleResetPassword(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const email = normalizeEmail(body.email);
+    const code = String(body.code || '').trim();
+    const password = String(body.password || '');
+    const users = readUsers();
+    const user = users.find(u => u.email === email);
+
+    if (!user || !code || !password) {
+      sendJson(res, 400, { error: 'E-posta, kod ve yeni şifre gerekli.' });
+      return;
+    }
+    if (password.length < 6) {
+      sendJson(res, 400, { error: 'Şifre en az 6 karakter olmalı.' });
+      return;
+    }
+    if (!user.resetCodeHash || Date.now() > Number(user.resetCodeExpiresAt || 0)) {
+      sendJson(res, 400, { error: 'Kod geçersiz veya süresi dolmuş.' });
+      return;
+    }
+
+    const candidate = hashPassword(code, user.resetCodeSalt).hash;
+    const ok = crypto.timingSafeEqual(Buffer.from(candidate, 'hex'), Buffer.from(user.resetCodeHash, 'hex'));
+    if (!ok) {
+      sendJson(res, 400, { error: 'Kod hatalı.' });
+      return;
+    }
+
+    const nextPassword = hashPassword(password);
+    user.passwordSalt = nextPassword.salt;
+    user.passwordHash = nextPassword.hash;
+    user.resetCodeSalt = null;
+    user.resetCodeHash = null;
+    user.resetCodeExpiresAt = null;
+    user.verified = true;
+    user.updatedAt = new Date().toISOString();
+    writeUsers(users);
+
+    sendJson(res, 200, { ok: true, user: publicUser(user) });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'Şifre yenilenemedi.' });
   }
 }
 
@@ -354,6 +506,10 @@ async function handleCoach(req, res) {
 }
 
 const server = http.createServer((req, res) => {
+  if (req.method === 'GET' && req.url === '/api/auth-debug') {
+    handleAuthDebug(req, res);
+    return;
+  }
   if (req.method === 'POST' && req.url === '/api/register') {
     handleRegister(req, res);
     return;
@@ -364,6 +520,14 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'POST' && req.url === '/api/login') {
     handleLogin(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/request-password-reset') {
+    handleRequestPasswordReset(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/reset-password') {
+    handleResetPassword(req, res);
     return;
   }
   if (req.method === 'POST' && req.url === '/api/coach') {
