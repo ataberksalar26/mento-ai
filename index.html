@@ -3544,7 +3544,7 @@
                   <option value="LGS">LGS öğrencisiyim</option>
                 </select>
                 <div class="signup-extra-grid" data-signup-only>
-                  <input id="birthYear" type="number" min="1900" max="2026" placeholder="Doğum yılı">
+                  <input id="birthYear" type="number" min="1900" max="2026" value="2000" placeholder="Doğum yılı">
                   <select id="gender">
                     <option value="">Cinsiyet</option>
                     <option value="Kız">Kız</option>
@@ -3617,14 +3617,14 @@
       <div class="app-logo">mento ai</div>
       <button class="new-chat" type="button" id="newChatButton">+ Yeni sohbet</button>
       <div class="chat-list" id="chatList">
-        <button class="active" type="button">Bugünkü plan</button>
-        <button type="button">Soru görseliyle çöz</button>
-        <button type="button">Konu anlatımı</button>
+        <button class="active" type="button" data-panel-route="/panel/bugunku-plan">Bugünkü plan</button>
+        <button type="button" data-panel-route="/panel/soru-coz">Soru görseliyle çöz</button>
+        <button type="button" data-panel-route="/panel/konu-anlatimi">Konu anlatımı</button>
         <div class="sidebar-label">Öğrenme yolları</div>
-        <button type="button">Ezber kartları</button>
-        <button type="button">Oyunlarla öğren</button>
-        <button type="button">Mini testler</button>
-        <button type="button">Hedef takibi</button>
+        <button type="button" data-panel-route="/panel/ezber-kartlari">Ezber kartları</button>
+        <button type="button" data-panel-route="/panel/oyunlarla-ogren">Oyunlarla öğren</button>
+        <button type="button" data-panel-route="/panel/mini-testler">Mini testler</button>
+        <button type="button" data-panel-route="/panel/hedef-takibi">Hedef takibi</button>
       </div>
       <div class="app-profile">
         <div class="avatar" id="profileAvatar">M</div>
@@ -3754,6 +3754,46 @@
     let pendingVerificationEmail = '';
     let activeExamBank = 'LGS';
     let activeLesson = 'Matematik';
+    const wizardRoutes = ['/plan/sinav', '/plan/netler', '/plan/hedef', '/plan/hesap'];
+    const routeSteps = {
+      '/kayit': 0,
+      '/plan': 0,
+      '/plan/sinav': 0,
+      '/plan/netler': 1,
+      '/plan/hedef': 2,
+      '/giris': 3,
+      '/plan/hesap': 3
+    };
+
+    function readRoute() {
+      if (window.location.protocol === 'file:') return window.location.hash.replace('#', '') || '/home';
+      return window.location.pathname || '/home';
+    }
+
+    function writeRoute(route, replace = false) {
+      if (window.location.protocol === 'file:') {
+        const nextHash = `#${route}`;
+        if (window.location.hash !== nextHash) {
+          if (replace) window.location.replace(nextHash);
+          else window.location.hash = route;
+        }
+        return;
+      }
+      if (window.location.pathname !== route) {
+        const method = replace ? 'replaceState' : 'pushState';
+        window.history[method]({}, '', route);
+      }
+    }
+
+    function openPlannerRoute(route = '/kayit', mode = 'signup') {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      studentApp.classList.remove('open');
+      studentApp.setAttribute('aria-hidden', 'true');
+      setAuthMode(mode);
+      setStep(routeSteps[route] ?? 0, false);
+      writeRoute(route);
+    }
 
     const topicBanks = {
       LGS: {
@@ -3792,7 +3832,7 @@
       return Math.max(0, Number(element?.value || 0));
     }
 
-    function setStep(step) {
+    function setStep(step, updateUrl = true) {
       currentStep = Math.max(0, Math.min(3, step));
       wizardPanels.forEach((panel, index) => panel.classList.toggle('active', index === currentStep));
       wizardSteps.forEach((item, index) => item.classList.toggle('active', index === currentStep));
@@ -3800,6 +3840,9 @@
       nextStep.textContent = currentStep === 3 ? 'Planı hesapla' : 'Devam et';
       skipStep.style.visibility = currentStep === 3 ? 'hidden' : 'visible';
       wizardResult.style.display = 'none';
+      if (updateUrl && modal.classList.contains('open')) {
+        writeRoute(authMode === 'login' ? '/giris' : wizardRoutes[currentStep]);
+      }
     }
 
     function renderSubjects() {
@@ -3894,7 +3937,7 @@
       messages.scrollTop = messages.scrollHeight;
     }
 
-    function openStudentPanel() {
+    function openStudentPanel(updateUrl = true) {
       const name = document.getElementById('fullName').value.trim() || 'Mento Öğrencisi';
       profileName.textContent = name;
       profileAvatar.textContent = name.trim().charAt(0).toUpperCase() || 'M';
@@ -3903,6 +3946,7 @@
       modal.setAttribute('aria-hidden', 'true');
       studentApp.classList.add('open');
       studentApp.setAttribute('aria-hidden', 'false');
+      if (updateUrl) writeRoute('/panel/bugunku-plan');
     }
 
     function renderExamModeTabs() {
@@ -3965,6 +4009,9 @@
       document.getElementById('authNote').textContent = mode === 'login'
         ? 'Giriş yapınca kayıtlı hedeflerin, önceki denemelerin ve bugünün planı açılır.'
         : 'Kayıt tamamlanmadan önce öğrencinin mailine gelen 6 haneli kod zorunlu.';
+      if (modal.classList.contains('open')) {
+        writeRoute(mode === 'login' ? '/giris' : wizardRoutes[currentStep]);
+      }
     }
 
     async function postJson(url, payload) {
@@ -4183,6 +4230,7 @@
     document.querySelectorAll('#chatList button').forEach(button => {
       button.addEventListener('click', () => {
         document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item === button));
+        writeRoute(button.dataset.panelRoute || '/panel');
         const title = button.textContent.trim();
         const replies = {
           'Bugünkü plan': 'Bugünkü plan: Önce en riskli konuyu kısa tekrar et, sonra süreli soru çöz, en son yanlış sebebini not al.',
@@ -4201,19 +4249,16 @@
     document.getElementById('closeStudentApp').addEventListener('click', () => {
       studentApp.classList.remove('open');
       studentApp.setAttribute('aria-hidden', 'true');
+      writeRoute('/home');
     });
 
     openButtons.forEach(button => {
       button.addEventListener('click', event => {
         event.preventDefault();
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
         if (button.dataset.openDemo === 'login') {
-          setAuthMode('login');
-          setStep(3);
+          openPlannerRoute('/giris', 'login');
         } else {
-          setAuthMode('signup');
-          setStep(0);
+          openPlannerRoute('/kayit', 'signup');
         }
       });
     });
@@ -4221,6 +4266,7 @@
     closeButton.addEventListener('click', () => {
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
+      writeRoute('/home');
     });
 
     modal.addEventListener('click', event => {
@@ -4279,13 +4325,40 @@
       chartNote.textContent = `${focus.name} odağı korunursa 5 deneme içinde yaklaşık +${potential} netlik alan açılabilir.`;
     }
 
+    function restoreRouteFromUrl() {
+      const route = readRoute();
+      if (route === '/' || route === '/home') {
+        writeRoute('/home', true);
+        return;
+      }
+      if (route === '/giris') {
+        openPlannerRoute('/giris', 'login');
+        return;
+      }
+      if (routeSteps[route] !== undefined) {
+        openPlannerRoute(route, 'signup');
+        return;
+      }
+      if (route.startsWith('/panel')) {
+        openStudentPanel(false);
+        const match = document.querySelector(`[data-panel-route="${route}"]`) || document.querySelector('[data-panel-route="/panel/bugunku-plan"]');
+        if (match) {
+          document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item === match));
+          if (route !== '/panel' && route !== '/panel/bugunku-plan') match.click();
+        }
+      }
+    }
+
     liveInputs.forEach(input => input.addEventListener('input', buildLiveBrainPlan));
     renderSubjects();
-    setStep(0);
+    setStep(0, false);
     renderExamModeTabs();
     renderLessonTabs();
     renderTopics();
     buildLiveBrainPlan();
+    restoreRouteFromUrl();
+    window.addEventListener('popstate', restoreRouteFromUrl);
+    window.addEventListener('hashchange', restoreRouteFromUrl);
   </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
 const USERS_FILE = path.join(ROOT, 'users.json');
-const APP_VERSION = 'profile-fields-2026-07-21-1845';
+const APP_VERSION = 'routes-profile-2026-07-21-1900';
 
 loadEnv(path.join(ROOT, '.env'));
 
@@ -478,6 +478,28 @@ function serveStatic(req, res) {
       sendFile(res, htmlPath);
       return;
     }
+  }
+  const appRoutes = [
+    '/home',
+    '/giris',
+    '/kayit',
+    '/plan',
+    '/plan/sinav',
+    '/plan/netler',
+    '/plan/hedef',
+    '/plan/hesap',
+    '/panel',
+    '/panel/bugunku-plan',
+    '/panel/soru-coz',
+    '/panel/konu-anlatimi',
+    '/panel/ezber-kartlari',
+    '/panel/oyunlarla-ogren',
+    '/panel/mini-testler',
+    '/panel/hedef-takibi'
+  ];
+  if (appRoutes.includes(urlPath)) {
+    sendFile(res, path.join(ROOT, 'index.html'));
+    return;
   }
   res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
   res.end('Not found');
