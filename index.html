@@ -2296,6 +2296,19 @@
       gap: 8px;
     }
 
+    .history-list {
+      display: grid;
+      gap: 8px;
+      max-height: 170px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    .history-list::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
     .sidebar-label {
       margin: 6px 2px 2px;
       color: #7f8ea6;
@@ -2316,6 +2329,40 @@
       background: rgba(255,255,255,.04);
       text-align: left;
       cursor: pointer;
+    }
+
+    .history-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 13px;
+      padding: 10px 11px;
+      color: #c8d4e5;
+      background: rgba(255,255,255,.035);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .history-item.active {
+      color: #fff;
+      background: rgba(49,184,119,.11);
+      border-color: rgba(49,184,119,.32);
+    }
+
+    .history-title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .history-date {
+      color: #8393aa;
+      font-size: 11px;
+      font-weight: 800;
     }
 
     .chat-list button.active {
@@ -2455,6 +2502,7 @@
     }
 
     .student-app.light .chat-list button,
+    .student-app.light .history-item,
     .student-app.light .tool-button,
     .student-app.light .settings-mini,
     .student-app.light .quick-card,
@@ -2469,6 +2517,11 @@
     .student-app.light .chat-list button.active {
       background: #f7e8bd;
       border-color: #f5bd47;
+    }
+
+    .student-app.light .history-item.active {
+      background: #dcefe8;
+      border-color: #7fc8ad;
     }
 
     .student-app.light .chat-top,
@@ -2489,6 +2542,10 @@
 
     .student-app.light .sidebar-label {
       color: #687b93;
+    }
+
+    .student-app.light .history-date {
+      color: #6a7b91;
     }
 
     .student-app.light .settings-mini strong,
@@ -2567,6 +2624,60 @@
       justify-self: end;
       color: #07111e;
       background: #f5bd47;
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      width: min(720px, 100%);
+    }
+
+    .learning-card {
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px;
+      padding: 15px;
+      background: rgba(255,255,255,.055);
+      box-shadow: 0 16px 34px rgba(0,0,0,.16);
+    }
+
+    .learning-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .learning-card p {
+      margin: 0 0 12px;
+      color: #aebbd0;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .learning-card button {
+      width: 100%;
+      min-height: 34px;
+      border: 0;
+      border-radius: 11px;
+      color: #07111e;
+      background: #f4b63e;
+      font-weight: 950;
+      cursor: pointer;
+    }
+
+    .student-app.light .learning-card {
+      background: #eef3f8;
+      border-color: #c8d4e2;
+      box-shadow: 0 12px 28px rgba(38,55,78,.08);
+    }
+
+    .student-app.light .learning-card strong {
+      color: #172335;
+    }
+
+    .student-app.light .learning-card p {
+      color: #53677f;
     }
 
     .composer {
@@ -3814,6 +3925,8 @@
     <aside class="app-sidebar">
       <div class="app-logo"><span class="app-logo-mark">M</span><span>mento ai</span></div>
       <button class="new-chat" type="button" id="newChatButton">+ Yeni sohbet</button>
+      <div class="sidebar-label">Sohbet geçmişi</div>
+      <div class="history-list" id="historyList"></div>
       <div class="chat-list" id="chatList">
         <button class="active" type="button" data-panel-route="/panel/bugunku-plan"><span class="nav-ico">✓</span>Bugünkü plan</button>
         <button type="button" data-panel-route="/panel/soru-coz"><span class="nav-ico">＋</span>Soru görseliyle çöz</button>
@@ -3844,7 +3957,7 @@
       <header class="chat-top">
         <div>
           <h2>Mento Koç</h2>
-          <p>Soru görseli yükle, soru sor veya konu anlatımı iste. Mento Brain + ChatGPT koç motoru aktiftir.</p>
+          <p id="brainStatus">Soru görseli yükle, soru sor veya konu anlatımı iste. Bağlantı kontrol ediliyor.</p>
         </div>
         <div class="top-actions">
           <button class="top-icon" type="button" id="notifyButton" aria-label="Bildirimler">●</button>
@@ -3922,6 +4035,7 @@
     const coachLines = document.getElementById('coachLines');
     const studentApp = document.getElementById('studentApp');
     const messages = document.getElementById('messages');
+    const historyList = document.getElementById('historyList');
     const chatInput = document.getElementById('chatInput');
     const sendMessage = document.getElementById('sendMessage');
     const questionPhoto = document.getElementById('questionPhoto');
@@ -3936,6 +4050,7 @@
     const themeToggle = document.getElementById('themeToggle');
     const topThemeToggle = document.getElementById('topThemeToggle');
     const notifyButton = document.getElementById('notifyButton');
+    const brainStatus = document.getElementById('brainStatus');
     const liveInputs = document.querySelectorAll('#liveExam, #trWrong, #trBlank, #matWrong, #matBlank, #fenWrong, #fenBlank, #sosWrong, #sosBlank');
     const liveFocusTitle = document.getElementById('liveFocusTitle');
     const liveInsight = document.getElementById('liveInsight');
@@ -3978,6 +4093,8 @@
     let pendingVerificationEmail = '';
     let activeExamBank = 'LGS';
     let activeLesson = 'Matematik';
+    let currentChatId = localStorage.getItem('mentoActiveChatId') || '';
+    const chatStorageKey = 'mentoChatSessions';
     const wizardRoutes = ['/plan/sinav', '/plan/netler', '/plan/hedef', '/plan/hesap'];
     const routeSteps = {
       '/kayit': 0,
@@ -4153,12 +4270,175 @@
       wizardResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function addMessage(text, type = 'ai') {
+    function readChatSessions() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(chatStorageKey) || '[]');
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function writeChatSessions(sessions) {
+      localStorage.setItem(chatStorageKey, JSON.stringify(sessions.slice(0, 12)));
+    }
+
+    function formatHistoryTime(value) {
+      const date = new Date(value || Date.now());
+      return date.toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit' });
+    }
+
+    function ensureCurrentChat() {
+      let sessions = readChatSessions();
+      let current = sessions.find(session => session.id === currentChatId);
+      if (!current) {
+        current = {
+          id: `chat-${Date.now()}`,
+          title: 'Yeni sohbet',
+          updatedAt: Date.now(),
+          messages: [
+            { type: 'ai', text: 'Merhaba. Ben Mento Koç. Sorunu yazabilir, soru görseli yükleyebilir veya sağdaki konulardan bir anlatım seçebilirsin.' },
+            { type: 'ai', text: 'Mento Brain önce kendi veri tabanını kontrol eder; ChatGPT bağlantısı açıksa cevabı daha doğal ve adım adım hale getirir.' }
+          ]
+        };
+        sessions.unshift(current);
+        currentChatId = current.id;
+        localStorage.setItem('mentoActiveChatId', currentChatId);
+        writeChatSessions(sessions);
+      }
+      return current;
+    }
+
+    function saveMessageToCurrent(text, type) {
+      let sessions = readChatSessions();
+      const current = ensureCurrentChat();
+      sessions = readChatSessions();
+      const index = sessions.findIndex(session => session.id === current.id);
+      if (index === -1) return;
+      sessions[index].messages.push({ type, text, at: Date.now() });
+      sessions[index].updatedAt = Date.now();
+      if (type === 'user' && sessions[index].title === 'Yeni sohbet') {
+        sessions[index].title = text.slice(0, 34) || 'Yeni sohbet';
+      }
+      sessions.unshift(...sessions.splice(index, 1));
+      writeChatSessions(sessions);
+      renderHistoryList();
+    }
+
+    function renderHistoryList() {
+      const sessions = readChatSessions();
+      historyList.innerHTML = sessions.map(session => `
+        <button class="history-item ${session.id === currentChatId ? 'active' : ''}" type="button" data-chat-id="${session.id}">
+          <span class="history-title">${session.title || 'Yeni sohbet'}</span>
+          <span class="history-date">${formatHistoryTime(session.updatedAt)}</span>
+        </button>
+      `).join('');
+      historyList.querySelectorAll('[data-chat-id]').forEach(button => {
+        button.addEventListener('click', () => loadChat(button.dataset.chatId));
+      });
+    }
+
+    function renderMessage(text, type = 'ai') {
       const bubble = document.createElement('div');
       bubble.className = `message ${type === 'user' ? 'user' : ''}`;
       bubble.textContent = text;
       messages.appendChild(bubble);
       messages.scrollTop = messages.scrollHeight;
+    }
+
+    function addMessage(text, type = 'ai', persist = true) {
+      renderMessage(text, type);
+      if (persist) saveMessageToCurrent(text, type);
+    }
+
+    function loadChat(chatId) {
+      const sessions = readChatSessions();
+      const session = sessions.find(item => item.id === chatId) || ensureCurrentChat();
+      currentChatId = session.id;
+      localStorage.setItem('mentoActiveChatId', currentChatId);
+      messages.innerHTML = '';
+      session.messages.forEach(item => renderMessage(item.text, item.type));
+      renderHistoryList();
+    }
+
+    function createNewChat() {
+      const sessions = readChatSessions();
+      const session = {
+        id: `chat-${Date.now()}`,
+        title: 'Yeni sohbet',
+        updatedAt: Date.now(),
+        messages: [
+          { type: 'ai', text: 'Yeni sohbet açıldı. Bir soru yaz, soru görseli yükle veya sağdan konu seç.' }
+        ]
+      };
+      currentChatId = session.id;
+      localStorage.setItem('mentoActiveChatId', currentChatId);
+      writeChatSessions([session, ...sessions]);
+      loadChat(session.id);
+    }
+
+    function addLearningCards(mode) {
+      const sets = {
+        'Ezber kartları': [
+          ['Akıllı kart destesi', `${activeLesson} için 8 kavram kartı: ön yüzde soru, arka yüzde net tanım ve ipucu.`],
+          ['Yanlış kartı', 'Yanlış yaptığın soru tipini otomatik karta çevirir, ertesi gün tekrar ettirir.'],
+          ['Hızlı tekrar', '3 dakika içinde en zayıf 5 kavramı yoklar.']
+        ],
+        'Oyunlarla öğren': [
+          ['Seri modu', '5 doğru üst üste yapınca seviye atlar, yanlışta kısa ipucu verir.'],
+          ['Süre yarışı', 'Paragraf, işlem veya kavram sorularında zamana karşı mini tur açar.'],
+          ['Puan görevi', 'Günlük hedef bitince rozet ve net potansiyeli verir.']
+        ],
+        'Mini testler': [
+          ['5 soruluk kontrol', `Seçili ${activeLesson} konusundan hızlı ölçüm yapar.`],
+          ['Yanlış etiketi', 'Her yanlışı kavram, dikkat, işlem veya süre diye ayırır.'],
+          ['Anında tekrar', 'Sonuca göre 15 dakikalık tekrar planı çıkarır.']
+        ],
+        'Hedef takibi': [
+          ['Günlük hedef', 'Süre, soru ve konu hedefini tek çizgide gösterir.'],
+          ['Net potansiyeli', 'Yanlış ve boş dağılımından kazanılabilir neti hesaplar.'],
+          ['Haftalık rota', 'Hedef okul/puan için hangi derse önce dönmen gerektiğini seçer.']
+        ]
+      };
+      const cards = sets[mode] || [];
+      const wrap = document.createElement('div');
+      wrap.className = 'learning-grid';
+      wrap.innerHTML = cards.map(([title, desc]) => `
+        <article class="learning-card">
+          <strong>${title}</strong>
+          <p>${desc}</p>
+          <button type="button" data-learning-action="${title}">Başlat</button>
+        </article>
+      `).join('');
+      messages.appendChild(wrap);
+      messages.scrollTop = messages.scrollHeight;
+      wrap.querySelectorAll('[data-learning-action]').forEach(button => {
+        button.addEventListener('click', () => {
+          addMessage(`${mode}: ${button.dataset.learningAction} başlat`, 'user');
+          addMessage(`${button.dataset.learningAction} hazır. ${activeExamBank} ${activeLesson} için ilk mini akışı başlatıyorum: 1 kısa hedef, 1 örnek, 3 kontrol sorusu ve sonunda yanlış sebebi.`);
+        });
+      });
+    }
+
+    function bootChatHistory() {
+      ensureCurrentChat();
+      loadChat(currentChatId);
+    }
+
+    async function checkBrainStatus() {
+      try {
+        const response = await fetch('/api/auth-debug');
+        const data = await response.json();
+        if (data.openAIReady) {
+          brainStatus.textContent = `Mento Brain + ChatGPT aktif. Model: ${data.openAIModel || 'gpt-4.1-mini'}.`;
+        } else if (data.openAISet && !data.openAIKeyLooksValid) {
+          brainStatus.textContent = 'ChatGPT anahtarı hatalı görünüyor. Render OPENAI_API_KEY alanına sk- ile başlayan anahtar yazılmalı.';
+        } else {
+          brainStatus.textContent = 'Mento Brain yerel modda. ChatGPT için Render OPENAI_API_KEY eklenmeli.';
+        }
+      } catch {
+        brainStatus.textContent = 'Mento Brain yerel modda çalışıyor. Sunucu bağlantısı kontrol edilemedi.';
+      }
     }
 
     function solveSimpleMath(text) {
@@ -4193,6 +4473,9 @@
       const raw = text.toLowerCase('tr-TR');
       const simpleMath = solveSimpleMath(text);
       if (simpleMath) return simpleMath;
+      if (/^(selam|selamlar|merhaba|mrb|sa|hey|hi|hello)[!. ]*$/i.test(text.trim())) {
+        return 'Selam, ben Mento Koç. Bana bir soru yazabilir, konu anlatımı isteyebilir veya “bugün 90 dakikalık plan çıkar” diyebilirsin.';
+      }
       const lessonHints = [
         ['Matematik', ['matematik', 'problem', 'denklem', 'oran', 'üslü', 'köklü', 'geometri', 'fonksiyon', 'ebob', 'ekok']],
         ['Türkçe', ['paragraf', 'anlam', 'fiilimsi', 'cümle', 'sözcük', 'yazım']],
@@ -4499,8 +4782,16 @@
             lesson: activeLesson
           }
         });
+        if (data.source === 'openai+mento-brain' || data.source === 'openai') {
+          brainStatus.textContent = 'Mento Brain + ChatGPT aktif. Cevap ChatGPT ile geliştirildi.';
+        } else if (data.source === 'mento-brain-fallback') {
+          brainStatus.textContent = 'ChatGPT isteği düştü; cevap Mento Brain yerel moddan geldi. Render API anahtarını kontrol et.';
+        } else {
+          brainStatus.textContent = 'Mento Brain yerel modda cevap verdi. ChatGPT için OPENAI_API_KEY kontrol edilmeli.';
+        }
         addMessage(data.answer || generateLocalBrainReply(text));
       } catch {
+        brainStatus.textContent = 'Sunucuya ulaşılamadı; cevap tarayıcı içi yedek moddan geldi.';
         addMessage(generateLocalBrainReply(text));
       } finally {
         sendMessage.disabled = false;
@@ -4523,8 +4814,7 @@
     });
 
     document.getElementById('newChatButton').addEventListener('click', () => {
-      messages.innerHTML = '';
-      addMessage('Yeni sohbet açıldı. Bir soru yaz, soru görseli yükle veya sağdan konu seç.');
+      createNewChat();
     });
 
     function toggleTheme() {
@@ -4563,13 +4853,16 @@
           'Bugünkü plan': 'Bugünkü plan: Önce en riskli konuyu kısa tekrar et, sonra süreli soru çöz, en son yanlış sebebini not al.',
           'Soru görseliyle çöz': 'Soru görselini alttaki + butonuyla yükle. Ardından dersini ve nerede takıldığını yaz.',
           'Konu anlatımı': 'Sağdaki ders ve konu listesinden istediğin konuyu seç. Sana kısa anlatım, örnek soru ve video rotası çıkarayım.',
-          'Ezber kartları': 'Ezber kartları modu açıldı. Seçili dersten 8 kart üretirim: ön yüzde kavram, arka yüzde kısa cevap ve 1 ipucu. Başlamak için “Matematik kart çıkar” yaz.',
-          'Oyunlarla öğren': 'Oyun modu açıldı. 5 doğru seri, süre yarışı ve seviye atlama mantığıyla çalışır. Başlamak için “oyunla paragraf çalıştır” yaz.',
-          'Mini testler': 'Mini test modu açıldı. Seçili konudan 5 soruluk hızlı kontrol, ardından yanlış etiketi ve tekrar planı üretirim.',
-          'Hedef takibi': 'Hedef takibi açıldı. Günlük süre, çözülen soru, net potansiyeli ve üst üste çalışma serini burada yorumlarım.'
+          'Ezber kartları': 'Ezber kartları modu açıldı. Kavramı küçük parçalara böler, aralıklı tekrar için kartlara dönüştürür.',
+          'Oyunlarla öğren': 'Oyun modu açıldı. Seri, süre ve puan görevleriyle konuyu daha canlı çalıştırır.',
+          'Mini testler': 'Mini test modu açıldı. 5 soruluk hızlı ölçüm, yanlış etiketi ve tekrar planı hazırlar.',
+          'Hedef takibi': 'Hedef takibi açıldı. Günlük süre, çözülen soru, net potansiyeli ve çalışma serini yorumlar.'
         };
         addMessage(title, 'user');
         addMessage(replies[title] || 'Bu mod ilk ürün sürümü için hazırlandı. Bir konu seçince planına bağlayacağım.');
+        if (['Ezber kartları', 'Oyunlarla öğren', 'Mini testler', 'Hedef takibi'].includes(title)) {
+          addLearningCards(title);
+        }
       });
     });
 
@@ -4677,6 +4970,8 @@
     renderLessonTabs();
     renderTopics();
     buildLiveBrainPlan();
+    bootChatHistory();
+    checkBrainStatus();
     restoreRouteFromUrl();
     window.addEventListener('popstate', restoreRouteFromUrl);
     window.addEventListener('hashchange', restoreRouteFromUrl);

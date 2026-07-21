@@ -7,7 +7,7 @@ const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
 const USERS_FILE = path.join(ROOT, 'users.json');
 const BRAIN_DATA_FILE = path.join(ROOT, 'data', 'mento-brain-questions.json');
-const APP_VERSION = 'openai-hybrid-brain-2026-07-21-2115';
+const APP_VERSION = 'openai-hybrid-brain-2026-07-21-2135';
 
 loadEnv(path.join(ROOT, '.env'));
 
@@ -55,19 +55,60 @@ function scoreBrainItem(item, text, exam, lesson) {
   for (const word of words) {
     if (haystack.includes(word)) score += word.length > 5 ? 3 : 1;
   }
+  if (score === 0) return 0;
   if (exam && item.exam === exam) score += 5;
   if (lesson && item.lesson === lesson) score += 5;
   return score;
 }
 
+function solveSimpleMath(question) {
+  const normalized = String(question || '')
+    .toLocaleLowerCase('tr-TR')
+    .replaceAll('artı', '+')
+    .replaceAll('arti', '+')
+    .replaceAll('eksi', '-')
+    .replaceAll('çarpı', '*')
+    .replaceAll('carpi', '*')
+    .replaceAll('kere', '*')
+    .replaceAll('bölü', '/')
+    .replaceAll('bolu', '/')
+    .replaceAll(',', '.');
+  if (!/^[\s\d.+\-*/()%=?kaçkacederneolursonuçcevap]+$/i.test(normalized)) return null;
+  const expression = normalized
+    .replace(/kaç|kac|eder|ne|olur|sonuç|sonuc|cevap|=/g, ' ')
+    .replace(/[^\d.+\-*/()%\s]/g, '')
+    .trim();
+  if (!expression || !/[+\-*/]/.test(expression)) return null;
+  try {
+    const result = Function(`"use strict"; return (${expression})`)();
+    if (!Number.isFinite(result)) return null;
+    const clean = Number.isInteger(result) ? String(result) : String(Number(result.toFixed(4)));
+    return `Cevap: ${clean}.\n\nKısa işlem: ${expression} = ${clean}.`;
+  } catch {
+    return null;
+  }
+}
+
+function isGreeting(question) {
+  return /^(selam|selamlar|merhaba|mrb|sa|hey|hi|hello)[!. ]*$/i.test(String(question || '').trim());
+}
+
 function buildBrainAnswer(question, student = {}) {
+  const mathAnswer = solveSimpleMath(question);
+  if (mathAnswer) return { answer: mathAnswer, matches: [] };
+  if (isGreeting(question)) {
+    return {
+      answer: 'Selam, ben Mento Koç. Bana bir soru yazabilir, konu anlatımı isteyebilir veya “bugün 90 dakikalık plan çıkar” diyebilirsin.',
+      matches: []
+    };
+  }
   const items = readBrainItems();
   const exam = String(student.exam || '').trim();
   const lesson = String(student.lesson || '').trim();
   const ranked = items
     .map(item => ({ item, score: scoreBrainItem(item, question, exam, lesson) }))
     .sort((a, b) => b.score - a.score);
-  const best = ranked[0]?.score > 0 ? ranked[0].item : null;
+  const best = ranked[0]?.score >= 4 ? ranked[0].item : null;
 
   if (!best) {
     return {
