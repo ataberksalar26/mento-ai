@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mento-ai-shell-2026-07-22-0010';
+const CACHE_NAME = 'mento-ai-shell-2026-07-25-0011';
 const SHELL_FILES = [
   '/',
   '/home',

@@ -7,7 +7,7 @@ const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
 const USERS_FILE = path.join(ROOT, 'users.json');
 const BRAIN_DATA_FILE = path.join(ROOT, 'data', 'mento-brain-questions.json');
-const APP_VERSION = 'orange-accent-panel-2026-07-22-0010';
+const APP_VERSION = 'mixed-orange-yellow-text-2026-07-25-0011';
 
 loadEnv(path.join(ROOT, '.env'));
 
