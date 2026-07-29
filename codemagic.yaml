@@ -17,7 +17,15 @@ workflows:
           set -e
           KEY_PATH="$HOME/private_keys/AuthKey_${APP_STORE_CONNECT_KEY_IDENTIFIER}.p8"
           mkdir -p "$(dirname "$KEY_PATH")"
-          printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | base64 -D > "$KEY_PATH"
+          if [ -z "$APP_STORE_CONNECT_PRIVATE_KEY" ]; then
+            echo "APP_STORE_CONNECT_PRIVATE_KEY is missing from appstore_credentials."
+            exit 1
+          fi
+          if printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | grep -q "BEGIN.*PRIVATE KEY"; then
+            printf '%s\n' "$APP_STORE_CONNECT_PRIVATE_KEY" > "$KEY_PATH"
+          else
+            printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | base64 -D > "$KEY_PATH"
+          fi
           chmod 600 "$KEY_PATH"
           echo "Apple signing key is ready."
       - name: Increment build number
