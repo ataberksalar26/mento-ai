@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Soru fotografi cekerek Mento AI ile cozum almak icin kamera erisimi kullanilir.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Galeriden soru gorseli secerek Mento AI ile cozum almak icin fotograf erisimi kullanilir.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Gelecekte sesli soru sorma ozelligi icin mikrofon erisimi kullanilabilir.</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
+</dict>
+</plist>
