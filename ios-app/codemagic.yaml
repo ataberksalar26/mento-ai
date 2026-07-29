@@ -3,20 +3,23 @@ workflows:
     name: Mento AI iOS Release
     max_build_duration: 120
     instance_type: mac_mini_m2
-    integrations:
-      app_store_connect: mento_app_store_connect
     environment:
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.ataberksalar.mentoai
+      groups:
+        - appstore_credentials
       vars:
         APP_STORE_APPLE_ID: "6796065929"
         XCODE_PROJECT: "ios-app/MentoAI.xcodeproj"
         XCODE_SCHEME: "MentoAI"
       xcode: latest
     scripts:
-      - name: Set up code signing
-        script: xcode-project use-profiles
+      - name: Prepare Apple signing key
+        script: |
+          set -e
+          KEY_PATH="$HOME/private_keys/AuthKey_${APP_STORE_CONNECT_KEY_IDENTIFIER}.p8"
+          mkdir -p "$(dirname "$KEY_PATH")"
+          printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | base64 -D > "$KEY_PATH"
+          chmod 600 "$KEY_PATH"
+          echo "Apple signing key is ready."
       - name: Increment build number
         script: |
           cd "$CM_BUILD_DIR/ios-app"
@@ -24,9 +27,39 @@ workflows:
           agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
       - name: Build IPA for TestFlight
         script: |
-          xcode-project build-ipa \
-            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
-            --scheme "$XCODE_SCHEME"
+          set -e
+          KEY_PATH="$HOME/private_keys/AuthKey_${APP_STORE_CONNECT_KEY_IDENTIFIER}.p8"
+          ARCHIVE_PATH="$CM_BUILD_DIR/build/ios/MentoAI.xcarchive"
+          EXPORT_PATH="$CM_BUILD_DIR/build/ios/ipa"
+          EXPORT_OPTIONS="$CM_BUILD_DIR/build/ios/ExportOptions.plist"
+
+          mkdir -p "$(dirname "$ARCHIVE_PATH")" "$EXPORT_PATH"
+          cat > "$EXPORT_OPTIONS" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>teamID</key><string>U3698U6257</string>
+          </dict></plist>
+          EOF
+
+          xcodebuild \
+            -project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            -scheme "$XCODE_SCHEME" \
+            -configuration Release \
+            -archivePath "$ARCHIVE_PATH" \
+            -destination 'generic/platform=iOS' \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$KEY_PATH" \
+            -authenticationKeyID "$APP_STORE_CONNECT_KEY_IDENTIFIER" \
+            -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID" \
+            archive
+
+          xcodebuild -exportArchive \
+            -archivePath "$ARCHIVE_PATH" \
+            -exportOptionsPlist "$EXPORT_OPTIONS" \
+            -exportPath "$EXPORT_PATH"
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
@@ -39,7 +72,3 @@ workflows:
         notify:
           success: true
           failure: true
-      app_store_connect:
-        auth: integration
-        submit_to_testflight: false
-        submit_to_app_store: false
