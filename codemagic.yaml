@@ -69,7 +69,6 @@ workflows:
             -authenticationKeyID "$KEY_ID" \
             -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID" \
             CODE_SIGN_STYLE=Automatic \
-            CODE_SIGN_IDENTITY="Apple Distribution" \
             archive
 
           xcodebuild -exportArchive \
