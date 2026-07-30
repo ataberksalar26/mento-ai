@@ -13,6 +13,15 @@ workflows:
         BUNDLE_ID: "com.ataberksalar.mentoai"
       xcode: latest
     scripts:
+      - name: Prepare Apple signing key
+        script: |
+          set -e
+          if ! printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | grep -q "BEGIN.*PRIVATE KEY"; then
+            DECODED_KEY="$(printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | tr -d '\r\n ' | base64 -D)"
+            echo "APP_STORE_CONNECT_PRIVATE_KEY<<EOF_KEY" >> $CM_ENV
+            printf '%s\n' "$DECODED_KEY" >> $CM_ENV
+            echo "EOF_KEY" >> $CM_ENV
+          fi
       - name: Fetch signing files
         script: |
           app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
