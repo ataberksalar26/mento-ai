@@ -15,7 +15,8 @@ workflows:
       - name: Prepare Apple signing key
         script: |
           set -e
-          KEY_PATH="$HOME/private_keys/AuthKey_${APP_STORE_CONNECT_KEY_IDENTIFIER}.p8"
+          KEY_ID="$(printf '%s' "$APP_STORE_CONNECT_KEY_IDENTIFIER" | tr -d '[:space:]')"
+          KEY_PATH="$HOME/.appstoreconnect/private_keys/AuthKey_${KEY_ID}.p8"
           mkdir -p "$(dirname "$KEY_PATH")"
           if [ -z "$APP_STORE_CONNECT_PRIVATE_KEY" ]; then
             echo "APP_STORE_CONNECT_PRIVATE_KEY is missing from appstore_credentials."
@@ -24,9 +25,13 @@ workflows:
           if printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | grep -q "BEGIN.*PRIVATE KEY"; then
             printf '%s\n' "$APP_STORE_CONNECT_PRIVATE_KEY" > "$KEY_PATH"
           else
-            printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | base64 -D > "$KEY_PATH"
+            printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | tr -d '\r\n ' | base64 -D > "$KEY_PATH"
           fi
           chmod 600 "$KEY_PATH"
+          if ! openssl pkey -in "$KEY_PATH" -noout; then
+            echo "The private key is not a valid Apple .p8 file. Generate a new key and copy it with APPLE-KEY-BASE64.cmd."
+            exit 1
+          fi
           echo "Apple signing key is ready."
       - name: Increment build number
         script: |
@@ -36,7 +41,8 @@ workflows:
       - name: Build IPA for TestFlight
         script: |
           set -e
-          KEY_PATH="$HOME/private_keys/AuthKey_${APP_STORE_CONNECT_KEY_IDENTIFIER}.p8"
+          KEY_ID="$(printf '%s' "$APP_STORE_CONNECT_KEY_IDENTIFIER" | tr -d '[:space:]')"
+          KEY_PATH="$HOME/.appstoreconnect/private_keys/AuthKey_${KEY_ID}.p8"
           ARCHIVE_PATH="$CM_BUILD_DIR/build/ios/MentoAI.xcarchive"
           EXPORT_PATH="$CM_BUILD_DIR/build/ios/ipa"
           EXPORT_OPTIONS="$CM_BUILD_DIR/build/ios/ExportOptions.plist"
@@ -60,7 +66,7 @@ workflows:
             -destination 'generic/platform=iOS' \
             -allowProvisioningUpdates \
             -authenticationKeyPath "$KEY_PATH" \
-            -authenticationKeyID "$APP_STORE_CONNECT_KEY_IDENTIFIER" \
+            -authenticationKeyID "$KEY_ID" \
             -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID" \
             archive
 
