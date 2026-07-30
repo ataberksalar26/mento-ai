@@ -1,4 +1,3 @@
-cat > /home/claude/codemagic.yaml << 'EOF'
 workflows:
   mento-ai-ios-release:
     name: Mento AI iOS Release
@@ -40,54 +39,6 @@ workflows:
       email:
         recipients:
           - ataberksalar@gmail.com
-        notify:
-          success: true
-          failure: true
-EOF
-cat /home/claude/codemagic.yaml
-Output
-
-workflows:
-  mento-ai-ios-release:
-    name: Mento AI iOS Release
-    max_build_duration: 120
-    instance_type: mac_mini_m2
-    environment:
-      groups:
-        - appstore_credentials
-      vars:
-        APP_STORE_APPLE_ID: "6796065929"
-        XCODE_PROJECT: "ios-app/MentoAI.xcodeproj"
-        XCODE_SCHEME: "MentoAI"
-        BUNDLE_ID: "com.ataberksalar.mentoai"
-      xcode: latest
-    scripts:
-      - name: Fetch signing files
-        script: |
-          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
-      - name: Set up signing certificate
-        script: keychain initialize
-      - name: Use fetched signing files
-        script: xcode-project use-profiles
-      - name: Increment build number
-        script: |
-          cd "$CM_BUILD_DIR/ios-app"
-          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID" || echo 0)
-          agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
-      - name: Build ipa for distribution
-        script: |
-          xcode-project build-ipa \
-            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
-            --scheme "$XCODE_SCHEME"
-    artifacts:
-      - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
-      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
-      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
-    publishing:
-      email:
-        recipients:
-          - ditalky@ditalky.com
         notify:
           success: true
           failure: true
