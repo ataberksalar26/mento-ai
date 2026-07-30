@@ -8,6 +8,7 @@ workflows:
         - appstore_credentials
       vars:
         APP_STORE_APPLE_ID: "6796065929"
+        BUNDLE_ID: "com.ataberksalar.mentoai"
         XCODE_PROJECT: "ios-app/MentoAI.xcodeproj"
         XCODE_SCHEME: "MentoAI"
       xcode: latest
@@ -33,6 +34,43 @@ workflows:
             exit 1
           fi
           echo "Apple signing key is ready."
+      - name: Prepare distribution certificate key
+        script: |
+          set -e
+          CERTIFICATE_KEY_PATH="$CM_BUILD_DIR/ios_distribution_private_key.pem"
+          if [ -z "$CERTIFICATE_PRIVATE_KEY" ]; then
+            echo "CERTIFICATE_PRIVATE_KEY is missing from appstore_credentials."
+            exit 1
+          fi
+          if printf '%s' "$CERTIFICATE_PRIVATE_KEY" | grep -q "BEGIN.*PRIVATE KEY"; then
+            printf '%s\n' "$CERTIFICATE_PRIVATE_KEY" > "$CERTIFICATE_KEY_PATH"
+          else
+            printf '%s' "$CERTIFICATE_PRIVATE_KEY" | tr -d '\r\n ' | base64 -D > "$CERTIFICATE_KEY_PATH"
+          fi
+          chmod 600 "$CERTIFICATE_KEY_PATH"
+          openssl pkey -in "$CERTIFICATE_KEY_PATH" -noout
+          echo "Distribution certificate key is ready."
+      - name: Initialize signing keychain
+        script: |
+          keychain initialize
+      - name: Fetch App Store signing files
+        script: |
+          set -e
+          KEY_ID="$(printf '%s' "$APP_STORE_CONNECT_KEY_IDENTIFIER" | tr -d '[:space:]')"
+          KEY_PATH="$HOME/.appstoreconnect/private_keys/AuthKey_${KEY_ID}.p8"
+          app-store-connect fetch-signing-files "$BUNDLE_ID" \
+            --type IOS_APP_STORE \
+            --create \
+            --issuer-id "$APP_STORE_CONNECT_ISSUER_ID" \
+            --key-id "$KEY_ID" \
+            --private-key "$KEY_PATH" \
+            --certificate-key "$CM_BUILD_DIR/ios_distribution_private_key.pem"
+      - name: Set up signing certificate
+        script: |
+          keychain add-certificates
+      - name: Apply App Store profile to Xcode project
+        script: |
+          xcode-project use-profiles
       - name: Increment build number
         script: |
           cd "$CM_BUILD_DIR/ios-app"
@@ -53,7 +91,7 @@ workflows:
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0"><dict>
             <key>method</key><string>app-store</string>
-            <key>signingStyle</key><string>automatic</string>
+            <key>signingStyle</key><string>manual</string>
             <key>teamID</key><string>U3698U6257</string>
           </dict></plist>
           EOF
@@ -64,11 +102,7 @@ workflows:
             -configuration Release \
             -archivePath "$ARCHIVE_PATH" \
             -destination 'generic/platform=iOS' \
-            -allowProvisioningUpdates \
-            -authenticationKeyPath "$KEY_PATH" \
-            -authenticationKeyID "$KEY_ID" \
-            -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID" \
-            CODE_SIGN_STYLE=Automatic \
+            CODE_SIGN_STYLE=Manual \
             archive
 
           xcodebuild -exportArchive \
