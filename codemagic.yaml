@@ -10,35 +10,71 @@ workflows:
         APP_STORE_APPLE_ID: "6796065929"
         XCODE_PROJECT: "ios-app/MentoAI.xcodeproj"
         XCODE_SCHEME: "MentoAI"
-        BUNDLE_ID: "com.ataberksalar.mentoai"
       xcode: latest
     scripts:
       - name: Prepare Apple signing key
         script: |
           set -e
-          if ! printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | grep -q "BEGIN.*PRIVATE KEY"; then
-            DECODED_KEY="$(printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | tr -d '\r\n ' | base64 -D)"
-            echo "APP_STORE_CONNECT_PRIVATE_KEY<<EOF_KEY" >> $CM_ENV
-            printf '%s\n' "$DECODED_KEY" >> $CM_ENV
-            echo "EOF_KEY" >> $CM_ENV
+          KEY_ID="$(printf '%s' "$APP_STORE_CONNECT_KEY_IDENTIFIER" | tr -d '[:space:]')"
+          KEY_PATH="$HOME/.appstoreconnect/private_keys/AuthKey_${KEY_ID}.p8"
+          mkdir -p "$(dirname "$KEY_PATH")"
+          if [ -z "$APP_STORE_CONNECT_PRIVATE_KEY" ]; then
+            echo "APP_STORE_CONNECT_PRIVATE_KEY is missing from appstore_credentials."
+            exit 1
           fi
-      - name: Fetch signing files
-        script: |
-          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
-      - name: Set up signing certificate
-        script: keychain initialize
-      - name: Use fetched signing files
-        script: xcode-project use-profiles
+          if printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | grep -q "BEGIN.*PRIVATE KEY"; then
+            printf '%s\n' "$APP_STORE_CONNECT_PRIVATE_KEY" > "$KEY_PATH"
+          else
+            printf '%s' "$APP_STORE_CONNECT_PRIVATE_KEY" | tr -d '\r\n ' | base64 -D > "$KEY_PATH"
+          fi
+          chmod 600 "$KEY_PATH"
+          if ! openssl pkey -in "$KEY_PATH" -noout; then
+            echo "The private key is not a valid Apple .p8 file. Generate a new key and copy it with APPLE-KEY-BASE64.cmd."
+            exit 1
+          fi
+          echo "Apple signing key is ready."
       - name: Increment build number
         script: |
           cd "$CM_BUILD_DIR/ios-app"
           LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID" || echo 0)
           agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
-      - name: Build ipa for distribution
+      - name: Build IPA for TestFlight
         script: |
-          xcode-project build-ipa \
-            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
-            --scheme "$XCODE_SCHEME"
+          set -e
+          KEY_ID="$(printf '%s' "$APP_STORE_CONNECT_KEY_IDENTIFIER" | tr -d '[:space:]')"
+          KEY_PATH="$HOME/.appstoreconnect/private_keys/AuthKey_${KEY_ID}.p8"
+          ARCHIVE_PATH="$CM_BUILD_DIR/build/ios/MentoAI.xcarchive"
+          EXPORT_PATH="$CM_BUILD_DIR/build/ios/ipa"
+          EXPORT_OPTIONS="$CM_BUILD_DIR/build/ios/ExportOptions.plist"
+
+          mkdir -p "$(dirname "$ARCHIVE_PATH")" "$EXPORT_PATH"
+          cat > "$EXPORT_OPTIONS" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>teamID</key><string>U3698U6257</string>
+          </dict></plist>
+          EOF
+
+          xcodebuild \
+            -project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            -scheme "$XCODE_SCHEME" \
+            -configuration Release \
+            -archivePath "$ARCHIVE_PATH" \
+            -destination 'generic/platform=iOS' \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$KEY_PATH" \
+            -authenticationKeyID "$KEY_ID" \
+            -authenticationKeyIssuerID "$APP_STORE_CONNECT_ISSUER_ID" \
+            CODE_SIGN_STYLE=Automatic \
+            archive
+
+          xcodebuild -exportArchive \
+            -archivePath "$ARCHIVE_PATH" \
+            -exportOptionsPlist "$EXPORT_OPTIONS" \
+            -exportPath "$EXPORT_PATH"
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
