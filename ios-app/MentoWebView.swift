@@ -93,6 +93,7 @@ struct MentoWebView: UIViewRepresentable {
             }
         }
 
+        @available(iOS 18.4, *)
         func webView(_ webView: WKWebView, runOpenPanelWith parameters: WKOpenPanelParameters, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping ([URL]?) -> Void) {
             guard let presenter = webView.closestViewController else {
                 completionHandler(nil)
