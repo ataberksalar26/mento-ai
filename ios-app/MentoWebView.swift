@@ -160,7 +160,7 @@ struct MentoWebView: UIViewRepresentable {
                 finishFileSelection(nil)
                 return
             }
-            finishFileSelection(saveTemporary(data: data, extension: "jpg"))
+            finishFileSelection(saveTemporary(data: data, fileExtension: "jpg"))
         }
 
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -171,7 +171,7 @@ struct MentoWebView: UIViewRepresentable {
             }
             provider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) { [weak self] data, _ in
                 DispatchQueue.main.async {
-                    self?.finishFileSelection(data.flatMap { self?.saveTemporary(data: $0, extension: "jpg") })
+                    self?.finishFileSelection(data.flatMap { self?.saveTemporary(data: $0, fileExtension: "jpg") })
                 }
             }
         }
@@ -194,7 +194,7 @@ struct MentoWebView: UIViewRepresentable {
             finishFileSelection(copyTemporaryFile(from: selectedURL))
         }
 
-        private func saveTemporary(data: Data, extension fileExtension: String) -> URL? {
+        private func saveTemporary(data: Data, fileExtension: String) -> URL? {
             let url = FileManager.default.temporaryDirectory.appendingPathComponent("mento-soru-\(UUID().uuidString).\(fileExtension)")
             do {
                 try data.write(to: url, options: .atomic)
