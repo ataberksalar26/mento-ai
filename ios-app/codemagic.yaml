@@ -58,13 +58,15 @@ workflows:
           set -e
           KEY_ID="$(printf '%s' "$APP_STORE_CONNECT_KEY_IDENTIFIER" | tr -d '[:space:]')"
           KEY_PATH="$HOME/.appstoreconnect/private_keys/AuthKey_${KEY_ID}.p8"
+          APP_STORE_PRIVATE_KEY="$(cat "$KEY_PATH")"
+          CERTIFICATE_PRIVATE_KEY_CONTENT="$(cat "$CM_BUILD_DIR/ios_distribution_private_key.pem")"
           app-store-connect fetch-signing-files "$BUNDLE_ID" \
             --type IOS_APP_STORE \
             --create \
             --issuer-id "$APP_STORE_CONNECT_ISSUER_ID" \
             --key-id "$KEY_ID" \
-            --private-key "$KEY_PATH" \
-            --certificate-key "$CM_BUILD_DIR/ios_distribution_private_key.pem"
+            --private-key "$APP_STORE_PRIVATE_KEY" \
+            --certificate-key "$CERTIFICATE_PRIVATE_KEY_CONTENT"
       - name: Set up signing certificate
         script: |
           keychain add-certificates
