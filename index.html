@@ -1968,20 +1968,31 @@
     }
 
     .wizard-step {
-      border: 1px solid #d3dbe6;
-      border-radius: 16px;
-      padding: 12px;
-      background: rgba(255,255,255,.52);
-      color: #6a7484;
-      font-weight: 900;
-      font-size: 13px;
+      position: relative;
+      padding: 0 0 10px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #9aa6b8;
+      font-weight: 800;
+      font-size: 12.5px;
+    }
+
+    .wizard-step::before {
+      content: "";
+      display: block;
+      height: 3px;
+      margin-bottom: 10px;
+      border-radius: 2px;
+      background: #d8e0ea;
     }
 
     .wizard-step.active {
       color: #0d1a2b;
-      border-color: rgba(224,166,63,.72);
-      background: linear-gradient(135deg, rgba(255,202,84,.34), rgba(255,255,255,.72));
-      box-shadow: 0 12px 30px rgba(224,166,63,.13);
+    }
+
+    .wizard-step.active::before {
+      background: linear-gradient(90deg, #ffb35c, #ea580c);
     }
 
     .wizard-panel {
@@ -2011,26 +2022,33 @@
     }
 
     .choice-card {
-      border: 1px solid #d8e0ea;
-      border-radius: 20px;
-      padding: 20px;
+      border: 1.5px solid #d8e0ea;
+      border-radius: 16px;
+      padding: 18px;
       background: rgba(255,255,255,.62);
       cursor: pointer;
-      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
     }
 
-    .choice-card:hover,
-    .choice-card.selected {
+    .choice-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(224,166,63,.9);
-      box-shadow: 0 18px 42px rgba(20,31,48,.12);
+      border-color: rgba(224,166,63,.65);
+    }
+
+    .choice-card.selected {
+      border-color: #ea580c;
+      background: rgba(249,115,22,.09);
     }
 
     .choice-card strong {
       display: block;
-      margin-bottom: 8px;
-      font-size: 25px;
+      margin-bottom: 6px;
+      font-size: 20px;
       color: #0f1b2d;
+    }
+
+    .choice-card.selected strong {
+      color: #c2410c;
     }
 
     .choice-card span {
@@ -2156,9 +2174,9 @@
     }
 
     .auth-tabs button.active {
-      color: #07111f;
-      background: #fff;
-      box-shadow: 0 8px 22px rgba(13,25,42,.1);
+      color: #7c2d12;
+      background: linear-gradient(180deg, #ffd9a8, #ffb35c);
+      box-shadow: 0 8px 22px rgba(224,166,63,.22);
     }
 
     .auth-fields {
@@ -2819,21 +2837,35 @@
 
     .study-controls {
       display: grid;
-      grid-template-columns: 92px minmax(150px, 1fr);
-      gap: 8px;
+      gap: 10px;
       justify-self: start;
-      width: min(100%, 288px);
+      width: 100%;
     }
 
-    .study-controls select {
-      min-height: 38px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 12px;
-      color: #eef4fb;
-      background: rgba(255,255,255,.065);
-      padding: 0 10px;
-      font-weight: 900;
-      outline: none;
+    .exam-pills,
+    .lesson-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .exam-pills button,
+    .lesson-pills button {
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      padding: 6px 13px;
+      color: #aebbd0;
+      background: rgba(255,255,255,.05);
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .exam-pills button.active,
+    .lesson-pills button.active {
+      border-color: transparent;
+      color: #7c2d12;
+      background: linear-gradient(180deg, #ffd9a8, #ffb35c);
     }
 
     .study-panel h3 {
@@ -2846,12 +2878,19 @@
       gap: 10px;
     }
 
-    .quick-card,
-    .topic-card {
+    .quick-card {
       border: 1px solid rgba(255,255,255,.1);
       border-radius: 16px;
       padding: 14px;
       background: rgba(255,255,255,.055);
+    }
+
+    .topic-card {
+      border: 0;
+      border-left: 3px solid var(--topic-accent, var(--orange));
+      border-radius: 0 12px 12px 0;
+      padding: 12px 14px;
+      background: rgba(255,255,255,.045);
     }
 
     .quick-card strong,
@@ -2871,18 +2910,20 @@
 
     .topic-list {
       display: grid;
-      gap: 10px;
+      gap: 8px;
     }
 
     .topic-card button {
-      margin-top: 10px;
-      width: 100%;
-      min-height: 38px;
+      margin-top: 8px;
+      width: auto;
+      min-height: auto;
       border: 0;
-      border-radius: 11px;
-      color: #07111e;
-      background: #e9f0f7;
-      font-weight: 950;
+      border-radius: 0;
+      padding: 0;
+      color: var(--topic-accent, var(--gold-light));
+      background: transparent;
+      font-weight: 800;
+      font-size: 12.5px;
       cursor: pointer;
     }
 
@@ -3397,6 +3438,114 @@
         grid-template-columns: 1fr;
       }
     }
+
+    .hero2 {
+      position: relative;
+      overflow: hidden;
+      max-width: 720px;
+      margin: 24px 51px 96px;
+      padding: 56px 48px;
+      border-radius: 28px;
+      background: linear-gradient(160deg, #0b1a2c 0%, #07111d 62%);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .hero2-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 82% 12%, rgba(249,115,22,.22), transparent 46%);
+      pointer-events: none;
+    }
+
+    .hero2-badge {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,209,102,.35);
+      background: rgba(255,209,102,.1);
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -.005em;
+    }
+
+    .hero2-badge-dot {
+      font-size: 12px;
+    }
+
+    .hero2-title {
+      position: relative;
+      max-width: 520px;
+      font-size: 42px;
+    }
+
+    .hero2-lead {
+      position: relative;
+      max-width: 440px;
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .hero2-actions {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .hero2-stats {
+      position: relative;
+      display: flex;
+      gap: 32px;
+    }
+
+    .hero2-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hero2-stat strong {
+      color: #fff;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+    }
+
+    .hero2-stat span {
+      color: #7d8697;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 720px) {
+      .hero2 {
+        margin: 16px 20px 64px;
+        padding: 36px 24px;
+        border-radius: 22px;
+      }
+
+      .hero2-title {
+        font-size: 30px;
+      }
+
+      .hero2-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero2-stats {
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+    }
   </style>
 </head>
 <body>
@@ -3421,115 +3570,19 @@
     </header>
 
     <main>
-      <section class="hero">
-        <div class="copy">
-          <div class="badge">TYT · AYT · LGS için AI koç</div>
-          <h1>Sınava daha akıllı hazırlan, netlerini <span class="gold-text">daha hızlı artır</span></h1>
-          <p class="lead">Mento Brain deneme sonuçlarını analiz eder, eksik konularını bulur ve sana özel çalışma yolunu oluşturur.</p>
-          <div class="actions">
-            <button class="btn btn-gold" type="button" data-open-demo>Ücretsiz Başla <span>→</span></button>
-            <button class="btn btn-dark" type="button" data-open-demo>Planı Gör <span class="play">▶</span></button>
-          </div>
-
-          <div class="stats">
-            <div class="stat glass-card">
-              <div class="stat-line"><div class="stat-icon">☆</div><strong>4.8</strong></div>
-              <span>öğrenci puanı</span>
-              <div class="stars">★★★★★</div>
-            </div>
-            <div class="stat glass-card">
-              <div class="stat-line"><div class="stat-icon">●</div><strong>14.000+</strong></div>
-              <span>öğrenci</span>
-            </div>
-            <div class="stat glass-card">
-              <div class="stat-line"><div class="stat-icon">↗</div><strong>+8</strong></div>
-              <span>net potansiyeli</span>
-            </div>
-          </div>
+      <section class="hero2">
+        <div class="hero2-glow" aria-hidden="true"></div>
+        <div class="hero2-badge"><span class="hero2-badge-dot">✦</span>TYT · AYT · LGS için yapay zeka koç</div>
+        <h1 class="hero2-title">Netlerini artıracak çalışma planı, <span class="gold-text">iki dakikada hazır</span></h1>
+        <p class="hero2-lead">Deneme sonuçlarını gir, Mento eksik konularını bulup bugünkü planını çıkarsın.</p>
+        <div class="hero2-actions">
+          <button class="btn btn-gold" type="button" data-open-demo>Ücretsiz başla <span>→</span></button>
+          <button class="btn btn-dark" type="button" data-open-demo>Planı gör <span class="play">▶</span></button>
         </div>
-
-        <div class="visual" aria-label="Mento AI uygulama önizlemesi">
-          <div class="dashboard">
-            <aside class="sidebar">
-              <div class="dash-logo"><b>M</b> mento ai</div>
-              <div class="side-link active">⌂ Ana Sayfa</div>
-              <div class="side-link">☰ Çalışma Planım</div>
-              <div class="side-link">▣ Denemelerim</div>
-              <div class="side-link">◱ Konular</div>
-              <div class="side-link">⌁ Raporlar</div>
-              <div class="side-link">✦ AI Koç</div>
-              <div class="side-link">◎ Hedeflerim</div>
-              <div class="side-link">⚙ Ayarlar</div>
-            </aside>
-
-            <section class="dash-main">
-              <h2>Kişisel çalışma planı</h2>
-              <p class="dash-sub">Bugünkü planın hazır. Hedefine bir adım daha yaklaşıyorsun!</p>
-
-              <div class="dash-grid">
-                <div>
-                  <div class="today white-card">
-                    <div class="today-head"><span>Bugünkü planın</span><span class="clock">◷ 92 dk</span></div>
-                    <div class="task">
-                      <div class="task-icon math">÷</div>
-                      <div><strong>Matematik: Problemler</strong><span>25 soru · 45 dakika</span></div>
-                      <div class="tag tag-red">Öncelikli</div>
-                    </div>
-                    <div class="task">
-                      <div class="task-icon book">□</div>
-                      <div><strong>Paragraf hız pratiği</strong><span>20 soru · 30 dakika</span></div>
-                      <div class="tag tag-green">Önerilen</div>
-                    </div>
-                    <div class="task">
-                      <div class="task-icon lab">△</div>
-                      <div><strong>Fen yanlış analizi</strong><span>15 soru · 30 dakika</span></div>
-                      <div class="tag tag-orange">Tekrar</div>
-                    </div>
-                  </div>
-
-                  <div class="goal white-card">
-                    <div class="goal-title">◷ Bugünün hedefi 92 dk</div>
-                    <div class="progress"><i></i></div>
-                    <div class="goal-foot"><span>68 dk tamamlandı</span><span>Kaldı 24 dk</span></div>
-                  </div>
-                </div>
-
-                <div class="right-col">
-                  <div class="mastery white-card">
-                    <div class="ring"><span>74%<br>ilerleme</span></div>
-                    <h3>Konu ustalığın</h3>
-                    <div class="bar-row"><span>Matematik</span><div class="bar"><i style="width:68%"></i></div><span>%68</span></div>
-                    <div class="bar-row"><span>Türkçe</span><div class="bar"><i style="width:72%"></i></div><span>%72</span></div>
-                    <div class="bar-row"><span>Fen Bilimleri</span><div class="bar yellow"><i style="width:55%"></i></div><span>%55</span></div>
-                    <div class="bar-row"><span>Sosyal</span><div class="bar yellow"><i style="width:60%"></i></div><span>%60</span></div>
-                  </div>
-
-                  <div class="brain white-card">
-                    <div class="brain-title"><h3>Mento Brain</h3><span class="online">● Online</span></div>
-                    <div class="chat">Merhaba! Son denemende paragraf hızın arttı. Matematik problemlerinde ise işlem hataların öne çıkıyor. Bugünkü plan bu alanlara odaklandı.</div>
-                    <button class="chat-button" type="button">AI Koç ile konuş ↗</button>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-
-          <div class="float-card gain">
-            <strong>+8 net<br>potansiyelin var</strong>
-            <span>Hedefine doğru harika gidiyorsun!</span>
-          </div>
-
-          <div class="float-card last">
-            <span>Son denemen</span>
-            <strong>82 net</strong>
-            <span>Bir önceki denemene göre +6 net artış</span>
-            <div class="chart"></div>
-          </div>
-
-          <div class="float-card rank">
-            <strong>Türkiye<br>Sıralaman</strong>
-            <span><b>%4,2</b><br>Top %5 içindesin!</span>
-          </div>
+        <div class="hero2-stats">
+          <div class="hero2-stat"><strong>14.000+</strong><span>öğrenci</span></div>
+          <div class="hero2-stat"><strong>4.8 ★</strong><span>öğrenci puanı</span></div>
+          <div class="hero2-stat"><strong>+8 net</strong><span>ortalama artış</span></div>
         </div>
       </section>
 
@@ -4066,12 +4119,8 @@
           <p>Bir konuyu seçince kısa anlatım, örnek soru ve video çalışma önerisi sohbet alanına düşer.</p>
         </div>
         <div class="study-controls" aria-label="Sınav ve ders seçimi">
-          <select id="examSelectPanel" aria-label="Sınav seç">
-            <option value="LGS">LGS</option>
-            <option value="TYT">TYT</option>
-            <option value="AYT">AYT</option>
-          </select>
-          <select id="lessonSelectPanel" aria-label="Ders seç"></select>
+          <div class="exam-pills" id="examPills" role="tablist" aria-label="Sınav seç"></div>
+          <div class="lesson-pills" id="lessonPills" role="tablist" aria-label="Ders seç"></div>
         </div>
       </div>
       <div class="quick-cards">
@@ -4116,9 +4165,10 @@
     const chatInput = document.getElementById('chatInput');
     const sendMessage = document.getElementById('sendMessage');
     const questionPhoto = document.getElementById('questionPhoto');
-    const examSelectPanel = document.getElementById('examSelectPanel');
-    const lessonSelectPanel = document.getElementById('lessonSelectPanel');
+    const examPills = document.getElementById('examPills');
+    const lessonPills = document.getElementById('lessonPills');
     const topicList = document.getElementById('topicList');
+    const topicAccents = ['#f97316', '#4d7df3', '#31b877', '#875ee4'];
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
     const profileMode = document.getElementById('profileMode');
@@ -4659,21 +4709,39 @@
     }
 
     function renderExamModeTabs() {
-      examSelectPanel.value = activeExamBank;
+      examPills.innerHTML = Object.keys(topicBanks).map(exam => `
+        <button type="button" class="${exam === activeExamBank ? 'active' : ''}" data-exam="${exam}">${exam}</button>
+      `).join('');
+      examPills.querySelectorAll('[data-exam]').forEach(button => {
+        button.addEventListener('click', () => {
+          activeExamBank = button.dataset.exam;
+          activeLesson = Object.keys(topicBanks[activeExamBank])[0];
+          renderExamModeTabs();
+          renderLessonTabs();
+          renderTopics();
+        });
+      });
     }
 
     function renderLessonTabs() {
-      lessonSelectPanel.innerHTML = Object.keys(topicBanks[activeExamBank]).map(lesson => `
-        <option value="${lesson}" ${lesson === activeLesson ? 'selected' : ''}>${lesson}</option>
+      lessonPills.innerHTML = Object.keys(topicBanks[activeExamBank]).map(lesson => `
+        <button type="button" class="${lesson === activeLesson ? 'active' : ''}" data-lesson="${lesson}">${lesson}</button>
       `).join('');
+      lessonPills.querySelectorAll('[data-lesson]').forEach(button => {
+        button.addEventListener('click', () => {
+          activeLesson = button.dataset.lesson;
+          renderLessonTabs();
+          renderTopics();
+        });
+      });
     }
 
     function renderTopics() {
-      topicList.innerHTML = topicBanks[activeExamBank][activeLesson].map(([title, desc]) => `
-        <article class="topic-card">
+      topicList.innerHTML = topicBanks[activeExamBank][activeLesson].map(([title, desc], index) => `
+        <article class="topic-card" style="--topic-accent:${topicAccents[index % topicAccents.length]}">
           <strong>${title}</strong>
           <p>${desc}</p>
-          <button type="button" data-topic="${title}" data-desc="${desc}">Anlatımı aç</button>
+          <button type="button" data-topic="${title}" data-desc="${desc}">Anlatımı aç →</button>
         </article>
       `).join('');
       topicList.querySelectorAll('[data-topic]').forEach(button => {
@@ -4853,19 +4921,6 @@
       selectedExam = event.target.value;
       document.querySelectorAll('[data-exam-choice]').forEach(item => item.classList.toggle('selected', item.dataset.examChoice === selectedExam));
       renderSubjects();
-    });
-
-    examSelectPanel.addEventListener('change', event => {
-      activeExamBank = event.target.value;
-      activeLesson = Object.keys(topicBanks[activeExamBank])[0];
-      renderExamModeTabs();
-      renderLessonTabs();
-      renderTopics();
-    });
-
-    lessonSelectPanel.addEventListener('change', event => {
-      activeLesson = event.target.value;
-      renderTopics();
     });
 
     document.querySelectorAll('[data-auth-tab]').forEach(button => {
