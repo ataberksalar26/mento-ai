@@ -20,11 +20,12 @@
       --line: rgba(255, 255, 255, .16);
       --text: #f7f7f4;
       --muted: #c2c9d4;
-      --gold: #f97316;
-      --gold-light: #ffd166;
-      --orange: #f97316;
-      --orange-dark: #ea580c;
-      --yellow: #ffd166;
+      --gold: #4f5ff0;
+      --gold-light: #f5a623;
+      --orange: #4f5ff0;
+      --orange-dark: #3d47c9;
+      --yellow: #f5a623;
+      --indigo-light: #6f7bf5;
       --green: #31b877;
       --blue: #4d7df3;
       --purple: #875ee4;
@@ -136,14 +137,14 @@
       display: grid;
       place-items: center;
       border-radius: 12px;
-      background: linear-gradient(145deg, rgba(255,179,92,.18), rgba(255,179,92,.04));
-      border: 1px solid rgba(255,179,92,.34);
+      background: linear-gradient(145deg, rgba(111,123,245,.18), rgba(111,123,245,.04));
+      border: 1px solid rgba(111,123,245,.34);
       color: var(--gold-light);
       font-size: 22px;
       line-height: 1;
       font-weight: 900;
       letter-spacing: -0.03em;
-      box-shadow: 0 12px 34px rgba(249,115,22,.14);
+      box-shadow: 0 12px 34px rgba(79,95,240,.14);
     }
 
     .logo-symbol::after {
@@ -153,7 +154,7 @@
       right: -7px;
       color: var(--gold-light);
       font-size: 12px;
-      text-shadow: 0 0 18px rgba(255,179,92,.55);
+      text-shadow: 0 0 18px rgba(111,123,245,.55);
     }
 
     .logo-word {
@@ -207,8 +208,8 @@
 
     .btn-gold {
       color: #171004;
-      background: linear-gradient(180deg, #ffb35c 0%, #ea580c 100%);
-      box-shadow: 0 15px 36px rgba(249,115,22,.26);
+      background: linear-gradient(180deg, #6f7bf5 0%, #3d47c9 100%);
+      box-shadow: 0 15px 36px rgba(79,95,240,.26);
     }
 
     .btn-dark {
@@ -251,8 +252,8 @@
       min-height: 40px;
       padding: 0 21px;
       border-radius: 999px;
-      border: 1px solid rgba(249,115,22,.34);
-      background: rgba(249,115,22,.075);
+      border: 1px solid rgba(79,95,240,.34);
+      background: rgba(79,95,240,.075);
       color: var(--yellow);
       font-size: 13px;
       letter-spacing: .235em;
@@ -271,11 +272,7 @@
     }
 
     .gold-text {
-      color: transparent;
-      background: linear-gradient(92deg, var(--yellow) 0%, #ffb35c 48%, var(--orange) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      text-shadow: 0 14px 42px rgba(249,115,22,.28);
+      color: var(--yellow);
     }
 
     .lead {
@@ -317,7 +314,7 @@
       border: 1px solid var(--line);
       border-radius: 24px;
       background:
-        radial-gradient(circle at 76% 36%, rgba(249,115,22,.15), transparent 23%),
+        radial-gradient(circle at 76% 36%, rgba(79,95,240,.15), transparent 23%),
         linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.035)),
         rgba(9,21,35,.62);
       box-shadow: 0 26px 80px rgba(0,0,0,.28);
@@ -525,7 +522,7 @@
       margin-bottom: 18px;
       border-radius: 14px;
       color: #151006;
-      background: linear-gradient(180deg, #ffb35c, #ea580c);
+      background: linear-gradient(180deg, #6f7bf5, #3d47c9);
       font-size: 22px;
       font-weight: 900;
     }
@@ -677,7 +674,7 @@
       border: 1px solid var(--line);
       border-radius: 24px;
       background:
-        radial-gradient(circle at 72% 14%, rgba(249,115,22,.16), transparent 22%),
+        radial-gradient(circle at 72% 14%, rgba(79,95,240,.16), transparent 22%),
         linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.035)),
         rgba(9,21,35,.60);
       box-shadow: 0 28px 90px rgba(0,0,0,.30);
@@ -890,7 +887,7 @@
       min-height: 22px;
       border-radius: 10px 10px 6px 6px;
       background: linear-gradient(180deg, var(--gold-light), var(--gold));
-      box-shadow: 0 10px 24px rgba(249,115,22,.24);
+      box-shadow: 0 10px 24px rgba(79,95,240,.24);
     }
 
     .chart-note {
@@ -938,7 +935,7 @@
       place-items: center;
       font-size: 22px;
       color: var(--gold-light);
-      background: rgba(249,115,22,.17);
+      background: rgba(79,95,240,.17);
     }
 
     .stat:nth-child(2) .stat-icon,
@@ -1065,7 +1062,7 @@
 
     .side-link.active {
       color: #fff;
-      background: rgba(249,115,22,.16);
+      background: rgba(79,95,240,.16);
     }
 
     .dash-main {
@@ -1653,7 +1650,7 @@
       height: 9px;
       margin-top: 12px;
       border-radius: 999px;
-      background: linear-gradient(90deg, var(--gold), rgba(249,115,22,.18));
+      background: linear-gradient(90deg, var(--gold), rgba(79,95,240,.18));
       transform: skewX(-18deg);
     }
 
@@ -1777,7 +1774,7 @@
       overflow: auto;
       color: var(--ink);
       background:
-        radial-gradient(circle at 18% 10%, rgba(249,115,22,.2), transparent 28%),
+        radial-gradient(circle at 18% 10%, rgba(79,95,240,.2), transparent 28%),
         linear-gradient(110deg, #07111e 0%, #0c1727 34%, #eef0f2 34.1%, #e7ebef 100%);
       border: 0;
       border-radius: 0;
@@ -1822,7 +1819,7 @@
 
     .side-stack div,
     .mini-proof div {
-      border: 1px solid rgba(249,115,22,.22);
+      border: 1px solid rgba(79,95,240,.22);
       border-radius: 16px;
       padding: 13px 14px;
       background: linear-gradient(145deg, rgba(7,17,30,.92), rgba(25,39,59,.86));
@@ -1992,7 +1989,7 @@
     }
 
     .wizard-step.active::before {
-      background: linear-gradient(90deg, #ffb35c, #ea580c);
+      background: linear-gradient(90deg, #6f7bf5, #3d47c9);
     }
 
     .wizard-panel {
@@ -2032,12 +2029,12 @@
 
     .choice-card:hover {
       transform: translateY(-2px);
-      border-color: rgba(224,166,63,.65);
+      border-color: rgba(79,95,240,.65);
     }
 
     .choice-card.selected {
-      border-color: #ea580c;
-      background: rgba(249,115,22,.09);
+      border-color: #3d47c9;
+      background: rgba(79,95,240,.09);
     }
 
     .choice-card strong {
@@ -2048,7 +2045,7 @@
     }
 
     .choice-card.selected strong {
-      color: #c2410c;
+      color: #34399e;
     }
 
     .choice-card span {
@@ -2114,8 +2111,8 @@
     .goal-grid input:focus,
     .auth-card input:focus,
     .auth-card select:focus {
-      border-color: rgba(224,166,63,.9);
-      box-shadow: 0 0 0 4px rgba(224,166,63,.14);
+      border-color: rgba(79,95,240,.9);
+      box-shadow: 0 0 0 4px rgba(79,95,240,.14);
     }
 
     .goal-grid {
@@ -2174,9 +2171,9 @@
     }
 
     .auth-tabs button.active {
-      color: #7c2d12;
-      background: linear-gradient(180deg, #ffd9a8, #ffb35c);
-      box-shadow: 0 8px 22px rgba(224,166,63,.22);
+      color: #34399e;
+      background: linear-gradient(180deg, #ffd699, #6f7bf5);
+      box-shadow: 0 8px 22px rgba(79,95,240,.22);
     }
 
     .auth-fields {
@@ -2297,10 +2294,10 @@
       width: 34px;
       height: 34px;
       border-radius: 11px;
-      color: #ffb35c;
-      background: rgba(249,115,22,.12);
-      border: 1px solid rgba(249,115,22,.34);
-      box-shadow: 0 14px 34px rgba(249,115,22,.12);
+      color: #6f7bf5;
+      background: rgba(79,95,240,.12);
+      border: 1px solid rgba(79,95,240,.34);
+      box-shadow: 0 14px 34px rgba(79,95,240,.12);
     }
 
     .app-logo-mark::after {
@@ -2309,15 +2306,15 @@
       top: -9px;
       right: -6px;
       font-size: 12px;
-      color: #ffb35c;
+      color: #6f7bf5;
     }
 
     .new-chat {
       min-height: 46px;
-      border: 1px solid rgba(249,115,22,.42);
+      border: 1px solid rgba(79,95,240,.42);
       border-radius: 14px;
       color: #07111e;
-      background: linear-gradient(180deg, #ffb35c, #f97316);
+      background: linear-gradient(180deg, #6f7bf5, #4f5ff0);
       font-weight: 950;
       cursor: pointer;
     }
@@ -2399,8 +2396,8 @@
 
     .chat-list button.active {
       color: #fff;
-      background: rgba(249,115,22,.12);
-      border-color: rgba(249,115,22,.3);
+      background: rgba(79,95,240,.12);
+      border-color: rgba(79,95,240,.3);
     }
 
     .nav-ico {
@@ -2410,7 +2407,7 @@
       height: 24px;
       border-radius: 9px;
       color: #07111e;
-      background: rgba(249,115,22,.9);
+      background: rgba(79,95,240,.9);
       font-size: 13px;
       flex: 0 0 auto;
     }
@@ -2433,7 +2430,7 @@
       height: 42px;
       border-radius: 50%;
       color: #07111e;
-      background: linear-gradient(135deg, #ffb35c, #32c985);
+      background: linear-gradient(135deg, #6f7bf5, #32c985);
       font-weight: 950;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.18);
@@ -2502,7 +2499,7 @@
       grid-template-rows: auto 1fr auto;
       min-width: 0;
       background:
-        radial-gradient(circle at 50% 0%, rgba(249,115,22,.11), transparent 32%),
+        radial-gradient(circle at 50% 0%, rgba(79,95,240,.11), transparent 32%),
         #091421;
     }
 
@@ -2529,8 +2526,8 @@
 
     .student-app.light .message.user {
       color: #07111e;
-      background: linear-gradient(180deg, #ffb35c, #ea580c);
-      border-color: #c2410c;
+      background: linear-gradient(180deg, #6f7bf5, #3d47c9);
+      border-color: #34399e;
     }
 
     .student-app.light .chat-list button,
@@ -2548,7 +2545,7 @@
 
     .student-app.light .chat-list button.active {
       background: #f7e8bd;
-      border-color: #fb923c;
+      border-color: #4f5ff0;
     }
 
     .student-app.light .history-item.active {
@@ -2655,7 +2652,7 @@
     .message.user {
       justify-self: end;
       color: #07111e;
-      background: #fb923c;
+      background: #4f5ff0;
     }
 
     .learning-grid {
@@ -2693,7 +2690,7 @@
       border: 0;
       border-radius: 11px;
       color: #07111e;
-      background: #f97316;
+      background: #4f5ff0;
       font-weight: 950;
       cursor: pointer;
     }
@@ -2718,9 +2715,9 @@
       grid-template-columns: 1.1fr repeat(3, minmax(130px, .55fr)) auto;
       gap: 10px;
       align-items: end;
-      border-color: rgba(249,115,22,.3);
+      border-color: rgba(79,95,240,.3);
       background:
-        radial-gradient(circle at 10% 0%, rgba(249,115,22,.14), transparent 32%),
+        radial-gradient(circle at 10% 0%, rgba(79,95,240,.14), transparent 32%),
         rgba(255,255,255,.06);
     }
 
@@ -2757,9 +2754,9 @@
     }
 
     .student-app.light .learning-card.featured {
-      border-color: #fb923c;
+      border-color: #4f5ff0;
       background:
-        radial-gradient(circle at 10% 0%, rgba(249,115,22,.22), transparent 32%),
+        radial-gradient(circle at 10% 0%, rgba(79,95,240,.22), transparent 32%),
         #eef3f8;
     }
 
@@ -2802,7 +2799,7 @@
 
     .send-button {
       color: #07111e;
-      background: #fb923c;
+      background: #4f5ff0;
     }
 
     .composer textarea {
@@ -2864,8 +2861,8 @@
     .exam-pills button.active,
     .lesson-pills button.active {
       border-color: transparent;
-      color: #7c2d12;
-      background: linear-gradient(180deg, #ffd9a8, #ffb35c);
+      color: #34399e;
+      background: linear-gradient(180deg, #ffd699, #6f7bf5);
     }
 
     .study-panel h3 {
@@ -2961,14 +2958,14 @@
       height: 70px;
       margin-bottom: 18px;
       border-radius: 50%;
-      background: radial-gradient(circle, #ffd05c 0 27%, rgba(255,208,92,.2) 28% 55%, transparent 56%);
-      box-shadow: 0 0 0 0 rgba(255,208,92,.38);
+      background: radial-gradient(circle, #f5a623 0 27%, rgba(245,166,35,.2) 28% 55%, transparent 56%);
+      box-shadow: 0 0 0 0 rgba(245,166,35,.38);
       animation: pulse 1.6s infinite;
     }
 
     @keyframes pulse {
-      70% { box-shadow: 0 0 0 20px rgba(255,208,92,0); }
-      100% { box-shadow: 0 0 0 0 rgba(255,208,92,0); }
+      70% { box-shadow: 0 0 0 20px rgba(245,166,35,0); }
+      100% { box-shadow: 0 0 0 0 rgba(245,166,35,0); }
     }
 
     .wizard-actions {
@@ -2993,7 +2990,7 @@
 
     .wizard-actions .btn-dark:hover {
       background: #0c1727;
-      border-color: rgba(224,166,63,.55);
+      border-color: rgba(79,95,240,.55);
     }
 
     .form-note {
@@ -3442,8 +3439,7 @@
     .hero2 {
       position: relative;
       overflow: hidden;
-      max-width: 720px;
-      margin: 24px 51px 96px;
+      margin: 24px 51px 64px;
       padding: 56px 48px;
       border-radius: 28px;
       background: linear-gradient(160deg, #0b1a2c 0%, #07111d 62%);
@@ -3453,8 +3449,109 @@
     .hero2-glow {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 82% 12%, rgba(249,115,22,.22), transparent 46%);
+      background:
+        radial-gradient(circle at 82% 12%, rgba(79,95,240,.22), transparent 46%),
+        radial-gradient(circle at 15% 85%, rgba(245,166,35,.1), transparent 40%);
       pointer-events: none;
+    }
+
+    .hero2-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero2-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .phone-mock {
+      width: 100%;
+      max-width: 230px;
+      background: #0c1220;
+      border: 7px solid #1a2030;
+      border-radius: 34px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.5);
+      padding: 22px 18px;
+    }
+
+    .phone-mock-label {
+      text-align: center;
+      color: #7d8697;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      margin-bottom: 14px;
+    }
+
+    .phone-mock-ring {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      border: 5px solid var(--orange);
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .phone-mock-topic {
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .phone-mock-next {
+      background: rgba(255,255,255,.06);
+      border-radius: 10px;
+      padding: 9px;
+      text-align: center;
+      color: #c7cedb;
+      font-size: 11.5px;
+      margin-bottom: 16px;
+    }
+
+    .phone-mock-play {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: var(--yellow);
+      color: #1a0f04;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+    }
+
+    .hero2-trust {
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .hero2-trust strong {
+      display: block;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .hero2-trust-stars {
+      color: var(--yellow);
+      font-size: 14px;
+    }
+
+    .hero2-trust span {
+      color: #7d8697;
+      font-size: 12px;
     }
 
     .hero2-badge {
@@ -3465,8 +3562,8 @@
       min-height: 34px;
       padding: 0 16px;
       border-radius: 999px;
-      border: 1px solid rgba(255,209,102,.35);
-      background: rgba(255,209,102,.1);
+      border: 1px solid rgba(245,166,35,.35);
+      background: rgba(245,166,35,.1);
       color: var(--yellow);
       font-size: 13px;
       font-weight: 700;
@@ -3545,6 +3642,74 @@
         gap: 20px;
         flex-wrap: wrap;
       }
+
+      .hero2-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero2-visual {
+        margin-top: 32px;
+      }
+
+      .testimonial-section {
+        margin: 0 20px 64px;
+      }
+
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .testimonial-section {
+      margin: 0 51px 96px;
+    }
+
+    .testimonial-section .section-kicker {
+      margin-bottom: 10px;
+    }
+
+    .testimonial-section h2 {
+      margin: 0 0 24px;
+      max-width: 560px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .testimonial-card {
+      border-radius: 16px;
+      padding: 20px;
+      background: #0d1c2e;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .testimonial-quote {
+      display: block;
+      color: var(--yellow);
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .testimonial-card p {
+      margin: 0 0 14px;
+      color: #dfe3ea;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      color: #7d8697;
+      font-size: 12px;
+    }
+
+    .testimonial-stars {
+      color: var(--yellow);
+      font-size: 12px;
     }
   </style>
 </head>
@@ -3572,17 +3737,57 @@
     <main>
       <section class="hero2">
         <div class="hero2-glow" aria-hidden="true"></div>
-        <div class="hero2-badge"><span class="hero2-badge-dot">✦</span>TYT · AYT · LGS için yapay zeka koç</div>
-        <h1 class="hero2-title">Netlerini artıracak çalışma planı, <span class="gold-text">iki dakikada hazır</span></h1>
-        <p class="hero2-lead">Deneme sonuçlarını gir, Mento eksik konularını bulup bugünkü planını çıkarsın.</p>
-        <div class="hero2-actions">
-          <button class="btn btn-gold" type="button" data-open-demo>Ücretsiz başla <span>→</span></button>
-          <button class="btn btn-dark" type="button" data-open-demo>Planı gör <span class="play">▶</span></button>
+        <div class="hero2-grid">
+          <div class="hero2-copy">
+            <div class="hero2-badge"><span class="hero2-badge-dot">✦</span>TYT · AYT · LGS için yapay zeka koç</div>
+            <h1 class="hero2-title">Netlerini <span class="gold-text">2 kat</span> daha hızlı artır</h1>
+            <p class="hero2-lead">Deneme sonuçlarını gir, Mento eksik konularını bulup bugünkü planını çıkarsın.</p>
+            <div class="hero2-actions">
+              <button class="btn btn-gold" type="button" data-open-demo>Ücretsiz başla <span>→</span></button>
+              <button class="btn btn-dark" type="button" data-open-demo>Planı gör <span class="play">▶</span></button>
+            </div>
+            <div class="hero2-stats">
+              <div class="hero2-stat"><strong>14.000+</strong><span>öğrenci</span></div>
+              <div class="hero2-stat"><strong>4.8 ★</strong><span>öğrenci puanı</span></div>
+              <div class="hero2-stat"><strong>+8 net</strong><span>ortalama artış</span></div>
+            </div>
+          </div>
+
+          <div class="hero2-visual" aria-hidden="true">
+            <div class="phone-mock">
+              <div class="phone-mock-label">KONU HAKİMİYETİ</div>
+              <div class="phone-mock-ring"><span>74%</span></div>
+              <div class="phone-mock-topic">Üslü ifadeleri anlamak</div>
+              <div class="phone-mock-next">Senin için sıradaki ders</div>
+              <div class="phone-mock-play">▶</div>
+            </div>
+            <div class="hero2-trust">
+              <strong>4.87 <span class="hero2-trust-stars">★★★★★</span></strong>
+              <span>14.000 öğrencinin güveni</span>
+            </div>
+          </div>
         </div>
-        <div class="hero2-stats">
-          <div class="hero2-stat"><strong>14.000+</strong><span>öğrenci</span></div>
-          <div class="hero2-stat"><strong>4.8 ★</strong><span>öğrenci puanı</span></div>
-          <div class="hero2-stat"><strong>+8 net</strong><span>ortalama artış</span></div>
+      </section>
+
+      <section class="testimonial-section">
+        <div class="section-kicker">Öğrenciler ne diyor</div>
+        <h2>Ebeveynler ve öğrenciler Mento AI hakkında</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <span class="testimonial-quote">”</span>
+            <p>LGS denemelerim 470'e ulaştı. Başarımın kaynağı bu uygulama, sınavlarımdan yüz alıyorum.</p>
+            <span class="testimonial-author">Öğrenci <span class="testimonial-stars">★★★★★</span></span>
+          </div>
+          <div class="testimonial-card">
+            <span class="testimonial-quote">”</span>
+            <p>Konuları ders anlatır gibi değil sohbet ediyormuş gibi anlatıyor. Yanlış yaptığım yeri buluyor.</p>
+            <span class="testimonial-author">Öğrenci <span class="testimonial-stars">★★★★★</span></span>
+          </div>
+          <div class="testimonial-card">
+            <span class="testimonial-quote">”</span>
+            <p>Matematik sınavımın gecesi çalıştım ve 95 aldım. Adım adım anlatıyor, yanlış yaptığın yeri buluyor.</p>
+            <span class="testimonial-author">Öğrenci <span class="testimonial-stars">★★★★★</span></span>
+          </div>
         </div>
       </section>
 
@@ -4168,7 +4373,7 @@
     const examPills = document.getElementById('examPills');
     const lessonPills = document.getElementById('lessonPills');
     const topicList = document.getElementById('topicList');
-    const topicAccents = ['#f97316', '#4d7df3', '#31b877', '#875ee4'];
+    const topicAccents = ['#4f5ff0', '#4d7df3', '#31b877', '#875ee4'];
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
     const profileMode = document.getElementById('profileMode');
