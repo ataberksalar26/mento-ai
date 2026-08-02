@@ -477,7 +477,11 @@ async function handleLogin(req, res) {
 
     const user = readUsers().find(u => u.email === email);
 
-    if (!user || !verifyPassword(password, user)) {
+    if (user && user.googleAuth && !user.passwordHash) {
+      sendJson(res, 401, { error: 'Bu hesap Google ile oluşturulmuş. Lütfen Google ile devam et butonunu kullan.' });
+      return;
+    }
+    if (!user || !user.passwordHash || !verifyPassword(password, user)) {
       sendJson(res, 401, { error: 'E-posta veya şifre hatalı.' });
       return;
     }
@@ -489,6 +493,77 @@ async function handleLogin(req, res) {
     sendJson(res, 200, { ok: true, user: publicUser(user) });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'Giriş hatası.' });
+  }
+}
+
+async function handleGoogleLogin(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const idToken = String(body.id_token || body.idToken || '').trim();
+    if (!idToken) {
+      sendJson(res, 400, { error: 'Google kimlik doğrulama verisi eksik.' });
+      return;
+    }
+
+    const verifyResponse = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`);
+    const payload = await verifyResponse.json().catch(() => ({}));
+
+    if (!verifyResponse.ok || payload.error) {
+      sendJson(res, 401, { error: 'Google kimlik doğrulaması geçersiz veya süresi dolmuş.' });
+      return;
+    }
+
+    const allowedClientIds = [
+      firstEnv('GOOGLE_IOS_CLIENT_ID'),
+      firstEnv('GOOGLE_WEB_CLIENT_ID'),
+      firstEnv('GOOGLE_ANDROID_CLIENT_ID')
+    ].filter(Boolean);
+    if (allowedClientIds.length && !allowedClientIds.includes(payload.aud)) {
+      sendJson(res, 401, { error: 'Google istemci kimliği tanınmıyor.' });
+      return;
+    }
+    if (payload.email_verified !== 'true' && payload.email_verified !== true) {
+      sendJson(res, 401, { error: 'Google e-postan doğrulanmamış.' });
+      return;
+    }
+
+    const email = normalizeEmail(payload.email);
+    if (!email) {
+      sendJson(res, 401, { error: 'Google hesabından e-posta alınamadı.' });
+      return;
+    }
+
+    const users = readUsers();
+    let user = users.find(u => u.email === email);
+    let isNewUser = false;
+
+    if (!user) {
+      isNewUser = true;
+      user = {
+        id: crypto.randomUUID(),
+        name: payload.name || email.split('@')[0],
+        email,
+        exam: '',
+        birthYear: null,
+        gender: '',
+        goal: '',
+        passwordSalt: null,
+        passwordHash: null,
+        googleAuth: true,
+        verified: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      writeUsers([...users, user]);
+    } else if (!user.verified) {
+      user.verified = true;
+      user.updatedAt = new Date().toISOString();
+      writeUsers(users);
+    }
+
+    sendJson(res, 200, { ok: true, isNewUser, user: publicUser(user) });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'Google girişi başarısız oldu.' });
   }
 }
 
@@ -754,6 +829,10 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'POST' && req.url === '/api/reset-password') {
     handleResetPassword(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/google-login') {
+    handleGoogleLogin(req, res);
     return;
   }
   if (req.method === 'POST' && req.url === '/api/coach') {
