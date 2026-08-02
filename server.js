@@ -213,12 +213,12 @@ function handleAuthDebug(req, res) {
   });
 }
 
-function readBody(req) {
+function readBody(req, maxBytes = 1_000_000) {
   return new Promise((resolve, reject) => {
     let body = '';
     req.on('data', chunk => {
       body += chunk;
-      if (body.length > 1_000_000) {
+      if (body.length > maxBytes) {
         req.destroy();
         reject(new Error('Request too large'));
       }
@@ -226,6 +226,220 @@ function readBody(req) {
     req.on('end', () => resolve(body));
     req.on('error', reject);
   });
+}
+
+function extractJsonBlock(text) {
+  if (!text) return null;
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  const raw = fenced ? fenced[1] : text;
+  const start = raw.indexOf('{');
+  const end = raw.lastIndexOf('}');
+  if (start === -1 || end === -1 || end < start) return null;
+  try {
+    return JSON.parse(raw.slice(start, end + 1));
+  } catch {
+    return null;
+  }
+}
+
+async function askOpenAIVision({ imageDataUrl, instruction, student = {}, maxOutputTokens = 900 }) {
+  if (!hasValidOpenAIKey()) {
+    const error = new Error('OPENAI_API_KEY tanımlı değil.');
+    error.status = 500;
+    throw error;
+  }
+
+  const response = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
+      max_output_tokens: maxOutputTokens,
+      input: [
+        {
+          role: 'system',
+          content: [
+            'Sen Mento AI adında Türkçe konuşan bir TYT, AYT ve LGS çalışma koçusun.',
+            'Öğrenci sana bir soru fotoğrafı gönderiyor. Görseldeki soruyu dikkatle oku.',
+            'Görsel bulanık veya okunaksızsa bunu belirt ve öğrenciden daha net bir fotoğraf iste.',
+            'Sınav garantisi verme; tıbbi, hukuki veya resmi garanti dili kullanma.'
+          ].join(' ')
+        },
+        {
+          role: 'user',
+          content: [
+            { type: 'input_text', text: `Öğrenci bilgisi: ${JSON.stringify(student)}\n${instruction}` },
+            { type: 'input_image', image_url: imageDataUrl }
+          ]
+        }
+      ]
+    })
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    const message = data.error?.message || 'OpenAI görsel isteği başarısız oldu.';
+    const error = new Error(message);
+    error.status = response.status;
+    throw error;
+  }
+
+  return extractOpenAIText(data);
+}
+
+async function askOpenAIQuizFromText({ topic, exam, lesson, maxOutputTokens = 900 }) {
+  if (!hasValidOpenAIKey()) {
+    const error = new Error('OPENAI_API_KEY tanımlı değil.');
+    error.status = 500;
+    throw error;
+  }
+
+  const response = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
+      max_output_tokens: maxOutputTokens,
+      input: [
+        {
+          role: 'system',
+          content: [
+            'Sen Mento AI adında Türkçe bir TYT, AYT ve LGS quiz üretme motorusun.',
+            'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
+            'JSON şeması: {"title": string, "questions": [{"question": string, "options": [string,string,string,string], "correctIndex": number (0-3), "explanation": string}]}.',
+            'Tam olarak 5 soru üret. Sorular verilen sınav seviyesine uygun, net ve tek doğru cevaplı olsun.'
+          ].join(' ')
+        },
+        {
+          role: 'user',
+          content: `Sınav: ${exam || 'TYT'}\nDers: ${lesson || ''}\nKonu / kaynak metin: ${topic}`
+        }
+      ]
+    })
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    const message = data.error?.message || 'OpenAI quiz isteği başarısız oldu.';
+    const error = new Error(message);
+    error.status = response.status;
+    throw error;
+  }
+
+  const quiz = extractJsonBlock(extractOpenAIText(data));
+  if (!quiz || !Array.isArray(quiz.questions) || !quiz.questions.length) {
+    const error = new Error('Quiz üretilemedi, tekrar dene.');
+    error.status = 502;
+    throw error;
+  }
+  return quiz;
+}
+
+async function askOpenAIQuizFromImage({ imageDataUrl, exam, lesson, maxOutputTokens = 900 }) {
+  if (!hasValidOpenAIKey()) {
+    const error = new Error('OPENAI_API_KEY tanımlı değil.');
+    error.status = 500;
+    throw error;
+  }
+
+  const response = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
+      max_output_tokens: maxOutputTokens,
+      input: [
+        {
+          role: 'system',
+          content: [
+            'Sen Mento AI adında Türkçe bir TYT, AYT ve LGS quiz üretme motorusun.',
+            'Öğrenci bir ders notu veya soru fotoğrafı gönderiyor. Görseldeki konuyu temel alarak yeni bir quiz üret.',
+            'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
+            'JSON şeması: {"title": string, "questions": [{"question": string, "options": [string,string,string,string], "correctIndex": number (0-3), "explanation": string}]}.',
+            'Tam olarak 5 soru üret.'
+          ].join(' ')
+        },
+        {
+          role: 'user',
+          content: [
+            { type: 'input_text', text: `Sınav: ${exam || 'TYT'}\nDers: ${lesson || ''}\nBu görseldeki konu/soru tipini temel alan yeni bir quiz üret.` },
+            { type: 'input_image', image_url: imageDataUrl }
+          ]
+        }
+      ]
+    })
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    const message = data.error?.message || 'OpenAI quiz isteği başarısız oldu.';
+    const error = new Error(message);
+    error.status = response.status;
+    throw error;
+  }
+
+  const quiz = extractJsonBlock(extractOpenAIText(data));
+  if (!quiz || !Array.isArray(quiz.questions) || !quiz.questions.length) {
+    const error = new Error('Quiz üretilemedi, tekrar dene.');
+    error.status = 502;
+    throw error;
+  }
+  return quiz;
+}
+
+async function handleVisionSolve(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req, 15_000_000) || '{}');
+    const imageDataUrl = String(body.image || '').trim();
+    const question = String(body.question || '').trim();
+    const student = body.student || {};
+
+    if (!imageDataUrl.startsWith('data:image/')) {
+      sendJson(res, 400, { error: 'Geçerli bir fotoğraf gerekli.' });
+      return;
+    }
+
+    const instruction = question
+      ? `Öğrencinin notu: ${question}\nGörseldeki soruyu çöz. Önce kısa cevap, sonra 3-5 adımlık açıklama, en sona 1 cümlelik koç önerisi ekle.`
+      : 'Görseldeki soruyu çöz. Önce kısa cevap, sonra 3-5 adımlık açıklama, en sona 1 cümlelik koç önerisi ekle.';
+
+    const answer = await askOpenAIVision({ imageDataUrl, instruction, student });
+    sendJson(res, 200, { ok: true, answer: answer || 'Görsel okunamadı, tekrar dener misin?' });
+  } catch (error) {
+    sendJson(res, error.status || 500, { error: error.message || 'Görsel işlenemedi.' });
+  }
+}
+
+async function handleGenerateQuiz(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req, 15_000_000) || '{}');
+    const imageDataUrl = body.image ? String(body.image).trim() : '';
+    const topic = String(body.topic || '').trim();
+    const exam = String(body.exam || '').trim();
+    const lesson = String(body.lesson || '').trim();
+
+    if (!imageDataUrl && !topic) {
+      sendJson(res, 400, { error: 'Bir fotoğraf ya da konu bilgisi gerekli.' });
+      return;
+    }
+
+    const quiz = imageDataUrl
+      ? await askOpenAIQuizFromImage({ imageDataUrl, exam, lesson })
+      : await askOpenAIQuizFromText({ topic, exam, lesson });
+
+    sendJson(res, 200, { ok: true, quiz });
+  } catch (error) {
+    sendJson(res, error.status || 500, { error: error.message || 'Quiz üretilemedi.' });
+  }
 }
 
 function readUsers() {
@@ -841,6 +1055,14 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'POST' && req.url === '/api/brain/answer') {
     handleBrainAnswer(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/vision-solve') {
+    handleVisionSolve(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/generate-quiz') {
+    handleGenerateQuiz(req, res);
     return;
   }
   if (req.method === 'GET') {
