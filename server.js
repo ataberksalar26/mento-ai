@@ -290,12 +290,17 @@ async function askOpenAIVision({ imageDataUrl, instruction, student = {}, maxOut
   return extractOpenAIText(data);
 }
 
-async function askOpenAIQuizFromText({ topic, exam, lesson, maxOutputTokens = 900 }) {
+async function askOpenAIQuizFromText({ topic, exam, lesson, variant = 1, questionCount = 20, maxOutputTokens = 4500 }) {
   if (!hasValidOpenAIKey()) {
     const error = new Error('OPENAI_API_KEY tanımlı değil.');
     error.status = 500;
     throw error;
   }
+
+  const variantLabel = ['I', 'II', 'III', 'IV', 'V'][Math.max(0, Math.min(4, Number(variant) - 1))] || 'I';
+  const variantNote = Number(variant) > 1
+    ? ` Bu Test ${variantLabel}. Öğrenci bu konudan önceki testleri de çözmüş olabilir; önceki testlerden tamamen farklı, benzer zorlukta yeni sorular üret.`
+    : ` Bu Test ${variantLabel}.`;
 
   const response = await fetch('https://api.openai.com/v1/responses', {
     method: 'POST',
@@ -313,7 +318,7 @@ async function askOpenAIQuizFromText({ topic, exam, lesson, maxOutputTokens = 90
             'Sen Mento AI adında Türkçe bir TYT, AYT ve LGS quiz üretme motorusun.',
             'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
             'JSON şeması: {"title": string, "questions": [{"question": string, "options": [string,string,string,string], "correctIndex": number (0-3), "explanation": string}]}.',
-            'Tam olarak 5 soru üret. Sorular verilen sınav seviyesine uygun, net ve tek doğru cevaplı olsun.'
+            `Tam olarak ${questionCount} soru üret. Sorular verilen sınav seviyesine uygun, birbirinden farklı, net ve tek doğru cevaplı olsun. Kolay-orta-zor karışımı olacak şekilde dağıt.${variantNote}`
           ].join(' ')
         },
         {
@@ -341,7 +346,7 @@ async function askOpenAIQuizFromText({ topic, exam, lesson, maxOutputTokens = 90
   return quiz;
 }
 
-async function askOpenAIQuizFromImage({ imageDataUrl, exam, lesson, maxOutputTokens = 900 }) {
+async function askOpenAIQuizFromImage({ imageDataUrl, exam, lesson, questionCount = 20, maxOutputTokens = 4500 }) {
   if (!hasValidOpenAIKey()) {
     const error = new Error('OPENAI_API_KEY tanımlı değil.');
     error.status = 500;
@@ -365,7 +370,7 @@ async function askOpenAIQuizFromImage({ imageDataUrl, exam, lesson, maxOutputTok
             'Öğrenci bir ders notu veya soru fotoğrafı gönderiyor. Görseldeki konuyu temel alarak yeni bir quiz üret.',
             'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
             'JSON şeması: {"title": string, "questions": [{"question": string, "options": [string,string,string,string], "correctIndex": number (0-3), "explanation": string}]}.',
-            'Tam olarak 5 soru üret.'
+            `Tam olarak ${questionCount} soru üret. Kolay-orta-zor karışımı olacak şekilde dağıt.`
           ].join(' ')
         },
         {
@@ -426,6 +431,8 @@ async function handleGenerateQuiz(req, res) {
     const topic = String(body.topic || '').trim();
     const exam = String(body.exam || '').trim();
     const lesson = String(body.lesson || '').trim();
+    const variant = Number(body.variant || 1);
+    const questionCount = Math.min(30, Math.max(5, Number(body.questionCount || 20)));
 
     if (!imageDataUrl && !topic) {
       sendJson(res, 400, { error: 'Bir fotoğraf ya da konu bilgisi gerekli.' });
@@ -433,12 +440,93 @@ async function handleGenerateQuiz(req, res) {
     }
 
     const quiz = imageDataUrl
-      ? await askOpenAIQuizFromImage({ imageDataUrl, exam, lesson })
-      : await askOpenAIQuizFromText({ topic, exam, lesson });
+      ? await askOpenAIQuizFromImage({ imageDataUrl, exam, lesson, questionCount })
+      : await askOpenAIQuizFromText({ topic, exam, lesson, variant, questionCount });
 
-    sendJson(res, 200, { ok: true, quiz });
+    sendJson(res, 200, { ok: true, quiz: { ...quiz, exam, lesson, topic: topic || quiz.title, variant } });
   } catch (error) {
     sendJson(res, error.status || 500, { error: error.message || 'Quiz üretilemedi.' });
+  }
+}
+
+async function askOpenAITopicLecture({ exam, lesson, topic, weakPoints = [], maxOutputTokens = 1400 }) {
+  if (!hasValidOpenAIKey()) {
+    const error = new Error('OPENAI_API_KEY tanımlı değil.');
+    error.status = 500;
+    throw error;
+  }
+
+  const hasWeakPoints = Array.isArray(weakPoints) && weakPoints.length > 0;
+  const weakPointsText = hasWeakPoints
+    ? `\nÖğrencinin bu konudaki son testte yanlış yaptığı sorular:\n${weakPoints.map((item, index) => `${index + 1}. ${item}`).join('\n')}`
+    : '';
+
+  const response = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
+      max_output_tokens: maxOutputTokens,
+      input: [
+        {
+          role: 'system',
+          content: [
+            'Sen Mento AI adında Türkçe konuşan bir TYT, AYT ve LGS konu anlatım öğretmenisin.',
+            'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
+            'JSON şeması: {"summary": string, "sections": [{"heading": string, "body": string}], "example": {"question": string, "solution": string}, "tip": string}.',
+            'summary 1-2 cümlelik kısa özet olsun. sections 3-5 adet, her biri konunun bir alt başlığını 3-6 cümleyle net anlatsın.',
+            'example alanında konuyla ilgili örnek bir soru ve adım adım çözümü olsun. tip alanında sınavda işe yarayacak kısa bir pratik ipucu olsun.',
+            hasWeakPoints
+              ? 'Öğrenci bu konudan bir test çözdü ve bazı sorularda hata yaptı. Anlatımı genel geçmeyip özellikle öğrencinin yanlış yaptığı soru tiplerindeki kavram eksikliğine odakla; sections bu eksiklere göre seçilsin, example de mümkünse benzer bir soru tipinden olsun.'
+              : '',
+            'Türkçe, sınav öğrencisinin anlayacağı sade bir dil kullan.'
+          ].filter(Boolean).join(' ')
+        },
+        {
+          role: 'user',
+          content: `Sınav: ${exam || 'TYT'}\nDers: ${lesson || ''}\nKonu: ${topic}${weakPointsText}`
+        }
+      ]
+    })
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    const message = data.error?.message || 'OpenAI konu anlatımı isteği başarısız oldu.';
+    const error = new Error(message);
+    error.status = response.status;
+    throw error;
+  }
+
+  const lecture = extractJsonBlock(extractOpenAIText(data));
+  if (!lecture || !Array.isArray(lecture.sections) || !lecture.sections.length) {
+    const error = new Error('Konu anlatımı üretilemedi, tekrar dene.');
+    error.status = 502;
+    throw error;
+  }
+  return lecture;
+}
+
+async function handleTopicLecture(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const topic = String(body.topic || '').trim();
+    const exam = String(body.exam || '').trim();
+    const lesson = String(body.lesson || '').trim();
+    const weakPoints = Array.isArray(body.weakPoints) ? body.weakPoints.map(String).slice(0, 15) : [];
+
+    if (!topic) {
+      sendJson(res, 400, { error: 'Konu bilgisi gerekli.' });
+      return;
+    }
+
+    const lecture = await askOpenAITopicLecture({ exam, lesson, topic, weakPoints });
+    sendJson(res, 200, { ok: true, lecture });
+  } catch (error) {
+    sendJson(res, error.status || 500, { error: error.message || 'Konu anlatımı üretilemedi.' });
   }
 }
 
@@ -542,8 +630,8 @@ async function handleRegister(req, res) {
       sendJson(res, 400, { error: 'Ad, e-posta ve şifre zorunlu.' });
       return;
     }
-    if (!['TYT', 'AYT', 'LGS'].includes(exam)) {
-      sendJson(res, 400, { error: 'Sınav seçimi geçersiz.' });
+    if (!exam || exam.length > 40) {
+      sendJson(res, 400, { error: 'Sınav bilgisi geçersiz.' });
       return;
     }
     if (!birthYear || birthYear < 1900 || birthYear > new Date().getFullYear()) {
@@ -778,6 +866,99 @@ async function handleGoogleLogin(req, res) {
     sendJson(res, 200, { ok: true, isNewUser, user: publicUser(user) });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'Google girişi başarısız oldu.' });
+  }
+}
+
+function base64UrlDecode(value) {
+  return Buffer.from(String(value || '').replace(/-/g, '+').replace(/_/g, '/'), 'base64');
+}
+
+let appleKeysCache = null;
+let appleKeysCacheAt = 0;
+
+async function fetchApplePublicKeys() {
+  if (appleKeysCache && Date.now() - appleKeysCacheAt < 60 * 60 * 1000) return appleKeysCache;
+  const response = await fetch('https://appleid.apple.com/auth/keys');
+  const data = await response.json();
+  appleKeysCache = data.keys || [];
+  appleKeysCacheAt = Date.now();
+  return appleKeysCache;
+}
+
+async function verifyAppleIdentityToken(identityToken) {
+  const parts = String(identityToken || '').split('.');
+  if (parts.length !== 3) throw new Error('Geçersiz Apple kimlik verisi.');
+  const [headerB64, payloadB64, signatureB64] = parts;
+
+  const header = JSON.parse(base64UrlDecode(headerB64).toString('utf8'));
+  const payload = JSON.parse(base64UrlDecode(payloadB64).toString('utf8'));
+
+  const keys = await fetchApplePublicKeys();
+  const jwk = keys.find(key => key.kid === header.kid);
+  if (!jwk) throw new Error('Apple imza anahtarı bulunamadı.');
+
+  const publicKey = crypto.createPublicKey({ key: jwk, format: 'jwk' });
+  const verified = crypto.verify('sha256', Buffer.from(`${headerB64}.${payloadB64}`), publicKey, base64UrlDecode(signatureB64));
+  if (!verified) throw new Error('Apple token imzası doğrulanamadı.');
+
+  if (payload.iss !== 'https://appleid.apple.com') throw new Error('Apple token issuer geçersiz.');
+  const allowedAudiences = [firstEnv('APPLE_BUNDLE_ID') || 'com.ataberksalar.mentoai'];
+  if (!allowedAudiences.includes(payload.aud)) throw new Error('Apple token audience uyuşmuyor.');
+  if (payload.exp && Date.now() / 1000 > Number(payload.exp)) throw new Error('Apple token süresi dolmuş.');
+
+  return payload;
+}
+
+async function handleAppleLogin(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const identityToken = String(body.identity_token || body.identityToken || '').trim();
+    const fullName = body.fullName || {};
+    if (!identityToken) {
+      sendJson(res, 400, { error: 'Apple kimlik doğrulama verisi eksik.' });
+      return;
+    }
+
+    const payload = await verifyAppleIdentityToken(identityToken);
+    const email = normalizeEmail(payload.email);
+    if (!email) {
+      sendJson(res, 401, { error: 'Apple hesabından e-posta alınamadı.' });
+      return;
+    }
+
+    const users = readUsers();
+    let user = users.find(u => u.email === email);
+    let isNewUser = false;
+    const nameFromApple = [fullName.givenName, fullName.familyName].filter(Boolean).join(' ').trim();
+
+    if (!user) {
+      isNewUser = true;
+      user = {
+        id: crypto.randomUUID(),
+        name: nameFromApple || email.split('@')[0],
+        email,
+        exam: '',
+        birthYear: null,
+        gender: '',
+        goal: '',
+        passwordSalt: null,
+        passwordHash: null,
+        appleAuth: true,
+        verified: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      writeUsers([...users, user]);
+    } else {
+      let changed = false;
+      if (!user.verified) { user.verified = true; changed = true; }
+      if (nameFromApple && (!user.name || user.name === email.split('@')[0])) { user.name = nameFromApple; changed = true; }
+      if (changed) { user.updatedAt = new Date().toISOString(); writeUsers(users); }
+    }
+
+    sendJson(res, 200, { ok: true, isNewUser, user: publicUser(user) });
+  } catch (error) {
+    sendJson(res, error.status || 401, { error: error.message || 'Apple girişi başarısız oldu.' });
   }
 }
 
@@ -1047,6 +1228,14 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'POST' && req.url === '/api/google-login') {
     handleGoogleLogin(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/apple-login') {
+    handleAppleLogin(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/topic-lecture') {
+    handleTopicLecture(req, res);
     return;
   }
   if (req.method === 'POST' && req.url === '/api/coach') {
