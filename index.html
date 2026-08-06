@@ -2368,9 +2368,23 @@
       background: rgba(255,255,255,.045);
     }
 
+    .history-group-label {
+      margin: 10px 2px 4px;
+      color: #5f6f88;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .history-list > .history-group-label:first-child {
+      margin-top: 0;
+    }
+
     .history-item {
+      position: relative;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr auto auto;
       gap: 8px;
       align-items: center;
       border: 1px solid rgba(255,255,255,.08);
@@ -2380,12 +2394,42 @@
       background: rgba(255,255,255,.035);
       text-align: left;
       cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .history-item:hover {
+      background: rgba(255,255,255,.06);
     }
 
     .history-item.active {
       color: #fff;
-      background: rgba(49,184,119,.11);
-      border-color: rgba(49,184,119,.32);
+      background: rgba(245,166,35,.1);
+      border-color: rgba(245,166,35,.28);
+    }
+
+    .history-delete {
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border: 0;
+      border-radius: 8px;
+      color: #6b7a92;
+      background: transparent;
+      font-size: 13px;
+      line-height: 1;
+      opacity: 0;
+      cursor: pointer;
+      transition: opacity .12s ease, background .12s ease, color .12s ease;
+    }
+
+    .history-item:hover .history-delete {
+      opacity: 1;
+    }
+
+    .history-delete:hover {
+      color: #ff9aa0;
+      background: rgba(239,107,115,.14);
     }
 
     .history-title {
@@ -2996,6 +3040,40 @@
       font-size: 12.5px;
     }
 
+    .flashcard-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #93a3bb;
+      font-size: 12.5px;
+    }
+
+    .lesson-tag {
+      color: #fff;
+      background: #378ADD;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .flashcard-head-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .streak-badge {
+      color: #f5a623;
+      background: rgba(245,166,35,.14);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 6px 11px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
     .flashcard-close {
       width: 34px;
       height: 34px;
@@ -3285,11 +3363,33 @@
       font-weight: 800;
     }
 
-    .game-stats span {
+    .stat-pill {
       padding: 5px 11px;
       border-radius: 999px;
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .stat-correct {
+      color: #5fd99a;
+      background: rgba(49,184,119,.14);
+      border-color: rgba(49,184,119,.28);
+    }
+
+    .stat-streak {
+      color: #f5a623;
+      background: rgba(245,166,35,.14);
+      border-color: rgba(245,166,35,.28);
+    }
+
+    .stat-best {
+      color: #b79dfa;
+      background: rgba(135,94,228,.16);
+      border-color: rgba(135,94,228,.3);
+    }
+
+    .stat-timer {
+      color: #dce7f5;
     }
 
     .game-question {
@@ -3311,10 +3411,17 @@
     }
 
     .game-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       text-align: left;
       padding: 13px 15px;
       border-radius: 13px;
-      border: 1px solid rgba(255,255,255,.1);
+      border-left: 4px solid rgba(255,255,255,.16);
+      border-top: 1px solid rgba(255,255,255,.1);
+      border-right: 1px solid rgba(255,255,255,.1);
+      border-bottom: 1px solid rgba(255,255,255,.1);
       background: rgba(255,255,255,.045);
       color: #dce7f5;
       font-size: 13.5px;
@@ -3322,14 +3429,25 @@
       cursor: pointer;
     }
 
+    .game-option-icon {
+      font-size: 13px;
+      font-weight: 900;
+    }
+
     .game-option.correct {
-      border-color: rgba(49,184,119,.5);
+      border-left-color: #31b877;
+      border-top-color: rgba(49,184,119,.5);
+      border-right-color: rgba(49,184,119,.5);
+      border-bottom-color: rgba(49,184,119,.5);
       background: rgba(49,184,119,.16);
       color: #7fe0b3;
     }
 
     .game-option.wrong {
-      border-color: rgba(239,107,115,.5);
+      border-left-color: #ef6b73;
+      border-top-color: rgba(239,107,115,.5);
+      border-right-color: rgba(239,107,115,.5);
+      border-bottom-color: rgba(239,107,115,.5);
       background: rgba(239,107,115,.14);
       color: #ff9aa0;
     }
@@ -4770,9 +4888,15 @@
       <div class="flashcard-head">
         <div>
           <h3>Ezber kartları</h3>
-          <p id="flashcardSubtitle">LGS • Matematik</p>
+          <div class="flashcard-meta">
+            <span class="lesson-tag" id="flashcardLessonTag">Matematik</span>
+            <span id="flashcardTopicText">LGS • Çarpanlar ve Katlar</span>
+          </div>
         </div>
-        <button class="flashcard-close" type="button" id="flashcardClose" aria-label="Kapat">✕</button>
+        <div class="flashcard-head-actions">
+          <span class="streak-badge" id="flashcardStreakBadge" style="display:none">🔥 0 gün seri</span>
+          <button class="flashcard-close" type="button" id="flashcardClose" aria-label="Kapat">✕</button>
+        </div>
       </div>
       <div class="flashcard-pills" id="flashcardLessonPills"></div>
       <div class="flashcard-pills" id="flashcardTopicPills"></div>
@@ -4786,8 +4910,11 @@
       </div>
       <div id="flashcardPlay">
         <div class="flashcard-progress">
+          <svg class="progress-ring" width="46" height="46" viewBox="0 0 46 46">
+            <circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/>
+            <circle cx="23" cy="23" r="19" fill="none" stroke="#f5a623" stroke-width="5" stroke-linecap="round" id="flashcardRing" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"/>
+          </svg>
           <span id="flashcardCount">1 / 8</span>
-          <div class="flashcard-progress-track"><div class="flashcard-progress-fill" id="flashcardProgressFill" style="width:12%"></div></div>
         </div>
         <div class="flashcard-stage">
           <div class="flashcard" id="flashcardCard">
@@ -4841,9 +4968,10 @@
       </div>
       <div id="gamePlay" style="display:none">
         <div class="game-stats">
-          <span id="gameScoreText">Doğru: 0/0</span>
-          <span id="gameStreakText">🔥 Seri: 0</span>
-          <span id="gameTimerText" style="display:none">⏱ 15s</span>
+          <span class="stat-pill stat-correct" id="gameScoreText">✓ Doğru 0/0</span>
+          <span class="stat-pill stat-streak" id="gameStreakText">🔥 Seri 0</span>
+          <span class="stat-pill stat-best" id="gameBestText">🏅 En iyi 0</span>
+          <span class="stat-pill stat-timer" id="gameTimerText" style="display:none">⏱ 15s</span>
         </div>
         <div class="flashcard-progress">
           <span id="gameCount">1 / 8</span>
@@ -4897,7 +5025,10 @@
     const topicList = document.getElementById('topicList');
     const topicAccents = ['#f5a623', '#4d7df3', '#31b877', '#875ee4'];
     const flashcardOverlay = document.getElementById('flashcardOverlay');
-    const flashcardSubtitle = document.getElementById('flashcardSubtitle');
+    const flashcardLessonTag = document.getElementById('flashcardLessonTag');
+    const flashcardTopicText = document.getElementById('flashcardTopicText');
+    const flashcardStreakBadge = document.getElementById('flashcardStreakBadge');
+    const flashcardRing = document.getElementById('flashcardRing');
     const flashcardLessonPills = document.getElementById('flashcardLessonPills');
     const flashcardTopicPills = document.getElementById('flashcardTopicPills');
     const flashcardLoading = document.getElementById('flashcardLoading');
@@ -4909,7 +5040,6 @@
     const flashcardFront = document.getElementById('flashcardFront');
     const flashcardBack = document.getElementById('flashcardBack');
     const flashcardCount = document.getElementById('flashcardCount');
-    const flashcardProgressFill = document.getElementById('flashcardProgressFill');
     const flashcardSummaryTitle = document.getElementById('flashcardSummaryTitle');
     const flashcardSummaryText = document.getElementById('flashcardSummaryText');
     let flashDeck = [];
@@ -4934,6 +5064,7 @@
     const gameSummaryText = document.getElementById('gameSummaryText');
     const gameScoreText = document.getElementById('gameScoreText');
     const gameStreakText = document.getElementById('gameStreakText');
+    const gameBestText = document.getElementById('gameBestText');
     const gameTimerText = document.getElementById('gameTimerText');
     const gameCount = document.getElementById('gameCount');
     const gameProgressFill = document.getElementById('gameProgressFill');
@@ -5237,17 +5368,68 @@
       renderHistoryList();
     }
 
-    function renderHistoryList() {
-      const sessions = readChatSessions();
-      historyList.innerHTML = sessions.map(session => `
+    function historyGroupLabel(value) {
+      const date = new Date(value || Date.now());
+      const day = date.toDateString();
+      if (day === new Date().toDateString()) return 'Bugün';
+      if (day === new Date(Date.now() - 86400000).toDateString()) return 'Dün';
+      return 'Daha eski';
+    }
+
+    function historyItemHtml(session) {
+      return `
         <button class="history-item ${session.id === currentChatId ? 'active' : ''}" type="button" data-chat-id="${session.id}">
           <span class="history-title">${session.title || 'Yeni sohbet'}</span>
           <span class="history-date">${formatHistoryTime(session.updatedAt)}</span>
+          <span class="history-delete" data-delete-chat="${session.id}" role="button" aria-label="Sohbeti sil">✕</span>
         </button>
-      `).join('');
+      `;
+    }
+
+    function renderHistoryList() {
+      const sessions = [...readChatSessions()].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+      let lastGroup = null;
+      historyList.innerHTML = sessions.map(session => {
+        const group = historyGroupLabel(session.updatedAt);
+        const label = group !== lastGroup ? `<div class="history-group-label">${group}</div>` : '';
+        lastGroup = group;
+        return label + historyItemHtml(session);
+      }).join('');
       historyList.querySelectorAll('[data-chat-id]').forEach(button => {
         button.addEventListener('click', () => loadChat(button.dataset.chatId));
       });
+      historyList.querySelectorAll('[data-delete-chat]').forEach(handle => {
+        handle.addEventListener('click', event => {
+          event.stopPropagation();
+          deleteChat(handle.dataset.deleteChat);
+        });
+      });
+    }
+
+    function deleteChat(chatId) {
+      let sessions = readChatSessions().filter(session => session.id !== chatId);
+      writeChatSessions(sessions);
+      if (chatId === currentChatId) {
+        if (sessions[0]) {
+          loadChat(sessions[0].id);
+        } else {
+          createNewChat();
+        }
+      } else {
+        renderHistoryList();
+      }
+    }
+
+    function isEmptySession(session) {
+      return session.title === 'Yeni sohbet' && (session.messages || []).every(item => item.type === 'ai');
+    }
+
+    function pruneEmptySessions() {
+      const sessions = readChatSessions();
+      const emptyOnes = sessions.filter(isEmptySession);
+      if (emptyOnes.length <= 1) return;
+      const keepId = emptyOnes.reduce((a, b) => (b.updatedAt > a.updatedAt ? b : a)).id;
+      writeChatSessions(sessions.filter(session => !isEmptySession(session) || session.id === keepId));
     }
 
     function renderMessage(text, type = 'ai') {
@@ -5275,6 +5457,11 @@
 
     function createNewChat() {
       const sessions = readChatSessions();
+      const current = sessions.find(item => item.id === currentChatId);
+      if (current && isEmptySession(current)) {
+        loadChat(current.id);
+        return;
+      }
       const session = {
         id: `chat-${Date.now()}`,
         title: 'Yeni sohbet',
@@ -5396,6 +5583,7 @@
     }
 
     function bootChatHistory() {
+      pruneEmptySessions();
       ensureCurrentChat();
       loadChat(currentChatId);
     }
@@ -5614,8 +5802,11 @@
       }
     }
 
+    const FLASH_RING_CIRC = 119.4;
+
     function renderFlashcard() {
-      flashcardSubtitle.textContent = `${flashLessonExam} • ${flashLessonName} • ${flashTopic}`;
+      flashcardLessonTag.textContent = flashLessonName;
+      flashcardTopicText.textContent = `${flashLessonExam} • ${flashTopic}`;
       if (!flashDeck.length) return;
       if (flashIndex >= flashDeck.length) {
         flashcardPlay.style.display = 'none';
@@ -5624,6 +5815,7 @@
         flashcardSummaryText.textContent = flashKnownIds.size === flashDeck.length
           ? 'Bu desteyi tamamen biliyorsun. Üstteki listeden başka bir konu seçip devam edebilirsin.'
           : 'Kalan kartları bugün bir kez daha göstereceğim, baştan başlat ve sadece onlara odaklan.';
+        flashcardRing.style.strokeDashoffset = '0';
         return;
       }
       flashcardPlay.style.display = 'block';
@@ -5633,7 +5825,8 @@
       flashcardFront.textContent = card.front;
       flashcardBack.textContent = card.back;
       flashcardCount.textContent = `${flashIndex + 1} / ${flashDeck.length}`;
-      flashcardProgressFill.style.width = `${Math.round((flashIndex / flashDeck.length) * 100)}%`;
+      const fraction = flashIndex / flashDeck.length;
+      flashcardRing.style.strokeDashoffset = String(FLASH_RING_CIRC * (1 - fraction));
       document.getElementById('flashcardPrev').disabled = flashIndex === 0;
     }
 
@@ -5643,6 +5836,17 @@
       renderFlashcard();
     }
 
+    function bumpDailyStreak(storageKey) {
+      const today = new Date().toDateString();
+      let data = {};
+      try { data = JSON.parse(localStorage.getItem(storageKey) || '{}'); } catch {}
+      if (data.lastDate === today) return data.count || 1;
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+      const count = data.lastDate === yesterday ? (data.count || 0) + 1 : 1;
+      localStorage.setItem(storageKey, JSON.stringify({ count, lastDate: today }));
+      return count;
+    }
+
     function openFlashcards() {
       flashLessonExam = activeExamBank;
       flashLessonName = activeLesson;
@@ -5650,6 +5854,9 @@
       renderFlashcardLessonPills();
       renderFlashcardTopicPills();
       loadFlashDeck();
+      const streak = bumpDailyStreak('mentoFlashStreak');
+      flashcardStreakBadge.style.display = '';
+      flashcardStreakBadge.textContent = `🔥 ${streak} gün seri`;
       flashcardOverlay.classList.add('open');
       flashcardOverlay.setAttribute('aria-hidden', 'false');
     }
@@ -5799,10 +6006,11 @@
       gameQuestionBox.textContent = q.question;
       gameCount.textContent = `${gameIndex + 1} / ${gameQuestions.length}`;
       gameProgressFill.style.width = `${Math.round((gameIndex / gameQuestions.length) * 100)}%`;
-      gameScoreText.textContent = `Doğru: ${gameCorrect}/${gameIndex}`;
-      gameStreakText.textContent = `🔥 Seri: ${gameStreak}`;
+      gameScoreText.textContent = `✓ Doğru ${gameCorrect}/${gameIndex}`;
+      gameStreakText.textContent = `🔥 Seri ${gameStreak}`;
+      gameBestText.textContent = `🏅 En iyi ${gameBestStreak}`;
       gameOptionsBox.innerHTML = (q.options || []).map((option, index) => `
-        <button type="button" class="game-option" data-option-index="${index}">${option}</button>
+        <button type="button" class="game-option" data-option-index="${index}"><span class="game-option-text">${option}</span><span class="game-option-icon"></span></button>
       `).join('');
       gameOptionsBox.querySelectorAll('[data-option-index]').forEach(button => {
         button.addEventListener('click', () => answerGame(Number(button.dataset.optionIndex)));
@@ -5819,8 +6027,14 @@
       const buttons = gameOptionsBox.querySelectorAll('[data-option-index]');
       buttons.forEach(button => {
         const index = Number(button.dataset.optionIndex);
-        if (index === correctIndex) button.classList.add('correct');
-        else if (index === chosenIndex) button.classList.add('wrong');
+        const icon = button.querySelector('.game-option-icon');
+        if (index === correctIndex) {
+          button.classList.add('correct');
+          if (icon) icon.textContent = '✓';
+        } else if (index === chosenIndex) {
+          button.classList.add('wrong');
+          if (icon) icon.textContent = '✕';
+        }
         button.disabled = true;
       });
       if (chosenIndex === correctIndex) {
@@ -5830,8 +6044,9 @@
       } else {
         gameStreak = 0;
       }
-      gameScoreText.textContent = `Doğru: ${gameCorrect}/${gameIndex + 1}`;
-      gameStreakText.textContent = `🔥 Seri: ${gameStreak}`;
+      gameScoreText.textContent = `✓ Doğru ${gameCorrect}/${gameIndex + 1}`;
+      gameStreakText.textContent = `🔥 Seri ${gameStreak}`;
+      gameBestText.textContent = `🏅 En iyi ${gameBestStreak}`;
       setTimeout(() => {
         gameIndex += 1;
         renderGameQuestion();
