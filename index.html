@@ -2351,13 +2351,21 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 13px;
-      padding: 12px;
-      color: #c8d4e5;
-      background: rgba(255,255,255,.04);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 9px 10px;
+      color: #9fadc2;
+      background: transparent;
       text-align: left;
+      font-size: 13px;
+      font-weight: 800;
       cursor: pointer;
+      transition: background .15s ease, color .15s ease;
+    }
+
+    .chat-list button:hover {
+      color: #dce7f5;
+      background: rgba(255,255,255,.045);
     }
 
     .history-item {
@@ -2397,7 +2405,7 @@
     .chat-list button.active {
       color: #fff;
       background: rgba(245,166,35,.12);
-      border-color: rgba(245,166,35,.3);
+      border-color: rgba(245,166,35,.22);
     }
 
     .nav-ico {
@@ -2405,11 +2413,17 @@
       place-items: center;
       width: 24px;
       height: 24px;
-      border-radius: 9px;
-      color: #07111e;
-      background: rgba(245,166,35,.9);
-      font-size: 13px;
+      border-radius: 8px;
+      color: #7f8ea6;
+      background: rgba(255,255,255,.05);
+      font-size: 12px;
       flex: 0 0 auto;
+      transition: background .15s ease, color .15s ease;
+    }
+
+    .chat-list button.active .nav-ico {
+      color: #07111e;
+      background: #f5a623;
     }
 
     .app-profile {
@@ -2643,18 +2657,23 @@
 
     .message {
       max-width: min(760px, 86%);
-      padding: 15px 17px;
-      border-radius: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
       line-height: 1.55;
+      font-size: 13.5px;
       color: #dce7f5;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.07);
+      box-shadow: 0 10px 24px rgba(0,0,0,.14);
     }
 
     .message.user {
       justify-self: end;
       color: #07111e;
+      font-weight: 700;
       background: #f5a623;
+      border-color: transparent;
+      box-shadow: 0 10px 24px rgba(245,166,35,.18);
     }
 
     .learning-grid {
@@ -2809,12 +2828,17 @@
       max-height: 130px;
       resize: vertical;
       border: 1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
+      border-radius: 14px;
       padding: 15px;
       color: #fff;
       background: rgba(255,255,255,.06);
       outline: none;
       font: inherit;
+      transition: border-color .15s ease;
+    }
+
+    .composer textarea:focus {
+      border-color: rgba(245,166,35,.45);
     }
 
     .study-panel {
@@ -4265,10 +4289,11 @@
       <div class="sidebar-label">Sohbet geçmişi</div>
       <div class="history-list" id="historyList"></div>
       <div class="chat-list" id="chatList">
+        <div class="sidebar-label">Çalışma</div>
         <button class="active" type="button" data-panel-route="/panel/bugunku-plan" data-panel-title="Bugünkü plan"><span class="nav-ico">✓</span>Bugünkü plan</button>
         <button type="button" data-panel-route="/panel/soru-coz" data-panel-title="Soru görseliyle çöz"><span class="nav-ico">＋</span>Soru görseliyle çöz</button>
         <button type="button" data-panel-route="/panel/konu-anlatimi" data-panel-title="Konu anlatımı"><span class="nav-ico">▤</span>Konu anlatımı</button>
-        <div class="sidebar-label">Öğrenme yolları</div>
+        <div class="sidebar-label">Pekiştirme</div>
         <button type="button" data-panel-route="/panel/ezber-kartlari" data-panel-title="Ezber kartları"><span class="nav-ico">◆</span>Ezber kartları</button>
         <button type="button" data-panel-route="/panel/oyunlarla-ogren" data-panel-title="Oyunlarla öğren"><span class="nav-ico">▶</span>Oyunlarla öğren</button>
         <button type="button" data-panel-route="/panel/mini-testler" data-panel-title="Mini testler"><span class="nav-ico">?</span>Mini testler</button>
