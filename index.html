@@ -3329,6 +3329,80 @@
       cursor: pointer;
     }
 
+    .plan-steps {
+      display: grid;
+      gap: 10px;
+    }
+
+    .plan-step {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 15px;
+      border-radius: 15px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .plan-step-num {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(245,166,35,.16);
+      color: #f5a623;
+      font-weight: 900;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+
+    .plan-step-body strong {
+      display: block;
+      color: #fff;
+      font-size: 13.5px;
+      margin-bottom: 3px;
+    }
+
+    .plan-step-body p {
+      margin: 0;
+      color: #93a3bb;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .plan-step button {
+      min-height: 36px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 11px;
+      color: #07111e;
+      background: #f5a623;
+      font-weight: 900;
+      font-size: 12.5px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .student-app.light .plan-step {
+      background: #edf3f8;
+      border-color: #c7d3e1;
+    }
+
+    .student-app.light .plan-step-body strong {
+      color: #172335;
+    }
+
+    .study-panel.plan-highlight {
+      animation: study-panel-pulse 1.4s ease;
+    }
+
+    @keyframes study-panel-pulse {
+      0%, 100% { box-shadow: none; }
+      30% { box-shadow: inset 0 0 0 2px rgba(245,166,35,.5); }
+    }
+
     .student-app.light .flashcard-box {
       background: #f3f6fa;
       border-color: #c6d1df;
@@ -4988,6 +5062,46 @@
     </div>
   </div>
 
+  <div class="flashcard-overlay" id="planOverlay" aria-hidden="true">
+    <div class="flashcard-box">
+      <div class="flashcard-head">
+        <div>
+          <h3>Bugünkü plan</h3>
+          <div class="flashcard-meta">
+            <span class="lesson-tag" id="planLessonTag">Matematik</span>
+            <span id="planTopicText">LGS • Çarpanlar ve Katlar</span>
+          </div>
+        </div>
+        <button class="flashcard-close" type="button" id="planClose" aria-label="Kapat">✕</button>
+      </div>
+      <div class="plan-steps">
+        <div class="plan-step">
+          <div class="plan-step-num">1</div>
+          <div class="plan-step-body">
+            <strong>Konu anlatımını izle</strong>
+            <p id="planStep1Desc">Bugünün önerilen konusu yükleniyor…</p>
+          </div>
+          <button type="button" id="planOpenLecture">Aç →</button>
+        </div>
+        <div class="plan-step">
+          <div class="plan-step-num">2</div>
+          <div class="plan-step-body">
+            <strong>20 soruluk test çöz</strong>
+            <p>Aynı konudan gerçek sorularla kendini sına.</p>
+          </div>
+          <button type="button" id="planOpenTest">Başlat →</button>
+        </div>
+        <div class="plan-step">
+          <div class="plan-step-num">3</div>
+          <div class="plan-step-body">
+            <strong>Yanlış sebebini not al</strong>
+            <p>Test bitince hangi soruları neden kaçırdığını gör, ertesi gün ona göre tekrar et.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const modal = document.getElementById('demoModal');
     const openButtons = document.querySelectorAll('[data-open-demo]');
@@ -5082,7 +5196,18 @@
     let gameAnswered = false;
     let gameTimerInterval = null;
     let gameTimeLeft = 15;
+    let gameQuestionCount = 8;
     const gameCache = {};
+
+    const planOverlay = document.getElementById('planOverlay');
+    const planLessonTag = document.getElementById('planLessonTag');
+    const planTopicText = document.getElementById('planTopicText');
+    const planStep1Desc = document.getElementById('planStep1Desc');
+    let planExam = null;
+    let planLesson = null;
+    let planTopicTitle = null;
+    let planTopicDesc = null;
+
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
     const profileMode = document.getElementById('profileMode');
@@ -5947,7 +6072,7 @@
       gamePlay.style.display = 'none';
       gameSummaryBox.style.display = 'none';
       gameErrorBox.style.display = 'none';
-      const cacheKey = `${gameLessonExam}|${gameLessonName}|${gameTopic}`;
+      const cacheKey = `${gameLessonExam}|${gameLessonName}|${gameTopic}|${gameQuestionCount}`;
       if (gameCache[cacheKey]) {
         gameQuestions = gameCache[cacheKey];
         startGameRound();
@@ -5958,7 +6083,7 @@
         const response = await fetch('/api/generate-quiz', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ topic: gameTopic, exam: gameLessonExam, lesson: gameLessonName, questionCount: 8 })
+          body: JSON.stringify({ topic: gameTopic, exam: gameLessonExam, lesson: gameLessonName, questionCount: gameQuestionCount })
         });
         const data = await response.json();
         if (!response.ok || !data.quiz?.questions?.length) {
@@ -6053,12 +6178,13 @@
       }, 1100);
     }
 
-    function openGame(mode) {
+    function openGame(mode, options = {}) {
       gameMode = mode;
       gameTitle.textContent = mode;
-      gameLessonExam = activeExamBank;
-      gameLessonName = activeLesson;
-      gameTopic = topicBanks[gameLessonExam]?.[gameLessonName]?.[0]?.[0] || gameLessonName;
+      gameLessonExam = options.exam || activeExamBank;
+      gameLessonName = options.lesson || activeLesson;
+      gameTopic = options.topic || topicBanks[gameLessonExam]?.[gameLessonName]?.[0]?.[0] || gameLessonName;
+      gameQuestionCount = options.questionCount || 8;
       renderGameLessonPills();
       renderGameTopicPills();
       loadGameQuestions();
@@ -6076,6 +6202,43 @@
     gameOverlay.addEventListener('click', event => { if (event.target === gameOverlay) closeGame(); });
     document.getElementById('gameRetry').addEventListener('click', () => loadGameQuestions());
     document.getElementById('gameRestart').addEventListener('click', () => startGameRound());
+
+    function pickDailyTopic(exam, lesson) {
+      const topics = topicBanks[exam]?.[lesson] || [];
+      if (!topics.length) return null;
+      const dayIndex = Math.floor(Date.now() / 86400000);
+      return topics[dayIndex % topics.length];
+    }
+
+    function openDailyPlan() {
+      planExam = activeExamBank;
+      planLesson = activeLesson;
+      const picked = pickDailyTopic(planExam, planLesson);
+      planTopicTitle = picked ? picked[0] : planLesson;
+      planTopicDesc = picked ? picked[1] : '';
+      planLessonTag.textContent = planLesson;
+      planTopicText.textContent = `${planExam} • ${planTopicTitle}`;
+      planStep1Desc.textContent = planTopicDesc || 'Bu ders için önce kısa bir konu tekrarı yap.';
+      planOverlay.classList.add('open');
+      planOverlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeDailyPlan() {
+      planOverlay.classList.remove('open');
+      planOverlay.setAttribute('aria-hidden', 'true');
+    }
+
+    document.getElementById('planClose').addEventListener('click', closeDailyPlan);
+    planOverlay.addEventListener('click', event => { if (event.target === planOverlay) closeDailyPlan(); });
+    document.getElementById('planOpenLecture').addEventListener('click', () => {
+      closeDailyPlan();
+      addMessage(`${planExam} ${planLesson} - ${planTopicTitle} konu anlatımı istiyorum.`, 'user');
+      addMessage(`${planTopicTitle}: ${planTopicDesc} Önce kısa konu anlatımı izle, sonra 12 kolay-orta soru çöz. Yanlışların varsa hangi adımda takıldığını yaz; ben onu parçalayarak anlatayım.`);
+    });
+    document.getElementById('planOpenTest').addEventListener('click', () => {
+      closeDailyPlan();
+      openGame('Bugünkü test', { exam: planExam, lesson: planLesson, topic: planTopicTitle, questionCount: 20 });
+    });
 
     function setAuthMode(mode) {
       authMode = mode;
@@ -6375,6 +6538,22 @@
           openFlashcards();
           return;
         }
+        if (title === 'Bugünkü plan') {
+          openDailyPlan();
+          return;
+        }
+        if (title === 'Soru görseliyle çöz') {
+          questionPhoto.click();
+          return;
+        }
+        if (title === 'Konu anlatımı') {
+          const panel = document.querySelector('.study-panel');
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          panel.classList.remove('plan-highlight');
+          void panel.offsetWidth;
+          panel.classList.add('plan-highlight');
+          return;
+        }
         const wasActive = activeLearningMode === title;
         const learningModes = ['Oyunlarla öğren', 'Mini testler', 'Hedef takibi'];
         if (wasActive && learningModes.includes(title)) {
@@ -6385,9 +6564,6 @@
           }
         }
         const replies = {
-          'Bugünkü plan': 'Bugünkü plan: Önce en riskli konuyu kısa tekrar et, sonra süreli soru çöz, en son yanlış sebebini not al.',
-          'Soru görseliyle çöz': 'Soru görselini alttaki + butonuyla yükle. Ardından dersini ve nerede takıldığını yaz.',
-          'Konu anlatımı': 'Sağdaki ders ve konu listesinden istediğin konuyu seç. Sana kısa anlatım, örnek soru ve video rotası çıkarayım.',
           'Oyunlarla öğren': 'Oyun modu açıldı. Seri, süre ve puan görevleriyle konuyu daha canlı çalıştırır.',
           'Mini testler': 'Mini test modu açıldı. 5 soruluk hızlı ölçüm, yanlış etiketi ve tekrar planı hazırlar.',
           'Hedef takibi': 'Hedef takibi açıldı. Günlük süre, çözülen soru, net potansiyeli ve çalışma serini yorumlar.'
@@ -6495,6 +6671,8 @@
           const title = match.dataset.panelTitle || match.textContent.trim();
           if (title === 'Ezber kartları') {
             openFlashcards();
+          } else if (title === 'Bugünkü plan') {
+            openDailyPlan();
           } else if (['Oyunlarla öğren', 'Mini testler', 'Hedef takibi'].includes(title)) {
             addLearningCards(title);
           }
