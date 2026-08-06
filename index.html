@@ -2498,6 +2498,7 @@
       display: grid;
       grid-template-rows: auto 1fr auto;
       min-width: 0;
+      min-height: 0;
       background:
         radial-gradient(circle at 50% 0%, rgba(245,166,35,.11), transparent 32%),
         #091421;
@@ -2637,6 +2638,7 @@
       gap: 14px;
       padding: 26px;
       overflow: auto;
+      min-height: 0;
     }
 
     .message {
@@ -4464,6 +4466,7 @@
       modal.setAttribute('aria-hidden', 'false');
       studentApp.classList.remove('open');
       studentApp.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
       setAuthMode(mode);
       setStep(routeSteps[route] ?? 0, false);
       writeRoute(route);
@@ -4910,6 +4913,7 @@
       modal.setAttribute('aria-hidden', 'true');
       studentApp.classList.add('open');
       studentApp.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
       if (updateUrl) writeRoute('/panel/bugunku-plan');
     }
 
