@@ -2950,6 +2950,288 @@
       cursor: pointer;
     }
 
+    .flashcard-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 85;
+      display: none;
+      place-items: center;
+      padding: 32px;
+      background: rgba(4,8,15,.78);
+      backdrop-filter: blur(6px);
+    }
+
+    .flashcard-overlay.open {
+      display: grid;
+    }
+
+    .flashcard-box {
+      width: min(560px, 100%);
+      max-height: 92vh;
+      display: grid;
+      gap: 18px;
+      padding: 26px;
+      border-radius: 24px;
+      background: #0b1626;
+      border: 1px solid rgba(255,255,255,.09);
+      box-shadow: 0 40px 90px rgba(0,0,0,.45);
+    }
+
+    .flashcard-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .flashcard-head h3 {
+      margin: 0 0 4px;
+      font-size: 19px;
+      color: #fff;
+    }
+
+    .flashcard-head p {
+      margin: 0;
+      color: #93a3bb;
+      font-size: 12.5px;
+    }
+
+    .flashcard-close {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 11px;
+      color: #dce7f5;
+      background: rgba(255,255,255,.06);
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .flashcard-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .flashcard-pills button {
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      padding: 5px 12px;
+      color: #aebbd0;
+      background: rgba(255,255,255,.05);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .flashcard-pills button.active {
+      border-color: transparent;
+      color: #c9820a;
+      background: linear-gradient(180deg, #ffd699, #ffcb70);
+    }
+
+    .flashcard-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #7f8ea6;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .flashcard-progress-track {
+      flex: 1;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+    }
+
+    .flashcard-progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: #f5a623;
+      transition: width .25s ease;
+    }
+
+    .flashcard-stage {
+      perspective: 1400px;
+      height: 240px;
+    }
+
+    .flashcard {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform .5s cubic-bezier(.2,.7,.3,1);
+    }
+
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-face {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 10px;
+      padding: 26px;
+      text-align: center;
+      border-radius: 20px;
+      backface-visibility: hidden;
+      border: 1px solid rgba(245,166,35,.24);
+    }
+
+    .flashcard-face.front {
+      background:
+        radial-gradient(circle at 30% 0%, rgba(245,166,35,.16), transparent 55%),
+        #12233a;
+    }
+
+    .flashcard-face.back {
+      transform: rotateY(180deg);
+      background:
+        radial-gradient(circle at 70% 100%, rgba(49,184,119,.16), transparent 55%),
+        #12233a;
+    }
+
+    .flashcard-tag {
+      color: #f5a623;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .flashcard-face.back .flashcard-tag {
+      color: #31b877;
+    }
+
+    .flashcard-term {
+      color: #fff;
+      font-size: 21px;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .flashcard-def {
+      color: #cdd8e8;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .flashcard-hint {
+      color: #647389;
+      font-size: 11.5px;
+    }
+
+    .flashcard-controls {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .flashcard-nav {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 13px;
+      color: #dce7f5;
+      background: rgba(255,255,255,.06);
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    .flashcard-nav:disabled {
+      opacity: .35;
+      cursor: default;
+    }
+
+    .flashcard-judge {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .flashcard-judge button {
+      min-height: 44px;
+      border: 0;
+      border-radius: 13px;
+      font-weight: 900;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .flashcard-know {
+      color: #07211a;
+      background: #31b877;
+    }
+
+    .flashcard-review {
+      color: #3a2405;
+      background: #ffcb70;
+    }
+
+    .flashcard-summary {
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+      text-align: center;
+      padding: 20px 6px 6px;
+    }
+
+    .flashcard-summary strong {
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .flashcard-summary p {
+      margin: 0;
+      color: #93a3bb;
+      font-size: 13px;
+    }
+
+    .flashcard-restart {
+      min-height: 44px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 13px;
+      color: #07111e;
+      background: #f5a623;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .student-app.light .flashcard-box {
+      background: #f3f6fa;
+      border-color: #c6d1df;
+    }
+
+    .student-app.light .flashcard-head h3,
+    .student-app.light .flashcard-summary strong {
+      color: #172235;
+    }
+
+    .student-app.light .flashcard-face.front,
+    .student-app.light .flashcard-face.back {
+      background: #fff;
+      border-color: #d9c495;
+    }
+
+    .student-app.light .flashcard-term {
+      color: #172235;
+    }
+
+    .student-app.light .flashcard-def {
+      color: #4a5977;
+    }
+
     .coach-loading {
       color: #fff;
       background: linear-gradient(145deg, #0c1727, #18283d);
@@ -4365,6 +4647,52 @@
     </aside>
   </section>
 
+  <div class="flashcard-overlay" id="flashcardOverlay" aria-hidden="true">
+    <div class="flashcard-box">
+      <div class="flashcard-head">
+        <div>
+          <h3>Ezber kartları</h3>
+          <p id="flashcardSubtitle">LGS • Matematik</p>
+        </div>
+        <button class="flashcard-close" type="button" id="flashcardClose" aria-label="Kapat">✕</button>
+      </div>
+      <div class="flashcard-pills" id="flashcardLessonPills"></div>
+      <div id="flashcardPlay">
+        <div class="flashcard-progress">
+          <span id="flashcardCount">1 / 8</span>
+          <div class="flashcard-progress-track"><div class="flashcard-progress-fill" id="flashcardProgressFill" style="width:12%"></div></div>
+        </div>
+        <div class="flashcard-stage">
+          <div class="flashcard" id="flashcardCard">
+            <div class="flashcard-face front">
+              <span class="flashcard-tag">Kavram</span>
+              <div class="flashcard-term" id="flashcardFront">—</div>
+              <span class="flashcard-hint">Çevirmek için karta dokun</span>
+            </div>
+            <div class="flashcard-face back">
+              <span class="flashcard-tag">Açıklama</span>
+              <div class="flashcard-def" id="flashcardBack">—</div>
+              <span class="flashcard-hint">Bildiysen sağa, tekrar edeceksen sola</span>
+            </div>
+          </div>
+        </div>
+        <div class="flashcard-controls">
+          <button class="flashcard-nav" type="button" id="flashcardPrev" aria-label="Önceki kart">‹</button>
+          <div class="flashcard-judge">
+            <button class="flashcard-review" type="button" id="flashcardReview">↻ Tekrar edeyim</button>
+            <button class="flashcard-know" type="button" id="flashcardKnow">✓ Biliyorum</button>
+          </div>
+          <button class="flashcard-nav" type="button" id="flashcardNext" aria-label="Sonraki kart">›</button>
+        </div>
+      </div>
+      <div class="flashcard-summary" id="flashcardSummary" style="display:none">
+        <strong id="flashcardSummaryTitle">8 karttan 6'sını biliyordun</strong>
+        <p id="flashcardSummaryText">Kalan kartları yarın tekrar göstereceğim, bugün önce onları çalış.</p>
+        <button class="flashcard-restart" type="button" id="flashcardRestart">Baştan başla</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const modal = document.getElementById('demoModal');
     const openButtons = document.querySelectorAll('[data-open-demo]');
@@ -4401,6 +4729,23 @@
     const lessonPills = document.getElementById('lessonPills');
     const topicList = document.getElementById('topicList');
     const topicAccents = ['#f5a623', '#4d7df3', '#31b877', '#875ee4'];
+    const flashcardOverlay = document.getElementById('flashcardOverlay');
+    const flashcardSubtitle = document.getElementById('flashcardSubtitle');
+    const flashcardLessonPills = document.getElementById('flashcardLessonPills');
+    const flashcardPlay = document.getElementById('flashcardPlay');
+    const flashcardSummaryBox = document.getElementById('flashcardSummary');
+    const flashcardCard = document.getElementById('flashcardCard');
+    const flashcardFront = document.getElementById('flashcardFront');
+    const flashcardBack = document.getElementById('flashcardBack');
+    const flashcardCount = document.getElementById('flashcardCount');
+    const flashcardProgressFill = document.getElementById('flashcardProgressFill');
+    const flashcardSummaryTitle = document.getElementById('flashcardSummaryTitle');
+    const flashcardSummaryText = document.getElementById('flashcardSummaryText');
+    let flashDeck = [];
+    let flashIndex = 0;
+    let flashKnownIds = new Set();
+    let flashLessonExam = null;
+    let flashLessonName = null;
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
     const profileMode = document.getElementById('profileMode');
@@ -4804,11 +5149,6 @@
       }
 
       const sets = {
-        'Ezber kartları': [
-          ['Akıllı kart destesi', `${activeLesson} için 8 kavram kartı: ön yüzde soru, arka yüzde net tanım ve ipucu.`],
-          ['Yanlış kartı', 'Yanlış yaptığın soru tipini otomatik karta çevirir, ertesi gün tekrar ettirir.'],
-          ['Hızlı tekrar', '3 dakika içinde en zayıf 5 kavramı yoklar.']
-        ],
         'Oyunlarla öğren': [
           ['Seri modu', '5 doğru üst üste yapınca seviye atlar, yanlışta kısa ipucu verir.'],
           ['Süre yarışı', 'Paragraf, işlem veya kavram sorularında zamana karşı mini tur açar.'],
@@ -4985,6 +5325,85 @@
         });
       });
     }
+
+    function buildFlashDeck() {
+      const cards = topicBanks[flashLessonExam]?.[flashLessonName] || [];
+      flashDeck = cards.map(([title, desc], index) => ({ id: `${flashLessonExam}-${flashLessonName}-${index}`, front: title, back: desc }));
+      flashIndex = 0;
+      flashKnownIds = new Set();
+    }
+
+    function renderFlashcardLessonPills() {
+      flashcardLessonPills.innerHTML = Object.keys(topicBanks[flashLessonExam]).map(lesson => `
+        <button type="button" class="${lesson === flashLessonName ? 'active' : ''}" data-flash-lesson="${lesson}">${lesson}</button>
+      `).join('');
+      flashcardLessonPills.querySelectorAll('[data-flash-lesson]').forEach(button => {
+        button.addEventListener('click', () => {
+          flashLessonName = button.dataset.flashLesson;
+          renderFlashcardLessonPills();
+          buildFlashDeck();
+          renderFlashcard();
+        });
+      });
+    }
+
+    function renderFlashcard() {
+      flashcardSubtitle.textContent = `${flashLessonExam} • ${flashLessonName}`;
+      if (!flashDeck.length) return;
+      if (flashIndex >= flashDeck.length) {
+        flashcardPlay.style.display = 'none';
+        flashcardSummaryBox.style.display = 'grid';
+        flashcardSummaryTitle.textContent = `${flashDeck.length} karttan ${flashKnownIds.size} tanesini biliyordun`;
+        flashcardSummaryText.textContent = flashKnownIds.size === flashDeck.length
+          ? 'Bu desteyi tamamen biliyorsun. Sağdaki listeden başka bir ders seçip devam edebilirsin.'
+          : 'Kalan kartları bugün bir kez daha göstereceğim, baştan başlat ve sadece onlara odaklan.';
+        return;
+      }
+      flashcardPlay.style.display = 'block';
+      flashcardSummaryBox.style.display = 'none';
+      flashcardCard.classList.remove('flipped');
+      const card = flashDeck[flashIndex];
+      flashcardFront.textContent = card.front;
+      flashcardBack.textContent = card.back;
+      flashcardCount.textContent = `${flashIndex + 1} / ${flashDeck.length}`;
+      flashcardProgressFill.style.width = `${Math.round((flashIndex / flashDeck.length) * 100)}%`;
+      document.getElementById('flashcardPrev').disabled = flashIndex === 0;
+    }
+
+    function judgeFlashcard(known) {
+      const card = flashDeck[flashIndex];
+      if (known) flashKnownIds.add(card.id); else flashKnownIds.delete(card.id);
+      flashIndex += 1;
+      renderFlashcard();
+    }
+
+    function openFlashcards() {
+      flashLessonExam = activeExamBank;
+      flashLessonName = activeLesson;
+      renderFlashcardLessonPills();
+      buildFlashDeck();
+      renderFlashcard();
+      flashcardOverlay.classList.add('open');
+      flashcardOverlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeFlashcards() {
+      flashcardOverlay.classList.remove('open');
+      flashcardOverlay.setAttribute('aria-hidden', 'true');
+    }
+
+    flashcardCard.addEventListener('click', () => flashcardCard.classList.toggle('flipped'));
+    document.getElementById('flashcardClose').addEventListener('click', closeFlashcards);
+    flashcardOverlay.addEventListener('click', event => { if (event.target === flashcardOverlay) closeFlashcards(); });
+    document.getElementById('flashcardPrev').addEventListener('click', () => {
+      if (flashIndex > 0) { flashIndex -= 1; renderFlashcard(); }
+    });
+    document.getElementById('flashcardNext').addEventListener('click', () => {
+      if (flashIndex < flashDeck.length) { flashIndex += 1; renderFlashcard(); }
+    });
+    document.getElementById('flashcardKnow').addEventListener('click', () => judgeFlashcard(true));
+    document.getElementById('flashcardReview').addEventListener('click', () => judgeFlashcard(false));
+    document.getElementById('flashcardRestart').addEventListener('click', () => { buildFlashDeck(); renderFlashcard(); });
 
     function setAuthMode(mode) {
       authMode = mode;
@@ -5277,12 +5696,16 @@
 
     document.querySelectorAll('#chatList button').forEach(button => {
       button.addEventListener('click', () => {
-        const wasActive = button.classList.contains('active');
+        const title = button.dataset.panelTitle || button.textContent.trim();
         document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item === button));
         writeRoute(button.dataset.panelRoute || '/panel');
-        const title = button.dataset.panelTitle || button.textContent.trim();
-        const learningModes = ['Ezber kartları', 'Oyunlarla öğren', 'Mini testler', 'Hedef takibi'];
-        if (wasActive && learningModes.includes(title) && activeLearningMode === title) {
+        if (title === 'Ezber kartları') {
+          openFlashcards();
+          return;
+        }
+        const wasActive = activeLearningMode === title;
+        const learningModes = ['Oyunlarla öğren', 'Mini testler', 'Hedef takibi'];
+        if (wasActive && learningModes.includes(title)) {
           const existing = messages.querySelector('.learning-grid');
           if (existing) {
             existing.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -5293,7 +5716,6 @@
           'Bugünkü plan': 'Bugünkü plan: Önce en riskli konuyu kısa tekrar et, sonra süreli soru çöz, en son yanlış sebebini not al.',
           'Soru görseliyle çöz': 'Soru görselini alttaki + butonuyla yükle. Ardından dersini ve nerede takıldığını yaz.',
           'Konu anlatımı': 'Sağdaki ders ve konu listesinden istediğin konuyu seç. Sana kısa anlatım, örnek soru ve video rotası çıkarayım.',
-          'Ezber kartları': 'Ezber kartları modu açıldı. Kavramı küçük parçalara böler, aralıklı tekrar için kartlara dönüştürür.',
           'Oyunlarla öğren': 'Oyun modu açıldı. Seri, süre ve puan görevleriyle konuyu daha canlı çalıştırır.',
           'Mini testler': 'Mini test modu açıldı. 5 soruluk hızlı ölçüm, yanlış etiketi ve tekrar planı hazırlar.',
           'Hedef takibi': 'Hedef takibi açıldı. Günlük süre, çözülen soru, net potansiyeli ve çalışma serini yorumlar.'
@@ -5399,7 +5821,9 @@
         if (match) {
           document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item === match));
           const title = match.dataset.panelTitle || match.textContent.trim();
-          if (['Ezber kartları', 'Oyunlarla öğren', 'Mini testler', 'Hedef takibi'].includes(title)) {
+          if (title === 'Ezber kartları') {
+            openFlashcards();
+          } else if (['Oyunlarla öğren', 'Mini testler', 'Hedef takibi'].includes(title)) {
             addLearningCards(title);
           }
         }
