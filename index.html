@@ -3031,6 +3031,49 @@
       background: linear-gradient(180deg, #ffd699, #ffcb70);
     }
 
+    .flashcard-loading {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      padding: 40px 10px;
+      color: #93a3bb;
+      font-size: 13px;
+    }
+
+    .flashcard-spinner {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 3px solid rgba(245,166,35,.22);
+      border-top-color: #f5a623;
+      animation: flashcard-spin .8s linear infinite;
+    }
+
+    @keyframes flashcard-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .flashcard-error {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+      padding: 34px 10px;
+      color: #ef9a9a;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .flashcard-error button {
+      min-height: 38px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 11px;
+      color: #07111e;
+      background: #f5a623;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
     .flashcard-progress {
       display: flex;
       align-items: center;
@@ -3230,6 +3273,81 @@
 
     .student-app.light .flashcard-def {
       color: #4a5977;
+    }
+
+    .game-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+      color: #aebbd0;
+      font-size: 12.5px;
+      font-weight: 800;
+    }
+
+    .game-stats span {
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .game-question {
+      margin: 16px 0 14px;
+      padding: 18px;
+      border-radius: 16px;
+      background: #12233a;
+      border: 1px solid rgba(255,255,255,.08);
+      color: #f4f7fb;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.5;
+      min-height: 70px;
+    }
+
+    .game-options {
+      display: grid;
+      gap: 9px;
+    }
+
+    .game-option {
+      text-align: left;
+      padding: 13px 15px;
+      border-radius: 13px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.045);
+      color: #dce7f5;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .game-option.correct {
+      border-color: rgba(49,184,119,.5);
+      background: rgba(49,184,119,.16);
+      color: #7fe0b3;
+    }
+
+    .game-option.wrong {
+      border-color: rgba(239,107,115,.5);
+      background: rgba(239,107,115,.14);
+      color: #ff9aa0;
+    }
+
+    .game-option:disabled {
+      cursor: default;
+    }
+
+    .student-app.light .game-question {
+      background: #fff;
+      border-color: #d9c495;
+      color: #172235;
+    }
+
+    .student-app.light .game-option {
+      background: #edf3f8;
+      border-color: #c7d3e1;
+      color: #172335;
     }
 
     .coach-loading {
@@ -4657,6 +4775,15 @@
         <button class="flashcard-close" type="button" id="flashcardClose" aria-label="Kapat">✕</button>
       </div>
       <div class="flashcard-pills" id="flashcardLessonPills"></div>
+      <div class="flashcard-pills" id="flashcardTopicPills"></div>
+      <div id="flashcardLoading" class="flashcard-loading" style="display:none">
+        <span class="flashcard-spinner"></span>
+        <span id="flashcardLoadingText">Mento AI bu konudan kartlar hazırlıyor…</span>
+      </div>
+      <div id="flashcardError" class="flashcard-error" style="display:none">
+        <span id="flashcardErrorText">Kartlar hazırlanamadı.</span>
+        <button type="button" id="flashcardRetry">Tekrar dene</button>
+      </div>
       <div id="flashcardPlay">
         <div class="flashcard-progress">
           <span id="flashcardCount">1 / 8</span>
@@ -4689,6 +4816,46 @@
         <strong id="flashcardSummaryTitle">8 karttan 6'sını biliyordun</strong>
         <p id="flashcardSummaryText">Kalan kartları yarın tekrar göstereceğim, bugün önce onları çalış.</p>
         <button class="flashcard-restart" type="button" id="flashcardRestart">Baştan başla</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="flashcard-overlay" id="gameOverlay" aria-hidden="true">
+    <div class="flashcard-box">
+      <div class="flashcard-head">
+        <div>
+          <h3 id="gameTitle">Seri modu</h3>
+          <p id="gameSubtitle">LGS • Matematik</p>
+        </div>
+        <button class="flashcard-close" type="button" id="gameClose" aria-label="Kapat">✕</button>
+      </div>
+      <div class="flashcard-pills" id="gameLessonPills"></div>
+      <div class="flashcard-pills" id="gameTopicPills"></div>
+      <div id="gameLoading" class="flashcard-loading" style="display:none">
+        <span class="flashcard-spinner"></span>
+        <span>Mento AI bu konudan sorular hazırlıyor…</span>
+      </div>
+      <div id="gameError" class="flashcard-error" style="display:none">
+        <span id="gameErrorText">Sorular hazırlanamadı.</span>
+        <button type="button" id="gameRetry">Tekrar dene</button>
+      </div>
+      <div id="gamePlay" style="display:none">
+        <div class="game-stats">
+          <span id="gameScoreText">Doğru: 0/0</span>
+          <span id="gameStreakText">🔥 Seri: 0</span>
+          <span id="gameTimerText" style="display:none">⏱ 15s</span>
+        </div>
+        <div class="flashcard-progress">
+          <span id="gameCount">1 / 8</span>
+          <div class="flashcard-progress-track"><div class="flashcard-progress-fill" id="gameProgressFill" style="width:12%"></div></div>
+        </div>
+        <div class="game-question" id="gameQuestion">Soru yükleniyor…</div>
+        <div class="game-options" id="gameOptions"></div>
+      </div>
+      <div class="flashcard-summary" id="gameSummary" style="display:none">
+        <strong id="gameSummaryTitle">10 sorudan 8'ini bildin</strong>
+        <p id="gameSummaryText">En uzun serin 6 soruydu. Aynı konudan devam edebilirsin.</p>
+        <button class="flashcard-restart" type="button" id="gameRestart">Yeniden oyna</button>
       </div>
     </div>
   </div>
@@ -4732,6 +4899,10 @@
     const flashcardOverlay = document.getElementById('flashcardOverlay');
     const flashcardSubtitle = document.getElementById('flashcardSubtitle');
     const flashcardLessonPills = document.getElementById('flashcardLessonPills');
+    const flashcardTopicPills = document.getElementById('flashcardTopicPills');
+    const flashcardLoading = document.getElementById('flashcardLoading');
+    const flashcardErrorBox = document.getElementById('flashcardError');
+    const flashcardErrorText = document.getElementById('flashcardErrorText');
     const flashcardPlay = document.getElementById('flashcardPlay');
     const flashcardSummaryBox = document.getElementById('flashcardSummary');
     const flashcardCard = document.getElementById('flashcardCard');
@@ -4746,6 +4917,41 @@
     let flashKnownIds = new Set();
     let flashLessonExam = null;
     let flashLessonName = null;
+    let flashTopic = null;
+    const flashcardCache = {};
+
+    const gameOverlay = document.getElementById('gameOverlay');
+    const gameTitle = document.getElementById('gameTitle');
+    const gameSubtitle = document.getElementById('gameSubtitle');
+    const gameLessonPills = document.getElementById('gameLessonPills');
+    const gameTopicPills = document.getElementById('gameTopicPills');
+    const gameLoading = document.getElementById('gameLoading');
+    const gameErrorBox = document.getElementById('gameError');
+    const gameErrorText = document.getElementById('gameErrorText');
+    const gamePlay = document.getElementById('gamePlay');
+    const gameSummaryBox = document.getElementById('gameSummary');
+    const gameSummaryTitle = document.getElementById('gameSummaryTitle');
+    const gameSummaryText = document.getElementById('gameSummaryText');
+    const gameScoreText = document.getElementById('gameScoreText');
+    const gameStreakText = document.getElementById('gameStreakText');
+    const gameTimerText = document.getElementById('gameTimerText');
+    const gameCount = document.getElementById('gameCount');
+    const gameProgressFill = document.getElementById('gameProgressFill');
+    const gameQuestionBox = document.getElementById('gameQuestion');
+    const gameOptionsBox = document.getElementById('gameOptions');
+    let gameMode = 'Seri modu';
+    let gameLessonExam = null;
+    let gameLessonName = null;
+    let gameTopic = null;
+    let gameQuestions = [];
+    let gameIndex = 0;
+    let gameCorrect = 0;
+    let gameStreak = 0;
+    let gameBestStreak = 0;
+    let gameAnswered = false;
+    let gameTimerInterval = null;
+    let gameTimeLeft = 15;
+    const gameCache = {};
     const profileName = document.getElementById('profileName');
     const profileAvatar = document.getElementById('profileAvatar');
     const profileMode = document.getElementById('profileMode');
@@ -5179,6 +5385,10 @@
       messages.scrollTop = messages.scrollHeight;
       wrap.querySelectorAll('[data-learning-action]').forEach(button => {
         button.addEventListener('click', () => {
+          if (mode === 'Oyunlarla öğren') {
+            openGame(button.dataset.learningAction);
+            return;
+          }
           addMessage(`${mode}: ${button.dataset.learningAction} başlat`, 'user');
           addMessage(`${button.dataset.learningAction} hazır. ${activeExamBank} ${activeLesson} için ilk mini akışı başlatıyorum: 1 kısa hedef, 1 örnek, 3 kontrol sorusu ve sonunda yanlış sebebi.`);
         });
@@ -5326,11 +5536,9 @@
       });
     }
 
-    function buildFlashDeck() {
+    function flashFallbackDeck() {
       const cards = topicBanks[flashLessonExam]?.[flashLessonName] || [];
-      flashDeck = cards.map(([title, desc], index) => ({ id: `${flashLessonExam}-${flashLessonName}-${index}`, front: title, back: desc }));
-      flashIndex = 0;
-      flashKnownIds = new Set();
+      return cards.map(([title, desc]) => ({ front: title, back: desc }));
     }
 
     function renderFlashcardLessonPills() {
@@ -5340,22 +5548,81 @@
       flashcardLessonPills.querySelectorAll('[data-flash-lesson]').forEach(button => {
         button.addEventListener('click', () => {
           flashLessonName = button.dataset.flashLesson;
+          flashTopic = topicBanks[flashLessonExam][flashLessonName]?.[0]?.[0] || flashLessonName;
           renderFlashcardLessonPills();
-          buildFlashDeck();
-          renderFlashcard();
+          renderFlashcardTopicPills();
+          loadFlashDeck();
         });
       });
     }
 
+    function renderFlashcardTopicPills() {
+      const topics = (topicBanks[flashLessonExam]?.[flashLessonName] || []).map(([title]) => title);
+      flashcardTopicPills.innerHTML = topics.map(title => `
+        <button type="button" class="${title === flashTopic ? 'active' : ''}" data-flash-topic="${title}">${title}</button>
+      `).join('');
+      flashcardTopicPills.querySelectorAll('[data-flash-topic]').forEach(button => {
+        button.addEventListener('click', () => {
+          flashTopic = button.dataset.flashTopic;
+          renderFlashcardTopicPills();
+          loadFlashDeck();
+        });
+      });
+    }
+
+    async function loadFlashDeck() {
+      flashcardPlay.style.display = 'none';
+      flashcardSummaryBox.style.display = 'none';
+      flashcardErrorBox.style.display = 'none';
+      const cacheKey = `${flashLessonExam}|${flashLessonName}|${flashTopic}`;
+      if (flashcardCache[cacheKey]) {
+        flashDeck = flashcardCache[cacheKey];
+        flashIndex = 0;
+        flashKnownIds = new Set();
+        renderFlashcard();
+        return;
+      }
+      flashcardLoading.style.display = 'grid';
+      try {
+        const response = await fetch('/api/flashcards', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ topic: flashTopic, exam: flashLessonExam, lesson: flashLessonName, count: 10 })
+        });
+        const data = await response.json();
+        if (!response.ok || !Array.isArray(data.cards) || !data.cards.length) {
+          throw new Error(data.error || 'Kartlar hazırlanamadı.');
+        }
+        flashcardCache[cacheKey] = data.cards;
+        flashDeck = data.cards;
+        flashIndex = 0;
+        flashKnownIds = new Set();
+        flashcardLoading.style.display = 'none';
+        renderFlashcard();
+      } catch (error) {
+        const fallback = flashFallbackDeck();
+        flashcardLoading.style.display = 'none';
+        if (fallback.length) {
+          flashDeck = fallback;
+          flashIndex = 0;
+          flashKnownIds = new Set();
+          renderFlashcard();
+        } else {
+          flashcardErrorBox.style.display = 'grid';
+          flashcardErrorText.textContent = error.message || 'Kartlar hazırlanamadı, tekrar dene.';
+        }
+      }
+    }
+
     function renderFlashcard() {
-      flashcardSubtitle.textContent = `${flashLessonExam} • ${flashLessonName}`;
+      flashcardSubtitle.textContent = `${flashLessonExam} • ${flashLessonName} • ${flashTopic}`;
       if (!flashDeck.length) return;
       if (flashIndex >= flashDeck.length) {
         flashcardPlay.style.display = 'none';
         flashcardSummaryBox.style.display = 'grid';
         flashcardSummaryTitle.textContent = `${flashDeck.length} karttan ${flashKnownIds.size} tanesini biliyordun`;
         flashcardSummaryText.textContent = flashKnownIds.size === flashDeck.length
-          ? 'Bu desteyi tamamen biliyorsun. Sağdaki listeden başka bir ders seçip devam edebilirsin.'
+          ? 'Bu desteyi tamamen biliyorsun. Üstteki listeden başka bir konu seçip devam edebilirsin.'
           : 'Kalan kartları bugün bir kez daha göstereceğim, baştan başlat ve sadece onlara odaklan.';
         return;
       }
@@ -5371,8 +5638,7 @@
     }
 
     function judgeFlashcard(known) {
-      const card = flashDeck[flashIndex];
-      if (known) flashKnownIds.add(card.id); else flashKnownIds.delete(card.id);
+      if (known) flashKnownIds.add(flashIndex); else flashKnownIds.delete(flashIndex);
       flashIndex += 1;
       renderFlashcard();
     }
@@ -5380,9 +5646,10 @@
     function openFlashcards() {
       flashLessonExam = activeExamBank;
       flashLessonName = activeLesson;
+      flashTopic = topicBanks[flashLessonExam]?.[flashLessonName]?.[0]?.[0] || flashLessonName;
       renderFlashcardLessonPills();
-      buildFlashDeck();
-      renderFlashcard();
+      renderFlashcardTopicPills();
+      loadFlashDeck();
       flashcardOverlay.classList.add('open');
       flashcardOverlay.setAttribute('aria-hidden', 'false');
     }
@@ -5403,7 +5670,197 @@
     });
     document.getElementById('flashcardKnow').addEventListener('click', () => judgeFlashcard(true));
     document.getElementById('flashcardReview').addEventListener('click', () => judgeFlashcard(false));
-    document.getElementById('flashcardRestart').addEventListener('click', () => { buildFlashDeck(); renderFlashcard(); });
+    document.getElementById('flashcardRestart').addEventListener('click', () => {
+      flashIndex = 0;
+      flashKnownIds = new Set();
+      renderFlashcard();
+    });
+    document.getElementById('flashcardRetry').addEventListener('click', () => loadFlashDeck());
+
+    function stopGameTimer() {
+      if (gameTimerInterval) { clearInterval(gameTimerInterval); gameTimerInterval = null; }
+    }
+
+    function startGameTimer() {
+      stopGameTimer();
+      if (gameMode !== 'Süre yarışı') { gameTimerText.style.display = 'none'; return; }
+      gameTimeLeft = 15;
+      gameTimerText.style.display = '';
+      gameTimerText.textContent = `⏱ ${gameTimeLeft}s`;
+      gameTimerInterval = setInterval(() => {
+        gameTimeLeft -= 1;
+        gameTimerText.textContent = `⏱ ${Math.max(0, gameTimeLeft)}s`;
+        if (gameTimeLeft <= 0) {
+          stopGameTimer();
+          if (!gameAnswered) answerGame(-1);
+        }
+      }, 1000);
+    }
+
+    function gameFallbackQuestions() {
+      const topics = topicBanks[gameLessonExam]?.[gameLessonName] || [];
+      return topics.slice(0, 6).map(([title, desc]) => ({
+        question: `${title} konusuyla ilgili doğru ifade hangisidir?`,
+        options: [desc, 'Bu konu sınav müfredatında yer almaz.', 'Bu konu yalnızca sözel sorularda çıkar.', 'Bu konunun tanımı yoktur.'],
+        correctIndex: 0
+      }));
+    }
+
+    function renderGameLessonPills() {
+      gameLessonPills.innerHTML = Object.keys(topicBanks[gameLessonExam]).map(lesson => `
+        <button type="button" class="${lesson === gameLessonName ? 'active' : ''}" data-game-lesson="${lesson}">${lesson}</button>
+      `).join('');
+      gameLessonPills.querySelectorAll('[data-game-lesson]').forEach(button => {
+        button.addEventListener('click', () => {
+          gameLessonName = button.dataset.gameLesson;
+          gameTopic = topicBanks[gameLessonExam][gameLessonName]?.[0]?.[0] || gameLessonName;
+          renderGameLessonPills();
+          renderGameTopicPills();
+          loadGameQuestions();
+        });
+      });
+    }
+
+    function renderGameTopicPills() {
+      const topics = (topicBanks[gameLessonExam]?.[gameLessonName] || []).map(([title]) => title);
+      gameTopicPills.innerHTML = topics.map(title => `
+        <button type="button" class="${title === gameTopic ? 'active' : ''}" data-game-topic="${title}">${title}</button>
+      `).join('');
+      gameTopicPills.querySelectorAll('[data-game-topic]').forEach(button => {
+        button.addEventListener('click', () => {
+          gameTopic = button.dataset.gameTopic;
+          renderGameTopicPills();
+          loadGameQuestions();
+        });
+      });
+    }
+
+    async function loadGameQuestions() {
+      stopGameTimer();
+      gamePlay.style.display = 'none';
+      gameSummaryBox.style.display = 'none';
+      gameErrorBox.style.display = 'none';
+      const cacheKey = `${gameLessonExam}|${gameLessonName}|${gameTopic}`;
+      if (gameCache[cacheKey]) {
+        gameQuestions = gameCache[cacheKey];
+        startGameRound();
+        return;
+      }
+      gameLoading.style.display = 'grid';
+      try {
+        const response = await fetch('/api/generate-quiz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ topic: gameTopic, exam: gameLessonExam, lesson: gameLessonName, questionCount: 8 })
+        });
+        const data = await response.json();
+        if (!response.ok || !data.quiz?.questions?.length) {
+          throw new Error(data.error || 'Sorular hazırlanamadı.');
+        }
+        gameCache[cacheKey] = data.quiz.questions;
+        gameQuestions = data.quiz.questions;
+        gameLoading.style.display = 'none';
+        startGameRound();
+      } catch (error) {
+        const fallback = gameFallbackQuestions();
+        gameLoading.style.display = 'none';
+        if (fallback.length) {
+          gameQuestions = fallback;
+          startGameRound();
+        } else {
+          gameErrorBox.style.display = 'grid';
+          gameErrorText.textContent = error.message || 'Sorular hazırlanamadı, tekrar dene.';
+        }
+      }
+    }
+
+    function startGameRound() {
+      gameIndex = 0;
+      gameCorrect = 0;
+      gameStreak = 0;
+      gameBestStreak = 0;
+      renderGameQuestion();
+    }
+
+    function renderGameQuestion() {
+      gameSubtitle.textContent = `${gameLessonExam} • ${gameLessonName} • ${gameTopic}`;
+      if (gameIndex >= gameQuestions.length) {
+        stopGameTimer();
+        gamePlay.style.display = 'none';
+        gameSummaryBox.style.display = 'grid';
+        gameSummaryTitle.textContent = `${gameQuestions.length} sorudan ${gameCorrect} tanesini bildin`;
+        gameSummaryText.textContent = `En uzun serin ${gameBestStreak} soruydu. Aynı konudan tekrar oynayabilir ya da üstten başka konu seçebilirsin.`;
+        return;
+      }
+      gameAnswered = false;
+      gamePlay.style.display = 'block';
+      gameSummaryBox.style.display = 'none';
+      const q = gameQuestions[gameIndex];
+      gameQuestionBox.textContent = q.question;
+      gameCount.textContent = `${gameIndex + 1} / ${gameQuestions.length}`;
+      gameProgressFill.style.width = `${Math.round((gameIndex / gameQuestions.length) * 100)}%`;
+      gameScoreText.textContent = `Doğru: ${gameCorrect}/${gameIndex}`;
+      gameStreakText.textContent = `🔥 Seri: ${gameStreak}`;
+      gameOptionsBox.innerHTML = (q.options || []).map((option, index) => `
+        <button type="button" class="game-option" data-option-index="${index}">${option}</button>
+      `).join('');
+      gameOptionsBox.querySelectorAll('[data-option-index]').forEach(button => {
+        button.addEventListener('click', () => answerGame(Number(button.dataset.optionIndex)));
+      });
+      startGameTimer();
+    }
+
+    function answerGame(chosenIndex) {
+      if (gameAnswered) return;
+      gameAnswered = true;
+      stopGameTimer();
+      const q = gameQuestions[gameIndex];
+      const correctIndex = Number(q.correctIndex);
+      const buttons = gameOptionsBox.querySelectorAll('[data-option-index]');
+      buttons.forEach(button => {
+        const index = Number(button.dataset.optionIndex);
+        if (index === correctIndex) button.classList.add('correct');
+        else if (index === chosenIndex) button.classList.add('wrong');
+        button.disabled = true;
+      });
+      if (chosenIndex === correctIndex) {
+        gameCorrect += 1;
+        gameStreak += 1;
+        gameBestStreak = Math.max(gameBestStreak, gameStreak);
+      } else {
+        gameStreak = 0;
+      }
+      gameScoreText.textContent = `Doğru: ${gameCorrect}/${gameIndex + 1}`;
+      gameStreakText.textContent = `🔥 Seri: ${gameStreak}`;
+      setTimeout(() => {
+        gameIndex += 1;
+        renderGameQuestion();
+      }, 1100);
+    }
+
+    function openGame(mode) {
+      gameMode = mode;
+      gameTitle.textContent = mode;
+      gameLessonExam = activeExamBank;
+      gameLessonName = activeLesson;
+      gameTopic = topicBanks[gameLessonExam]?.[gameLessonName]?.[0]?.[0] || gameLessonName;
+      renderGameLessonPills();
+      renderGameTopicPills();
+      loadGameQuestions();
+      gameOverlay.classList.add('open');
+      gameOverlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeGame() {
+      stopGameTimer();
+      gameOverlay.classList.remove('open');
+      gameOverlay.setAttribute('aria-hidden', 'true');
+    }
+
+    document.getElementById('gameClose').addEventListener('click', closeGame);
+    gameOverlay.addEventListener('click', event => { if (event.target === gameOverlay) closeGame(); });
+    document.getElementById('gameRetry').addEventListener('click', () => loadGameQuestions());
+    document.getElementById('gameRestart').addEventListener('click', () => startGameRound());
 
     function setAuthMode(mode) {
       authMode = mode;

@@ -449,6 +449,82 @@ async function handleGenerateQuiz(req, res) {
   }
 }
 
+async function askOpenAIFlashcards({ exam, lesson, topic, count = 10, maxOutputTokens = 1600 }) {
+  if (!hasValidOpenAIKey()) {
+    const error = new Error('OPENAI_API_KEY tanımlı değil.');
+    error.status = 500;
+    throw error;
+  }
+
+  const response = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_MODEL || 'gpt-4.1-mini',
+      max_output_tokens: maxOutputTokens,
+      input: [
+        {
+          role: 'system',
+          content: [
+            'Sen Mento AI adında Türkçe bir TYT, AYT ve LGS ezber kartı (flashcard) üretme motorusun.',
+            'Verilen konuyu genel geçme, konunun içindeki gerçek alt kavramlara ve sık sorulan noktalara böl.',
+            'Örnek: konu "Çarpanlar ve Katlar" ise kartlar EBOB nedir, EKOK nedir, asal çarpanlara ayırma, ortak bölen/kat bulma gibi somut alt başlıklardan oluşmalı.',
+            'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
+            'JSON şeması: {"cards": [{"front": string, "back": string}]}.',
+            `Tam olarak ${count} kart üret. front alanı kısa bir soru ya da kavram adı olsun (en fazla 8-9 kelime). back alanı 1-3 cümlelik net, doğru ve sınav diline uygun bir cevap/tanım olsun.`,
+            'Kartlar birbirini tekrar etmesin, konunun farklı alt noktalarını kapsasın.'
+          ].join(' ')
+        },
+        {
+          role: 'user',
+          content: `Sınav: ${exam || 'TYT'}\nDers: ${lesson || ''}\nKonu: ${topic}`
+        }
+      ]
+    })
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    const message = data.error?.message || 'OpenAI ezber kartı isteği başarısız oldu.';
+    const error = new Error(message);
+    error.status = response.status;
+    throw error;
+  }
+
+  const result = extractJsonBlock(extractOpenAIText(data));
+  if (!result || !Array.isArray(result.cards) || !result.cards.length) {
+    const error = new Error('Ezber kartları üretilemedi, tekrar dene.');
+    error.status = 502;
+    throw error;
+  }
+  return result.cards
+    .map(card => ({ front: String(card?.front || '').trim(), back: String(card?.back || '').trim() }))
+    .filter(card => card.front && card.back);
+}
+
+async function handleFlashcards(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const topic = String(body.topic || '').trim();
+    const exam = String(body.exam || '').trim();
+    const lesson = String(body.lesson || '').trim();
+    const count = Math.min(16, Math.max(4, Number(body.count || 10)));
+
+    if (!topic) {
+      sendJson(res, 400, { error: 'Konu bilgisi gerekli.' });
+      return;
+    }
+
+    const cards = await askOpenAIFlashcards({ exam, lesson, topic, count });
+    sendJson(res, 200, { ok: true, cards, topic, exam, lesson });
+  } catch (error) {
+    sendJson(res, error.status || 500, { error: error.message || 'Ezber kartları üretilemedi.' });
+  }
+}
+
 async function askOpenAITopicLecture({ exam, lesson, topic, weakPoints = [], maxOutputTokens = 1400 }) {
   if (!hasValidOpenAIKey()) {
     const error = new Error('OPENAI_API_KEY tanımlı değil.');
@@ -1236,6 +1312,10 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'POST' && req.url === '/api/topic-lecture') {
     handleTopicLecture(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/flashcards') {
+    handleFlashcards(req, res);
     return;
   }
   if (req.method === 'POST' && req.url === '/api/coach') {
