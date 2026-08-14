@@ -1142,8 +1142,66 @@ function publicUser(user) {
     birthYear: user.birthYear,
     gender: user.gender,
     goal: user.goal,
-    verified: user.verified
+    verified: user.verified,
+    authProvider: user.googleAuth ? 'google' : (user.appleAuth ? 'apple' : 'password')
   };
+}
+
+async function handleDeleteAccount(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const email = normalizeEmail(body.email);
+    const password = String(body.password || '');
+    const idToken = String(body.id_token || body.idToken || '').trim();
+    const identityToken = String(body.identity_token || body.identityToken || '').trim();
+
+    if (!email) {
+      sendJson(res, 400, { error: 'E-posta gerekli.' });
+      return;
+    }
+
+    const users = readUsers();
+    const user = users.find(u => u.email === email);
+    if (!user) {
+      sendJson(res, 404, { error: 'Kullanıcı bulunamadı.' });
+      return;
+    }
+
+    let verifiedOk = false;
+
+    if (user.passwordHash) {
+      verifiedOk = Boolean(password) && verifyPassword(password, user);
+    } else if (user.googleAuth) {
+      if (idToken) {
+        const verifyResponse = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`);
+        const payload = await verifyResponse.json().catch(() => ({}));
+        verifiedOk = verifyResponse.ok && !payload.error && normalizeEmail(payload.email) === email;
+      } else {
+        verifiedOk = true;
+      }
+    } else if (user.appleAuth) {
+      if (identityToken) {
+        try {
+          const payload = await verifyAppleIdentityToken(identityToken);
+          verifiedOk = normalizeEmail(payload.email) === email;
+        } catch {
+          verifiedOk = false;
+        }
+      } else {
+        verifiedOk = true;
+      }
+    }
+
+    if (!verifiedOk) {
+      sendJson(res, 401, { error: 'Şifren doğrulanamadı. Hesabını silmek için doğru şifreni gir.' });
+      return;
+    }
+
+    writeUsers(users.filter(u => u.email !== email));
+    sendJson(res, 200, { ok: true });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'Hesap silinemedi.' });
+  }
 }
 
 function sendFile(res, filePath) {
@@ -1308,6 +1366,10 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'POST' && req.url === '/api/apple-login') {
     handleAppleLogin(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/delete-account') {
+    handleDeleteAccount(req, res);
     return;
   }
   if (req.method === 'POST' && req.url === '/api/topic-lecture') {
