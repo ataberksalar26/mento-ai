@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mento AI | Yapay Zekalı TYT, AYT ve LGS Koçu</title>
   <meta name="description" content="Mento AI deneme sonuçlarını analiz eder, eksik konularını bulur ve sana özel çalışma planı oluşturur.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://mento-ai.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="Mento AI">
+  <meta property="og:title" content="Mento AI | TYT, AYT ve LGS için kişisel çalışma koçu">
+  <meta property="og:description" content="Deneme sonucunu gir, eksik konularını gör ve sana uygun günlük çalışma planını oluştur.">
+  <meta property="og:url" content="https://mento-ai.com/">
+  <meta property="og:image" content="https://mento-ai.com/assets/mento-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mento AI | TYT, AYT ve LGS çalışma koçu">
+  <meta name="twitter:description" content="Deneme analizi ve kişisel çalışma planı tek yerde.">
+  <meta name="twitter:image" content="https://mento-ai.com/assets/mento-og.jpg">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="favicon.svg">
   <link rel="manifest" href="site.webmanifest">
@@ -4329,7 +4344,76 @@
       color: var(--yellow);
       font-size: 12px;
     }
+
+    .proof-section, .faq-section, .closing-cta {
+      padding: 88px 52px;
+    }
+
+    .proof-section { background: rgba(255,255,255,.025); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .proof-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 32px; }
+    .proof-head h2, .faq-section h2, .closing-cta h2 { margin: 9px 0 0; font-size: clamp(30px, 4vw, 50px); line-height: 1.04; letter-spacing: -.035em; }
+    .proof-head p { max-width: 430px; color: var(--muted); line-height: 1.65; margin: 0; }
+    .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .proof-card { min-height: 220px; padding: 25px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.04); }
+    .proof-card .case-label { color: var(--gold-light); font-size: 12px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    .proof-card h3 { margin: 18px 0 9px; font-size: 21px; }
+    .proof-card p { color: var(--muted); line-height: 1.6; margin: 0; font-size: 14px; }
+    .proof-card a { display: inline-block; margin-top: 18px; color: var(--gold-light); font-weight: 800; font-size: 14px; }
+    .faq-section { max-width: 1020px; margin: 0 auto; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+    .faq-grid details { border: 1px solid var(--line); background: rgba(255,255,255,.035); border-radius: 8px; padding: 0 18px; }
+    .faq-grid summary { min-height: 62px; display: flex; align-items: center; cursor: pointer; font-weight: 760; list-style: none; }
+    .faq-grid summary::-webkit-details-marker { display: none; }
+    .faq-grid summary::after { content: '+'; margin-left: auto; color: var(--gold-light); font-size: 22px; }
+    .faq-grid details[open] summary::after { content: '-'; }
+    .faq-grid p { color: var(--muted); margin: 0 0 18px; line-height: 1.65; font-size: 14px; }
+    .closing-cta { text-align: center; background: linear-gradient(135deg, rgba(245,166,35,.14), rgba(77,125,243,.11)); border-top: 1px solid rgba(245,166,35,.22); }
+    .closing-cta p { max-width: 590px; margin: 16px auto 28px; color: var(--muted); line-height: 1.65; }
+    .team-section { display: grid; grid-template-columns: 1.04fr .96fr; gap: 42px; align-items: center; padding: 88px 52px; }
+    .team-section img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }
+    .team-section h2 { margin: 10px 0 16px; font-size: clamp(30px, 4vw, 48px); line-height: 1.06; letter-spacing: -.035em; }
+    .team-section p { color: var(--muted); line-height: 1.7; }
+    .team-caption { display: block; margin-top: 8px; color: #8994a4; font-size: 12px; }
+    .sticky-mobile-cta { display: none; }
+
+    @media (max-width: 800px) {
+      .proof-section, .faq-section, .closing-cta { padding: 56px 22px; }
+      .proof-head { display: block; }
+      .proof-head p { margin-top: 18px; }
+      .proof-grid, .faq-grid { grid-template-columns: 1fr; }
+      .team-section { grid-template-columns: 1fr; padding: 56px 22px; gap: 22px; }
+      .sticky-mobile-cta { position: fixed; z-index: 50; left: 12px; right: 12px; bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px 10px 16px; background: rgba(7,17,29,.94); border: 1px solid rgba(255,255,255,.18); box-shadow: 0 18px 45px rgba(0,0,0,.35); border-radius: 8px; backdrop-filter: blur(12px); }
+      .sticky-mobile-cta span { font-size: 13px; font-weight: 750; }
+      .sticky-mobile-cta .btn { min-height: 42px; padding: 0 16px; font-size: 13px; }
+      body { padding-bottom: 84px; }
+    }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Mento AI",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web, iOS",
+        "inLanguage": "tr-TR",
+        "url": "https://mento-ai.com/",
+        "description": "TYT, AYT ve LGS öğrencileri için deneme analizi ve kişisel çalışma planı sunan yapay zeka destekli çalışma koçu."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type":"Question","name":"Mento AI hangi sınavlar için kullanılabilir?","acceptedAnswer":{"@type":"Answer","text":"Mento AI TYT, AYT ve LGS hazırlığında deneme analizi, günlük plan ve konu takibi için kullanılabilir."}},
+          {"@type":"Question","name":"Mento AI çalışma planını nasıl oluşturur?","acceptedAnswer":{"@type":"Answer","text":"Sınav türü, hedef, günlük süre ve deneme sonuçlarına göre önceliklendirilmiş görevler önerir."}},
+          {"@type":"Question","name":"Mento AI ücretsiz mi?","acceptedAnswer":{"@type":"Answer","text":"Mento AI'nın temel çalışma planı özellikleri ücretsiz kullanılabilir."}},
+          {"@type":"Question","name":"Deneme sonucumu nasıl analiz ederim?","acceptedAnswer":{"@type":"Answer","text":"Doğru, yanlış ve boş sayılarını deneme analizi alanına girerek ders bazlı odak önerisini görebilirsin."}},
+          {"@type":"Question","name":"Verilerim nasıl korunur?","acceptedAnswer":{"@type":"Answer","text":"Hesap ve kullanım verilerinin işlenmesine dair ayrıntılar Mento AI Gizlilik Politikası sayfasında açıklanır."}}
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="page">
@@ -4344,6 +4428,7 @@
           <a href="#ayt">AYT</a>
           <a href="#lgs">LGS</a>
           <a href="#nasil-calisir">Nasıl Çalışır?</a>
+          <a href="#sss">SSS</a>
         </div>
         <div class="nav-actions">
           <a href="#" data-open-demo="login">Giriş</a>
@@ -4406,6 +4491,36 @@
             <p>Matematik sınavımın gecesi çalıştım ve 95 aldım. Adım adım anlatıyor, yanlış yaptığın yeri buluyor.</p>
             <span class="testimonial-author">Öğrenci <span class="testimonial-stars">★★★★★</span></span>
           </div>
+        </div>
+      </section>
+
+      <section class="proof-section" id="ornekler" aria-labelledby="proofTitle">
+        <div class="proof-head">
+          <div>
+            <div class="section-kicker">Örnek akışlar</div>
+            <h2 id="proofTitle">Farklı hedefler için, farklı çalışma rotaları.</h2>
+          </div>
+          <p>Bu örnekler Mento AI'nın deneme verisi ve çalışma süresini nasıl günlük görevlere dönüştürdüğünü gösterir.</p>
+        </div>
+        <div class="proof-grid">
+          <article class="proof-card">
+            <span class="case-label">TYT senaryosu</span>
+            <h3>Paragraf ve problem dengesi</h3>
+            <p>Süre kaybının yoğun olduğu alanlar seçilir; kısa tekrar, süreli pratik ve yanlış analizi aynı güne yerleşir.</p>
+            <a href="#deneme-analizi">Deneme analizini incele →</a>
+          </article>
+          <article class="proof-card">
+            <span class="case-label">AYT senaryosu</span>
+            <h3>Konu eksiğini kapatma</h3>
+            <p>Alan dersindeki eksik konu, konu anlatımı ve mini testle bağlanır; plan günlük hedefe göre güncellenir.</p>
+            <a href="#nasil-calisir">Planın nasıl oluştuğunu gör →</a>
+          </article>
+          <article class="proof-card">
+            <span class="case-label">LGS senaryosu</span>
+            <h3>Yeni nesil soru pratiği</h3>
+            <p>Yanlışlar kavram, dikkat, işlem ve süre başlıklarına ayrılır; sonraki çalışma turu buna göre şekillenir.</p>
+            <a href="#lgs">LGS akışına git →</a>
+          </article>
         </div>
       </section>
 
@@ -4673,6 +4788,40 @@
           </div>
         </div>
       </section>
+
+      <section class="faq-section" id="sss" aria-labelledby="faqTitle">
+        <div class="section-kicker">Sık sorulan sorular</div>
+        <h2 id="faqTitle">Başlamadan önce merak edilenler.</h2>
+        <div class="faq-grid">
+          <details><summary>Mento AI hangi sınavlar için kullanılabilir?</summary><p>TYT, AYT ve LGS hazırlığında deneme analizi, günlük plan ve konu takibi için kullanılabilir.</p></details>
+          <details><summary>Çalışma planı nasıl hazırlanır?</summary><p>Sınav türünü, hedefini, günlük çalışma süreni ve deneme sonuçlarını girersin. Mento AI en öncelikli görevleri sıralar.</p></details>
+          <details><summary>Deneme sonucumu nasıl analiz ederim?</summary><p>Doğru, yanlış ve boş sayılarını canlı deneme analizi alanına gir. Ders bazlı odak ve günlük süre önerisini anında gör.</p></details>
+          <details><summary>Mento AI ücretsiz mi?</summary><p>Temel plan oluşturma ve çalışma akışlarını ücretsiz deneyebilirsin. Farklı bir ücretlendirme sunulursa, uygulama içinde önceden açıkça bildirilir.</p></details>
+          <details><summary>Yapay zeka cevapları her zaman doğru mu?</summary><p>Yapay zeka yanıtları çalışma desteği içindir. Önemli bilgilerde öğretmeninle ve güvenilir kaynaklarla kontrol etmeni öneririz.</p></details>
+          <details><summary>Verilerim nasıl korunur?</summary><p>Verilerin işlenmesi, saklanması ve hakların <a href="/gizlilik" style="color:var(--gold-light);font-weight:750">Gizlilik Politikası</a> sayfasında açıklanır.</p></details>
+        </div>
+      </section>
+
+      <section class="team-section" id="hakkimizda" aria-labelledby="teamTitle">
+        <div>
+          <div class="section-kicker">Mento AI hakkında</div>
+          <h2 id="teamTitle">Öğrencinin ne çalışacağını düşünmediği bir çalışma deneyimi.</h2>
+          <p>Mento AI; deneme sonuçları, konu eksiği ve günlük çalışma süresini bir araya getirerek öğrenciye sade bir sonraki adım sunmak için geliştiriliyor.</p>
+          <p>Amacımız, sınav hazırlığını karmaşık raporlardan çıkarıp her gün uygulanabilir kısa görevlere dönüştürmek.</p>
+          <a class="btn btn-dark" href="mailto:ataberksalar@gmail.com">Ekibe ulaş</a>
+        </div>
+        <div>
+          <img src="assets/mento-team.jpg" alt="Mento AI ekibini temsil eden eğitim teknolojisi çalışma ortamı" width="1200" height="800" loading="lazy" decoding="async">
+          <span class="team-caption">Mento AI ekibini temsil eden görsel.</span>
+        </div>
+      </section>
+
+      <section class="closing-cta" aria-labelledby="closingTitle">
+        <div class="section-kicker">İlk adım</div>
+        <h2 id="closingTitle">Bugünün planını iki dakikada oluştur.</h2>
+        <p>Sınavını ve hedefini seç. Mento AI, ilk çalışma rotanı oluşturmak için seni adım adım yönlendirsin.</p>
+        <button class="btn btn-gold" type="button" data-open-demo>Ücretsiz plan oluştur →</button>
+      </section>
     </main>
   </div>
 
@@ -4686,14 +4835,14 @@
         <div>
           <strong>Ürün</strong>
           <a href="#tyt">Sınavlar</a>
-          <a href="#nasil-calisir">Özellikler</a>
+          <a href="#deneme-analizi">Deneme Analizi</a>
           <a href="#nasil-calisir">Nasıl Çalışır</a>
         </div>
         <div>
           <strong>Şirket</strong>
-          <a href="#">Hakkımızda</a>
-          <a href="#">İletişim</a>
-          <a href="#">Kariyer</a>
+          <a href="#hakkimizda">Hakkımızda</a>
+          <a href="#sss">Sık Sorulan Sorular</a>
+          <a href="mailto:ataberksalar@gmail.com">İletişim</a>
         </div>
         <div>
           <strong>Yasal</strong>
@@ -4707,6 +4856,11 @@
       <span>Kişisel verilerin 256-bit şifreleme ile korunur.</span>
     </div>
   </footer>
+
+  <div class="sticky-mobile-cta" aria-label="Hızlı başlangıç">
+    <span>Planını hemen oluştur</span>
+    <button class="btn btn-gold" type="button" data-open-demo>Başla</button>
+  </div>
 
   <div class="modal" id="demoModal" aria-hidden="true">
     <div class="demo" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
@@ -6337,7 +6491,7 @@
         await postJson('/api/verify-code', { email, code });
         authStatus.textContent = 'E-posta doğrulandı. İlk planın hazırlanıyor.';
         createLocalPlan();
-        setTimeout(openStudentPanel, 650);
+        setTimeout(() => { window.location.href = '/tesekkurler'; }, 650);
       } catch (error) {
         authStatus.textContent = error.message;
       } finally {
@@ -6700,4 +6854,3 @@
   </script>
 </body>
 </html>
-

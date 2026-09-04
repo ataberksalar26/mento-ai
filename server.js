@@ -1204,7 +1204,7 @@ async function handleDeleteAccount(req, res) {
   }
 }
 
-function sendFile(res, filePath) {
+function sendFile(res, filePath, status = 200) {
   fs.readFile(filePath, (err, content) => {
     if (err) {
       res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
@@ -1226,7 +1226,11 @@ function sendFile(res, filePath) {
       '.ico': 'image/x-icon',
       '.webmanifest': 'application/manifest+json; charset=utf-8'
     };
-    res.writeHead(200, { 'Content-Type': contentTypes[ext] || 'application/octet-stream' });
+    const headers = { 'Content-Type': contentTypes[ext] || 'application/octet-stream' };
+    if (['.png', '.jpg', '.jpeg', '.svg', '.ico'].includes(ext)) {
+      headers['Cache-Control'] = 'public, max-age=604800';
+    }
+    res.writeHead(status, headers);
     res.end(content);
   });
 }
@@ -1274,8 +1278,7 @@ function serveStatic(req, res) {
     sendFile(res, path.join(ROOT, 'index.html'));
     return;
   }
-  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-  res.end('Not found');
+  sendFile(res, path.join(ROOT, '404.html'), 404);
 }
 
 async function handleCoach(req, res) {
