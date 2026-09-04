@@ -5,4 +5,4 @@ Disallow: /panel/
 Disallow: /giris
 Disallow: /kayit
 Disallow: /tesekkurler
-Sitemap: https://mento-ai.com/sitemap.xml
+Sitemap: https://www.mento-ai.com/sitemap.xml
