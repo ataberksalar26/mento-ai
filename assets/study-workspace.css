@@ -35,6 +35,11 @@
 .question-source{color:#ffd069;overflow-wrap:anywhere;line-height:1.6}
 .study-light .question-source{color:#745100}
 .question-image{display:block;max-width:100%;max-height:400px;object-fit:contain;background:#fff}
+.question-copy{font-size:18px;font-weight:500}
+.question-copy p{margin:12px 0}
+.question-table-wrap{overflow-x:auto;white-space:normal}
+.question-table{border-collapse:collapse;width:100%;margin:14px 0;font-size:16px}
+.question-table th,.question-table td{border:1px solid #687684;padding:10px;text-align:left}
 .quiz-options button{text-align:left;line-height:1.6;overflow-wrap:anywhere}
 .quiz-options [aria-pressed=true]{border-color:#ffd069;background:#494028}
 .quiz-nav{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:20px 0}

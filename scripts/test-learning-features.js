@@ -80,6 +80,13 @@ let browser;
   await app.reload();await app.getByText('Merhaba, Deneme',{exact:true}).waitFor();
   await app.getByText('Konular',{exact:true}).click();await app.getByLabel('Konu ara').fill('Çarpanlar');await app.getByText('Çarpanlar ve Katlar',{exact:true}).click();
   assert.equal(await app.getByLabel('Konu notlarım',{exact:true}).inputValue(),'Mobil notum');
+  await app.getByText('30 soruluk testi aç',{exact:true}).click();
+  const real=require('../data/question-bank.json').tests.find(t=>t.exam==='LGS'&&t.topic==='Çarpanlar ve Katlar');
+  for(let i=0;i<30;i++){await app.getByRole('radio').nth(real.questions[i].correctIndex).click();if(i<29)await app.getByText('Sonraki',{exact:true}).click();}
+  await app.getByText('Testi bitir',{exact:true}).click();await app.getByText('Bitir ve sonuçları gör',{exact:true}).click();
+  await app.getByText('30 doğru · 0 yanlış · 0 boş',{exact:true}).waitFor();
+  await app.getByText('Konuya dön',{exact:true}).click();
+  await app.getByText('30 soruluk testi aç',{exact:true}).click();await app.getByText('30 doğru · 0 yanlış · 0 boş',{exact:true}).waitFor();
   await app.getByText('Mini test',{exact:true}).first().click();
   for(let i=0;i<3;i++){await app.getByText(['12','Metnin tumunu degerlendirerek','Gece ve gunduzu'][i],{exact:true}).click();await app.getByText(i===2?'Sonucu gör':'Sonraki soru',{exact:true}).click();}
   await app.getByText('Mini test',{exact:true}).first().click();await app.getByText('Alıştırma tamamlandı',{exact:true}).waitFor();

@@ -1,4 +1,643 @@
 {
   "version": 1,
-  "tests": []
+  "tests": [
+    {
+      "exam": "LGS",
+      "lesson": "Matematik",
+      "topic": "Çarpanlar ve Katlar",
+      "questions": [
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-01",
+          "question": "36’nın bütün pozitif tam sayı çarpanları birer karta, 48’in bütün pozitif tam sayı çarpanları da ayrı birer karta yazılıyor. Her iki grupta da bulunan sayılar birer kez tahtaya yazılıyor.\n\nTahtaya kaç farklı sayı yazılır?",
+          "options": [
+            "6",
+            "8",
+            "9",
+            "12"
+          ],
+          "correctIndex": 0,
+          "explanation": "İki sayıyı da bölen sayılar, EBOB’larının pozitif çarpanlarıdır.\nEBOB(36, 48) = 12’dir.\n12’nin pozitif çarpanları 1, 2, 3, 4, 6 ve 12’dir.\nTahtaya 6 farklı sayı yazılır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 1,
+            "editNote": "Bütün çarpanların kullanıldığı açıklaştırıldı; sayılar ve cevap değişmedi."
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-02",
+          "question": "Bir öğrenci 360 sayısını asal çarpanlarına ayırıyor. Her farklı asal çarpan için farklı bir renk kullanıyor; aynı asal çarpanın tekrarlarını aynı renkle gösteriyor.\n\nÖğrenci kaç farklı renk kullanır?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctIndex": 1,
+          "explanation": "360=36×10=2³×3²×5.\nFarklı asal çarpanlar 2, 3 ve 5’tir.\n3 farklı renk gerekir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 2
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-03",
+          "question": "Bir depodaki ürün sayısı, onlar basamağındaki rakam silindiği için 4□2 biçiminde görülmektedir.\n\nÜrünler hem altışarlı hem dokuzarlı paketlendiğinde hiç ürün artmadığına göre silinen rakam kaçtır?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "6"
+          ],
+          "correctIndex": 2,
+          "explanation": "Sayı 9’a bölünebildiği için rakamları toplamı 9’un katıdır.\nRakamlar toplamı 4+□+2=6+□ olur.\n□ bir rakam olduğundan toplam yalnızca 9 olabilir. Dolayısıyla □=3.\n432 sayısı çift ve 3’e bölünebilir olduğundan 6’ya da bölünür.\nSilinen rakam 3’tür.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 3
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-04",
+          "question": "72 cm ve 120 cm uzunluğundaki iki şerit, hiç parça artmadan eşit uzunlukta parçalara ayrılacaktır. Her iki şeritten elde edilen bütün parçaların uzunlukları aynı olacaktır.\n\nParçaların uzunluğu en fazla kaç santimetre olabilir?",
+          "options": [
+            "8",
+            "12",
+            "18",
+            "24"
+          ],
+          "correctIndex": 3,
+          "explanation": "Parça uzunluğu hem 72’yi hem 120’yi tam bölmelidir.\nEn büyük uzunluk EBOB(72, 120)’dir.\n72=2³×3², 120=2³×3×5.\nEBOB =2³×3=24 cm.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 4
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-05",
+          "question": "Bir robot 12 dakikada, diğer robot 18 dakikada bir şarj istasyonuna uğramaktadır. İkisi saat 10.00’da aynı anda istasyona uğramıştır.\n\nRobotlar bundan sonra ilk kez kaç dakika sonra istasyona aynı anda uğrar?",
+          "options": [
+            "36",
+            "30",
+            "54",
+            "72"
+          ],
+          "correctIndex": 0,
+          "explanation": "Birlikte uğrama süresi 12 ve 18’in ortak katıdır.\nİlk kez denildiğinden en küçük ortak kat aranır.\n12=2²×3, 18=2×3².\nEKOK =2²×3²=36 dakikadır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 5
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-06",
+          "question": "Bir şifreleme sisteminde bir sayının şifresi, o sayının farklı asal çarpanlarının birer kez çarpılmasıyla oluşturuluyor.\n\nÖrneğin 12’nin şifresi 2×3=6 oluyor.\n\n180 sayısının şifresi kaçtır?",
+          "options": [
+            "15",
+            "30",
+            "60",
+            "90"
+          ],
+          "correctIndex": 1,
+          "explanation": "180=2²×3²×5.\nFarklı asal çarpanlar 2, 3 ve 5’tir.\nŞifre 2×3×5=30 olur.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 6
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-07",
+          "question": "Bir matematik oyununda, seçilen iki sayının 1’den başka ortak pozitif çarpanı yoksa oyuncu kazanıyor.\n\nAşağıdaki sayı çiftlerinden hangisini seçen oyuncu kazanır?",
+          "options": [
+            "14 ve 21",
+            "15 ve 25",
+            "16 ve 27",
+            "22 ve 33"
+          ],
+          "correctIndex": 2,
+          "explanation": "14 ve 21’in ortak çarpanı 7’dir.\n15 ve 25’in ortak çarpanı 5’tir.\n16’nın tek asal çarpanı 2, 27’nin tek asal çarpanı 3’tür. Ortak pozitif çarpanları yalnızca 1’dir.\n22 ve 33’ün ortak çarpanı 11’dir.\nKazandıran çift 16 ve 27’dir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 7
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-08",
+          "question": "İki doğal sayının asal çarpanlarına ayrılmış biçimleri şöyledir:\n\n K=2³×3²,   L=2²×3×5 \n\nBu iki sayının en büyük ortak böleni kaçtır?",
+          "options": [
+            "6",
+            "18",
+            "24",
+            "12"
+          ],
+          "correctIndex": 3,
+          "explanation": "Ortak asal çarpanlar 2 ve 3’tür.\nEBOB bulunurken ortak asal çarpanların küçük üsleri alınır.\nEBOB(K,L)=2²×3=12.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 8
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-09",
+          "question": "Bir okul, aynı model kalemlerden tek bir satıcıdan satın alacaktır. Birinci satıcı kalemleri 24’lü, ikinci satıcı 90’lı kutularda satmaktadır.\n\nOkul, hangi satıcıyı seçerse seçsin kutuları açtırmadan aynı sayıda kalem alabilmek istiyor.\n\nAlınabilecek en az kalem sayısı kaçtır?",
+          "options": [
+            "360",
+            "120",
+            "180",
+            "720"
+          ],
+          "correctIndex": 0,
+          "explanation": "Kalem sayısı hem 24’ün hem 90’ın katı olmalıdır.\n24=2³×3, 90=2×3²×5.\nEKOK =2³×3²×5=360.\n360 kalem, birinci satıcıdan 15 kutu veya ikinci satıcıdan 4 kutu alınarak elde edilir.\nEn az 360 kalem alınabilir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 9
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-10",
+          "question": "30’un bütün pozitif tam sayı çarpanları farklı kartlara birer kez yazılıyor. Üzerindeki sayı 3’ün katı olan kartlar masadan kaldırılıyor.\n\nMasada kalan kartlardaki sayıların toplamı kaçtır?",
+          "options": [
+            "15",
+            "18",
+            "24",
+            "30"
+          ],
+          "correctIndex": 1,
+          "explanation": "30’un pozitif çarpanları 1, 2, 3, 5, 6, 10, 15 ve 30’dur.\n3’ün katı olan 3, 6, 15 ve 30 kaldırılır.\nKalan sayılar 1, 2, 5 ve 10’dur.\nToplam 1+2+5+10=18.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 10
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-11",
+          "question": "48 eş kare çıkartma, aralarında boşluk kalmadan ve üst üste gelmeden bir dikdörtgen oluşturacak şekilde yerleştiriliyor. Her çıkartmanın bir kenarı 1 cm’dir. Dikdörtgenin her kenarı 1 cm’den uzundur.\n\nOluşturulabilecek dikdörtgenin çevresi en az kaç santimetredir?",
+          "options": [
+            "24",
+            "26",
+            "28",
+            "32"
+          ],
+          "correctIndex": 2,
+          "explanation": "Kenar uzunluklarının çarpımı 48 olmalıdır.\nUygun kenar çiftleri 2,24; 3,16; 4,12; 6,8 olur.\nÇevreler sırasıyla 52, 38, 32 ve 28 cm’dir.\nEn küçük çevre 28 cm’dir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 11
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-12",
+          "question": "Bir sayının pozitif çarpanları, her satırdaki iki sayının çarpımı bu sayıya eşit olacak şekilde eşleştirilmiştir.\n\nBirinci çarpan\tİkinci çarpan\n1\t60\n2\t30\n3\t20\n4\t15\n5\t■\n6\t10\n\nTabloda ■ yerine hangi sayı gelmelidir?",
+          "options": [
+            "8",
+            "10",
+            "15",
+            "12"
+          ],
+          "correctIndex": 3,
+          "explanation": "Her satırdaki sayıların çarpımı 60’tır.\nBu nedenle 5×■=60.\n■=60÷5=12.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 12
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-13",
+          "question": "84 kırmızı ve 126 mavi boncuğun tamamı hediye paketlerine paylaştırılacaktır. Her pakette aynı sayıda kırmızı, aynı sayıda mavi boncuk bulunacaktır.\n\nMümkün olan en fazla sayıda paket hazırlandığında bir pakette toplam kaç boncuk bulunur?",
+          "options": [
+            "5",
+            "6",
+            "7",
+            "42"
+          ],
+          "correctIndex": 0,
+          "explanation": "Paket sayısı hem 84’ü hem 126’yı tam bölmelidir.\nEn fazla paket sayısı EBOB(84, 126) = 42’dir.\nBir pakette 84÷42=2 kırmızı boncuk bulunur.\nBir pakette 126÷42=3 mavi boncuk bulunur.\nToplam 2+3=5 boncuk bulunur.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 13
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-14",
+          "question": "Bir seradaki iki sulama sistemi aşağıdaki aralıklarla çalışmaktadır.\n\nSistem\tÇalışmaya başlama aralığı\nK\t20 dakika\nL\t30 dakika\n\nİki sistem saat 09.10’da aynı anda çalışmaya başlamıştır.\n\nBundan sonra ilk kez saat kaçta yeniden aynı anda çalışmaya başlarlar?",
+          "options": [
+            "09.40",
+            "10.10",
+            "10.30",
+            "11.10"
+          ],
+          "correctIndex": 1,
+          "explanation": "EKOK(20, 30) = 60 dakikadır.\nSistemler 60 dakika sonra birlikte çalışmaya başlar.\n09.10’a 1 saat eklenirse 10.10 bulunur.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 14
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-15",
+          "question": "Bir geziye katılan öğrencilerin sınıflara göre sayıları aşağıdadır.\n\nSınıf\tÖğrenci sayısı\n8-A\t45\n8-B\t60\n8-C\t75\n\nHer sınıf kendi içinde, bütün gruplardaki öğrenci sayıları eşit olacak şekilde gruplara ayrılacaktır. Hiçbir öğrenci grup dışında kalmayacaktır.\n\nBir grupta en fazla kaç öğrenci bulunabilir?",
+          "options": [
+            "5",
+            "10",
+            "15",
+            "20"
+          ],
+          "correctIndex": 2,
+          "explanation": "Grup büyüklüğü 45, 60 ve 75’i tam bölmelidir.\nEBOB(45, 60, 75) = 15’tir.\nSınıflar sırasıyla 3, 4 ve 5 gruba ayrılabilir.\nBir grupta en fazla 15 öğrenci bulunur.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 15
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-16",
+          "question": "72 sayısı, pozitif bir tam sayı ile çarpılarak bir tam sayının karesine eşit hâle getirilecektir.\n\nKullanılabilecek en küçük çarpan kaçtır?",
+          "options": [
+            "3",
+            "6",
+            "8",
+            "2"
+          ],
+          "correctIndex": 3,
+          "explanation": "72=2³×3².\nBir tam kare sayının asal çarpanlarının üsleri çift olmalıdır.\n2’nin üssünü çift yapmak için sayı 2 ile çarpılır.\n72×2=144=12².\nEn küçük çarpan 2’dir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 16
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-17",
+          "question": "Bir sınıftaki öğrenciler altışarlı veya sekizerli gruplara ayrıldığında hiç öğrenci artmıyor. Sınıf mevcudu iki basamaklı bir doğal sayıdır.\n\nBu sınıfta en az kaç öğrenci olabilir?",
+          "options": [
+            "24",
+            "36",
+            "42",
+            "48"
+          ],
+          "correctIndex": 0,
+          "explanation": "Öğrenci sayısı 6 ve 8’in ortak katı olmalıdır.\nEKOK(6, 8) = 24’tür.\n24 iki basamaklıdır ve her iki sayıya da tam bölünür.\nEn az 24 öğrenci olabilir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 17
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-18",
+          "question": "Kenar uzunlukları 30 m ve 42 m olan dikdörtgen biçimindeki bir bahçenin çevresine eşit aralıklarla fidan dikilecektir. Dört köşenin her birinde de bir fidan bulunacaktır.\n\nArdışık fidanlar arasındaki uzaklık mümkün olan en büyük değer seçilirse toplam kaç fidan gerekir?",
+          "options": [
+            "12",
+            "24",
+            "25",
+            "36"
+          ],
+          "correctIndex": 1,
+          "explanation": "Köşelere de fidan gelmesi için aralık hem 30’u hem 42’yi bölmelidir.\nEn büyük aralık EBOB(30, 42) = 6 metredir.\nBahçenin çevresi 2(30+42)=144 metredir.\nKapalı bir çevrede fidan sayısı aralık sayısına eşittir.\n144÷6=24 fidan gerekir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 18
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-19",
+          "question": "Bir yardım kampanyasında 150 defter ve 210 kalem bulunmaktadır. Defterlerden 6 tanesi ve kalemlerden 6 tanesi ayrılarak depoda bırakılıyor.\n\nKalan malzemelerin tamamıyla, her birinde aynı sayıda defter ve aynı sayıda kalem bulunan 12’den az olmayan yardım paketleri hazırlanacaktır.\n\nHazırlanabilecek paket sayısı kaçtır?",
+          "options": [
+            "6",
+            "8",
+            "12",
+            "18"
+          ],
+          "correctIndex": 2,
+          "explanation": "Paketlenecek defter sayısı 150-6=144, kalem sayısı 210-6=204 olur.\nPaket sayısı 144 ve 204’ün ortak böleni olmalıdır.\nEBOB(144, 204) = 12 olduğundan ortak bölenler 1, 2, 3, 4, 6 ve 12’dir.\nBunlardan 12’den az olmayan tek sayı 12’dir.\nHer pakette 12 defter ve 17 kalem bulunur.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 19
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-20",
+          "question": "Aynı duraktan hareket eden iki ring aracından biri 18 dakikada, diğeri 24 dakikada bir hareket etmektedir. İki araç saat 08.00’de birlikte hareket etmiştir.\n\n08.00 ve 14.00 saatleri de sayıma dâhil edilirse, bu zaman aralığında araçlar toplam kaç kez birlikte hareket eder?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctIndex": 3,
+          "explanation": "EKOK(18, 24) = 72 dakikadır.\n08.00 ile 14.00 arasında 360 dakika vardır.\nOrtak hareketler başlangıçtan 0, 72, 144, 216, 288 ve 360 dakika sonra gerçekleşir.\nBaşlangıçtaki hareket de sayıldığından toplam 6 kez birlikte hareket ederler.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 20
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-21",
+          "question": "18 cm × 30 cm boyutlarındaki dikdörtgen kartonlar kesilmeden, boşluk bırakılmadan ve üst üste gelmeden kare bir pano oluşturmak için kullanılacaktır.\n\nBütün kartonlar aynı yönde yerleştirilecek; 18 cm’lik kenarları panonun yatay kenarına, 30 cm’lik kenarları dikey kenarına paralel olacaktır.\n\nOluşturulabilecek en küçük kare pano için kaç karton gerekir?",
+          "options": [
+            "15",
+            "10",
+            "25",
+            "30"
+          ],
+          "correctIndex": 0,
+          "explanation": "Karenin kenarı hem 18’in hem 30’un katı olmalıdır.\nEn küçük kenar EKOK(18, 30) = 90 cm’dir.\nYatay doğrultuda 90÷18=5 karton yerleşir.\nDikey doğrultuda 90÷30=3 karton yerleşir.\nToplam 5×3=15 karton gerekir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 21
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-22",
+          "question": "Bir kitaplıktaki kitap sayısı 100’den fazla, 150’den azdır.\n\nKitaplar on ikişerli gruplandığında da on sekizerli gruplandığında da 5 kitap artmaktadır.\n\nBu koşulları sağlayan bütün olası kitap sayılarının toplamı kaçtır?",
+          "options": [
+            "226",
+            "262",
+            "288",
+            "298"
+          ],
+          "correctIndex": 1,
+          "explanation": "Kitap sayısından 5 çıkarılırsa sonuç hem 12’ye hem 18’e tam bölünür.\nEKOK(12, 18) = 36 olduğundan kitap sayısı 36k+5 biçimindedir.\nVerilen aralıkta 36×3+5=113 ve 36×4+5=149 bulunur.\nDiğer katlar aralık dışında kalır.\nToplam 113+149=262.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 22
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-23",
+          "question": "İki pozitif tam sayının EBOB’u 12, EKOK’u 180’dir.\n\nBu iki sayının toplamı en az kaç olabilir?",
+          "options": [
+            "84",
+            "90",
+            "96",
+            "192"
+          ],
+          "correctIndex": 2,
+          "explanation": "Sayılar 12x ve 12y biçiminde yazılır. EBOB’un 12 olması için x ve y aralarında asal olmalıdır.\nBu durumda EKOK 12xy olur.\n12xy=180 olduğundan xy=15.\nUygun pozitif çarpan çiftleri (1,15) ve (3,5)’tir.\nAsıl sayı çiftleri (12,180) ve (36,60) olur.\nToplamları 192 ve 96’dır. En küçük toplam 96’dır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 23
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-24",
+          "question": "Üç gösterge lambasının yanıp sönme aralıkları şöyledir:\n\nLamba\tYanıp sönme aralığı\nKırmızı\t8 saniye\nMavi\t12 saniye\nYeşil\t18 saniye\n\nLambalar başlangıçta aynı anda yanıp sönüyor. Yanıp sönmeler anlık kabul ediliyor.\n\nBaşlangıç anı hariç, sonraki 144 saniye içinde, 144. saniye de dâhil, mavi ve yeşil lambaların birlikte yanıp söndüğü fakat kırmızı lambanın yanıp sönmediği kaç an vardır?",
+          "options": [
+            "1",
+            "3",
+            "4",
+            "2"
+          ],
+          "correctIndex": 3,
+          "explanation": "Mavi ve yeşil lambalar EKOK(12, 18) = 36 saniyede bir birlikte yanıp söner.\nİlgili anlar 36, 72, 108 ve 144. saniyelerdir.\nKırmızı lamba 8’in katlarında yanıp söner. 72 ve 144, 8’in katıdır.\n36 ve 108, 8’in katı değildir.\nKoşulu sağlayan 2 an vardır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 24
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-25",
+          "question": "Bir üretici aynı sayıdaki kurabiyeyi iki farklı biçimde paketlemeyi karşılaştırıyor.\n\nBütün kurabiyeler 12’li kutulara konulduğunda hiç kurabiye artmıyor.\nBütün kurabiyeler 18’li kutulara konulduğunda da hiç kurabiye artmıyor.\n12’li paketleme için gereken kutu sayısı, 18’li paketleme için gerekenden 5 fazladır.\n\nİki yöntemde gereken kutu sayılarının toplamı kaçtır?",
+          "options": [
+            "25",
+            "30",
+            "35",
+            "40"
+          ],
+          "correctIndex": 0,
+          "explanation": "Kurabiye sayısı 12 ve 18’in ortak katı, yani 36k olsun.\n12’li kutulardan 36k÷12=3k tane gerekir.\n18’li kutulardan 36k÷18=2k tane gerekir.\nFark 3k-2k=k=5 olduğundan kutu sayıları 15 ve 10’dur.\nToplam 15+10=25.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 25
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-26",
+          "question": "Kenar uzunlukları metre cinsinden pozitif tam sayı olan dikdörtgen bir alanın çevresi 84 metredir. İki farklı kenar uzunluğunun EBOB’u 6’dır.\n\nBu alanın yüz ölçümü en fazla kaç metrekare olabilir?",
+          "options": [
+            "360",
+            "432",
+            "441",
+            "504"
+          ],
+          "correctIndex": 1,
+          "explanation": "Kenarlara a ve b denirse 2(a+b)=84, yani a+b=42.\nEBOB 6 olduğundan a=6x, b=6y yazılır. Burada x,y aralarında asaldır.\n6x+6y=42 olduğundan x+y=7.\nSıra gözetmeden uygun çiftler (1,6),(2,5),(3,4)’tür.\nKenarlar sırasıyla (6,36),(12,30),(18,24) olur.\nAlanlar 216, 360 ve 432 m²’dir.\nEn büyük alan 432 m²’dir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 26
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-27",
+          "question": "Birbirine bağlı iki dişli çarkın diş sayıları 24 ve 40’tır. Bir çarkta kaç dişlik ilerleme olursa diğerinde de aynı sayıda dişlik ilerleme olur.\n\nBaşlangıçta her çarkın bir dişi işaretleniyor. Çarklar döndürülmeye başladıktan sonra iki işaretli diş ilk kez aynı anda kendi başlangıç konumlarına dönüyor.\n\nBu ana kadar iki çarkın yaptığı tam tur sayılarının toplamı kaçtır?",
+          "options": [
+            "5",
+            "6",
+            "8",
+            "10"
+          ],
+          "correctIndex": 2,
+          "explanation": "İki çarkın da başlangıç konumuna dönmesi için ilerlenen diş sayısı hem 24’ün hem 40’ın katı olmalıdır.\nEKOK(24, 40) = 120’dir.\n24 dişli çark 120÷24=5 tur atar.\n40 dişli çark 120÷40=3 tur atar.\nToplam 5+3=8 turdur.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 27
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-28",
+          "question": "96 kalem ve 120 silginin tamamı kutulara yerleştirilecektir. Her kutuda aynı sayıda kalem ve aynı sayıda silgi bulunacaktır.\n\nKullanılacak kutu sayısı 20’den az, her kutudaki toplam ürün sayısı ise en fazla 20 olacaktır.\n\nBuna göre bir kutuda toplam kaç ürün bulunur?",
+          "options": [
+            "12",
+            "15",
+            "16",
+            "18"
+          ],
+          "correctIndex": 3,
+          "explanation": "Kutu sayısı 96 ve 120’nin ortak böleni olmalıdır.\nEBOB(96, 120) = 24’tür. 20’den küçük ortak bölenler 1, 2, 3, 4, 6, 8 ve 12’dir.\nToplam ürün sayısı 96+120=216’dır.\nHer kutuda en fazla 20 ürün olması için en az 11 kutu gerekir; çünkü 10 kutu en fazla 200 ürün alabilir.\nUygun ortak bölenler içinde en az 11 olan tek sayı 12’dir.\nBir kutudaki toplam ürün sayısı 216÷12=18’dir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 28
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-29",
+          "question": "Birinci uyarı cihazı saat 08.00’de çalıştırılıyor ve bu andan başlayarak 15 dakikada bir ses çıkarıyor.\n\nİkinci uyarı cihazı saat 08.05’te çalıştırılıyor ve bu andan başlayarak 20 dakikada bir ses çıkarıyor.\n\nCihazlar 08.00–12.00 aralığında, sınır saatleri de dâhil, kaç kez aynı anda ses çıkarır?",
+          "options": [
+            "4",
+            "5",
+            "12",
+            "16"
+          ],
+          "correctIndex": 0,
+          "explanation": "Birinci cihazın ilk sesleri 08.00, 08.15, 08.30 ve 08.45’tedir.\nİkinci cihazın ilk sesleri 08.05, 08.25 ve 08.45’tedir.\nİlk ortak ses 08.45’te gerçekleşir.\nBundan sonraki ortak sesler EKOK(15, 20) = 60 dakika aralıklarla gelir.\nOrtak ses saatleri 08.45, 09.45, 10.45 ve 11.45’tir.\nToplam 4 kez aynı anda ses çıkarırlar.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 29
+          }
+        },
+        {
+          "id": "lgs-matematik-carpanlar-katlar-user-v1-30",
+          "question": "84 cm, 132 cm ve 180 cm uzunluğundaki üç metal çubuk, hiç parça artmadan eşit uzunlukta parçalara ayrılacaktır. Elde edilen bütün parçaların uzunluğu aynı olacaktır.\n\nBir kesme işleminde yalnızca bir çubuk veya bir parça kesilebilmektedir. Her kesme işleminin ücreti 5 TL’dir ve kesme sırasında uzunluk kaybı olmamaktadır.\n\nToplam kesim ücreti en az kaç TL olur?",
+          "options": [
+            "135",
+            "150",
+            "165",
+            "180"
+          ],
+          "correctIndex": 1,
+          "explanation": "Kesim sayısını en aza indirmek için parça uzunluğu en büyük seçilmelidir.\nEBOB(84, 132, 180) = 12 cm’dir.\nÇubuklardan sırasıyla 84÷12=7, 132÷12=11, 180÷12=15 parça çıkar.\nBir çubuğu n parçaya ayırmak için n-1 kesim gerekir.\nToplam kesim sayısı (7-1)+(11-1)+(15-1)=6+10+14=30’dur.\nÜcret 30×5=150 TL olur.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: hesap ve tek doğru seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-carpanlar-katlar-2026-09-06",
+            "permissionReference": "Kullanıcının 6 Eylül 2026 tarihli bu soruları kullan talebi",
+            "questionNumber": 30
+          }
+        }
+      ]
+    }
+  ]
 }

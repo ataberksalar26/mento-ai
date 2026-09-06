@@ -22,8 +22,13 @@ Render ortami otomatik taninir. Istemcinin bildirdigi kullanici ID'sine guvenilm
 
 ## Icerik durumu
 
-Her konu icin 30 soruluk, yeniden yayin izni uygun bir kaynak henuz bulunamadi.
-question-bank.json bilerek bostur. Sahte kaynak ya da uretilmis soru yoktur.
+LGS Matematik / Carpanlar ve Katlar: kullanicinin ChatGPT ile hazirlattigi
+30 soru, 6 Eylul 2026 tarihli kullanim talebiyle eklendi. 18 orta / 12 zor
+etiketi kullanicinin dosyasindan korunmustur; uzman kalibrasyonu degildir.
+Kayitlar origin:"user-ai" tasir; internetten alinmis veya MEB sorusu degildir.
+30 cevabin tamami scripts/test-user-questions.js ile ayri hesaplandi.
+Ilk soruda butun carpanlarin kullanildigi aciklastirildi; cevap degismedi.
+Ogretmen incelemesi veya ucuncu taraf telif hakki garantisi verilmez.
 Eksik test 404 QUESTION_BANK_PENDING ve resmi kaynak baglantilarini dondurur.
 Eski AI test onbellegi yeni akista kullanilmaz.
 
@@ -41,6 +46,9 @@ Dosya version:1 ve tests dizisi icermeli. Her test exam, lesson, topic ve
 tam 30 questions icermeli. Her soru id, question, 4 veya 5 options,
 correctIndex (0 tabanli), explanation, difficulty (orta/zor), reviewedBy,
 source: {title,url,license,permissionReference,origin:"published"} icermeli.
+Kullanicinin AI ile hazirlattigi icerikler icin source:
+{title,document,permissionReference,origin:"user-ai"} kullanilir;
+uydurma kaynak URL'si veya acik lisans eklenmez.
 Istege bagli image: /assets/questions/dosya.png (jpg/webp de olur).
 permissionReference gercek lisans/izin belgesini gostermelidir.
 Semantik dogruluk ve zorluk insan tarafindan kontrol edilmelidir;

@@ -22,7 +22,10 @@ function validateBank(bank) {
       if (!Array.isArray(q.options) || ![4, 5].includes(q.options.length) || q.options.some(o => typeof o !== 'string' || !o.trim()) || new Set(q.options).size !== q.options.length) throw new Error('Invalid options: ' + q.id);
       if (!Number.isInteger(q.correctIndex) || q.correctIndex < 0 || q.correctIndex >= q.options.length || !q.explanation?.trim()) throw new Error('Invalid answer: ' + q.id);
       if (!['orta', 'zor'].includes(q.difficulty) || !q.reviewedBy?.trim()) throw new Error('Question needs difficulty and editorial review: ' + q.id);
-      if (!q.source?.title || !/^https:\/\//.test(q.source.url || '') || !q.source.license || !q.source.permissionReference || q.source.origin !== 'published') throw new Error('Question needs source and reuse permission: ' + q.id);
+      const source = q.source;
+      const published = source?.origin === 'published' && /^https:\/\//.test(source.url || '') && !!source.license;
+      const userAI = source?.origin === 'user-ai' && typeof source.document === 'string' && !!source.document.trim() && !source.url;
+      if (!source?.title || !source.permissionReference || (!published && !userAI)) throw new Error('Question needs source and reuse permission: ' + q.id);
       if (q.image && !/^\/assets\/questions\/[a-zA-Z0-9_-]+\.(png|jpg|webp)$/.test(q.image)) throw new Error('Invalid image path: ' + q.id);
     }
   }

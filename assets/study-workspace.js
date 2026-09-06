@@ -1,6 +1,11 @@
 /* Topic workspace uses the existing curriculum and server learning APIs. */
 (() => {
   const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const questionMarkup = value => String(value).split(/\n\s*\n/).map(block => {
+    const rows=block.split('\n');
+    if(rows.length>1&&rows.every(row=>row.includes('\t'))){const cells=rows.map(row=>row.split('\t'));return '<div class="question-table-wrap"><table class="question-table"><thead><tr>'+cells[0].map(cell=>'<th scope="col">'+escape(cell)+'</th>').join('')+'</tr></thead><tbody>'+cells.slice(1).map(row=>'<tr>'+row.map(cell=>'<td>'+escape(cell)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';}
+    return '<p>'+escape(block)+'</p>';
+  }).join('');
   const read = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } };
   const save = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch { return false; } };
   let preferences = read('mentoStudyPreferences', {exam:activeExamBank,theme:'dark',minutes:60});
@@ -208,10 +213,10 @@
     function question() {
       const q=state.questions[position];
       const completed=state.answers.filter(a=>a!==null).length;
-      node.innerHTML=`<div class="quiz-nav"><strong>Soru ${position+1} / 30</strong><span>${completed} cevaplandı</span></div><progress max="30" value="${completed}" aria-label="Cevaplanan sorular"></progress><h3 class="lecture-copy">${escape(q.question)}</h3><div class="quiz-options">${q.options.map((o,i)=>`<button aria-pressed="${state.answers[position]===i}" data-answer="${i}">${String.fromCharCode(65+i)}. ${escape(o)}</button>`).join('')}</div><button id="clearAnswer" ${state.answers[position]===null?'disabled':''}>Cevabı temizle</button><div class="quiz-nav"><button id="prevQuestion" ${position===0?'disabled':''}>Önceki</button><button id="nextQuestion" ${position===29?'disabled':''}>Sonraki</button><button class="primary" id="finishQuiz">Testi bitir</button></div><div class="quiz-grid" aria-label="Sorular">${state.questions.map((_,i)=>`<button data-jump="${i}" class="${state.answers[i]!==null?'answered':''}" aria-current="${i===position}" aria-label="Soru ${i+1}${state.answers[i]!==null?', cevaplandı':''}">${i+1}</button>`).join('')}</div><div id="finishConfirm"></div>`;
+      node.innerHTML=`<div class="quiz-nav"><strong>Soru ${position+1} / 30</strong><span>${completed} cevaplandı</span></div><progress max="30" value="${completed}" aria-label="Cevaplanan sorular"></progress><div class="lecture-copy question-copy">${questionMarkup(q.question)}</div><div class="quiz-options">${q.options.map((o,i)=>`<button aria-pressed="${state.answers[position]===i}" data-answer="${i}">${String.fromCharCode(65+i)}. ${escape(o)}</button>`).join('')}</div><button id="clearAnswer" ${state.answers[position]===null?'disabled':''}>Cevabı temizle</button><div class="quiz-nav"><button id="prevQuestion" ${position===0?'disabled':''}>Önceki</button><button id="nextQuestion" ${position===29?'disabled':''}>Sonraki</button><button class="primary" id="finishQuiz">Testi bitir</button></div><div class="quiz-grid" aria-label="Sorular">${state.questions.map((_,i)=>`<button data-jump="${i}" class="${state.answers[i]!==null?'answered':''}" aria-current="${i===position}" aria-label="Soru ${i+1}${state.answers[i]!==null?', cevaplandı':''}">${i+1}</button>`).join('')}</div><div id="finishConfirm"></div>`;
       node.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{state.answers[position]=Number(b.dataset.answer);persist();question();});
       if(q.image){const image=document.createElement('img');image.src=q.image;image.alt='Soruya ait şekil';image.className='question-image';node.querySelector('.quiz-options').before(image);}
-      if(q.source){const link=document.createElement('a');link.href=q.source.url;link.target='_blank';link.rel='noopener noreferrer';link.className='question-source';link.textContent=q.source.title+' · '+q.source.license;node.appendChild(link);}
+      if(q.source){const published=q.source.origin!=='user-ai'&&/^https:\/\//.test(q.source.url||'');const source=document.createElement(published?'a':'p');if(published){source.href=q.source.url;source.target='_blank';source.rel='noopener noreferrer';}source.className='question-source';source.textContent=q.source.title+(q.source.license?' · '+q.source.license:'');node.appendChild(source);}
       node.querySelector('#clearAnswer').onclick=()=>{state.answers[position]=null;persist();question();};
       node.querySelector('#prevQuestion').onclick=()=>{position--;question();};
       node.querySelector('#nextQuestion').onclick=()=>{position++;question();};
