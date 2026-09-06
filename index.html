@@ -5103,7 +5103,7 @@
       <div class="study-head">
         <div>
           <h3>Konu anlatımı ve videolar</h3>
-          <p>Bir konuyu seçince kısa anlatım, örnek soru ve video çalışma önerisi sohbet alanına düşer.</p>
+          <p>Konunu seç, video derslerine ve notlarına devam et.</p>
         </div>
         <div class="study-controls" aria-label="Sınav ve ders seçimi">
           <div id="examPills" hidden></div>
@@ -5665,11 +5665,12 @@
     }
 
     function historyItemHtml(session) {
+      const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       return `
-        <button class="history-item ${session.id === currentChatId ? 'active' : ''}" type="button" data-chat-id="${session.id}">
-          <span class="history-title">${session.title || 'Yeni sohbet'}</span>
+        <button class="history-item ${session.id === currentChatId ? 'active' : ''}" type="button" data-chat-id="${escape(session.id)}">
+          <span class="history-title">${escape(session.title || 'Yeni sohbet')}</span>
           <span class="history-date">${formatHistoryTime(session.updatedAt)}</span>
-          <span class="history-delete" data-delete-chat="${session.id}" role="button" aria-label="Sohbeti sil">✕</span>
+          <span class="history-delete" data-delete-chat="${escape(session.id)}" role="button" aria-label="Sohbeti sil">✕</span>
         </button>
       `;
     }
@@ -5817,8 +5818,7 @@
         });
         wrap.querySelectorAll('[data-learning-action]').forEach(button => {
           button.addEventListener('click', () => {
-            addMessage(`Mini testler: ${button.dataset.learningAction} başlat`, 'user');
-            addMessage(`${button.dataset.learningAction} hazır. Son mini test sonucuna göre eksik kazanımı, yanlış sebebini ve yarınki tekrar sırasını çıkaracağım.`);
+            openStudyDashboard();
           });
         });
         return;
@@ -6691,11 +6691,11 @@
           return;
         }
         if (title === 'Konu anlatımı') {
-          const panel = document.querySelector('.study-panel');
-          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          panel.classList.remove('plan-highlight');
-          void panel.offsetWidth;
-          panel.classList.add('plan-highlight');
+          openStudyLibrary();
+          return;
+        }
+        if (title === 'Hedef takibi') {
+          openStudyDashboard();
           return;
         }
         const wasActive = activeLearningMode === title;
@@ -6709,7 +6709,7 @@
         }
         const replies = {
           'Oyunlarla öğren': 'Oyun modu açıldı. Seri, süre ve puan görevleriyle konuyu daha canlı çalıştırır.',
-          'Mini testler': 'Mini test modu açıldı. 5 soruluk hızlı ölçüm, yanlış etiketi ve tekrar planı hazırlar.',
+          'Mini testler': 'Bir konu seçerek mevcut hazır testleri kontrol edebilirsin.',
           'Hedef takibi': 'Hedef takibi açıldı. Günlük süre, çözülen soru, net potansiyeli ve çalışma serini yorumlar.'
         };
         addMessage(title, 'user');

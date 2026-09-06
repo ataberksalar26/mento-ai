@@ -50,6 +50,34 @@
 .settings-form input,.settings-form select{width:100%;box-sizing:border-box;background:#253340;color:inherit;border:1px solid #566575;border-radius:6px;padding:10px}
 .study-dialog progress{width:100%;accent-color:#ffd069;height:8px}
 .study-dialog.study-light{background:#fff;color:#18242c}
+.study-dialog[open]{display:flex;flex-direction:column}
+.study-dialog header{flex:0 0 auto}
+.study-body{height:auto;flex:1;min-height:0}
+.study-dialog textarea{display:block;width:100%;box-sizing:border-box;background:#253340;border:1px solid #566575;border-radius:6px;color:inherit;font:inherit;padding:12px;resize:vertical;margin:12px 0;line-height:1.6}
+.study-dialog input[type=checkbox]{width:18px;height:18px;accent-color:#f5b82c;flex-shrink:0}
+.settings-form .setting-check,.topic-actions label,.watched-label{display:flex;align-items:center;gap:8px}
+.topic-actions{display:flex;gap:20px;flex-wrap:wrap;margin:8px 0 20px}
+.watched-label{margin-top:12px;font-size:14px;min-height:32px}
+.video-entry{min-width:0;border-bottom:1px solid #465363;padding-bottom:12px}
+.study-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:24px 0}
+.study-metrics strong{display:block;font-size:24px;color:#6ad7ae;overflow-wrap:anywhere}
+.study-metrics span{display:block;font-size:13px;margin-top:8px}
+.planned-topics{display:grid;gap:8px;margin-bottom:16px}
+.planned-topics button{text-align:left;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.planned-topics span{overflow-wrap:anywhere}
+.focus-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.focus-controls output{font:700 30px ui-monospace,monospace;min-width:110px;font-variant-numeric:tabular-nums}
+.study-section input[type=number]{width:80px;border:1px solid #566575;background:transparent;color:inherit;padding:8px;border-radius:6px}
+.library-search{display:grid;gap:8px;margin-top:20px}
+.library-search input{padding:12px;border:1px solid #566575;background:transparent;color:inherit;border-radius:6px;min-width:0}
+.wrong-entry{padding:16px 0;border-bottom:1px solid #465363;overflow-wrap:anywhere}
+.wrong-entry summary{cursor:pointer;line-height:1.6}
+.study-light textarea{background:#f4f6f8;color:#18242c}
+.study-light .study-metrics strong{color:#177352}
+.study-dialog :focus-visible{outline:2px solid #f4b52c;outline-offset:3px}
+.mento-reduce-motion *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.mento-large-text .study-dialog p,.mento-large-text .study-dialog textarea,.mento-large-text .study-dialog button,.mento-large-text .student-app .message{font-size:18px;line-height:1.7}
+@media(max-width:420px){.study-metrics{gap:8px}.study-metrics strong{font-size:20px}.study-dialog h2{max-width:240px}.video-item{grid-template-columns:90px minmax(0,1fr)}}
 .study-light .study-meta,.study-light small,.study-light .study-status{color:#4f6270}
 .study-light button,.study-light input,.study-light select{background:#edf1f4;color:#18242c}
 .study-light .video-number{color:#775100}
