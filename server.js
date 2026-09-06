@@ -2,6 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { createAiBudget, context: aiContext } = require('./ai-budget');
+const { loadBank, findTest, sources: questionSources } = require('./question-bank');
 
 const PORT = Number(process.env.PORT || 3000);
 const ROOT = __dirname;
@@ -10,6 +12,8 @@ const BRAIN_DATA_FILE = path.join(ROOT, 'data', 'mento-brain-questions.json');
 const APP_VERSION = 'mixed-orange-yellow-text-2026-07-25-0011';
 
 loadEnv(path.join(ROOT, '.env'));
+const aiBudget = createAiBudget();
+const questionBank = loadBank();
 
 function loadEnv(filePath) {
   if (!fs.existsSync(filePath)) return;
@@ -26,6 +30,7 @@ function loadEnv(filePath) {
 }
 
 function sendJson(res, status, data) {
+  if (status === 429 && !res.hasHeader('Retry-After')) res.setHeader('Retry-After', '60');
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify(data));
 }
@@ -148,7 +153,7 @@ function hasValidOpenAIKey() {
 async function askOpenAI({ question, student = {}, brainContext = null, maxOutputTokens = 650 }) {
   if (!hasValidOpenAIKey()) return null;
 
-  const response = await fetch('https://api.openai.com/v1/responses', {
+  const response = await aiBudget.request('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -249,7 +254,7 @@ async function askOpenAIVision({ imageDataUrl, instruction, student = {}, maxOut
     throw error;
   }
 
-  const response = await fetch('https://api.openai.com/v1/responses', {
+  const response = await aiBudget.request('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -302,7 +307,7 @@ async function askOpenAIQuizFromText({ topic, exam, lesson, variant = 1, questio
     ? ` Bu Test ${variantLabel}. Öğrenci bu konudan önceki testleri de çözmüş olabilir; önceki testlerden tamamen farklı, benzer zorlukta yeni sorular üret.`
     : ` Bu Test ${variantLabel}.`;
 
-  const response = await fetch('https://api.openai.com/v1/responses', {
+  const response = await aiBudget.request('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -353,7 +358,7 @@ async function askOpenAIQuizFromImage({ imageDataUrl, exam, lesson, questionCoun
     throw error;
   }
 
-  const response = await fetch('https://api.openai.com/v1/responses', {
+  const response = await aiBudget.request('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -426,24 +431,20 @@ async function handleVisionSolve(req, res) {
 
 async function handleGenerateQuiz(req, res) {
   try {
-    const body = JSON.parse(await readBody(req, 15_000_000) || '{}');
-    const imageDataUrl = body.image ? String(body.image).trim() : '';
+    const body = JSON.parse(await readBody(req, 16000) || '{}');
     const topic = String(body.topic || '').trim();
     const exam = String(body.exam || '').trim();
     const lesson = String(body.lesson || '').trim();
-    const variant = Number(body.variant || 1);
-    const questionCount = Math.min(30, Math.max(5, Number(body.questionCount || 20)));
-
-    if (!imageDataUrl && !topic) {
-      sendJson(res, 400, { error: 'Bir fotoğraf ya da konu bilgisi gerekli.' });
+    if (body.image || !questionSources[exam] || !topic || !lesson) {
+      sendJson(res, 400, { error: 'Hazır test için sınav, ders ve konu seç.' });
       return;
     }
-
-    const quiz = imageDataUrl
-      ? await askOpenAIQuizFromImage({ imageDataUrl, exam, lesson, questionCount })
-      : await askOpenAIQuizFromText({ topic, exam, lesson, variant, questionCount });
-
-    sendJson(res, 200, { ok: true, quiz: { ...quiz, exam, lesson, topic: topic || quiz.title, variant } });
+    const quiz = findTest(questionBank, exam, lesson, topic);
+    if (!quiz) {
+      sendJson(res, 404, { error: 'Bu konu için hazır test henüz eklenmedi.', code: 'QUESTION_BANK_PENDING', sources: questionSources[exam] });
+      return;
+    }
+    sendJson(res, 200, { ok: true, source: 'question-bank', quiz });
   } catch (error) {
     sendJson(res, error.status || 500, { error: error.message || 'Quiz üretilemedi.' });
   }
@@ -456,7 +457,7 @@ async function askOpenAIFlashcards({ exam, lesson, topic, count = 10, maxOutputT
     throw error;
   }
 
-  const response = await fetch('https://api.openai.com/v1/responses', {
+  const response = await aiBudget.request('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -537,7 +538,7 @@ async function askOpenAITopicLecture({ exam, lesson, topic, weakPoints = [], max
     ? `\nÖğrencinin bu konudaki son testte yanlış yaptığı sorular:\n${weakPoints.map((item, index) => `${index + 1}. ${item}`).join('\n')}`
     : '';
 
-  const response = await fetch('https://api.openai.com/v1/responses', {
+  const response = await aiBudget.request('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
@@ -1236,11 +1237,15 @@ function sendFile(res, filePath, status = 200) {
 }
 
 function serveStatic(req, res) {
-  const urlPath = decodeURIComponent(new URL(req.url, `http://localhost:${PORT}`).pathname);
+  let urlPath;
+  try { urlPath = decodeURIComponent(new URL(req.url, `http://localhost:${PORT}`).pathname); }
+  catch { sendJson(res, 400, { error: 'Geçersiz adres.' }); return; }
   const safePath = urlPath === '/' ? '/index.html' : urlPath;
   const filePath = path.normalize(path.join(ROOT, safePath));
 
-  if (!filePath.startsWith(ROOT)) {
+  const relativePath = path.relative(ROOT, filePath).replaceAll('\\', '/');
+  const publicFile = /^(?:index|404|gizlilik|kosullar|tesekkurler)\.html$/.test(relativePath) || /^(?:favicon\.svg|site\.webmanifest|robots\.txt|sitemap\.xml|sw\.js)$/.test(relativePath) || /^assets\/(?!.*(?:^|\/)\.)[\w/.-]+\.(?:js|css|png|jpg|jpeg|svg|webp)$/.test(relativePath) || relativePath === 'data/topic-videos.json';
+  if (relativePath.startsWith('..') || relativePath.split('/').some(part => part.startsWith('.')) || path.isAbsolute(relativePath) || (path.extname(filePath) && !publicFile)) {
     res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Forbidden');
     return;
@@ -1327,6 +1332,11 @@ async function handleBrainAnswer(req, res) {
       });
       sendJson(res, 200, { ok: true, source: 'openai+mento-brain', answer: answer || local.answer, matches: local.matches });
     } catch (error) {
+      if ([413, 429, 503].includes(error.status)) {
+        if (error.retryAfter) res.setHeader('Retry-After', String(error.retryAfter));
+        sendJson(res, error.status, { error: error.message });
+        return;
+      }
       sendJson(res, 200, { ok: true, source: 'mento-brain-fallback', ...local, openAIError: error.message });
     }
   } catch (error) {
@@ -1334,7 +1344,13 @@ async function handleBrainAnswer(req, res) {
   }
 }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer((req, res) => aiContext.run({ req, res }, () => routeRequest(req, res)));
+function routeRequest(req, res) {
+  if (req.method === 'GET' && req.url === '/api/ai-usage') {
+    try { sendJson(res, 200, { ok: true, ...aiBudget.status(req) }); }
+    catch (error) { sendJson(res, error.status || 503, { error: error.message }); }
+    return;
+  }
   if (req.method === 'GET' && req.url === '/api/auth-debug') {
     handleAuthDebug(req, res);
     return;
@@ -1395,7 +1411,7 @@ const server = http.createServer((req, res) => {
     handleVisionSolve(req, res);
     return;
   }
-  if (req.method === 'POST' && req.url === '/api/generate-quiz') {
+  if (req.method === 'POST' && ['/api/question-bank', '/api/generate-quiz'].includes(req.url)) {
     handleGenerateQuiz(req, res);
     return;
   }
@@ -1405,7 +1421,7 @@ const server = http.createServer((req, res) => {
   }
   res.writeHead(405, { 'Content-Type': 'text/plain; charset=utf-8' });
   res.end('Method not allowed');
-});
+}
 
 server.listen(PORT, () => {
   console.log(`Mento AI hazır: http://localhost:${PORT}`);

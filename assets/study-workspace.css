@@ -1,0 +1,56 @@
+.sidebar-brand{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-bottom:18px;min-width:0}
+.sidebar-brand .app-logo{margin:0;gap:6px;font-size:21px;white-space:nowrap;min-width:0}
+.exam-dropdown{position:relative;flex:0 0 72px;color:#eef2f6;font-size:13px}
+.exam-dropdown summary{display:flex;align-items:center;justify-content:space-between;min-height:40px;padding:0 8px;cursor:pointer;list-style:none;border:1px solid #465363;border-radius:6px;background:#182330}
+.exam-dropdown summary::-webkit-details-marker{display:none}
+.exam-dropdown summary:focus-visible,.exam-options button:focus-visible{outline:2px solid #ffd069;outline-offset:2px}
+.exam-options{position:absolute;top:calc(100% + 6px);right:0;width:96px;z-index:50;padding:4px;background:#182330;border:1px solid #465363;border-radius:6px;box-shadow:0 8px 24px #0006}
+.exam-options button{display:block;width:100%;min-height:40px;text-align:left;border:0;border-radius:4px;background:transparent;color:inherit;padding:8px 12px;font:inherit;cursor:pointer}
+.exam-options button[aria-pressed=true],.exam-options button:hover{background:#ffd069;color:#182330}
+.student-app.light .exam-dropdown{color:#182330}
+.student-app.light .exam-dropdown summary,.student-app.light .exam-options{background:#fff}
+.study-dialog{position:fixed;inset:0;width:min(1000px,calc(100% - 24px));max-width:1000px;height:min(850px,calc(100dvh - 24px));max-height:calc(100dvh - 24px);margin:auto;padding:0;border:1px solid #465363;border-radius:8px;background:#101923;color:#eef2f6;z-index:10000;font-family:inherit}
+.study-dialog::backdrop{background:#0009}
+.study-dialog header{display:flex;gap:16px;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid #38424e}
+.study-dialog h2{font-size:22px;margin:4px 0;letter-spacing:0;overflow-wrap:anywhere}
+.study-dialog h3{font-size:18px;letter-spacing:0}
+.study-dialog button,.study-dialog select,.study-dialog input{font:inherit}
+.study-dialog button{cursor:pointer;min-height:40px;border:1px solid #566575;border-radius:6px;padding:8px 14px;color:inherit;background:#253340}
+.study-dialog button:disabled{opacity:.5;cursor:default}
+.study-dialog button.primary{color:#161b21;background:#ffd069;border-color:#ffd069;font-weight:700}
+.study-dialog .close-study{flex:0 0 40px;padding:0;font-size:24px}
+.study-body{height:calc(100% - 100px);overflow:auto;padding:0 22px 28px;overscroll-behavior:contain}
+.study-meta,.study-dialog small{color:#b9c6d2;font-size:13px}
+.study-tabs{display:flex;gap:8px;padding:16px 0;flex-wrap:wrap}
+.study-tabs [aria-selected=true]{background:#ffd069;color:#161b21;border-color:#ffd069}
+.video-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:12px 0 24px}
+.video-item{color:inherit;text-decoration:none;display:flex;flex-direction:column;gap:8px;min-width:0;overflow-wrap:anywhere}
+.video-item img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;background:#253340}
+.video-item strong{font-size:14px;line-height:1.5}
+.video-number{color:#ffd069;font-weight:700}
+.lecture-copy{line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
+.study-section{border-top:1px solid #38424e;padding:18px 0}
+.study-status{padding:20px 0;color:#becbd6}
+.quiz-options{display:grid;gap:10px;margin:20px 0}
+.question-source{color:#ffd069;overflow-wrap:anywhere;line-height:1.6}
+.study-light .question-source{color:#745100}
+.question-image{display:block;max-width:100%;max-height:400px;object-fit:contain;background:#fff}
+.quiz-options button{text-align:left;line-height:1.6;overflow-wrap:anywhere}
+.quiz-options [aria-pressed=true]{border-color:#ffd069;background:#494028}
+.quiz-nav{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:20px 0}
+.quiz-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px;margin:16px 0}
+.quiz-grid button{padding:4px;min-width:0}
+.quiz-grid .answered{border-color:#4bd2a1}
+.quiz-grid [aria-current=true]{background:#ffd069;color:#161b21}
+.quiz-review{padding:18px 0;border-top:1px solid #465363}
+.quiz-review.correct h3{color:#69dbb2}
+.quiz-review.incorrect h3{color:#ffaaaa}
+.settings-form{display:grid;gap:18px;padding:22px 0;max-width:520px}
+.settings-form label{display:grid;gap:8px}
+.settings-form input,.settings-form select{width:100%;box-sizing:border-box;background:#253340;color:inherit;border:1px solid #566575;border-radius:6px;padding:10px}
+.study-dialog progress{width:100%;accent-color:#ffd069;height:8px}
+.study-dialog.study-light{background:#fff;color:#18242c}
+.study-light .study-meta,.study-light small,.study-light .study-status{color:#4f6270}
+.study-light button,.study-light input,.study-light select{background:#edf1f4;color:#18242c}
+.study-light .video-number{color:#775100}
+@media(max-width:650px){.study-dialog header{padding:14px}.study-dialog h2{font-size:19px}.study-body{padding:0 14px 24px}.video-list{grid-template-columns:1fr}.video-item{display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 12px}.video-item img{grid-row:1/5}.quiz-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}

@@ -5028,7 +5028,17 @@
 
   <section class="student-app" id="studentApp" aria-hidden="true">
     <aside class="app-sidebar">
-      <div class="app-logo"><span class="app-logo-mark">M</span><span>mento ai</span></div>
+      <div class="sidebar-brand">
+        <div class="app-logo"><span class="app-logo-mark">M</span><span>mento ai</span></div>
+        <details class="exam-dropdown" id="examDropdown">
+          <summary aria-label="Sınav seç"><span id="currentExamLabel">LGS</span><span aria-hidden="true">⌄</span></summary>
+          <div class="exam-options" role="group" aria-label="Sınav">
+            <button type="button" data-main-exam="LGS" aria-pressed="true">LGS</button>
+            <button type="button" data-main-exam="TYT" aria-pressed="false">TYT</button>
+            <button type="button" data-main-exam="AYT" aria-pressed="false">AYT</button>
+          </div>
+        </details>
+      </div>
       <button class="new-chat" type="button" id="newChatButton">+ Yeni sohbet</button>
       <div class="sidebar-label">Sohbet geçmişi</div>
       <div class="history-list" id="historyList"></div>
@@ -5064,6 +5074,7 @@
         <div>
           <h2>Mento Koç</h2>
           <p id="brainStatus">Soru görseli yükle, soru sor veya konu anlatımı iste. Bağlantı kontrol ediliyor.</p>
+          <p id="aiUsage" aria-live="polite"></p>
         </div>
         <div class="top-actions">
           <button class="top-icon" type="button" id="notifyButton" aria-label="Bildirimler">●</button>
@@ -5095,12 +5106,12 @@
           <p>Bir konuyu seçince kısa anlatım, örnek soru ve video çalışma önerisi sohbet alanına düşer.</p>
         </div>
         <div class="study-controls" aria-label="Sınav ve ders seçimi">
-          <div class="exam-pills" id="examPills" role="tablist" aria-label="Sınav seç"></div>
+          <div id="examPills" hidden></div>
           <div class="lesson-pills" id="lessonPills" role="tablist" aria-label="Ders seç"></div>
         </div>
       </div>
       <div class="quick-cards">
-        <div class="quick-card"><strong>Bugünün video rotası</strong><span>1 konu anlatımı + 12 soru + yanlış sebebi notu.</span></div>
+        <div class="quick-card"><strong>Bugünün video rotası</strong><span>Video dersleri · Konu anlatımı · Soru kaynakları</span></div>
         <div class="quick-card"><strong>Görselle çözüm</strong><span>Kamera veya galeriden soru yükle, çözüm akışını başlat.</span></div>
       </div>
       <div>
@@ -5186,7 +5197,7 @@
       <div class="flashcard-pills" id="gameTopicPills"></div>
       <div id="gameLoading" class="flashcard-loading" style="display:none">
         <span class="flashcard-spinner"></span>
-        <span>Mento AI bu konudan sorular hazırlıyor…</span>
+        <span>Hazır test yükleniyor…</span>
       </div>
       <div id="gameError" class="flashcard-error" style="display:none">
         <span id="gameErrorText">Sorular hazırlanamadı.</span>
@@ -5764,8 +5775,8 @@
         wrap.innerHTML = `
           <article class="learning-card featured">
             <div>
-              <strong>Sana özel mini test oluştur</strong>
-              <p>${activeExamBank} ${activeLesson} konularından seçim yap. Mento AI seçtiğin konu, zorluk ve hedef bilgilerine göre test akışı hazırlasın.</p>
+              <strong>${activeExamBank} ${activeLesson} konu testleri</strong>
+              <p>30 soru · Orta ve zor</p>
             </div>
             <label>Konu
               <select id="miniTopicSelect">
@@ -5774,20 +5785,15 @@
             </label>
             <label>Zorluk
               <select id="miniDifficultySelect">
-                <option value="orta">Orta</option>
-                <option value="kolay">Kolay</option>
-                <option value="zor">Zor</option>
-                <option value="karma">Karma</option>
+                <option value="orta-zor">Orta ve zor</option>
               </select>
             </label>
             <label>Soru
               <select id="miniCountSelect">
-                <option value="5">5 soru</option>
-                <option value="8">8 soru</option>
-                <option value="10">10 soru</option>
+                <option value="30">30 soru</option>
               </select>
             </label>
-            <button type="button" id="startMiniTest">Testi hazırla</button>
+            <button type="button" id="startMiniTest">Testi aç</button>
           </article>
           <article class="learning-card">
             <strong>Yanlış sebebi</strong>
@@ -5806,8 +5812,8 @@
           const topic = document.getElementById('miniTopicSelect').value;
           const difficulty = document.getElementById('miniDifficultySelect').value;
           const count = document.getElementById('miniCountSelect').value;
-          addMessage(`${activeExamBank} ${activeLesson} ${topic} için ${difficulty} seviyede ${count} soruluk mini test hazırla. Sonunda yanlış sebebi ve kısa tekrar planı ver.`, 'user');
-          addMessage(`${topic} mini testi hazırlanıyor: ${count} soru, ${difficulty} seviye. Cevapları verdikçe kontrol edeceğim; yanlış çıkarsa nedenini etiketleyip kısa tekrar planına bağlayacağım.`);
+          addMessage(`${activeExamBank} ${activeLesson} · ${topic} · ${count} soruluk konu testi`, 'user');
+          openTopicLearning(activeExamBank, activeLesson, topic, true);
         });
         wrap.querySelectorAll('[data-learning-action]').forEach(button => {
           button.addEventListener('click', () => {
@@ -5870,11 +5876,11 @@
         const response = await fetch('/api/auth-debug');
         const data = await response.json();
         if (data.openAIReady) {
-          brainStatus.textContent = `Mento Brain + ChatGPT aktif. Model: ${data.openAIModel || 'gpt-4.1-mini'}.`;
+          brainStatus.textContent = 'Koç hazır. Sorunu yazabilir veya bir konu seçebilirsin.';
         } else if (data.openAISet && !data.openAIKeyLooksValid) {
-          brainStatus.textContent = 'ChatGPT anahtarı hatalı görünüyor. Render OPENAI_API_KEY alanına sk- ile başlayan anahtar yazılmalı.';
+          brainStatus.textContent = 'AI koç şu anda kullanılamıyor. Konu kaynaklarını inceleyebilirsin.';
         } else {
-          brainStatus.textContent = 'Mento Brain yerel modda. ChatGPT için Render OPENAI_API_KEY eklenmeli.';
+          brainStatus.textContent = 'Konu kaynakları hazır. AI koç şu anda çevrimdışı.';
         }
       } catch {
         brainStatus.textContent = 'Mento Brain yerel modda çalışıyor. Sunucu bağlantısı kontrol edilemedi.';
@@ -5981,6 +5987,7 @@
           activeLesson = button.dataset.lesson;
           renderLessonTabs();
           renderTopics();
+          if (activeLearningMode === 'Mini testler') addLearningCards('Mini testler');
         });
       });
     }
@@ -5996,7 +6003,7 @@
       topicList.querySelectorAll('[data-topic]').forEach(button => {
         button.addEventListener('click', () => {
           addMessage(`${activeExamBank} ${activeLesson} - ${button.dataset.topic} konu anlatımı istiyorum.`, 'user');
-          addMessage(`${button.dataset.topic}: ${button.dataset.desc} Önce kısa konu anlatımı izle, sonra 12 kolay-orta soru çöz. Yanlışların varsa hangi adımda takıldığını yaz; ben onu parçalayarak anlatayım.`);
+          openTopicLearning(activeExamBank, activeLesson, button.dataset.topic);
         });
       });
     }
@@ -6181,15 +6188,6 @@
       }, 1000);
     }
 
-    function gameFallbackQuestions() {
-      const topics = topicBanks[gameLessonExam]?.[gameLessonName] || [];
-      return topics.slice(0, 6).map(([title, desc]) => ({
-        question: `${title} konusuyla ilgili doğru ifade hangisidir?`,
-        options: [desc, 'Bu konu sınav müfredatında yer almaz.', 'Bu konu yalnızca sözel sorularda çıkar.', 'Bu konunun tanımı yoktur.'],
-        correctIndex: 0
-      }));
-    }
-
     function renderGameLessonPills() {
       gameLessonPills.innerHTML = Object.keys(topicBanks[gameLessonExam]).map(lesson => `
         <button type="button" class="${lesson === gameLessonName ? 'active' : ''}" data-game-lesson="${lesson}">${lesson}</button>
@@ -6232,7 +6230,7 @@
       }
       gameLoading.style.display = 'grid';
       try {
-        const response = await fetch('/api/generate-quiz', {
+        const response = await fetch('/api/question-bank', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ topic: gameTopic, exam: gameLessonExam, lesson: gameLessonName, questionCount: gameQuestionCount })
@@ -6246,15 +6244,9 @@
         gameLoading.style.display = 'none';
         startGameRound();
       } catch (error) {
-        const fallback = gameFallbackQuestions();
         gameLoading.style.display = 'none';
-        if (fallback.length) {
-          gameQuestions = fallback;
-          startGameRound();
-        } else {
-          gameErrorBox.style.display = 'grid';
-          gameErrorText.textContent = error.message || 'Sorular hazırlanamadı, tekrar dene.';
-        }
+        gameErrorBox.style.display = 'grid';
+        gameErrorText.textContent = error.message || 'Hazır test yüklenemedi, tekrar dene.';
       }
     }
 
@@ -6385,7 +6377,7 @@
     document.getElementById('planOpenLecture').addEventListener('click', () => {
       closeDailyPlan();
       addMessage(`${planExam} ${planLesson} - ${planTopicTitle} konu anlatımı istiyorum.`, 'user');
-      addMessage(`${planTopicTitle}: ${planTopicDesc} Önce kısa konu anlatımı izle, sonra 12 kolay-orta soru çöz. Yanlışların varsa hangi adımda takıldığını yaz; ben onu parçalayarak anlatayım.`);
+      openTopicLearning(planExam, planLesson, planTopicTitle);
     });
     document.getElementById('planOpenTest').addEventListener('click', () => {
       closeDailyPlan();
@@ -6420,6 +6412,7 @@
         body: JSON.stringify(payload)
       });
       const data = await response.json().catch(() => ({}));
+      window.refreshAiUsage?.();
       if (!response.ok) throw new Error(data.error || data.message || 'İşlem tamamlanamadı.');
       return data;
     }
@@ -6627,9 +6620,9 @@
           brainStatus.textContent = 'Mento Brain yerel modda cevap verdi. ChatGPT için OPENAI_API_KEY kontrol edilmeli.';
         }
         addMessage(data.answer || generateLocalBrainReply(text));
-      } catch {
-        brainStatus.textContent = 'Sunucuya ulaşılamadı; cevap tarayıcı içi yedek moddan geldi.';
-        addMessage(generateLocalBrainReply(text));
+      } catch (error) {
+        brainStatus.textContent = 'Yanıt alınamadı.';
+        addMessage(error.message || 'Yanıt alınamadı. Biraz sonra tekrar dene.');
       } finally {
         sendMessage.disabled = false;
       }
@@ -6669,8 +6662,7 @@
     });
 
     document.getElementById('settingsButton').addEventListener('click', () => {
-      settingsPanel.classList.toggle('show');
-      addMessage('Ayarlar açıldı. Profil fotoğrafını sol alttaki avatar alanından seçebilir, tema modunu değiştirebilirsin.');
+      openStudySettings();
     });
 
     profilePhoto.addEventListener('change', () => {
@@ -6850,5 +6842,7 @@
     window.addEventListener('popstate', restoreRouteFromUrl);
     window.addEventListener('hashchange', restoreRouteFromUrl);
   </script>
+  <link rel="stylesheet" href="/assets/study-workspace.css">
+  <script src="/assets/study-workspace.js"></script>
 </body>
 </html>
