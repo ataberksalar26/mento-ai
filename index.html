@@ -2271,10 +2271,12 @@
       color: #e9f0f7;
       background: #07111e;
       min-height: 100dvh;
+      color-scheme: dark;
     }
 
     .student-app.light {
       color: #172235;
+      color-scheme: light;
       background:
         radial-gradient(circle at 48% 0%, rgba(244,182,62,.16), transparent 28%),
         linear-gradient(180deg, #e6ecf3 0%, #dce4ed 100%);
@@ -2336,7 +2338,7 @@
       flex: 0 0 auto;
     }
 
-    .exam-dropdown summary {
+    .exam-dropdown-btn {
       list-style: none;
       display: flex;
       align-items: center;
@@ -2350,28 +2352,30 @@
       font-weight: 800;
       cursor: pointer;
       user-select: none;
+      transition: background .15s ease, border-color .15s ease;
     }
 
-    .exam-dropdown summary::-webkit-details-marker {
-      display: none;
+    .exam-dropdown-btn:hover {
+      background: rgba(245,166,35,.16);
+      border-color: rgba(245,166,35,.45);
     }
 
-    .exam-dropdown summary span[aria-hidden] {
+    .exam-dropdown-btn span[aria-hidden] {
       font-size: 10px;
       display: inline-block;
       transition: transform .15s ease;
     }
 
-    .exam-dropdown[open] summary span[aria-hidden] {
+    .exam-dropdown.open .exam-dropdown-btn span[aria-hidden] {
       transform: rotate(180deg);
     }
 
     .exam-options {
+      display: none;
       position: absolute;
       top: calc(100% + 8px);
       right: 0;
       z-index: 20;
-      display: grid;
       gap: 3px;
       min-width: 120px;
       padding: 6px;
@@ -2379,6 +2383,10 @@
       background: #101f33;
       border: 1px solid rgba(255,255,255,.1);
       box-shadow: 0 20px 40px rgba(0,0,0,.4);
+    }
+
+    .exam-dropdown.open .exam-options {
+      display: grid;
     }
 
     .exam-options button {
@@ -5169,14 +5177,14 @@
     <aside class="app-sidebar">
       <div class="sidebar-brand">
         <div class="app-logo"><span class="app-logo-mark">M</span><span>mento ai</span></div>
-        <details class="exam-dropdown" id="examDropdown">
-          <summary aria-label="Sınav seç"><span id="currentExamLabel">LGS</span><span aria-hidden="true">⌄</span></summary>
+        <div class="exam-dropdown" id="examDropdown">
+          <button type="button" class="exam-dropdown-btn" id="examDropdownBtn" aria-label="Sınav seç" aria-haspopup="true" aria-expanded="false"><span id="currentExamLabel">LGS</span><span aria-hidden="true">⌄</span></button>
           <div class="exam-options" role="group" aria-label="Sınav">
             <button type="button" data-main-exam="LGS" aria-pressed="true">LGS</button>
             <button type="button" data-main-exam="TYT" aria-pressed="false">TYT</button>
             <button type="button" data-main-exam="AYT" aria-pressed="false">AYT</button>
           </div>
-        </details>
+        </div>
       </div>
       <button class="new-chat" type="button" id="newChatButton">+ Yeni sohbet</button>
       <div class="sidebar-label">Sohbet geçmişi</div>
@@ -5443,6 +5451,7 @@
     const lessonPills = document.getElementById('lessonPills');
     const topicList = document.getElementById('topicList');
     const examDropdown = document.getElementById('examDropdown');
+    const examDropdownBtn = document.getElementById('examDropdownBtn');
     const currentExamLabel = document.getElementById('currentExamLabel');
     const topicAccents = ['#f5a623', '#4d7df3', '#31b877', '#875ee4'];
     const flashcardOverlay = document.getElementById('flashcardOverlay');
@@ -6122,9 +6131,15 @@
       });
     }
 
+    function setExamDropdownOpen(open) {
+      if (!examDropdown) return;
+      examDropdown.classList.toggle('open', open);
+      examDropdownBtn?.setAttribute('aria-expanded', String(open));
+    }
+
     function setMainExam(exam) {
       if (!topicBanks[exam] || exam === activeExamBank) {
-        if (examDropdown) examDropdown.open = false;
+        setExamDropdownOpen(false);
         return;
       }
       activeExamBank = exam;
@@ -6134,19 +6149,20 @@
         examDropdown.querySelectorAll('[data-main-exam]').forEach(button => {
           button.setAttribute('aria-pressed', String(button.dataset.mainExam === exam));
         });
-        examDropdown.open = false;
       }
+      setExamDropdownOpen(false);
       renderExamModeTabs();
       renderLessonTabs();
       renderTopics();
     }
 
     if (examDropdown) {
+      examDropdownBtn.addEventListener('click', () => setExamDropdownOpen(!examDropdown.classList.contains('open')));
       examDropdown.querySelectorAll('[data-main-exam]').forEach(button => {
         button.addEventListener('click', () => setMainExam(button.dataset.mainExam));
       });
       document.addEventListener('click', event => {
-        if (examDropdown.open && !examDropdown.contains(event.target)) examDropdown.open = false;
+        if (examDropdown.classList.contains('open') && !examDropdown.contains(event.target)) setExamDropdownOpen(false);
       });
     }
 
