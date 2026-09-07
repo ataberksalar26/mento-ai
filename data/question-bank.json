@@ -5735,6 +5735,3937 @@
           }
         }
       ]
+    },
+    {
+      "exam": "LGS",
+      "lesson": "Matematik",
+      "topic": "Eşlik ve Benzerlik",
+      "questions": [
+        {
+          "id": "lgs-user-v1-271",
+          "question": "Benzer iki üçgenin karşılıklı kenarları aşağıdadır. x kaçtır?\n\nKüçük üçgen\tBüyük üçgen\n4 cm\t6 cm\n6 cm\t9 cm\n8 cm\tx cm",
+          "options": [
+            "10",
+            "12",
+            "14",
+            "16"
+          ],
+          "correctIndex": 1,
+          "explanation": "Büyütme oranı 6/4=3/2. x=8·3/2=12.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 271
+          },
+          "image": "/assets/questions/q-271.png",
+          "imageAlt": "4, 6, 8 cm; 6, 9, x cm. İki üçgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-272",
+          "question": "ABC≅ KLM eşliğinde köşeler yazılış sırasıyla eşleşmektedir. B açısı 58° ise L açısı kaç derecedir?",
+          "options": [
+            "58",
+            "62",
+            "116",
+            "122"
+          ],
+          "correctIndex": 0,
+          "explanation": "B ile L karşılıklı köşelerdir. Eş üçgenlerin karşılıklı açıları eşittir: 58°.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 272
+          },
+          "image": "/assets/questions/q-272.png",
+          "imageAlt": "ABC · B = 58°; KLM · L = ?. İki üçgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-273",
+          "question": "İki benzer çokgenin küçükten büyüğe uzunluk oranı 2/3’tür. Küçüğün çevresi 30 cm ise büyüğün çevresi kaç santimetredir?",
+          "options": [
+            "20",
+            "40",
+            "45",
+            "60"
+          ],
+          "correctIndex": 2,
+          "explanation": "Çevreler de aynı orandadır. Büyük çevre 30·3/2=45 cm.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 273
+          }
+        },
+        {
+          "id": "lgs-user-v1-274",
+          "question": "1/200.000 ölçekli haritada iki noktanın uzaklığı 3 cm’dir. Gerçek uzaklık kaç kilometredir?",
+          "options": [
+            "0,6",
+            "3",
+            "6",
+            "60"
+          ],
+          "correctIndex": 2,
+          "explanation": "Gerçek uzaklık 3·200.000=600.000 cm. 100.000 cm = 1 km olduğundan sonuç 6 km.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 274
+          }
+        },
+        {
+          "id": "lgs-user-v1-275",
+          "question": "Bir fotokopi makinesi bütün uzunlukları %120 ölçeğinde büyütüyor. Kâğıttaki 15 cm’lik çizginin yeni uzunluğu kaç santimetredir?",
+          "options": [
+            "3",
+            "12",
+            "16,2",
+            "18"
+          ],
+          "correctIndex": 3,
+          "explanation": "%120, uzunluğu 1,2 ile çarpmaktır. 15·1,2=18 cm.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 275
+          }
+        },
+        {
+          "id": "lgs-user-v1-276",
+          "question": "6 cm × 10 cm boyutundaki fotoğraf, oranları korunarak büyütülüyor. Yeni kısa kenar 9 cm ise uzun kenar kaç santimetredir?",
+          "options": [
+            "12",
+            "13",
+            "18",
+            "15"
+          ],
+          "correctIndex": 3,
+          "explanation": "Büyütme oranı 9/6=1,5. Uzun kenar 10·1,5=15 cm.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 276
+          },
+          "image": "/assets/questions/q-276.png",
+          "imageAlt": "6 × 10 cm; 9 × x cm. İki dikdörtgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-277",
+          "question": "Aynı anda, düz zemine dik 1,5 m’lik çubuğun gölgesi 2 m, bir ağacın gölgesi 8 m’dir. Güneş ışınları paralel kabul edilirse ağacın yüksekliği kaç metredir?",
+          "options": [
+            "4",
+            "6",
+            "8",
+            "12"
+          ],
+          "correctIndex": 1,
+          "explanation": "Oluşan dik üçgenler benzerdir. h/8=1,5/2 olduğundan h=6 m.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 277
+          },
+          "image": "/assets/questions/q-277.png",
+          "imageAlt": "Dik çubuk ve ağaç; gölgeler 2 m ve 8 m, çubuk yüksekliği 1,5 m."
+        },
+        {
+          "id": "lgs-user-v1-278",
+          "question": "Birbirine eş iki kareden birinin alanı 49 cm²’dir. Diğerinin çevresi kaç santimetredir?",
+          "options": [
+            "14",
+            "28",
+            "49",
+            "196"
+          ],
+          "correctIndex": 1,
+          "explanation": "Karenin kenarı √(49)=7 cm. Eş karenin çevresi 4·7=28 cm.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 278
+          },
+          "image": "/assets/questions/q-278.png",
+          "imageAlt": "Alan = 49 cm²; Eş kare · Çevre = ?. İki dikdörtgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-279",
+          "question": "Kenarları 3, 4 ve 5 cm olan üçgene hangi üçgen benzerdir?",
+          "options": [
+            "6, 7, 8 cm",
+            "6, 8, 10 cm",
+            "3, 5, 7 cm",
+            "9, 12, 16 cm"
+          ],
+          "correctIndex": 1,
+          "explanation": "B’de karşılıklı kenar oranları 6/3=8/4=10/5=2. Diğer seçeneklerde üç oran eşit değildir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 279
+          },
+          "image": "/assets/questions/q-279.png",
+          "imageAlt": "Kenarları 3, 4 ve 5 cm olan dik üçgen."
+        },
+        {
+          "id": "lgs-user-v1-280",
+          "question": "Benzer iki şeklin küçükten büyüğe uzunluk oranı 3/4’tür. Küçüğün alanı 27 cm² ise büyüğün alanı kaç santimetrekaredir?",
+          "options": [
+            "36",
+            "40",
+            "48",
+            "64"
+          ],
+          "correctIndex": 2,
+          "explanation": "Alan oranı 9/16’dır. Büyük alan 27·16/9=48 cm².",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 280
+          }
+        },
+        {
+          "id": "lgs-user-v1-281",
+          "question": "Kenarları 4 cm ve 7 cm olan iki eşkenar üçgen için hangisi doğrudur?",
+          "options": [
+            "Benzerdirler fakat eş değildirler.",
+            "Eştirler fakat benzer değildirler.",
+            "Ne eş ne benzerdirler.",
+            "Hem eş hem benzerdirler."
+          ],
+          "correctIndex": 0,
+          "explanation": "İkisinin de açıları 60° olduğundan benzerdirler. Kenar uzunlukları farklı olduğundan eş değildirler.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 281
+          },
+          "image": "/assets/questions/q-281.png",
+          "imageAlt": "Kenar = 4 cm; Kenar = 7 cm. İki üçgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-282",
+          "question": "Bir kâğıt şeklin aynadaki görüntüsüyle aslı karşılaştırılıyor. Hangisi kesinlikle doğrudur?",
+          "options": [
+            "Karşılıklı uzunlukları ve açıları eşittir.",
+            "Görüntünün alanı daha büyüktür.",
+            "Görüntünün çevresi daha küçüktür.",
+            "Şekiller yalnızca kareyse eştir."
+          ],
+          "correctIndex": 0,
+          "explanation": "Yansıma uzunluk ve açıları korur. Bu nedenle şekil ile görüntüsü eştir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 282
+          }
+        },
+        {
+          "id": "lgs-user-v1-283",
+          "question": "ABC∼ KLM benzerliğinde köşeler yazılış sırasıyla eşleşmektedir. Doğru oran hangisidir?",
+          "options": [
+            "(AB)/(LM)=(BC)/(KL)",
+            "(AC)/(KL)=(AB)/(KM)",
+            "(AB)/(KL)=(BC)/(LM)",
+            "(AB)/(KM)=(BC)/(LM)"
+          ],
+          "correctIndex": 2,
+          "explanation": "A–K, B–L, C–M eşleşir. Dolayısıyla AB–KL ve BC–LM karşılıklı kenarlardır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 283
+          },
+          "image": "/assets/questions/q-283.png",
+          "imageAlt": "A ↔ K; B ↔ L, C ↔ M. İki üçgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-284",
+          "question": "1/50 ölçekli planda bir odanın kenarı 8 cm gösteriliyor. Gerçek uzunluk kaç metredir?",
+          "options": [
+            "0,4",
+            "4",
+            "40",
+            "400"
+          ],
+          "correctIndex": 1,
+          "explanation": "8·50=400 cm. Bu uzunluk 4 metredir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 284
+          }
+        },
+        {
+          "id": "lgs-user-v1-285",
+          "question": "Bir fotoğrafın eni ve boyu yarıya indiriliyor. Yeni alanın eski alana oranı kaçtır?",
+          "options": [
+            "(1)/(2)",
+            "(1)/(4)",
+            "(1)/(8)",
+            "(3)/(4)"
+          ],
+          "correctIndex": 1,
+          "explanation": "İki boyut da 1/2 ile çarpılır. Alan oranı (1/2)²=1/4.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 285
+          }
+        },
+        {
+          "id": "lgs-user-v1-286",
+          "question": "8 cm × 12 cm’lik bir dikdörtgen afişin kısa kenarı, benzerlik korunarak 20 cm yapılıyor. Yeni uzun kenar kaç santimetredir?",
+          "options": [
+            "24",
+            "28",
+            "32",
+            "30"
+          ],
+          "correctIndex": 3,
+          "explanation": "Uzunluklar 20/8=2,5 katına çıkar. Uzun kenar 12·2,5=30 cm.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 286
+          },
+          "image": "/assets/questions/q-286.png",
+          "imageAlt": "8 × 12 cm; 20 × x cm. İki dikdörtgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-287",
+          "question": "ABC üçgeninde açılar sırasıyla 50°, 60°, 70°; XYZ üçgeninde 60°, 70°, 50°’dir. Benzerlikte A köşesi hangi köşeyle eşleşir?",
+          "options": [
+            "X",
+            "Y",
+            "X veya Y",
+            "Z"
+          ],
+          "correctIndex": 3,
+          "explanation": "Eşleşen köşelerin açıları eşittir. A’nın 50°’lik açısına Z karşılık gelir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 287
+          },
+          "image": "/assets/questions/q-287.png",
+          "imageAlt": "A:50° B:60° C:70°; X:60° Y:70° Z:50°. İki üçgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-288",
+          "question": "Benzer iki dörtgenin çevreleri 24 ve 36 cm’dir. Küçük dörtgendeki 10 cm’lik kenarın büyükteki karşılığı kaç santimetredir?",
+          "options": [
+            "15",
+            "12",
+            "18",
+            "20"
+          ],
+          "correctIndex": 0,
+          "explanation": "Büyütme oranı 36/24=3/2. Karşılık gelen kenar 10·3/2=15 cm.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 288
+          }
+        },
+        {
+          "id": "lgs-user-v1-289",
+          "question": "ABC üçgeninde D, AB üzerinde; E, AC üzerindedir. DE, BC’ye paraleldir. AB=12, AD=8, BC=15 cm ise DE kaç santimetredir?",
+          "options": [
+            "6",
+            "8",
+            "12",
+            "10"
+          ],
+          "correctIndex": 3,
+          "explanation": "ADE ve ABC benzerdir. DE/15=8/12; DE=10 cm.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 289
+          },
+          "image": "/assets/questions/q-289.png",
+          "imageAlt": "ABC üçgeninde DE, BC'ye paralel. AD=8; AB=12  BC = 15"
+        },
+        {
+          "id": "lgs-user-v1-290",
+          "question": "ABC üçgeninde D, AB üzerinde; E, AC üzerindedir ve DE∥BC’dir. AD=6, DB=3, AE=8 cm olduğuna göre EC kaç santimetredir?",
+          "options": [
+            "3",
+            "6",
+            "4",
+            "12"
+          ],
+          "correctIndex": 2,
+          "explanation": "AD/AB=6/9=2/3=AE/AC. AC=12, dolayısıyla EC=12-8=4 cm.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 290
+          },
+          "image": "/assets/questions/q-290.png",
+          "imageAlt": "ABC üçgeninde DE, BC'ye paralel. AD=6; DB=3 AE=8; EC=? "
+        },
+        {
+          "id": "lgs-user-v1-291",
+          "question": "Benzer iki üçgenin uzunluk oranı 3/5, alanları farkı 64 cm²’dir. Küçük üçgenin alanı kaç santimetrekaredir?",
+          "options": [
+            "36",
+            "40",
+            "48",
+            "100"
+          ],
+          "correctIndex": 0,
+          "explanation": "Alanlar 9k ve 25k olur. 16k=64⇒ k=4; küçük alan 36 cm².",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 291
+          }
+        },
+        {
+          "id": "lgs-user-v1-292",
+          "question": "8 cm × 12 cm’lik fotoğraf, döndürülmeden ve kesilmeden, oranı korunarak 18 cm × 24 cm’lik kâğıda mümkün olduğunca büyük basılıyor. Kâğıdın boş kalan alanı kaç santimetrekaredir?",
+          "options": [
+            "24",
+            "36",
+            "64",
+            "48"
+          ],
+          "correctIndex": 3,
+          "explanation": "Büyütme sınırı min(18/8,24/12)=2. Fotoğraf 16×24 olur; boş alan 18·24-16·24=48.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 292
+          },
+          "image": "/assets/questions/q-292.png",
+          "imageAlt": "Fotoğraf: 8 × 12; Kâğıt: 18 × 24. İki dikdörtgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-293",
+          "question": "1/400 ölçekli planda dikdörtgen bahçe 3 cm × 5 cm gösteriliyor. Gerçek alan kaç metrekaredir?",
+          "options": [
+            "240",
+            "60",
+            "120",
+            "2400"
+          ],
+          "correctIndex": 0,
+          "explanation": "Gerçek kenarlar 1200 ve 2000 cm, yani 12 ve 20 m’dir. Alan 12·20=240 m².",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 293
+          }
+        },
+        {
+          "id": "lgs-user-v1-294",
+          "question": "Boyu 18 cm olan fotoğraf önce %150 ölçeğinde, ardından elde edilen kopya %80 ölçeğinde basılıyor. Son boy kaç santimetredir?",
+          "options": [
+            "21,6",
+            "14,4",
+            "24",
+            "27"
+          ],
+          "correctIndex": 0,
+          "explanation": "Ölçekler çarpılır: 1,5·0,8=1,2. Son boy 18·1,2=21,6 cm.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 294
+          }
+        },
+        {
+          "id": "lgs-user-v1-295",
+          "question": "Kenarları 6, 8, 10 cm olan dik üçgene benzer başka bir üçgenin çevresi 72 cm’dir. Büyük üçgenin hipotenüsüne ait yüksekliği kaç santimetredir?",
+          "options": [
+            "12",
+            "14,4",
+            "18",
+            "24"
+          ],
+          "correctIndex": 1,
+          "explanation": "Küçük yükseklik 6·8/10=4,8 cm. Çevre oranı 72/24=3; büyük yükseklik 14,4 cm.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 295
+          },
+          "image": "/assets/questions/q-295.png",
+          "imageAlt": "6, 8, 10 cm; Çevre = 72 cm. İki üçgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-296",
+          "question": "ABC≅ KLM ve köşeler sıralarıyla eşleşiyor. AB=2x+1, KL=13, BC=x+5 cm ise LM kaç santimetredir?",
+          "options": [
+            "11",
+            "6",
+            "13",
+            "18"
+          ],
+          "correctIndex": 0,
+          "explanation": "2x+1=13⇒ x=6. BC ile LM eş olduğundan LM=6+5=11.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 296
+          },
+          "image": "/assets/questions/q-296.png",
+          "imageAlt": "AB = 2x + 1; KL = 13; BC = x + 5. İki üçgen şeması."
+        },
+        {
+          "id": "lgs-user-v1-297",
+          "question": "ABCD dışbükey yamuğunda AB∥CD, AB=6 ve CD=14 cm’dir. AC ile BD köşegenleri O’da kesişiyor. BD=20 cm ise BO kaç santimetredir?",
+          "options": [
+            "8",
+            "10",
+            "14",
+            "6"
+          ],
+          "correctIndex": 3,
+          "explanation": "AOB ve COD üçgenleri benzerdir; BO/OD=6/14=3/7. Toplam 20 olduğundan BO=20·3/10=6.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 297
+          },
+          "image": "/assets/questions/q-297.png",
+          "imageAlt": "AB ve CD paralel, uzunlukları 6 ve 14 cm. Köşegenler O noktasında kesişiyor."
+        },
+        {
+          "id": "lgs-user-v1-298",
+          "question": "Kenarı 18 cm olan eşkenar üçgenin bir köşesinden, karşı kenara paralel kesilerek daha küçük bir üçgen ayrılıyor. Ayrılan üçgenin çevresi 36 cm’dir. Geriye kalan alan, başlangıç alanının kaçta kaçıdır?",
+          "options": [
+            "(1)/(3)",
+            "(4)/(9)",
+            "(5)/(9)",
+            "(2)/(3)"
+          ],
+          "correctIndex": 2,
+          "explanation": "Küçük kenar 36/3=12; uzunluk oranı 2/3, alan oranı 4/9. Kalan pay 1-4/9=5/9.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 298
+          },
+          "image": "/assets/questions/q-298.png",
+          "imageAlt": "ABC üçgeninde DE, BC'ye paralel. Büyük kenar: 18 Küçük çevre: 36 "
+        },
+        {
+          "id": "lgs-user-v1-299",
+          "question": "ABC üçgeninde DE∥BC ve D ile E, sırasıyla AB ve AC üzerindedir. A’nın DE doğrusuna dik uzaklığı 4 cm, DE ile BC arasındaki uzaklık 6 cm’dir. DE=6 cm ise BC kaç santimetredir?",
+          "options": [
+            "9",
+            "12",
+            "15",
+            "18"
+          ],
+          "correctIndex": 2,
+          "explanation": "Büyük üçgenin yüksekliği 4+6=10. DE/BC=4/10; BC=6·10/4=15.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 299
+          },
+          "image": "/assets/questions/q-299.png",
+          "imageAlt": "ABC üçgeninde DE, BC'ye paralel. Yükseklikler: 4 ve 6  DE=6; BC=?"
+        },
+        {
+          "id": "lgs-user-v1-300",
+          "question": "A açısı dik olan ABC üçgeninde AB=6, AC=8 cm’dir. Üçgen AC doğrusu boyunca yansıtılıyor; B’nin görüntüsü B′ oluyor. Oluşan BCB′ üçgeninin çevresi kaç santimetredir?",
+          "options": [
+            "24",
+            "32",
+            "36",
+            "40"
+          ],
+          "correctIndex": 1,
+          "explanation": "BC=B'C=10 cm. A, BB′’nin ortasında olduğundan BB'=12; çevre 10+10+12=32.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 300
+          },
+          "image": "/assets/questions/q-300.png",
+          "imageAlt": "A dik açı; AB 6 cm, AC 8 cm. B noktası AC doğrusu boyunca yansıtılır."
+        }
+      ]
+    },
+    {
+      "exam": "LGS",
+      "lesson": "Matematik",
+      "topic": "Dönüşüm Geometrisi",
+      "questions": [
+        {
+          "id": "lgs-user-v1-301",
+          "question": "A(−3,4), 5 birim sağa ve 2 birim aşağı öteleniyor. Görüntüsü hangisidir?",
+          "options": [
+            "(2,2)",
+            "(−8,2)",
+            "(2,6)",
+            "(−1,9)"
+          ],
+          "correctIndex": 0,
+          "explanation": "Sağa hareket x’e 5 ekler; aşağı hareket y’den 2 çıkarır. (-3+5,4-2)=(2,2).",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 301
+          },
+          "image": "/assets/questions/q-301.png",
+          "imageAlt": "A(-3,4). A(−3,4) · 5 sağa, 2 aşağı"
+        },
+        {
+          "id": "lgs-user-v1-302",
+          "question": "P(4,−7) noktasının x eksenine göre yansıması hangisidir?",
+          "options": [
+            "(−4,−7)",
+            "(−4,7)",
+            "(4,7)",
+            "(7,4)"
+          ],
+          "correctIndex": 2,
+          "explanation": "x sabit kalır, y’nin işareti değişir. Sonuç (4,7).",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 302
+          },
+          "image": "/assets/questions/q-302.png",
+          "imageAlt": "P(4,-7). P(4,−7) · x ekseninde yansıma"
+        },
+        {
+          "id": "lgs-user-v1-303",
+          "question": "K(−5,2) noktasının y eksenine göre yansıması hangisidir?",
+          "options": [
+            "(−5,−2)",
+            "(5,2)",
+            "(5,−2)",
+            "(2,−5)"
+          ],
+          "correctIndex": 1,
+          "explanation": "y sabit kalır, x’in işareti değişir. Sonuç (5,2).",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 303
+          },
+          "image": "/assets/questions/q-303.png",
+          "imageAlt": "K(-5,2). K(−5,2) · y ekseninde yansıma"
+        },
+        {
+          "id": "lgs-user-v1-304",
+          "question": "A(−2,5) noktası A′(3,1)’e öteleniyor. Öteleme hangisidir?",
+          "options": [
+            "1 sağa, 6 yukarı",
+            "5 sola, 4 yukarı",
+            "5 sağa, 4 yukarı",
+            "5 sağa, 4 aşağı"
+          ],
+          "correctIndex": 3,
+          "explanation": "Yatay değişim 3-(-2)=5; düşey değişim 1-5=-4. Yani 5 sağa, 4 aşağı.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 304
+          },
+          "image": "/assets/questions/q-304.png",
+          "imageAlt": "A(-2,5); A′(3,1). A(−2,5) → A′(3,1)"
+        },
+        {
+          "id": "lgs-user-v1-305",
+          "question": "Hangi nokta x eksenine göre yansıtıldığında aynı yerde kalır?",
+          "options": [
+            "(−3,0)",
+            "(0,−3)",
+            "(3,2)",
+            "(−2,3)"
+          ],
+          "correctIndex": 0,
+          "explanation": "Yansıma ekseni üzerindeki noktalar sabittir. x ekseninde y=0 olduğundan A uygundur.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 305
+          }
+        },
+        {
+          "id": "lgs-user-v1-306",
+          "question": "A(1,1), B(5,1), C(1,4) üçgeni 2 birim sola ve 3 birim yukarı öteleniyor. C′ hangisidir?",
+          "options": [
+            "(3,7)",
+            "(−1,7)",
+            "(−1,1)",
+            "(4,2)"
+          ],
+          "correctIndex": 1,
+          "explanation": "C’ye aynı öteleme uygulanır: (1-2,4+3)=(-1,7).",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 306
+          },
+          "image": "/assets/questions/q-306.png",
+          "imageAlt": "A(1,1); B(5,1); C(1,4). 2 sola, 3 yukarı"
+        },
+        {
+          "id": "lgs-user-v1-307",
+          "question": "P(5,−1) noktası, x=2 dikey doğrusuna göre yansıtılıyor. Görüntüsü hangisidir?",
+          "options": [
+            "(−5,−1)",
+            "(−1,−1)",
+            "(1,−1)",
+            "(5,5)"
+          ],
+          "correctIndex": 1,
+          "explanation": "P, doğrunun 3 birim sağındadır. Görüntüsü 3 birim solda, x=2-3=-1 olur; y değişmez.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 307
+          },
+          "image": "/assets/questions/q-307.png",
+          "imageAlt": "P(5,-1). P(5,−1) · Ayna: x = 2"
+        },
+        {
+          "id": "lgs-user-v1-308",
+          "question": "A(3,4), y=-1 yatay doğrusuna göre yansıtılıyor. A′ hangisidir?",
+          "options": [
+            "(3,−4)",
+            "(−3,4)",
+            "(3,−6)",
+            "(3,2)"
+          ],
+          "correctIndex": 2,
+          "explanation": "A, eksenin 5 birim üstündedir. Görüntüsü 5 birim altında: y=-1-5=-6.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 308
+          },
+          "image": "/assets/questions/q-308.png",
+          "imageAlt": "A(3,4). A(3,4) · Ayna: y = −1"
+        },
+        {
+          "id": "lgs-user-v1-309",
+          "question": "Bir çokgen yalnızca öteleniyor. Aşağıdakilerden hangisi kesinlikle değişmez?",
+          "options": [
+            "Her köşenin koordinatı",
+            "Çokgenin alanı",
+            "Her köşenin orijine uzaklığı",
+            "Şeklin bulunduğu bölge"
+          ],
+          "correctIndex": 1,
+          "explanation": "Öteleme biçimi ve büyüklüğü korur; alan değişmez. Konumla ilgili diğer özellikler değişebilir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 309
+          }
+        },
+        {
+          "id": "lgs-user-v1-310",
+          "question": "P(2,3) önce x eksenine göre yansıtılıyor, sonra 4 birim sağa öteleniyor. Son nokta hangisidir?",
+          "options": [
+            "(−2,7)",
+            "(6,3)",
+            "(6,−3)",
+            "(−6,−3)"
+          ],
+          "correctIndex": 2,
+          "explanation": "Yansıma (2,-3), sağa öteleme (2+4,-3)=(6,-3) verir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 310
+          },
+          "image": "/assets/questions/q-310.png",
+          "imageAlt": "P(2,3). x ekseninde yansıma, sonra 4 sağa"
+        },
+        {
+          "id": "lgs-user-v1-311",
+          "question": "A(a,2), 3 birim sağa ve 4 birim yukarı ötelenince A′(8,b) oluyor. a+b kaçtır?",
+          "options": [
+            "11",
+            "13",
+            "14",
+            "17"
+          ],
+          "correctIndex": 0,
+          "explanation": "a+3=8⇒ a=5. b=2+4=6; toplam 11.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 311
+          }
+        },
+        {
+          "id": "lgs-user-v1-312",
+          "question": "A(1,2), B(5,2), C(3,6) üçgeni y eksenine göre yansıtılıyor. B’nin görüntüsü hangisidir?",
+          "options": [
+            "(5,−2)",
+            "(−2,5)",
+            "(−5,2)",
+            "(−5,−2)"
+          ],
+          "correctIndex": 2,
+          "explanation": "B’nin yalnızca x koordinatının işareti değişir: (5,2)→(-5,2).",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 312
+          },
+          "image": "/assets/questions/q-312.png",
+          "imageAlt": "A(1,2); B(5,2); C(3,6). y ekseninde yansıma"
+        },
+        {
+          "id": "lgs-user-v1-313",
+          "question": "P(4,−2) ile P′(−4,−2) birbirinin hangi eksene göre yansımasıdır?",
+          "options": [
+            "y ekseni",
+            "x ekseni",
+            "y=-2 doğrusu",
+            "x=4 doğrusu"
+          ],
+          "correctIndex": 0,
+          "explanation": "Noktaların y’leri aynı, x’leri zıt işaretlidir. Orta noktalarından geçen yansıma ekseni x=0, yani y eksenidir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 313
+          },
+          "image": "/assets/questions/q-313.png",
+          "imageAlt": "P(4,-2); P′(-4,-2). P(4,−2), P′(−4,−2)"
+        },
+        {
+          "id": "lgs-user-v1-314",
+          "question": "Eşkenar olmayan bir ikizkenar üçgenin kaç yansıma simetri ekseni vardır?",
+          "options": [
+            "0",
+            "2",
+            "3",
+            "1"
+          ],
+          "correctIndex": 3,
+          "explanation": "Yalnızca tepe noktasından tabanın ortasına geçen doğru, şekli iki eş ayna parçasına ayırır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 314
+          }
+        },
+        {
+          "id": "lgs-user-v1-315",
+          "question": "Bir karenin kaç yansıma simetri ekseni vardır?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctIndex": 3,
+          "explanation": "İki köşegen ve karşılıklı kenarların orta noktalarından geçen iki doğru; toplam 4 eksen.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 315
+          }
+        },
+        {
+          "id": "lgs-user-v1-316",
+          "question": "Kare olmayan bir dikdörtgenin kaç yansıma simetri ekseni vardır?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctIndex": 1,
+          "explanation": "Karşılıklı kenarların orta noktalarından geçen iki doğru simetri eksenidir. Köşegenleri simetri ekseni değildir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 316
+          }
+        },
+        {
+          "id": "lgs-user-v1-317",
+          "question": "Bir nokta 3 birim sağa, 4 birim yukarı öteleniyor. Noktanın ilk ve son konumları arasındaki uzaklık kaç birimdir?",
+          "options": [
+            "5",
+            "7",
+            "1",
+            "25"
+          ],
+          "correctIndex": 0,
+          "explanation": "Yer değiştirme dik üçgen oluşturur. Uzaklık √(3²+4²)=5.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 317
+          }
+        },
+        {
+          "id": "lgs-user-v1-318",
+          "question": "P(3,−5) önce x, ardından y eksenine göre yansıtılıyor. Son nokta hangisidir?",
+          "options": [
+            "(3,5)",
+            "(−3,5)",
+            "(−3,−5)",
+            "(5,−3)"
+          ],
+          "correctIndex": 1,
+          "explanation": "İlk yansıma (3,5), ikinci yansıma (-3,5) verir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 318
+          },
+          "image": "/assets/questions/q-318.png",
+          "imageAlt": "P(3,-5). Önce x, sonra y ekseninde yansıma"
+        },
+        {
+          "id": "lgs-user-v1-319",
+          "question": "Bir nokta 2 sağa, 3 aşağı ötelenip y eksenine göre yansıtılınca (−7,1) oluyor. Başlangıç noktası hangisidir?",
+          "options": [
+            "(5,4)",
+            "(9,−2)",
+            "(−9,4)",
+            "(5,−2)"
+          ],
+          "correctIndex": 0,
+          "explanation": "İşlemleri tersine alalım: yansımadan önce (7,1). Ötelemeden önce (7-2,1+3)=(5,4).",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 319
+          }
+        },
+        {
+          "id": "lgs-user-v1-320",
+          "question": "P(2,1)’e iki farklı işlem uygulanıyor: I. Önce y ekseninde yansıma, sonra 3 sağa öteleme. II. Önce 3 sağa öteleme, sonra y ekseninde yansıma. Son iki noktanın uzaklığı kaç birimdir?",
+          "options": [
+            "3",
+            "6",
+            "4",
+            "8"
+          ],
+          "correctIndex": 1,
+          "explanation": "I’in sonucu (1,1), II’nin sonucu (−5,1)’dir. Yatay uzaklık 1-(-5)=6.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 320
+          }
+        },
+        {
+          "id": "lgs-user-v1-321",
+          "question": "A(−2,5), önce x=1, sonra x=4 doğrularına göre yansıtılıyor. Son görüntüsü hangisidir?",
+          "options": [
+            "(−8,5)",
+            "(2,5)",
+            "(6,5)",
+            "(4,5)"
+          ],
+          "correctIndex": 3,
+          "explanation": "İlk yansıma x=1+3=4 verir. Nokta ikinci yansıma doğrusu üzerinde olduğundan (4,5) olarak kalır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 321
+          },
+          "image": "/assets/questions/q-321.png",
+          "imageAlt": "A(-2,5). A(−2,5) · Önce x=1, sonra x=4"
+        },
+        {
+          "id": "lgs-user-v1-322",
+          "question": "P(3,6), önce y=2, sonra y=-1 doğrularına göre yansıtılıyor. Son nokta hangisidir?",
+          "options": [
+            "(3,−6)",
+            "(3,−4)",
+            "(−3,0)",
+            "(3,0)"
+          ],
+          "correctIndex": 3,
+          "explanation": "İlk görüntüde y=2-4=-2. İkinci yansımada −1’in 1 birim üstüne geçer: y=0.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 322
+          },
+          "image": "/assets/questions/q-322.png",
+          "imageAlt": "P(3,6). P(3,6) · Önce y=2, sonra y=−1"
+        },
+        {
+          "id": "lgs-user-v1-323",
+          "question": "A(1,1), B(5,1), C(1,4) üçgeni önce x eksenine göre yansıtılıp sonra 2 birim yukarı öteleniyor. Son üçgenin alanı kaç birimkaredir?",
+          "options": [
+            "3",
+            "12",
+            "6",
+            "24"
+          ],
+          "correctIndex": 2,
+          "explanation": "Başlangıç alanı 4·3/2=6. Yansıma ve öteleme alanı korur.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 323
+          },
+          "image": "/assets/questions/q-323.png",
+          "imageAlt": "A(1,1); B(5,1); C(1,4). x ekseninde yansıma, 2 yukarı"
+        },
+        {
+          "id": "lgs-user-v1-324",
+          "question": "P(5,b) noktasının x eksenine göre yansıması, aynı noktanın 6 birim aşağı ötelenmiş hâliyle çakışıyor. b kaçtır?",
+          "options": [
+            "−3",
+            "6",
+            "3",
+            "−6"
+          ],
+          "correctIndex": 2,
+          "explanation": "Görüntülerin y’leri eşittir: -b=b-6. Buradan 2b=6, b=3.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 324
+          }
+        },
+        {
+          "id": "lgs-user-v1-325",
+          "question": "Bir üçgenin köşeleri (0,0), (4,0), (1,3); ötelenmiş görüntüsünün köşeleri (2,−1), (6,−1), (3,2)’dir. Öteleme hangisidir?",
+          "options": [
+            "2 sola, 1 yukarı",
+            "2 sağa, 1 aşağı",
+            "1 sağa, 2 aşağı",
+            "2 sağa, 1 yukarı"
+          ],
+          "correctIndex": 1,
+          "explanation": "Her köşeye aynı değişim uygulanır: x’e 2 eklenmiş, y’den 1 çıkarılmıştır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 325
+          }
+        },
+        {
+          "id": "lgs-user-v1-326",
+          "question": "A(0,0), B(0,6), C(4,0) üçgeni y eksenine göre yansıtılıyor. Asıl üçgenle görüntüsünün birleşiminin alanı kaç birimkaredir?",
+          "options": [
+            "24",
+            "12",
+            "36",
+            "48"
+          ],
+          "correctIndex": 0,
+          "explanation": "Üçgenlerin iç bölgeleri örtüşmez; yalnızca AB kenarı ortaktır. Toplam alan 2·(4·6/2)=24.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 326
+          },
+          "image": "/assets/questions/q-326.png",
+          "imageAlt": "A(0,0); B(0,6); C(4,0). y ekseninde yansıma"
+        },
+        {
+          "id": "lgs-user-v1-327",
+          "question": "P(−3,4) önce y ekseninde yansıtılıyor, ardından 4 birim aşağı öteleniyor. Başlangıç ve son konum arasındaki uzaklık kaçtır?",
+          "options": [
+            "6",
+            "10",
+            "2√(10)",
+            "2√(13)"
+          ],
+          "correctIndex": 3,
+          "explanation": "Son nokta (3,0)’dır. Uzaklık √(6²+4²)=√(52)=2√(13).",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 327
+          },
+          "image": "/assets/questions/q-327.png",
+          "imageAlt": "P(-3,4). y ekseninde yansıma, 4 aşağı"
+        },
+        {
+          "id": "lgs-user-v1-328",
+          "question": "P(−2,3) noktası bir dikey doğruya göre yansıtılınca P′(8,3) oluyor. Yansıma doğrusu hangisidir?",
+          "options": [
+            "x=5",
+            "y=3",
+            "x=3",
+            "x=6"
+          ],
+          "correctIndex": 2,
+          "explanation": "Dikey ayna iki noktanın yatay orta noktasından geçer. (-2+8)/2=3, yani x=3.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 328
+          },
+          "image": "/assets/questions/q-328.png",
+          "imageAlt": "P(-2,3); P′(8,3). Dikey yansıma doğrusu = ?"
+        },
+        {
+          "id": "lgs-user-v1-329",
+          "question": "Köşeleri (1,1), (5,1), (5,3), (1,3) olan dikdörtgen 3 birim sağa öteleniyor. İlk şekille görüntünün ortak bölgesinin alanı kaçtır?",
+          "options": [
+            "1",
+            "3",
+            "4",
+            "2"
+          ],
+          "correctIndex": 3,
+          "explanation": "İlk x aralığı [1,5], yeni aralık [4,8]’dir. Ortak genişlik 1, yükseklik 2; alan 2.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 329
+          }
+        },
+        {
+          "id": "lgs-user-v1-330",
+          "question": "Bir nokta önce x=-2, ardından x=b doğrularına göre yansıtılıyor. Bu iki işlem bütün noktaları 10 birim sağa öteliyorsa b kaçtır?",
+          "options": [
+            "3",
+            "5",
+            "8",
+            "10"
+          ],
+          "correctIndex": 0,
+          "explanation": "İlk görüntünün x’i -4-x, ikincinin 2b+4+x olur. 2b+4=10⇒ b=3.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 330
+          }
+        }
+      ]
+    },
+    {
+      "exam": "LGS",
+      "lesson": "Matematik",
+      "topic": "Geometrik Cisimler",
+      "questions": [
+        {
+          "id": "lgs-user-v1-331",
+          "question": "İç ölçüleri 4, 5 ve 6 cm olan dikdörtgenler prizması biçimindeki kutunun hacmi kaç santimetreküptür?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "60",
+            "120",
+            "150",
+            "240"
+          ],
+          "correctIndex": 1,
+          "explanation": "Hacim üç dik boyutun çarpımıdır: 4·5·6=120 cm³.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 331
+          },
+          "image": "/assets/questions/q-331.png",
+          "imageAlt": "Dik prizma şeması: 4 cm, 5 cm, 6 cm. "
+        },
+        {
+          "id": "lgs-user-v1-332",
+          "question": "Ayrıtı 3 cm olan küpün bütün yüzleri boyanacaktır. Boyanacak alan kaç santimetrekaredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "18",
+            "27",
+            "54",
+            "81"
+          ],
+          "correctIndex": 2,
+          "explanation": "Bir yüz 3²=9 cm²’dir. Altı yüzün toplamı 6·9=54.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 332
+          },
+          "image": "/assets/questions/q-332.png",
+          "imageAlt": "Dik prizma şeması: 3 cm, 3 cm, 3 cm. Bütün yüzler boyanıyor"
+        },
+        {
+          "id": "lgs-user-v1-333",
+          "question": "Taban yarıçapı 3 cm, yüksekliği 5 cm olan dik silindirin hacmi kaç santimetreküptür?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "45",
+            "90",
+            "135",
+            "270"
+          ],
+          "correctIndex": 2,
+          "explanation": "V=π r²h=3·9·5=135 cm³.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 333
+          },
+          "image": "/assets/questions/q-333.png",
+          "imageAlt": "Dik silindir: r = 3, h = 5. cm · π = 3"
+        },
+        {
+          "id": "lgs-user-v1-334",
+          "question": "Çapı 8 cm, yüksekliği 10 cm olan dik silindirin yalnızca yan yüzü etiketle kaplanıyor. Etiket alanı kaç santimetrekaredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "120",
+            "480",
+            "336",
+            "240"
+          ],
+          "correctIndex": 3,
+          "explanation": "Yarıçap 4 cm’dir. Yan alan 2π rh=2·3·4·10=240.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 334
+          },
+          "image": "/assets/questions/q-334.png",
+          "imageAlt": "Dik silindir: d = 8, h = 10. Yalnız yan yüz · cm · π = 3"
+        },
+        {
+          "id": "lgs-user-v1-335",
+          "question": "Ayrıtları 2, 3 ve 4 cm olan dikdörtgenler prizmasının toplam yüzey alanı kaçtır?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "24",
+            "26",
+            "48",
+            "52"
+          ],
+          "correctIndex": 3,
+          "explanation": "Üç farklı yüzün alanları 6, 8, 12’dir. Toplam 2(6+8+12)=52 cm².",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 335
+          },
+          "image": "/assets/questions/q-335.png",
+          "imageAlt": "Dik prizma şeması: 2 cm, 3 cm, 4 cm. "
+        },
+        {
+          "id": "lgs-user-v1-336",
+          "question": "Dikdörtgenler prizması biçimindeki bir iskeletin bütün ayrıtlarına birer çubuk yerleştirilecektir. Kaç çubuk gerekir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "6",
+            "8",
+            "10",
+            "12"
+          ],
+          "correctIndex": 3,
+          "explanation": "Alt tabanda 4, üst tabanda 4, bunları birleştiren 4 ayrıt vardır. Toplam 12.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 336
+          },
+          "image": "/assets/questions/q-336.png",
+          "imageAlt": "Dik prizma şeması: , , . Bütün ayrıtlar"
+        },
+        {
+          "id": "lgs-user-v1-337",
+          "question": "Tabanı dik kenarları 3 ve 4 cm olan dik üçgen, yüksekliği 10 cm olan dik prizmanın hacmi kaçtır?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "120",
+            "60",
+            "30",
+            "70"
+          ],
+          "correctIndex": 1,
+          "explanation": "Taban alanı 3·4/2=6. Hacim 6·10=60 cm³.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 337
+          }
+        },
+        {
+          "id": "lgs-user-v1-338",
+          "question": "İç tabanı 20 cm × 30 cm olan dikdörtgen prizma biçimindeki kapta su yüksekliği 10 cm’dir. Kaç litre su vardır? 1000 cm³=1 L.\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "0,6",
+            "60",
+            "600",
+            "6"
+          ],
+          "correctIndex": 3,
+          "explanation": "Hacim 20·30·10=6000 cm³, yani 6 litredir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 338
+          },
+          "image": "/assets/questions/q-338.png",
+          "imageAlt": "Dik prizma şeması: 20 cm, 30 cm, 10 cm. Su yüksekliği 10 cm"
+        },
+        {
+          "id": "lgs-user-v1-339",
+          "question": "Dik silindirin yan yüzü açıldığında, taban çevresine karşılık gelen kenarı 18 cm olan bir dikdörtgen oluşuyor. Silindirin yarıçapı kaç santimetredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "6",
+            "3",
+            "9",
+            "2"
+          ],
+          "correctIndex": 1,
+          "explanation": "2π r=18. 6r=18⇒ r=3.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 339
+          }
+        },
+        {
+          "id": "lgs-user-v1-340",
+          "question": "Yarıçapı 2 cm, yüksekliği 5 cm olan kapalı dik silindirin toplam yüzey alanı kaçtır?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "60",
+            "72",
+            "84",
+            "96"
+          ],
+          "correctIndex": 2,
+          "explanation": "İki taban 2·3·2²=24, yan alan 2·3·2·5=60. Toplam 84 cm².",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 340
+          },
+          "image": "/assets/questions/q-340.png",
+          "imageAlt": "Dik silindir: r = 2, h = 5. Kapalı silindir · cm · π = 3"
+        },
+        {
+          "id": "lgs-user-v1-341",
+          "question": "Bir dairesel tabanı, bir tepe noktası ve tabanı tepeye bağlayan eğri yan yüzü olan cisim hangisidir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "Küre",
+            "Silindir",
+            "Koni",
+            "Kare prizma"
+          ],
+          "correctIndex": 2,
+          "explanation": "Dairesel tabanla tek tepe noktasını birleştiren bu yapı konidir. Silindirde iki dairesel taban vardır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 341
+          }
+        },
+        {
+          "id": "lgs-user-v1-342",
+          "question": "İki eş üçgen ve üç dikdörtgenden oluşan uygun bir açınım hangi cisme ait olabilir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "Dik üçgen prizma",
+            "Küp",
+            "Kare piramit",
+            "Silindir"
+          ],
+          "correctIndex": 0,
+          "explanation": "İki üçgen tabanı, üç dikdörtgen yan yüzü oluşturur. Bu, dik üçgen prizmanın yüz yapısıdır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 342
+          }
+        },
+        {
+          "id": "lgs-user-v1-343",
+          "question": "Bir küpün bütün ayrıtları iki katına çıkarılıyor. Hacmi kaç katına çıkar?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "8",
+            "2",
+            "4",
+            "6"
+          ],
+          "correctIndex": 0,
+          "explanation": "Üç boyut da iki katına çıkar. Hacim çarpanı 2·2·2=8.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 343
+          }
+        },
+        {
+          "id": "lgs-user-v1-344",
+          "question": "Bir dik silindirin tabanı değiştirilmeden yüksekliği üç katına çıkarılıyor. Hacmi kaç katına çıkar?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "3",
+            "6",
+            "9",
+            "27"
+          ],
+          "correctIndex": 0,
+          "explanation": "V=taban alanı· h. Taban sabitse yükseklik ve hacim aynı oranda değişir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 344
+          }
+        },
+        {
+          "id": "lgs-user-v1-345",
+          "question": "Hacmi 240 cm³, tabanı 6 cm × 8 cm olan dik prizmanın yüksekliği kaç santimetredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "5",
+            "6",
+            "8",
+            "10"
+          ],
+          "correctIndex": 0,
+          "explanation": "Taban alanı 48 cm²’dir. h=240/48=5 cm.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 345
+          },
+          "image": "/assets/questions/q-345.png",
+          "imageAlt": "Dik prizma şeması: 6 cm, 8 cm, h = ?. Hacim = 240 cm³"
+        },
+        {
+          "id": "lgs-user-v1-346",
+          "question": "Kare tabanlı bir piramidin tabanı da sayıldığında toplam kaç yüzü vardır?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "5",
+            "4",
+            "6",
+            "8"
+          ],
+          "correctIndex": 0,
+          "explanation": "Bir kare taban ve dört üçgen yan yüz bulunur. Toplam 5 yüz.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 346
+          }
+        },
+        {
+          "id": "lgs-user-v1-347",
+          "question": "Yarıçapı 2 cm, yüksekliği 10 cm olan dik silindirin yan yüz açınımının alanı kaç santimetrekaredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "60",
+            "100",
+            "120",
+            "144"
+          ],
+          "correctIndex": 2,
+          "explanation": "Açınımın kenarları 2π r=12 ve 10 cm’dir. Alan 12·10=120.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 347
+          },
+          "image": "/assets/questions/q-347.png",
+          "imageAlt": "Dik silindir: r = 2, h = 10. Yan yüz açınımı · cm · π = 3"
+        },
+        {
+          "id": "lgs-user-v1-348",
+          "question": "Ayrıtları 3, 4 ve 8 cm olan dikdörtgenler prizmasının bütün ayrıt uzunlukları toplamı kaç santimetredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "15",
+            "30",
+            "48",
+            "60"
+          ],
+          "correctIndex": 3,
+          "explanation": "Her uzunluktan dört ayrıt vardır. Toplam 4(3+4+8)=60 cm.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 348
+          },
+          "image": "/assets/questions/q-348.png",
+          "imageAlt": "Dik prizma şeması: 3 cm, 4 cm, 8 cm. "
+        },
+        {
+          "id": "lgs-user-v1-349",
+          "question": "Üstü açık, tabanı 10 cm × 8 cm ve yüksekliği 6 cm olan kutu ince levhadan yapılacaktır. Birleştirme payları yoksa kaç santimetrekare levha gerekir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "376",
+            "296",
+            "216",
+            "480"
+          ],
+          "correctIndex": 1,
+          "explanation": "Taban 80; yan yüzler 2·10·6+2·8·6=216. Kapak yoktur; toplam 296.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 349
+          }
+        },
+        {
+          "id": "lgs-user-v1-350",
+          "question": "Ayrıtı 6 cm olan küp, ayrıtı 2 cm olan küçük küplere tamamen ayrılıyor. Küçük küplerin bütün yüzey alanlarının toplamı kaç santimetrekaredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "216",
+            "432",
+            "576",
+            "648"
+          ],
+          "correctIndex": 3,
+          "explanation": "3³=27 küçük küp oluşur. Her birinin yüzeyi 6·2²=24; toplam 27·24=648.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 350
+          },
+          "image": "/assets/questions/q-350.png",
+          "imageAlt": "Dik prizma şeması: 6 cm, 6 cm, 6 cm. Küçük küp ayrıtı: 2 cm"
+        },
+        {
+          "id": "lgs-user-v1-351",
+          "question": "Yarıçapı 4 cm olan dik silindirik kapta su yüksekliği 9 cm’dir. Su, yarıçapı 6 cm olan yeterince yüksek başka bir dik silindire tamamen aktarılıyor. Yeni yükseklik kaç santimetredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "4",
+            "6",
+            "8",
+            "13,5"
+          ],
+          "correctIndex": 0,
+          "explanation": "Hacim korunur: π4²·9=π6²h. 144=36h⇒ h=4.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 351
+          }
+        },
+        {
+          "id": "lgs-user-v1-352",
+          "question": "Tabanı 20 cm × 15 cm olan dik prizma biçimindeki kapta su 10 cm yüksekliktedir. Hacmi 900 cm³ olan bir cisim tamamen suya batırılıyor. Taşma yoksa yeni su yüksekliği kaç santimetredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "11",
+            "12",
+            "15",
+            "13"
+          ],
+          "correctIndex": 3,
+          "explanation": "Yükselme 900/(20·15)=3 cm’dir. Yeni yükseklik 10+3=13.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 352
+          }
+        },
+        {
+          "id": "lgs-user-v1-353",
+          "question": "İç yarıçapı 3 cm, iç yüksekliği 8 cm olan dik silindirik kap, kapasitesinin dörtte üçü kadar suyla doludur. Su hacmi kaç santimetreküptür?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "54",
+            "162",
+            "216",
+            "288"
+          ],
+          "correctIndex": 1,
+          "explanation": "Kapasite 3·3²·8=216. Su hacmi 216·3/4=162.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 353
+          },
+          "image": "/assets/questions/q-353.png",
+          "imageAlt": "Dik silindir: r = 3, h = 8. Kapasitenin 3/4’ü dolu · cm · π = 3"
+        },
+        {
+          "id": "lgs-user-v1-354",
+          "question": "12 cm × 18 cm’lik kâğıt iki farklı biçimde silindirin yan yüzü yapılıyor. I’de taban çevresi 12, yükseklik 18; II’de çevre 18, yükseklik 12 cm’dir. Örtüşme yoksa V_I/V_II kaçtır?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "(4)/(9)",
+            "(2)/(3)",
+            "(3)/(2)",
+            "1"
+          ],
+          "correctIndex": 1,
+          "explanation": "Yarıçaplar 2 ve 3 cm’dir. Hacimler 3·4·18=216 ve 3·9·12=324; oran 2/3.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 354
+          }
+        },
+        {
+          "id": "lgs-user-v1-355",
+          "question": "Yarıçapı 2, yüksekliği 9 cm olan dolu silindir ile yarıçapı 3, yüksekliği 4 cm olan dolu silindirdeki sular birleştiriliyor. Yarıçapı 3 cm olan üçüncü kapta yükseklik kaç santimetre olur?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "8",
+            "9",
+            "12",
+            "13"
+          ],
+          "correctIndex": 0,
+          "explanation": "İlk iki hacim de 108 cm³’tür. Toplam 216; üçüncü taban alanı 27 olduğundan yükseklik 216/27=8.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 355
+          }
+        },
+        {
+          "id": "lgs-user-v1-356",
+          "question": "İç boyutları 24 cm × 18 cm × 12 cm olan kutuya, ayrıtı 6 cm olan küpler kenarlara paralel yerleştiriliyor. En fazla kaç küp sığar?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "12",
+            "18",
+            "24",
+            "36"
+          ],
+          "correctIndex": 2,
+          "explanation": "Boyutlar boyunca 4, 3 ve 2 küp yerleşir. Toplam 4·3·2=24.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 356
+          },
+          "image": "/assets/questions/q-356.png",
+          "imageAlt": "Dik prizma şeması: 24 cm, 18 cm, 12 cm. Yerleştirilen küp ayrıtı: 6 cm"
+        },
+        {
+          "id": "lgs-user-v1-357",
+          "question": "Ayrıtı 12 cm olan küpün dış yüzleri boyanıp küp, ayrıtı 4 cm olan 27 küpe ayrılıyor. Küçük küplerden tam iki yüzü boyalı olan kaç tanedir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "8",
+            "12",
+            "6",
+            "24"
+          ],
+          "correctIndex": 1,
+          "explanation": "Tam iki boyalı yüz, büyük küpün ayrıtlarının köşe olmayan kısımlarındadır. Her ayrıtın ortasında bir tane vardır; 12 ayrıt için 12 küp.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 357
+          },
+          "image": "/assets/questions/q-357.png",
+          "imageAlt": "Dik prizma şeması: 12 cm, 12 cm, 12 cm. Boyanıp 4 cm ayrıtlı küplere ayrılıyor"
+        },
+        {
+          "id": "lgs-user-v1-358",
+          "question": "Yarıçapı 5 cm, yüksekliği 12 cm olan kapalı dik silindirin dışı, zemine temas eden alt tabanı dışında boyanıyor. Boyanan alan kaç santimetrekaredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "360",
+            "510",
+            "435",
+            "750"
+          ],
+          "correctIndex": 2,
+          "explanation": "Yan alan 2·3·5·12=360, üst taban 3·25=75. Toplam 435.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 358
+          },
+          "image": "/assets/questions/q-358.png",
+          "imageAlt": "Dik silindir: r = 5, h = 12. Alt taban hariç boyalı · cm · π = 3"
+        },
+        {
+          "id": "lgs-user-v1-359",
+          "question": "Kare tabanlı dik prizmanın yüksekliği 10 cm, hacmi 490 cm³’tür. Toplam yüzey alanı kaç santimetrekaredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "378",
+            "280",
+            "392",
+            "490"
+          ],
+          "correctIndex": 0,
+          "explanation": "Taban alanı 49, kenarı 7 cm’dir. Yüzey 2·49+4·7·10=378.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 359
+          },
+          "image": "/assets/questions/q-359.png",
+          "imageAlt": "Dik prizma şeması: a, a, 10 cm. Hacim = 490 cm³"
+        },
+        {
+          "id": "lgs-user-v1-360",
+          "question": "Yarıçapları 3 cm, yükseklikleri 4 cm olan iki eş kapalı dik silindir, tabanları tam çakışacak biçimde birleştiriliyor. Dışarıda kalan toplam yüzey alanı kaç santimetrekaredir?\n\nGerektiğinde π = 3 alınız.",
+          "options": [
+            "252",
+            "198",
+            "144",
+            "216"
+          ],
+          "correctIndex": 1,
+          "explanation": "Birleşim, yüksekliği 8 cm olan silindirdir. Dış yüzey 2·3·3·8+2·3·9=198. Birleşen tabanlar dışarıda kalmaz.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 360
+          }
+        }
+      ]
+    },
+    {
+      "exam": "LGS",
+      "lesson": "Türkçe",
+      "topic": "Sözcükte Anlam",
+      "questions": [
+        {
+          "id": "lgs-user-v1-361",
+          "question": "“Yazar, toplumdaki aksaklıklara keskin eleştiriler yöneltiyor.” “Keskin” sözcüğünün anlamı hangisidir?",
+          "options": [
+            "Kolayca kırılan",
+            "Uzun süren",
+            "Sert ve etkili",
+            "Anlaşılması güç"
+          ],
+          "correctIndex": 2,
+          "explanation": "Sözcük fiziksel kesiciliği anlatmıyor. Eleştirilerin sertliğini ve etkisini belirtiyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 361,
+            "editNote": "Altı çizili ifadesi yerine hedef sözcük açıkça belirtildi."
+          }
+        },
+        {
+          "id": "lgs-user-v1-362",
+          "question": "“Konuyu süslü sözlere başvurmadan, yalın bir dille anlattı.” “Yalın” yerine hangisi getirilebilir?",
+          "options": [
+            "Ayrıntılı",
+            "Kapalı",
+            "Sade",
+            "Bilimsel"
+          ],
+          "correctIndex": 2,
+          "explanation": "“Süslü sözlere başvurmadan” ifadesi anlamı belirler. Yalın, burada sade demektir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 362
+          }
+        },
+        {
+          "id": "lgs-user-v1-363",
+          "question": "“Hazırlıkları ağırdan aldığı için zamanında yetişemedi.” Deyimin anlamı hangisidir?",
+          "options": [
+            "İşin önemini kavramak",
+            "İşi yavaş yürütmek",
+            "Çok yorulmak",
+            "Fazla yük taşımak"
+          ],
+          "correctIndex": 1,
+          "explanation": "Zamanında yetişememe, hazırlıkların yavaş ilerletilmesinin sonucudur. Fiziksel ağırlık anlatılmıyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 363
+          }
+        },
+        {
+          "id": "lgs-user-v1-364",
+          "question": "Hangi cümlede “kök” sözcüğü matematik terimidir?",
+          "options": [
+            "Ağacın kökü kurumuş.",
+            "Denklemin köklerini buldu.",
+            "Sorunun köküne indi.",
+            "Ailesinin kökleri bu şehirdedir."
+          ],
+          "correctIndex": 1,
+          "explanation": "B’de “kök”, denklemi sağlayan değeri belirten özel alan kavramıdır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 364
+          }
+        },
+        {
+          "id": "lgs-user-v1-365",
+          "question": "Aşağıdaki sözcüklerden hangisi soyut anlamlıdır?",
+          "options": [
+            "Bardak",
+            "Rüzgâr",
+            "Koku",
+            "Umut"
+          ],
+          "correctIndex": 3,
+          "explanation": "Umut, duyu organlarıyla doğrudan algılanan bir varlık değildir. Rüzgâr ve koku ise duyularla algılanabilir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 365
+          }
+        },
+        {
+          "id": "lgs-user-v1-366",
+          "question": "Hangi cümlede “sıcak” mecaz anlamdadır?",
+          "options": [
+            "Sıcak çorbayı masaya koydu.",
+            "Hava bugün sıcaktı.",
+            "Bizi sıcak bir gülümsemeyle karşıladı.",
+            "Sıcak suyu kovaya boşalttı."
+          ],
+          "correctIndex": 2,
+          "explanation": "Gülümsemenin sıcaklığı, samimiyet ve yakınlık anlamındadır; fiziksel sıcaklık değildir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 366
+          }
+        },
+        {
+          "id": "lgs-user-v1-367",
+          "question": "“Yan odadaki konuşmaya kulak kabarttı.” Deyim neyi anlatır?",
+          "options": [
+            "Dikkatle dinlemeyi",
+            "Söze karışmayı",
+            "Yanlış anlamayı",
+            "Duymamayı"
+          ],
+          "correctIndex": 0,
+          "explanation": "Kulak kabartmak, bir sesi ya da konuşmayı duymak için dikkatini vermektir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 367
+          }
+        },
+        {
+          "id": "lgs-user-v1-368",
+          "question": "“Yüzünü soğuk suyla yıkadı.” cümlesindeki “yüz”ün eş seslisi hangi cümlededir?",
+          "options": [
+            "Yüzünde bir gülümseme vardı.",
+            "Yüzüne güneş vuruyordu.",
+            "Yüzünü aynada inceledi.",
+            "Parka kadar yüz metre yürüdü."
+          ],
+          "correctIndex": 3,
+          "explanation": "İlk üçünde vücudun bölümü anlatılır. D’de aynı yazılıştaki sözcük, 100 sayısını belirtir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 368
+          }
+        },
+        {
+          "id": "lgs-user-v1-369",
+          "question": "“Bu çalışmanın en güçlü yanı, özgün bir bakış açısı sunması.” Sözcüğün anlamı hangisidir?",
+          "options": [
+            "Kendine özgü",
+            "Herkesçe bilinen",
+            "Kusursuz",
+            "Çok eski"
+          ],
+          "correctIndex": 0,
+          "explanation": "Özgünlük, başkasının tekrarı olmamayı ve kendine özgülüğü anlatır; kusursuzluk anlamına gelmez.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 369
+          }
+        },
+        {
+          "id": "lgs-user-v1-370",
+          "question": "“Bölgede su kaynakları kıt.” cümlesindeki sözcüğün zıt anlamlısı hangisidir?",
+          "options": [
+            "Temiz",
+            "Derin",
+            "Uzak",
+            "Bol"
+          ],
+          "correctIndex": 3,
+          "explanation": "Kıt, ihtiyacı karşılamaya göre az; bol ise çok ve yeterli miktarda demektir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 370
+          }
+        },
+        {
+          "id": "lgs-user-v1-371",
+          "question": "“Herkesin rahat etmesini düşünmesi, onun ince davranışlarından biridir.” “İnce” hangi anlamdadır?",
+          "options": [
+            "Kalınlığı az",
+            "Duyarlı ve nazik",
+            "Ayrıntılı",
+            "Zayıf"
+          ],
+          "correctIndex": 1,
+          "explanation": "Başkalarının rahatlığını gözetmek, düşünceli ve nazik davranmaktır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 371
+          }
+        },
+        {
+          "id": "lgs-user-v1-372",
+          "question": "Hangi cümlede mecaz anlamlı kullanım vardır?",
+          "options": [
+            "Soğuk tavrı hepimizi şaşırttı.",
+            "Buzdolabından soğuk su aldı.",
+            "Soğuk rüzgâr pencereyi titretti.",
+            "Soğuk zemine oturmadı."
+          ],
+          "correctIndex": 0,
+          "explanation": "Tavrın “soğuk” olması ilgisizliği ve yakınlık göstermemeyi anlatır. Diğerleri fiziksel sıcaklıkla ilgilidir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 372
+          }
+        },
+        {
+          "id": "lgs-user-v1-373",
+          "question": "“Okulumuzun genç fidanları, bilim yarışmasından ödülle döndü.” “Fidanlar” sözcüğüyle kimler anlatılmıştır?",
+          "options": [
+            "Öğretmenler",
+            "Veliler",
+            "Öğrenciler",
+            "Yarışma görevlileri"
+          ],
+          "correctIndex": 2,
+          "explanation": "Gelişme çağındaki öğrenciler, büyüyen fidanlara benzetilerek adlandırılmıştır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 373
+          }
+        },
+        {
+          "id": "lgs-user-v1-374",
+          "question": "“Soruma cevap verirken lafı dolandırdı.” Bu deyimin anlamı hangisidir?",
+          "options": [
+            "Söyleyeceğini doğrudan söylememek",
+            "Aynı kelimeyi yanlış söylemek",
+            "Çok yüksek sesle konuşmak",
+            "Konuşmayı tamamen bırakmak"
+          ],
+          "correctIndex": 0,
+          "explanation": "Deyim, asıl söyleneceğe doğrudan gelmeyip dolaylı anlatmayı belirtir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 374
+          }
+        },
+        {
+          "id": "lgs-user-v1-375",
+          "question": "“Dosyaları titiz bir çalışmayla düzenledi.” Sözcüğün bağlama en uygun karşılığı hangisidir?",
+          "options": [
+            "Özenli",
+            "Hızlı",
+            "Yorucu",
+            "Gösterişli"
+          ],
+          "correctIndex": 0,
+          "explanation": "Titizlik, ayrıntılara dikkat ederek özen göstermektir; hızlı olmak zorunlu değildir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 375
+          }
+        },
+        {
+          "id": "lgs-user-v1-376",
+          "question": "Hangi cümlede “kanat” havacılık alanında kullanılan bir terimdir?",
+          "options": [
+            "Kuşun kanadı yaralanmıştı.",
+            "Uçağın kanadı teknik kontrolden geçirildi.",
+            "Başarısı ona kanat taktı.",
+            "Çocuklarını kanatları altına aldı."
+          ],
+          "correctIndex": 1,
+          "explanation": "B’de uçuşa yarayan teknik yapı anlatılır. C ve D mecaz, A canlı organıyla ilgilidir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 376
+          }
+        },
+        {
+          "id": "lgs-user-v1-377",
+          "question": "Genelden özele doğru sıralama hangisidir?",
+          "options": [
+            "Çam–ağaç–bitki–canlı",
+            "Bitki–canlı–ağaç–çam",
+            "Canlı–ağaç–bitki–çam",
+            "Canlı–bitki–ağaç–çam"
+          ],
+          "correctIndex": 3,
+          "explanation": "Her sonraki kavram öncekinden daha dar bir gruptur: canlıların bitkileri, bitkilerin ağaçları, ağaçların çamları.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 377
+          }
+        },
+        {
+          "id": "lgs-user-v1-378",
+          "question": "“Zamanının büyük bir kısmını okumaya ayırıyor.” Sözcük hangi anlamı taşır?",
+          "options": [
+            "Yaşça ilerlemiş",
+            "Önemli",
+            "Miktarca fazla",
+            "Boyutça geniş"
+          ],
+          "correctIndex": 2,
+          "explanation": "Burada zamanın boyutu değil, okumaya ayrılan miktarının fazlalığı belirtiliyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 378
+          }
+        },
+        {
+          "id": "lgs-user-v1-379",
+          "question": "“Editör, metni budamış; düşünceyi ilerletmeyen tekrarları çıkarmış ama temel savı korumuş.” “Budamak” hangi işlemi anlatır?",
+          "options": [
+            "Ana düşünceyi değiştirmeyi",
+            "Gereksiz bölümleri ayıklamayı",
+            "Metni başka dile çevirmeyi",
+            "Bütün ayrıntıları kaldırıp yalnızca başlık bırakmayı"
+          ],
+          "correctIndex": 1,
+          "explanation": "Çıkarılanlar gereksiz tekrarlardır; temel sav korunmuştur. Bu, gelişigüzel kısaltma değil ayıklamadır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 379
+          }
+        },
+        {
+          "id": "lgs-user-v1-380",
+          "question": "“Bu yöntem, eski uygulamaları hızlandırmakla kalmadı; alanda daha önce denenmemiş bir yaklaşım getirerek çığır açtı.” Deyimin karşılığı hangisidir?",
+          "options": [
+            "Geçici ilgi uyandırmak",
+            "Eskiyi aynen sürdürmek",
+            "Hız kazanmak",
+            "Yeni bir yol başlatmak"
+          ],
+          "correctIndex": 3,
+          "explanation": "“Daha önce denenmemiş yaklaşım” yeni bir yön başlatmayı açıklar. Yalnızca hızlanma yeterli değildir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 380
+          }
+        },
+        {
+          "id": "lgs-user-v1-381",
+          "question": "“Sorunu derin bir incelemeden sonra çözebildi.” “Derin” hangi cümlede aynı anlamdadır?",
+          "options": [
+            "Derin kuyudan ses geliyordu.",
+            "Konu hakkında derin araştırmalar yaptı.",
+            "Çocuk derin bir uykuya daldı.",
+            "Ayrılık onda derin bir üzüntü bıraktı."
+          ],
+          "correctIndex": 1,
+          "explanation": "İki kullanımda da yüzeyde kalmayan, ayrıntılara inen araştırma anlatılır. Diğerleri uzaklık veya yoğunluk bildirir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 381
+          }
+        },
+        {
+          "id": "lgs-user-v1-382",
+          "question": "“Karakterin kararları şaşırtıcıydı ama önceki davranışlarıyla çelişmediği için tutarlıydı.” Sözcüğün anlamı hangisidir?",
+          "options": [
+            "Kendi içinde uyumlu",
+            "Herkesçe beğenilen",
+            "Değişime kapalı",
+            "Önceden bilinen"
+          ],
+          "correctIndex": 0,
+          "explanation": "Anlamı “önceki davranışlarıyla çelişmemek” belirler. Tutarlı olmak, şaşırtıcı olmamayı gerektirmez.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 382
+          }
+        },
+        {
+          "id": "lgs-user-v1-383",
+          "question": "“Belgesel, yıllardır gözden kaçan emekçileri görünür kılıyor.” Bu sözle ne anlatılmıştır?",
+          "options": [
+            "Emeklerinin fark edilmesini sağlamak",
+            "İnsanları fiziksel olarak büyütmek",
+            "Çalışma saatlerini artırmak",
+            "Herkesin aynı işi yapmasını sağlamak"
+          ],
+          "correctIndex": 0,
+          "explanation": "“Gözden kaçan” ifadesi, fark edilmeyen emeği belirtir. Görünür kılmak, dikkat çekip tanınmasını sağlamaktır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 383
+          }
+        },
+        {
+          "id": "lgs-user-v1-384",
+          "question": "“Araştırmacı, yerleşik kanıları yeni bulgularla yeniden değerlendirdi.” “Yerleşik kanılar” sözünün hangisini anlatır?",
+          "options": [
+            "Kesin biçimde kanıtlanmış yasaları",
+            "Uzun süredir benimsenen düşünceleri",
+            "Yeni ortaya atılan tahminleri",
+            "Yalnızca kişisel anıları"
+          ],
+          "correctIndex": 1,
+          "explanation": "Yerleşik kanı, yaygınlaşmış ve benimsenmiş görüştür. Benimsenmiş olması kesin kanıtlandığını göstermez.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 384,
+            "editNote": "Altı çizili ifadesi yerine hedef sözcük açıkça belirtildi."
+          }
+        },
+        {
+          "id": "lgs-user-v1-385",
+          "question": "“Oyunun ikinci perdesi başladı.” ve “Pencerenin perdesi açıldı.” cümlelerindeki sözcüklerin anlam özellikleri sırasıyla hangisidir?",
+          "options": [
+            "Mecaz–terim",
+            "Gerçek–mecaz",
+            "Mecaz–mecaz",
+            "Terim–gerçek"
+          ],
+          "correctIndex": 3,
+          "explanation": "İlkinde tiyatro eserinin bölümü olan terim; ikincide pencere örtüsü olan temel anlam kullanılmıştır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 385
+          }
+        },
+        {
+          "id": "lgs-user-v1-386",
+          "question": "“Yazar, bilimle günlük yaşam arasında köprü kuruyor; soyut bilgiyi herkesin deneyimiyle ilişkilendiriyor.” “Köprü kurmak” sözünün hangisine karşılık gelir?",
+          "options": [
+            "İki alanı birbirinden ayırmaya",
+            "İki alan arasında bağlantı oluşturmaya",
+            "Bilgiyi yalnızca uzmanlara sunmaya",
+            "Deneyimleri bilimden üstün tutmaya"
+          ],
+          "correctIndex": 1,
+          "explanation": "Devamındaki “ilişkilendiriyor” sözü anlamı açıklar. Köprü, burada bağlantı kurma benzetmesidir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 386,
+            "editNote": "Altı çizili ifadesi yerine hedef sözcük açıkça belirtildi."
+          }
+        },
+        {
+          "id": "lgs-user-v1-387",
+          "question": "“Kurul, adayları ince eleyip sık dokuyarak seçti.” Hangisi bu sözün anlamını korur?",
+          "options": [
+            "Adayları ayrıntılı ve dikkatli değerlendirdi.",
+            "Adayları kura çekerek belirledi.",
+            "Yalnızca ilk izlenimine güvendi.",
+            "Başvuruların hepsini kabul etti."
+          ],
+          "correctIndex": 0,
+          "explanation": "Deyim, seçim yaparken çok dikkatli davranıp ayrıntıları değerlendirmeyi anlatır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 387
+          }
+        },
+        {
+          "id": "lgs-user-v1-388",
+          "question": "“Beş sayfa mı yazdın? Bu kadar kısa bir çalışma yetmez.” sözünde çalışmanın miktarını yetersiz bulma anlamını en iyi hangi fiil karşılar?",
+          "options": [
+            "Özümsemek",
+            "Kanıksamak",
+            "Azımsamak",
+            "Yadsımak"
+          ],
+          "correctIndex": 2,
+          "explanation": "Değerlendirme sayfa miktarına yöneliktir. Azımsamak, miktarı az bulmaktır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 388
+          }
+        },
+        {
+          "id": "lgs-user-v1-389",
+          "question": "“İlk bölümde anlatım duruydu; gereksiz terimler çoğalınca anlam bulanıklaştı.” Sözcük hangi değişimi belirtir?",
+          "options": [
+            "Konunun önem kazanmasını",
+            "Olayların hızlanmasını",
+            "Anlaşılabilirliğin azalmasını",
+            "Bilgilerin doğrulanmasını"
+          ],
+          "correctIndex": 2,
+          "explanation": "Gereksiz terimler anlamı izlemeyi zorlaştırmıştır. Bulanıklaşma burada açıklığın kaybolmasıdır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 389
+          }
+        },
+        {
+          "id": "lgs-user-v1-390",
+          "question": "“Yazar her şeyi açıklamıyor; okurun kendi deneyimiyle tamamlayacağı boşluklar bırakıyor.” “Boşluklar” neyi anlatır?",
+          "options": [
+            "Basılmamış sayfaları",
+            "Yazım yanlışlarını",
+            "Unutulmuş zorunlu bilgileri",
+            "Okurun yorumuna açık bırakılan anlam alanlarını"
+          ],
+          "correctIndex": 3,
+          "explanation": "Metin, bilinçli olarak her yorumu hazır sunmuyor. Boşluklar fiziksel eksiklik değil, okurun anlam kuracağı alanlardır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 390
+          }
+        }
+      ]
+    },
+    {
+      "exam": "LGS",
+      "lesson": "Türkçe",
+      "topic": "Cümlede Anlam",
+      "questions": [
+        {
+          "id": "lgs-user-v1-391",
+          "question": "Hangi cümlede amaç–sonuç ilişkisi vardır?",
+          "options": [
+            "Yağmur yağdığı için geç kaldı.",
+            "Yorulduğundan erkenden uyudu.",
+            "Yol kapandığı için geri döndü.",
+            "Unutmamak için adresi not etti."
+          ],
+          "correctIndex": 3,
+          "explanation": "Not etmenin hedefi unutmamaktır. Diğer cümlelerde gerçekleşmiş bir durumun nedeni verilir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 391
+          }
+        },
+        {
+          "id": "lgs-user-v1-392",
+          "question": "“Yol kapalı olduğu için toplantıya gecikti.” cümlesinde hangi ilişki vardır?",
+          "options": [
+            "Koşul–sonuç",
+            "Neden–sonuç",
+            "Amaç–sonuç",
+            "Karşılaştırma"
+          ],
+          "correctIndex": 1,
+          "explanation": "Gecikme sonuç, yolun kapalı olması onun nedenidir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 392
+          }
+        },
+        {
+          "id": "lgs-user-v1-393",
+          "question": "Hangi cümlede bir işin gerçekleşmesi koşula bağlanmıştır?",
+          "options": [
+            "Kitabı bitirmek için eve gitti.",
+            "Kitabı bitirdiği için sevindi.",
+            "Kitabı dün bitirmiş.",
+            "Kitabı bitirirsen birlikte tartışabiliriz."
+          ],
+          "correctIndex": 3,
+          "explanation": "Tartışmanın gerçekleşmesi, kitabın bitirilmesine bağlıdır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 393
+          }
+        },
+        {
+          "id": "lgs-user-v1-394",
+          "question": "Hangi cümlede karşılaştırma vardır?",
+          "options": [
+            "Roman beş bölümden oluşuyor.",
+            "Romanı dün aldım.",
+            "İkinci romanı ilkinden daha kısa.",
+            "Romanın kapağında bir ağaç var."
+          ],
+          "correctIndex": 2,
+          "explanation": "İki roman uzunluk bakımından “daha kısa” ifadesiyle karşılaştırılıyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 394
+          }
+        },
+        {
+          "id": "lgs-user-v1-395",
+          "question": "Hangi cümle öznel yargı içerir?",
+          "options": [
+            "Serginin en etkileyici resmi girişteydi.",
+            "Sergide yirmi resim vardı.",
+            "Sergi salı günü açıldı.",
+            "Salon ikinci kattaydı."
+          ],
+          "correctIndex": 0,
+          "explanation": "“En etkileyici” kişisel beğeniye bağlıdır. Diğer bilgiler ölçülüp doğrulanabilir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 395
+          }
+        },
+        {
+          "id": "lgs-user-v1-396",
+          "question": "Hangi cümle nesnel yargı içerir?",
+          "options": [
+            "Kitap beş bölümden oluşuyor.",
+            "Kitabın dili büyüleyici.",
+            "Son bölüm gereksiz uzun.",
+            "Yazarın en güzel kitabı bu."
+          ],
+          "correctIndex": 0,
+          "explanation": "Bölüm sayısı sayılarak doğrulanabilir. Diğerlerinde kişisel değerlendirme bulunur.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 396
+          }
+        },
+        {
+          "id": "lgs-user-v1-397",
+          "question": "Hangi cümle varsayım bildirir?",
+          "options": [
+            "Sanırım tren gecikecek.",
+            "Keşke tren gecikmese.",
+            "Tren dün gecikti.",
+            "Diyelim ki tren bir saat gecikti."
+          ],
+          "correctIndex": 3,
+          "explanation": "Gerçekleştiği bilinmeyen durum, üzerinde düşünmek için olmuş gibi kabul ediliyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 397
+          }
+        },
+        {
+          "id": "lgs-user-v1-398",
+          "question": "Hangi cümle olasılık bildirir?",
+          "options": [
+            "Yarın mutlaka burada olacağım.",
+            "Dün burada buluştuk.",
+            "Yarın burada olmalısın.",
+            "Belki yarın burada buluşuruz."
+          ],
+          "correctIndex": 3,
+          "explanation": "“Belki” gerçekleşmenin kesin olmadığını, mümkün olduğunu gösterir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 398
+          }
+        },
+        {
+          "id": "lgs-user-v1-399",
+          "question": "Hangi cümle öneri içerir?",
+          "options": [
+            "Her akşam bir saat çalışıyor.",
+            "Dün program hazırladı.",
+            "Çalışması iki saat sürdü.",
+            "Konuları küçük parçalara ayırarak çalışabilirsin."
+          ],
+          "correctIndex": 3,
+          "explanation": "Bir çalışma yöntemi tavsiye ediliyor; olmuş bir olay aktarılmıyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 399
+          }
+        },
+        {
+          "id": "lgs-user-v1-400",
+          "question": "Hangi cümle pişmanlık bildirir?",
+          "options": [
+            "Umarım yarın erken kalkarım.",
+            "Keşke ona o sert sözleri söylemeseydim.",
+            "Belki bugün bize gelir.",
+            "Bence biraz dinlenmelisin."
+          ],
+          "correctIndex": 1,
+          "explanation": "Konuşan, geçmişte yaptığı bir davranıştan rahatsızlık duyuyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 400
+          }
+        },
+        {
+          "id": "lgs-user-v1-401",
+          "question": "Hangi cümle yakınma içerir?",
+          "options": [
+            "Her toplantıyı son anda haber veriyorlar.",
+            "Toplantı yarın saat üçte.",
+            "Toplantıda beş kişi vardı.",
+            "Toplantı için sandalye getirdim."
+          ],
+          "correctIndex": 0,
+          "explanation": "Sürekli yaşanan ve rahatsızlık veren bir durumdan şikâyet ediliyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 401
+          }
+        },
+        {
+          "id": "lgs-user-v1-402",
+          "question": "Hangi cümlede sitem vardır?",
+          "options": [
+            "Bu hafta üç gün yağmur yağdı.",
+            "Telefonun şarjı bitmiş.",
+            "Bunca yıldır arkadaşız, taşındığını bana söylememişsin.",
+            "Yeni evin üçüncü kattaymış."
+          ],
+          "correctIndex": 2,
+          "explanation": "Yakınlık duyulan kişiye, beklenen davranışı göstermediği için kırgınlık belirtiliyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 402
+          }
+        },
+        {
+          "id": "lgs-user-v1-403",
+          "question": "“Bu düzenli çalışma sürerse takımın gelecek yıl daha iyi sonuç alacağını düşünüyorum.” cümlesinde hangisi vardır?",
+          "options": [
+            "Geçmişe özlem",
+            "Kesinleşmiş sonuç",
+            "Geleceğe yönelik tahmin",
+            "Pişmanlık"
+          ],
+          "correctIndex": 2,
+          "explanation": "Henüz gerçekleşmemiş bir sonuç, mevcut çalışma düzenine dayanılarak öngörülüyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 403
+          }
+        },
+        {
+          "id": "lgs-user-v1-404",
+          "question": "“Yarışmaya sınıfımızdan yalnızca Elif katıldı.” cümlesinden kesin olarak hangisi çıkar?",
+          "options": [
+            "Sınıftan Elif dışında kimse katılmamıştır.",
+            "Yarışmanın tek katılımcısı Elif’tir.",
+            "Elif yarışmayı kazanmıştır.",
+            "Diğer öğrenciler yarışmayı bilmiyordur."
+          ],
+          "correctIndex": 0,
+          "explanation": "“Sınıfımızdan” kapsamı sınırlar; “yalnızca” bu kapsamda Elif dışındakileri dışlar.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 404
+          }
+        },
+        {
+          "id": "lgs-user-v1-405",
+          "question": "“Artık okula yürüyerek gidiyor.” cümlesinden hangisi çıkarılabilir?",
+          "options": [
+            "Okula gidiş biçiminde önceye göre değişiklik olmuştur.",
+            "Okulun yeri değişmiştir.",
+            "Daha önce hiç yürümemiştir.",
+            "Evini okula yakın bir yere taşımıştır."
+          ],
+          "correctIndex": 0,
+          "explanation": "“Artık” önceki durumdan farklılaşmayı bildirir. Değişikliğin nedeni açıklanmamıştır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 405
+          }
+        },
+        {
+          "id": "lgs-user-v1-406",
+          "question": "“Toplantıya en az üç kişi katılacak.” bilgisiyle hangi durum uyumludur?",
+          "options": [
+            "Hiç kimsenin katılmaması",
+            "Dört kişinin katılması",
+            "Bir kişinin katılması",
+            "İki kişinin katılması"
+          ],
+          "correctIndex": 1,
+          "explanation": "“En az üç”, üç veya daha fazla demektir. Dört kişi bu sınırı sağlar.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 406
+          }
+        },
+        {
+          "id": "lgs-user-v1-407",
+          "question": "“Öğrencilerin bazıları çalışmasını tamamladı.” cümlesinden kesin olarak hangisi çıkar?",
+          "options": [
+            "Çalışmasını tamamlayan en az bir öğrenci vardır.",
+            "Bütün öğrenciler çalışmasını tamamlamıştır.",
+            "Tamamlayanların sayısı beştir.",
+            "Tamamlamayanlar hiç çalışmamıştır."
+          ],
+          "correctIndex": 0,
+          "explanation": "Cümle tamamlayan öğrencilerin varlığını bildirir. Kesin sayı ve diğerlerinin çabası belirtilmez.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 407
+          }
+        },
+        {
+          "id": "lgs-user-v1-408",
+          "question": "“Bu yazı yalnızca uzmanlara değil, konuya yeni başlayanlara da sesleniyor.” cümlesinde vurgulanan hangisidir?",
+          "options": [
+            "Yazının uzmanlar için gereksiz olduğu",
+            "Yazının farklı bilgi düzeylerindeki okurlara yönelik olduğu",
+            "Yeni başlayanların uzmanlardan daha bilgili olduğu",
+            "Yazının bilimsel bilgi içermediği"
+          ],
+          "correctIndex": 1,
+          "explanation": "“Yalnızca… değil… da” yapısı, hedef kitlenin iki grubu da kapsadığını belirtir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 408
+          }
+        },
+        {
+          "id": "lgs-user-v1-409",
+          "question": "“Takımımız bu yıl da finale kaldı, ancak şampiyon olamadı.” cümlesinden hangisi kesinlikle çıkar?",
+          "options": [
+            "Takım daha önce en az bir kez finale kalmıştır.",
+            "Takım geçen yıl şampiyon olmuştur.",
+            "Takım her yıl finale kalmaktadır.",
+            "Takım finalde bir puan farkla yenilmiştir."
+          ],
+          "correctIndex": 0,
+          "explanation": "“Bu yıl da” finale kalmanın önceden de gerçekleştiğini gösterir. Önceki yılın sonucu ve yenilgi farkı verilmez.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 409
+          }
+        },
+        {
+          "id": "lgs-user-v1-410",
+          "question": "“Listedeki kitapların tamamını değil, yalnızca bir kısmını okudum.” cümlesinden hangisi kesinlikle çıkar?",
+          "options": [
+            "Listedeki kitapların çoğu okunmuştur.",
+            "Listede okunmamış en az bir kitap vardır.",
+            "Okunan bütün kitaplar beğenilmiştir.",
+            "Listenin yarısı okunmuştur."
+          ],
+          "correctIndex": 1,
+          "explanation": "“Tamamını değil” bütünün bitmediğini açıkça belirtir. “Bir kısmı” kesin oran bildirmez.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 410
+          }
+        },
+        {
+          "id": "lgs-user-v1-411",
+          "question": "“İyi bir sunum, çok bilgi yığmakla değil, gerekli bilgiyi anlaşılır bir sıraya koymakla hazırlanır.” cümlesine en yakın yargı hangisidir?",
+          "options": [
+            "İyi sunumda ayrıntı bulunmamalıdır.",
+            "Bilginin seçimi ve düzenlenişi, miktarından daha belirleyicidir.",
+            "Uzun sunumların tamamı başarısızdır.",
+            "Sunumda yalnızca kişisel düşünceler anlatılmalıdır."
+          ],
+          "correctIndex": 1,
+          "explanation": "Cümle bilgi çokluğuna karşı seçme ve düzenlemeyi öne çıkarır. Ayrıntıları bütünüyle reddetmez.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 411
+          }
+        },
+        {
+          "id": "lgs-user-v1-412",
+          "question": "“Projeyi cuma gününe yetiştirebilirim; yeter ki gerekli veriler bugün gelsin.” cümlesi için hangisi doğrudur?",
+          "options": [
+            "Proje cuma günü kesinlikle bitecektir.",
+            "Veriler bugün kesinlikle gelecektir.",
+            "Projenin yetişmesi, verilerin bugün gelmesi koşuluna bağlanmıştır.",
+            "Projenin cuma gününden önce bitmesi imkânsızdır."
+          ],
+          "correctIndex": 2,
+          "explanation": "“Yeter ki” koşul bildirir. Cümle ne koşulun gerçekleştiğini ne de sonucun kesinliğini söyler.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 412
+          }
+        },
+        {
+          "id": "lgs-user-v1-413",
+          "question": "“Bir kitabı kaç günde bitirdiğinden çok, ondan geriye sende ne kaldığı önemlidir.” cümlesinin vurgusu hangisidir?",
+          "options": [
+            "Yavaş okunan her kitap daha iyi anlaşılır.",
+            "Kitap bitirmek gereksizdir.",
+            "Okumanın değeri, yalnızca hızla değil kazanımla değerlendirilmelidir.",
+            "Kısa kitaplar daha kalıcıdır."
+          ],
+          "correctIndex": 2,
+          "explanation": "Hızla okurun kazandıkları karşılaştırılır; ağırlık kazanıma verilir. Belirli bir okuma hızı zorunlu tutulmaz.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 413
+          }
+        },
+        {
+          "id": "lgs-user-v1-414",
+          "question": "“Yeni sistemle işlem süresi kısalırken hata sayısı arttı.” cümlesinden kesin olarak hangisi çıkar?",
+          "options": [
+            "Hataların tek nedeni hızlanmadır.",
+            "Yeni sistemin hiçbir yararı yoktur.",
+            "Süre bakımından iyileşme, hata sayısı bakımından kötüleşme görülmüştür.",
+            "Eski sistem hatasız çalışmıştır."
+          ],
+          "correctIndex": 2,
+          "explanation": "İki değişim birlikte bildirilir. Aralarında kesin neden ilişkisi veya eski sistemin hatasızlığı belirtilmez.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 414
+          }
+        },
+        {
+          "id": "lgs-user-v1-415",
+          "question": "“Bu bulgu görüşümüzü destekliyor; fakat tek başına onu kanıtlamaya yetmiyor.” cümlesindeki yaklaşım hangisidir?",
+          "options": [
+            "Görüşü tamamen reddetmek",
+            "Bulguyu değersiz saymak",
+            "Görüşün kesin doğruluğunu ilan etmek",
+            "Kanıtın katkısını kabul edip sınırını belirtmek"
+          ],
+          "correctIndex": 3,
+          "explanation": "“Destekliyor” olumlu katkıyı, “yetmiyor” kanıtın sınırını anlatır. Ne tam ret ne kesin kabul vardır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 415
+          }
+        },
+        {
+          "id": "lgs-user-v1-416",
+          "question": "“Çocuğun yerine her kararı vermek de onu bütün kararlarında yalnız bırakmak da doğru değildir.” cümlesine en uygun öneri hangisidir?",
+          "options": [
+            "Karar vermesine alan açarken gerektiğinde rehberlik etmek",
+            "Bütün kararları yetişkinlerin vermesi",
+            "Çocuğun hiçbir kararına ilgi göstermemek",
+            "Karar vermeyi tamamen ertelemek"
+          ],
+          "correctIndex": 0,
+          "explanation": "İki uç davranış reddediliyor. Uygun yaklaşım, bağımsızlıkla desteği birlikte sağlamaktır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 416
+          }
+        },
+        {
+          "id": "lgs-user-v1-417",
+          "question": "“Deniz, bu yarışmada yine kendi derecesini geliştirdi.” cümlesinden hangisi kesin çıkar?",
+          "options": [
+            "Yarışmayı birinci bitirmiştir.",
+            "Rakiplerinin hepsini geçmiştir.",
+            "Her yarışta rekor kırmıştır.",
+            "Daha önce de kendi derecesini geliştirmiştir."
+          ],
+          "correctIndex": 3,
+          "explanation": "“Yine” aynı tür başarının önceden gerçekleştiğini belirtir. Bu, başkalarından daha iyi derece yaptığı anlamına gelmez.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 417
+          }
+        },
+        {
+          "id": "lgs-user-v1-418",
+          "question": "“Bir düşünceyi çok kişinin benimsemesi, onun doğru olduğunu tek başına göstermez.” cümlesine en yakın anlam hangisidir?",
+          "options": [
+            "Yaygın düşüncelerin hepsi yanlıştır.",
+            "Yaygınlık, doğruluk için yeterli kanıt değildir.",
+            "Az kişinin inandığı her düşünce doğrudur.",
+            "Bir düşüncenin doğruluğu araştırılamaz."
+          ],
+          "correctIndex": 1,
+          "explanation": "Cümle yaygınlığı reddetmez; onun tek başına yeterli ölçüt olmadığını söyler.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 418
+          }
+        },
+        {
+          "id": "lgs-user-v1-419",
+          "question": "“Eleştiri, yalnızca kusurları sıraladığında değil, gelişmenin yolunu gösterdiğinde işlevini yerine getirir.” cümlesinde eleştiriden beklenen nedir?",
+          "options": [
+            "Bütün kusurları görmezden gelmesi",
+            "Eleştirilen kişiyi mutlaka övmesi",
+            "Eksikleri belirtmenin yanında iyileşmeye katkı sunması",
+            "Yalnızca başarısız eserleri konu alması"
+          ],
+          "correctIndex": 2,
+          "explanation": "Kusur belirleme yeterli görülmüyor; gelişmeye yol göstermek de bekleniyor.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 419
+          }
+        },
+        {
+          "id": "lgs-user-v1-420",
+          "question": "Bir okul için “Her öğrenci en az bir, en fazla üç kulübe üyedir.” bilgisi veriliyor. Hangisi kesinlikle doğrudur?",
+          "options": [
+            "Her kulüpte üç öğrenci vardır.",
+            "Hiçbir öğrenci dört kulübe üye değildir.",
+            "Üç kulübe üye olan mutlaka bir öğrenci vardır.",
+            "Bütün öğrenciler aynı sayıda kulübe üyedir."
+          ],
+          "correctIndex": 1,
+          "explanation": "İzin verilen üyelik sayıları 1, 2 ve 3’tür. Dört üyelik dışlanır; her sayının mutlaka gerçekleşmesi gerekmez.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-271-420-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 420
+          }
+        }
+      ]
+    },
+    {
+      "exam": "LGS",
+      "lesson": "Türkçe",
+      "topic": "Paragrafta Anlam",
+      "questions": [
+        {
+          "id": "lgs-user-v1-421",
+          "question": "Bir kitabı hızla bitirmek, onu iyi anlamakla aynı şey değildir. Bazen tek bir cümlede durmak, önceki sayfalara dönmek gerekir. Okuma sırasında verilen bu küçük aralar, metnin düşüncemizde yer bulmasını sağlar.\n\nParagrafın ana düşüncesi hangisidir?",
+          "options": [
+            "Nitelikli okuma, metin üzerinde düşünmeye zaman ayırmayı gerektirir.",
+            "Bir kitabın değeri, okunma süresiyle ölçülür.",
+            "Kitapları anlamanın temel yolu tekrar tekrar okumaktır.",
+            "Okuma hızını artırmak, anlamayı da güçlendirir."
+          ],
+          "correctIndex": 0,
+          "explanation": "Durmak ve geri dönmek, düşünmeye fırsat verdiği için önemseniyor. Temel vurgu hız değil, anlamı işleme üzerindedir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 421
+          }
+        },
+        {
+          "id": "lgs-user-v1-422",
+          "question": "Eski bir çeşme, yalnızca suyun aktığı bir yapı değildir. Önünde bekleyenleri, çevresinde oynayan çocukları, yıllarca değişen sokakları da hatırlatır. Böyle yapılar yıkıldığında şehir, taşlarından fazlasını kaybeder.\n\nBu paragrafa en uygun başlık hangisidir?",
+          "options": [
+            "Şehirlerde Su Kullanımı",
+            "Eski Yapıların Maliyeti",
+            "Şehrin Hafızasını Taşıyan Yapılar",
+            "Çocukların Değişen Oyunları"
+          ],
+          "correctIndex": 2,
+          "explanation": "Çeşme, ortak yaşantıları hatırlatan bir yapı olarak ele alınıyor. Başlık bu ana düşünceyi kapsamalıdır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 422
+          }
+        },
+        {
+          "id": "lgs-user-v1-423",
+          "question": "Okul bahçesindeki küçük alanı öğrencilerle birlikte ektik. İlk gün herkes hemen çiçek görmek istiyordu. Haftalar geçtikçe çocuklar toprağın nemini kontrol etmeyi, yeni çıkan yaprakları fark etmeyi öğrendi. Beklemek, onlar için artık boş durmak değildi.\n\nBu parçadan öğrencilerle ilgili hangisi çıkarılabilir?",
+          "options": [
+            "Bahçeciliği bütün derslerden daha çok sevmişlerdir.",
+            "Sonucu beklerken gelişim sürecini izlemeyi öğrenmişlerdir.",
+            "Bitkilerin bakımını zamanla öğretmenlerine bırakmışlardır.",
+            "Çiçek yetiştirmenin kısa sürede tamamlandığını görmüşlerdir."
+          ],
+          "correctIndex": 1,
+          "explanation": "Öğrenciler yalnızca sonucu istemekten, değişimleri gözlemlemeye geçmiştir. Son cümle bu dönüşümü özetler.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 423
+          }
+        },
+        {
+          "id": "lgs-user-v1-424",
+          "question": "Mahalle atölyesinde cumartesi günleri eski eşyaları onarıyoruz. Katılmak için deneyim gerekmiyor; gerekli araçları atölye sağlıyor. İlk buluşmada herkes evinden getirdiği küçük bir eşyanın sorununu anlatıyor.\n\nBu parçada hangi sorunun cevabı yoktur?",
+          "options": [
+            "Atölye hangi gün düzenlenmektedir?",
+            "Katılımcıların deneyimli olması gerekir mi?",
+            "Gerekli araçlar nereden sağlanmaktadır?",
+            "Her buluşma kaç saat sürmektedir?"
+          ],
+          "correctIndex": 3,
+          "explanation": "Gün, deneyim koşulu ve araçların kaynağı açıklanmıştır. Buluşmaların süresi belirtilmemiştir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 424
+          }
+        },
+        {
+          "id": "lgs-user-v1-425",
+          "question": "Bir mesaj gelir gelmez cevap vermeyi özen göstermek sanıyoruz. Oysa bazen hızlı cevabımız, karşımızdakinin ne söylediğini tam anlamadan verilmiş oluyor. İletişimde değerli olan, yalnızca bekletmemek değil, söylenene gerçekten karşılık verebilmektir.\n\nYazarın eleştirdiği davranış hangisidir?",
+          "options": [
+            "Mesajlara yazılı olarak cevap vermek",
+            "Cevap hızını, anlama çabasının önüne koymak",
+            "Bir mesaj üzerinde uzun süre düşünmek",
+            "Karşılıklı konuşmayı yazışmaya tercih etmek"
+          ],
+          "correctIndex": 1,
+          "explanation": "Eleştiri hızlı cevap vermeye değil, hız uğruna anlamanın ihmal edilmesine yöneliktir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 425
+          }
+        },
+        {
+          "id": "lgs-user-v1-426",
+          "question": "(I) Bir dili öğrenirken yanlış yapmaktan kaçınmak, konuşmayı geciktirebilir. (II) Çünkü kişi kusursuz cümleyi bekledikçe bildiklerini kullanamaz. (III) Dünyadaki diller farklı alfabelerle yazılabilir. (IV) Oysa küçük yanlışlarla kurulan konuşmalar da öğrenmenin parçasıdır. (V) Bu nedenle denemek, çoğu zaman beklemekten daha öğreticidir.\n\nHangi cümle düşüncenin akışını bozmaktadır?",
+          "options": [
+            "III",
+            "II",
+            "IV",
+            "V"
+          ],
+          "correctIndex": 0,
+          "explanation": "Paragraf, hata korkusunun dil öğrenmeye etkisini işler. Alfabelerle ilgili III. cümle bu düşünceyi ilerletmez.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 426
+          }
+        },
+        {
+          "id": "lgs-user-v1-427",
+          "question": "Her gün uzun saatler ayıramadığı için çizim yapmayı erteliyordu. Sonra, kahvaltıdan önce yalnızca on dakika çizmeye başladı. Bir ayın sonunda defteri dolmuştu. Demek ki ----.\n\nParagraf hangi cümleyle tamamlanmalıdır?",
+          "options": [
+            "çizimde başarılı olmak için mutlaka sabah çalışılmalıdır",
+            "kısa çalışmalar, uzun çalışmaların yerini her koşulda tutar",
+            "bir defteri doldurmak, çizim yeteneğinin yeterli kanıtıdır",
+            "küçük ama düzenli çalışmalar da birikim oluşturabilir"
+          ],
+          "correctIndex": 3,
+          "explanation": "Örnek, az zamanın düzenli kullanılmasıyla ortaya çıkan birikimi gösterir. Diğer seçenekler metni aşan genellemelerdir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 427
+          }
+        },
+        {
+          "id": "lgs-user-v1-428",
+          "question": "I. Bunun üzerine haritadaki işaretleri tek tek karşılaştırmaya başladık. II. Eski bir haritanın kenarında anlamını bilmediğimiz bir simge gördük. III. Sonunda simgenin, artık kullanılmayan bir su yolunu gösterdiğini anladık. IV. Aynı simgenin başka noktalarda da bulunduğunu fark ettik.\n\nAnlamlı sıralama hangisidir?",
+          "options": [
+            "I–II–IV–III",
+            "II–III–I–IV",
+            "II–IV–I–III",
+            "IV–I–III–II"
+          ],
+          "correctIndex": 2,
+          "explanation": "Önce simge görülür, başka yerlerde tekrarlandığı fark edilir, karşılaştırma yapılır ve anlamı çözülür.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 428
+          }
+        },
+        {
+          "id": "lgs-user-v1-429",
+          "question": "(I) Kütüphaneye yeni gelen kitapları girişteki masaya yerleştirdik. (II) Yanlarına kısa tanıtım notları ekleyince öğrenciler kitapları daha çok incelemeye başladı. (III) Böylece daha önce dikkat çekmeyen türler de okur buldu. (IV) Kütüphanenin sessiz çalışma bölümü ise ayrı bir düzenleme gerektiriyordu. (V) Buradaki masaları birbirinden uzaklaştırıp aydınlatmayı yeniledik.\n\nParça iki paragrafa ayrılırsa ikinci paragraf hangi cümleyle başlamalıdır?",
+          "options": [
+            "IV",
+            "II",
+            "III",
+            "V"
+          ],
+          "correctIndex": 0,
+          "explanation": "İlk üç cümle kitapların tanıtımıyla ilgilidir. IV’te çalışma alanının düzenlenmesine geçilir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 429
+          }
+        },
+        {
+          "id": "lgs-user-v1-430",
+          "question": "Sokağımızdaki fırın kapanmış. Sabahları pencereden gelen ekmek kokusu, okul yolunda duyduğum o kısa selamlaşmalar da onunla birlikte uzaklaşmış gibi. Şimdi aynı köşeden geçerken çocukluğumdan bir ses eksilmiş hissediyorum.\n\nParçaya hâkim duygu hangisidir?",
+          "options": [
+            "Kaygı",
+            "Öfke",
+            "Şaşkınlık",
+            "Özlem"
+          ],
+          "correctIndex": 3,
+          "explanation": "Fırın, geçmişteki yaşantıları hatırlatıyor. Anlatıcı kaybolan çocukluk deneyimlerine özlem duyuyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 430
+          }
+        },
+        {
+          "id": "lgs-user-v1-431",
+          "question": "Eski atölyede herkes aynı uzun masanın çevresinde çalışırdı; yeni atölyede ise ayrı çalışma alanları var. Eski düzen konuşmayı kolaylaştırıyordu, yenisi dikkatin dağılmasını azaltıyor. İki düzenin de farklı ihtiyaçlara cevap verdiği açık.\n\nBu parçanın anlatımında hangisi öne çıkmaktadır?",
+          "options": [
+            "Tanık gösterme",
+            "Sayısal verilerden yararlanma",
+            "Karşılaştırma",
+            "Benzetme"
+          ],
+          "correctIndex": 2,
+          "explanation": "Eski ve yeni düzen, iletişim ve dikkat bakımından karşılaştırılmaktadır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 431
+          }
+        },
+        {
+          "id": "lgs-user-v1-432",
+          "question": "Yanlış çözdüğüm soruların yalnızca doğrusuna bakardım. Sonra aynı tür hataları yeniden yaptığımı fark ettim. Artık hangi adımda ve neden yanıldığımı da yazıyorum. Böylece yanlışlarım, tekrar görmek istemediğim izler olmaktan çıkıp yol gösterici oldu.\n\nParagrafın ana düşüncesi hangisidir?",
+          "options": [
+            "Bir sorunun doğru cevabını öğrenmek yeterlidir.",
+            "Hataların nedenini incelemek, öğrenmeyi geliştirebilir.",
+            "Yanlışları kaydetmek, soru çözmekten daha önemlidir.",
+            "Aynı hatayı yapan kişi konuyu öğrenemez."
+          ],
+          "correctIndex": 1,
+          "explanation": "Anlatıcının gelişmesini sağlayan, yanlışların nedenlerine yönelmesidir. Metin bütün soru çözme yöntemlerini karşılaştırmaz.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 432
+          }
+        },
+        {
+          "id": "lgs-user-v1-433",
+          "question": "Bir ustanın bilgisi her zaman sözlere kolayca dökülmez. Marangoz, tahtanın sesinden nerede çatlak olduğunu anlayabilir; aşçı, hamurun kıvamını dokunarak değerlendirebilir. Uzun deneyimler, bazen açıklamadan önce fark etmeyi sağlar.\n\nMarangoz ve aşçı örnekleri hangi düşünceyi desteklemektedir?",
+          "options": [
+            "Meslek öğrenirken açıklamaların gereksiz olduğunu",
+            "Deneyimle kazanılan bilginin sezgisel değerlendirmelerde görülebildiğini",
+            "Bütün mesleklerin aynı becerilere dayandığını",
+            "Ustaların bilgilerini paylaşmak istemediğini"
+          ],
+          "correctIndex": 1,
+          "explanation": "İki örnek de deneyimin hızlı fark etme ve değerlendirme becerisine dönüşmesini gösterir.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 433
+          }
+        },
+        {
+          "id": "lgs-user-v1-434",
+          "question": "Arkadaşımın önerisini ilk duyduğumda uygun bulmadım. Yine de hemen karşı çıkmak yerine hangi sorunu çözmeye çalıştığını sordum. Açıklamasından sonra önerinin tamamını benimsemedim ama başlangıçta görmediğim yararlı bir yönünü fark ettim.\n\nAnlatıcının tutumu hangisidir?",
+          "options": [
+            "Uyum sağlamak için kendi düşüncesinden vazgeçmek",
+            "Karşı görüşü dinlemeden reddetmek",
+            "Karar vermeyi başkalarına bırakmak",
+            "Katılmadığı görüşü anlamaya açık olmak"
+          ],
+          "correctIndex": 3,
+          "explanation": "Anlatıcı görüşünü tamamen bırakmadan karşı tarafı dinleyip yararlı bir yön buluyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 434
+          }
+        },
+        {
+          "id": "lgs-user-v1-435",
+          "question": "Yeni bir işe başlarken ayrıntılı plan hazırlamak isterim. Fakat işi hiç denemeden hazırladığım planların çoğu değişiyor. Bu yüzden önce küçük bir deneme yapıyor, karşıma çıkan güçlükleri gördükten sonra planımı genişletiyorum.\n\nParçanın en uygun özeti hangisidir?",
+          "options": [
+            "Küçük denemelerden edinilen bilgiler, daha gerçekçi planlar kurmaya yardımcı olabilir.",
+            "Plan yapmak, yeni bir işe başlamayı her zaman zorlaştırır.",
+            "Başarılı olmak için bütün ayrıntılar önceden belirlenmelidir.",
+            "Bir işin güçlükleri ancak tamamlandıktan sonra anlaşılır."
+          ],
+          "correctIndex": 0,
+          "explanation": "Deneme, planın yerine geçmiyor; onu gerçek koşullara göre geliştirmeyi sağlıyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 435
+          }
+        },
+        {
+          "id": "lgs-user-v1-436",
+          "question": "Aynı romanı yıllar sonra okuduğumuzda başka ayrıntılara takılırız. Bir zamanlar önemsiz bulduğumuz bir konuşma, yaşadıklarımızdan sonra bize farklı görünebilir. Değişen her zaman kitap değildir; bazen onu karşılayan okurdur.\n\nBu parça hangi soruya cevap verir?",
+          "options": [
+            "Bir romanın uzunluğu nasıl belirlenir?",
+            "Yazarlar neden kitaplarını yeniden yayımlar?",
+            "Aynı kitabı farklı zamanlarda neden farklı yorumlayabiliriz?",
+            "Bir kitabın ilk baskısı neden değerlidir?"
+          ],
+          "correctIndex": 2,
+          "explanation": "Parça, okurun değişen deneyimlerinin aynı metne ilişkin yorumunu değiştirmesini açıklıyor.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 436
+          }
+        },
+        {
+          "id": "lgs-user-v1-437",
+          "question": "Mahallede düzenlenen takas gününe ilk hafta az kişi geldi. Katılanlar deneyimlerini komşularıyla paylaşınca sonraki buluşma daha kalabalık oldu. Düzenleyiciler, duyuru yapmanın yanında insanların yaşadıkları deneyimi anlatmasının da etkili olduğunu gördü.\n\nBu parçadan hangisine ulaşılamaz?",
+          "options": [
+            "İlk buluşmanın katılımı sonraki buluşmadan azdır.",
+            "Katılımcılar deneyimlerini başkalarıyla paylaşmıştır.",
+            "Kişisel deneyimlerin aktarılması katılımı desteklemiştir.",
+            "Duyuruların katılım üzerinde hiçbir etkisi olmamıştır."
+          ],
+          "correctIndex": 3,
+          "explanation": "“Duyuru yapmanın yanında” sözü, duyuruların etkisini dışlamaz. Diğer üç bilgi metinde vardır.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 437
+          }
+        },
+        {
+          "id": "lgs-user-v1-438",
+          "question": "Bir şehri yalnızca görülmesi gereken yerlerin listesiyle gezmek istemiyorum. Çünkü ----. Bu nedenle bazen programımdan ayrılıyor, sıradan bir sokakta yürüyüp çevremde olup biteni izliyorum.\n\nBoşluğa hangisi getirilmelidir?",
+          "options": [
+            "şehrin gündelik yaşamı da onu tanımanın önemli bir parçasıdır",
+            "bütün şehirlerin tarihî yapıları birbirine benzemektedir",
+            "plansız yapılan her gezi daha kısa sürmektedir",
+            "önemli yapıları görmek şehri tanımak için yeterlidir"
+          ],
+          "correctIndex": 0,
+          "explanation": "Son cümlede gündelik hayatı gözlemleme örneği veriliyor. A, bu davranışın gerekçesini sağlar.",
+          "difficulty": "orta",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 438
+          }
+        },
+        {
+          "id": "lgs-user-v1-439",
+          "question": "Dijital öneri sistemleri, sevdiğimiz içeriklere ulaşmayı kolaylaştırıyor. Ancak sürekli önceki tercihlerimize benzeyen seçeneklerle karşılaşmak, ilgimizin dışındaki alanları görmemizi azaltabilir. Bu yüzden önerilerden yararlanırken bazen bilerek farklı bir seçim yapmak, keşfetme alanımızı genişletebilir.\n\nYazarın yaklaşımı hangisidir?",
+          "options": [
+            "Öneri sistemlerinin kullanılmasını bütünüyle reddetmek",
+            "Sağladıkları kolaylığı kabul ederken keşfi daraltma ihtimaline dikkat çekmek",
+            "Önceki tercihlerle uyumlu bütün içerikleri değersiz bulmak",
+            "Farklı seçimlerin her zaman daha çok beğenileceğini savunmak"
+          ],
+          "correctIndex": 1,
+          "explanation": "İlk cümle yararı, ikinci olası sınırlılığı belirtir. Öneri, sistemi bırakmak değil seçimleri çeşitlendirmektir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 439
+          }
+        },
+        {
+          "id": "lgs-user-v1-440",
+          "question": "Kütüphaneyi yenilerken raf sayısını artırdık. Fakat bazı çocukların içeri girip hiçbir kitaba dokunmadan çıktığını gördük. Kitapları bulmayı kolaylaştıran işaretler, kısa tanıtımlar ve birlikte inceleme saatleri ekleyince durum değişti. Kitapların orada bulunması önemliydi; onlara ulaşmanın yolunu göstermek de gerekiyordu.\n\nParagrafın temel vurgusu hangisidir?",
+          "options": [
+            "Raf sayısını artırmak kütüphanelerde gereksizdir.",
+            "Çocuklar kitaplarını mutlaka bir yetişkine seçtirmelidir.",
+            "Kaynak sunmak, onlardan yararlanmayı kolaylaştıran düzenlemelerle desteklenmelidir.",
+            "Tanıtımı yapılan her kitap bütün çocukların ilgisini çeker."
+          ],
+          "correctIndex": 2,
+          "explanation": "Kitapların varlığı yeterli olmamış, erişim ve yönlendirme düzenlemeleri kullanımı desteklemiştir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 440
+          }
+        },
+        {
+          "id": "lgs-user-v1-441",
+          "question": "Kalabalık şehirde sessizlik aramak, her sesi ortadan kaldırmak anlamına gelmeyebilir. Bazen insanın ihtiyacı, seslerin yokluğu değil, dikkatini sürekli bölen uyarılardan uzaklaşmaktır. Ağaçların arasında duyulan kuş sesleri bu nedenle, tamamen sessiz ama bildirimlerle dolu bir odadan daha dinlendirici gelebilir.\n\nParçada görünüşte karşıt olan durum nasıl açıklanmaktadır?",
+          "options": [
+            "Dinlendiriciliğin yalnızca ses miktarına değil, dikkatin ne ölçüde bölündüğüne de bağlı olmasıyla",
+            "Doğadaki bütün seslerin aynı yükseklikte olmasıyla",
+            "İnsanların şehirde hiçbir zaman dinlenememesiyle",
+            "Sessiz odaların açık alanlardan daha küçük olmasıyla"
+          ],
+          "correctIndex": 0,
+          "explanation": "Sesli ortamın daha dinlendirici olması, “sessizlik” ihtiyacının dikkat bölünmesi üzerinden yeniden açıklanmasıyla anlam kazanır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 441
+          }
+        },
+        {
+          "id": "lgs-user-v1-442",
+          "question": "Bir metni kısaltırken yalnızca kelime sayısına bakmak yeterli değildir. Tekrarlanan bir cümleyi çıkarmak anlatımı güçlendirebilir; fakat düşünceler arasındaki bağı kuran kısa bir ifadeyi silmek, metni anlaşılmazlaştırabilir. İyi bir kısaltma, az sözcük bırakmak kadar gerekli ilişkileri korumaktır.\n\nParagrafın anlamını en doğru yansıtan yargı hangisidir?",
+          "options": [
+            "Kısaltılan metinler ilk biçimlerinden daha anlaşılır olur.",
+            "Bağlantı kuran ifadeler hiçbir koşulda değiştirilemez.",
+            "Metnin uzunluğu, anlatım niteliğinden tamamen bağımsızdır.",
+            "Kısaltmada sözcüklerin sayısı kadar metindeki işlevleri de değerlendirilmelidir."
+          ],
+          "correctIndex": 3,
+          "explanation": "Gereksiz tekrar ile gerekli bağlantı farklı işlevlerdedir. Karar yalnızca sayıya göre verilmemelidir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 442
+          }
+        },
+        {
+          "id": "lgs-user-v1-443",
+          "question": "I. Bir fotoğraf, çekildiği anı kaydeder; fakat o anın öncesini ve sonrasını bütünüyle göstermez. II. Bu nedenle bir görüntüyü yorumlarken kadrajın dışında kalmış olabilecekleri de düşünmek gerekir.\n\nBu iki cümle arasındaki ilişki hangisidir?",
+          "options": [
+            "İkinci cümle birincideki düşünceyi çürütmektedir.",
+            "İkinci cümle birincideki olaya zaman bakımından öncülük etmektedir.",
+            "İkinci cümle birincide belirtilen sınırlılıktan bir öneri çıkarmaktadır.",
+            "İkinci cümle birincideki düşüncenin örneğini vermektedir."
+          ],
+          "correctIndex": 2,
+          "explanation": "Görüntünün eksik bağlam sunması, yorumlarken görünmeyen koşulları düşünme önerisine gerekçe oluşturuyor.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 443
+          }
+        },
+        {
+          "id": "lgs-user-v1-444",
+          "question": "“Çocuklar kendi sorularını sormalı.” derken yetişkinlerin hiçbir yönlendirme yapmamasını kastetmiyorum. Bazen doğru yerde sorulan küçük bir soru, çocuğun fark etmediği bir ayrıntıyı görmesini sağlar. Önemli olan, onun yerine düşünmek değil, düşünmesini sürdürebileceği bir alan açmaktır.\n\nYazarın karşı çıktığı anlayış hangisidir?",
+          "options": [
+            "Çocukların merakını sorularla desteklemek",
+            "Çocuğun bağımsız düşünmesini, her türlü rehberliğin yokluğu olarak görmek",
+            "Çocuğa cevabını geliştirmesi için zaman tanımak",
+            "Yetişkinin hazır cevap vermeden yol göstermesi"
+          ],
+          "correctIndex": 1,
+          "explanation": "Yazar, bağımsızlıkla rehberliğin birlikte bulunabileceğini savunuyor. Bunları zorunlu karşıtlar saymayı reddediyor.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 444
+          }
+        },
+        {
+          "id": "lgs-user-v1-445",
+          "question": "(I) Bir başarının arkasındaki uzun hazırlık dönemi çoğu zaman görünmez. (II) Seyirci, sahnedeki birkaç dakikayı izler; o dakikaların kaç denemeyle kurulduğunu bilmez. (III) Bu görünmezlik, becerinin bir anda ortaya çıktığı düşüncesini güçlendirebilir. (IV) Bu nedenle başarılı bir işi değerlendirirken yalnızca sonuca değil, onu mümkün kılan sürece de bakmalıyız.\n\n“Aksayan provalar, yeniden yazılan sayfalar ve vazgeçilen taslaklar çoğunlukla sahnenin dışında kalır.” cümlesi nereye getirilmelidir?",
+          "options": [
+            "II ile III arasına",
+            "III ile IV arasına",
+            "IV’ten sonra",
+            "I’den önce"
+          ],
+          "correctIndex": 0,
+          "explanation": "Cümle, II’de sözü edilen görünmeyen denemeleri örneklendirir. Ardından “Bu görünmezlik” sözü doğal biçimde gelir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 445
+          }
+        },
+        {
+          "id": "lgs-user-v1-446",
+          "question": "İki öğrenci aynı geziyi anlatıyor. Biri binaların tarihlerini ve ölçülerini sıralıyor; diğeri sokakta duyduğu konuşmaları, değişen ışığı ve kendi şaşkınlığını aktarıyor. İkisi de geziyi anlatmış olsa da okurun önünde aynı şehir oluşmuyor.\n\nBu parçadan çıkarılabilecek en kapsamlı yargı hangisidir?",
+          "options": [
+            "Tarih ve ölçü içeren anlatımlar okuru etkileyemez.",
+            "Kişisel izlenim içeren metinler her zaman daha doğrudur.",
+            "Anlatıcının seçtiği ayrıntılar ve bakış açısı, okurun algısını biçimlendirir.",
+            "Aynı yeri gezen kişiler ortak hiçbir şey anlatamaz."
+          ],
+          "correctIndex": 2,
+          "explanation": "Ortak konuya rağmen seçilen ayrıntılar farklıdır. Farklı şehir algısının nedeni bu seçim ve bakış açısıdır.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 446
+          }
+        },
+        {
+          "id": "lgs-user-v1-447",
+          "question": "Bir yöntemin bende işe yaraması, herkes için en iyi yöntem olduğunu göstermez. Çalışma süresi, önceki bilgi ve hedef değiştikçe ihtiyaçlar da değişebilir. Deneyimlerimizi paylaşmak yararlıdır; ancak onları başkalarının koşullarını görmeden değişmez kurallara dönüştürmemeliyiz.\n\nYazar hangi tutumu benimsemektedir?",
+          "options": [
+            "Kişisel deneyimlerin paylaşılmasını gereksiz bulmak",
+            "Öğrenme yöntemlerinin karşılaştırılamayacağını savunmak",
+            "Başarılı yöntemlerin yalnızca ilk kullanan kişiye yarayacağını düşünmek",
+            "Deneyimlerden yararlanırken bireysel koşulları dikkate almak"
+          ],
+          "correctIndex": 3,
+          "explanation": "Deneyimin yararı kabul ediliyor; itiraz, koşulları yok sayan genellemeye yöneltiliyor.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 447
+          }
+        },
+        {
+          "id": "lgs-user-v1-448",
+          "question": "Bir müzenin ziyaretçi sayısının artması sevindirici olabilir. Fakat ziyaretçilerin eserlerle nasıl ilişki kurduğunu bilmeden yalnızca bu sayıdan öğrenmenin arttığı sonucuna varamayız. Kaç kişinin geldiği ile gelenlerin ne yaşadığı, birbirini tamamlayan ama aynı olmayan bilgilerdir.\n\nYazarın temel uyarısı hangisidir?",
+          "options": [
+            "Ziyaretçi sayıları hiçbir konuda bilgi vermez.",
+            "Nicel artış, deneyimin niteliğindeki artışı tek başına kanıtlamaz.",
+            "Kalabalık müzelerde öğrenme gerçekleşmez.",
+            "Müze başarısı yalnızca ziyaret süresiyle ölçülmelidir."
+          ],
+          "correctIndex": 1,
+          "explanation": "Kişi sayısıyla öğrenmenin niteliği ayrılıyor. Sayının yararsız olduğu değil, tek başına yeterli olmadığı söyleniyor.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 448
+          }
+        },
+        {
+          "id": "lgs-user-v1-449",
+          "question": "Bir tartışmada fikrini değiştiren kişiyi hemen tutarsızlıkla suçlamak doğru değildir. Yeni bir bilgi karşısında görüşünü gözden geçirmek, düşüncesini önemsemediğini değil, onu gerekçelere dayandırdığını gösterebilir. Elbette her değişim böyle değildir; fakat değişmemek de tek başına sağlamlığın kanıtı sayılamaz.\n\nParçaya en uygun yargı hangisidir?",
+          "options": [
+            "Görüş değişikliğinin değeri, değişimin gerekçeleri dikkate alınarak değerlendirilmelidir.",
+            "Sık fikir değiştiren herkes daha sağlam düşünür.",
+            "Düşüncesini koruyan kişiler yeni bilgileri reddeder.",
+            "Tutarlılık, görüşleri sürekli değiştirmeyi gerektirir."
+          ],
+          "correctIndex": 0,
+          "explanation": "Yazar ne değişmeyi ne değişmemeyi tek başına ölçüt kabul eder. Belirleyici olan gerekçelerdir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 449
+          }
+        },
+        {
+          "id": "lgs-user-v1-450",
+          "question": "Teknoloji bazı işleri daha kısa sürede yapmamızı sağlıyor. Fakat kazandığımız zamanı nasıl kullandığımız ayrı bir mesele. Boşalan her aralığı yeni görevlerle dolduruyorsak hızlanmış olabiliriz; yine de kendimize daha fazla zaman ayırmış olmayabiliriz.\n\nParagrafın sonuna hangi cümle getirilmesi anlamı en iyi tamamlar?",
+          "options": [
+            "Bu nedenle işleri hızlandıran bütün araçlardan uzak durmalıyız.",
+            "Zaman kazanmak, ancak onu neye ayıracağımıza da karar verdiğimizde yaşamımıza farklı bir alan açabilir.",
+            "Yeni görevler üstlenmek her durumda verimliliğimizi azaltır.",
+            "Teknoloji kullanmayan insanlar zamanlarını daha iyi değerlendirir."
+          ],
+          "correctIndex": 1,
+          "explanation": "Parça, hızlanmakla kendine zaman ayırmanın aynı olmadığını anlatır. B, kazanılan zamanın bilinçli kullanımını sonuç olarak önerir.",
+          "difficulty": "zor",
+          "reviewedBy": "Codex: içerik ve seçenek kontrolü; öğretmen incelemesi değildir",
+          "source": {
+            "origin": "user-ai",
+            "title": "ChatGPT ile hazırlanmış, kullanıcı tarafından sağlanmış soru",
+            "document": "lgs-421-450-2026-09-07",
+            "permissionReference": "Kullanıcının 7 Eylül 2026 tarihli ekleme talebi",
+            "questionNumber": 450
+          }
+        }
+      ]
     }
   ]
 }

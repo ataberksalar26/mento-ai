@@ -18,7 +18,7 @@ function plainMath(input) {
     const match = text.slice(at).match(/^[a-zA-Z]+/);
     if (!match) { const char = text[at++]; if ('%,; '.includes(char)) return char === '%' ? '%' : ' '; throw new Error('Unknown escape ' + char); }
     const name = match[0]; at += name.length;
-    const symbols = { times:'×', cdot:'·', div:'÷', circ:'°', qquad:'  ', quad:' ', le:'≤', ge:'≥', ldots:'…' };
+    const symbols = { times:'×', cdot:'·', div:'÷', circ:'°', qquad:'  ', quad:' ', le:'≤', ge:'≥', ldots:'…', cong:'≅', sim:'∼', Rightarrow:'⇒', to:'→', min:'min', pi:'π' };
     if (name in symbols) return symbols[name];
     if (['boxed','text','operatorname'].includes(name)) return atom();
     if (name === 'sqrt') return '√(' + atom() + ')';

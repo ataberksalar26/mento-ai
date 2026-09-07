@@ -1,0 +1,387 @@
+{
+  "at": "2026-09-06T13:28:38.678Z",
+  "topics": 206,
+  "links": 618,
+  "uniqueVideos": 602,
+  "metadataVerified": 528,
+  "missing": [],
+  "changes": [
+    {
+      "key": "TYT|Geometri|Çember ve Daire",
+      "before": [
+        "76 - ÇEMBER - DAİRE - İLYAS GÜNEŞ l KPSS",
+        "Çemberde Açı-1 | 60 Günde Geometri | 31.Gün 1.Ders | 2026",
+        "20 DAKİKADA ÇEMBER VE DAİRE / KONU ÖZETİ / TEKRAR"
+      ],
+      "after": [
+        "Çemberde Açı-1 | 60 Günde Geometri | 31.Gün 1.Ders | 2026",
+        "20 DAKİKADA ÇEMBER VE DAİRE / KONU ÖZETİ / TEKRAR",
+        "Çember Konu Anlatımı 3 | 58 Günde TYT AYT Geometri Kampı | Geometri Konu Anlatımı"
+      ]
+    },
+    {
+      "key": "TYT|Tarih|İnkılap Tarihi",
+      "before": [
+        "21 - 2026 KPSS - Tarih - T.C  İnkılap Tarihi (Atatürk'ün Hayatı) - Aydın YÜCE",
+        "69) KPSS Tarih - ​​Atatürk İlke ve İnkılapları 1 - Ramazan YETGİN - 2025",
+        "6) KPSS / AGS Tarih - İnkılap Tarihi I - Gökhan ÖZ - 2026"
+      ],
+      "after": [
+        "Atatürkçülük ve Türk İnkılabı 3 - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 35",
+        "Atatürkçülük ve Türk İnkılabı 3 - Soru Çözümü | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 35",
+        "Milli Mücadele Dönemi 2 - Konu Anlatımı | 39 GÜNDE AYRINTILI TYT TARİH KAMPI 2026-27 | 28"
+      ]
+    },
+    {
+      "key": "AYT|Tarih|Osmanlı Kuruluş ve Yükselme",
+      "before": [
+        "Osmanlı Kuruluş Dönemi Haritalı Anlatım Tek Part KPSS Tarih Sınav Video Animasyonlu Komik Anlatım",
+        "Osmanlının Kuruluşu - Osmanlı Nasıl Kuruldu?",
+        "44) Beylikten Devlete Osmanlı (Kuruluş) | Osman Gazi - Orhan Gazi | Mehmet Celal ÖZYILDIZ - 2026"
+      ],
+      "after": [
+        "Osmanlının Kuruluşu - Osmanlı Nasıl Kuruldu?",
+        "44) Beylikten Devlete Osmanlı (Kuruluş) | Osman Gazi - Orhan Gazi | Mehmet Celal ÖZYILDIZ - 2026",
+        "10. Gün - Beylikten Devlete Osmanlı Siyaseti / 1302-1453 I 39 Günde AYT Tarih Konu Anlatımı - zeduva"
+      ]
+    },
+    {
+      "key": "AYT|Tarih|Çağdaş Türk ve Dünya Tarihi",
+      "before": [
+        "34) AYT Tarih - Çağdaş Türk ve Dünya Tarihi - Ramazan YETGİN - 2025",
+        "Bu Video İle Çağdaş Türk ve Dünya Tarihine Nokta Koy / KPSS Lisans-Önlisans-Ortaöğretim 2026",
+        "15. Gün / Çağdaş Türk ve Dünya Tarihi - 15 Günde KPSS Tarih Full Tekrar"
+      ],
+      "after": [
+        "34) AYT Tarih - Çağdaş Türk ve Dünya Tarihi - Ramazan YETGİN - 2025",
+        "39 Günde AYT Tarih | 39. GÜN: Çağdaş Türk ve Dünya Tarihi (YKS 2026)",
+        "22) AYT Tarih Kampı 2026 / 30 Dakikada Çağdaş Türk ve Dünya Tarihi / Soğuk Savaş ve Yumuşama Dönemi"
+      ]
+    },
+    {
+      "key": "AYT|Coğrafya|Nüfus Politikaları",
+      "before": [
+        "Nüfus Politikaları | 39 GÜNDE AYT COĞRAFYA KAMPI 2026 | 11.sınıf coğrafya | ZEDUVA",
+        "Türkiye'de Nüfus ve Politikaları konu anlatımı | KPSS - AGS COĞRAFYA 2026 | Kodlamalarla",
+        "Türkiye'nin Nüfus Politikaları Konu + Soru | 39 GÜNDE AYT COĞRAFYA KAMPI 2026 | 11.sınıf coğrafya"
+      ],
+      "after": [
+        "Nüfus Politikaları | 39 GÜNDE AYT COĞRAFYA KAMPI 2026 | 11.sınıf coğrafya | ZEDUVA",
+        "Türkiye'nin Nüfus Politikaları Konu + Soru | 39 GÜNDE AYT COĞRAFYA KAMPI 2026 | 11.sınıf coğrafya",
+        "4) AYT Coğrafya Konu Anlatımı - Nüfus Politikaları, Türkiye'de Nüfus Politikaları | Nüfusun Geleceği"
+      ]
+    },
+    {
+      "key": "AYT|Coğrafya|Türkiye’nin Yer Şekilleri",
+      "before": [
+        "Türkiye'nin yer şekilleri konu anlatımı | 39 GÜNDE AYRINTILI TYT COĞRAFYA KAMPI 2026 | 18",
+        "7 DAKİKADA TÜRĶİYENİN YERŞEKİLLERİ GENEL TEKRAR",
+        "ZİNCİR GENEL TEKRAR -3 | Türkiye'nin yer şekilleri konu anlatım ve soru çözüm  | KPSS - AGS"
+      ],
+      "after": [
+        "Türkiye'nin yer şekilleri konu anlatımı | 39 GÜNDE AYRINTILI TYT COĞRAFYA KAMPI 2026 | 18",
+        "7 DAKİKADA TÜRĶİYENİN YERŞEKİLLERİ GENEL TEKRAR",
+        "Türkiye'nin İklimi  | TYT-AYT Coğrafya Konu Anlatımı"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "id": "XIKi746J8HE",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "a_PKjiSTnOA",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "ADw1AqrMnR4",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "wkMX1zUeV_c",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "DoctgDfTUkM",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "TV3TmsgZgtg",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "r9ZY-3rmJu0",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "uPQ0liyJ7RA",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "9maN3hsvQzI",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "_LTFiZ8ZGKc",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "HAYUoat9TEs",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "kOGjP-ZwsUQ",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "PN-u37jaEqw",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "lTBPReZ0aOM",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "ZlPS9eMMtLk",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "hJgX6NgvLUM",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "o701Jky1ckw",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "9kZxP0dJWZU",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "bqYHz5C7GOs",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "S3L2pH4b8AQ",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "myXhBHoMvjw",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "jf_8fVa0CRQ",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "2PDPYCfhfPM",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "j6CVJ7C5Ywk",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "Gzc2B41bK3M",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "mepU1SduBxI",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "yFOap8u4OU8",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "p80zG_thrYU",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "FlH5CG0CZpk",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "yDJTF_YeMus",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "oPcfo2wM-Fc",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "d-_CGMxGbf8",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "p9Io5znHgUI",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "WWv9MsNm-eI",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "951K68f-kZ4",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "o5wCGhvZhmk",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "IBeWthIueIk",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "d1pn69U62S0",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "p6o2TZe7lgE",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "c_hxtT8aAME",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "m6tfPJqIOoM",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "AlKUMvdiav0",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "tSYRVXHb-c8",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "daAQxQJy9Mk",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "rit0LlD2Fnw",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "C0Mo8REVrJU",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "iCjhMz5PL-s",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "ln-8TpKO5Yw",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "_DJtzBOquxk",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "v17MubW4g2Q",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "JhMRyYlJceU",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "4Z7G_ZBd48M",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "jzhM9T_sAO4",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "iTjotuH-fCc",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "Sxi_dmFEF2o",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "2452AXFujJk",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "y6YNE0uzB0w",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "4NJRoc-Bzcw",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "FCPQ47Qg7ZM",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "ZEK8mAszVns",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "-ODhiDHldi8",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "QnUH-S_BPH8",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "0ZMoUvwSUnM",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "AyFD2dFgeLw",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "fO5ErlbFFKg",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "OWRp7BotMpE",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "IKJ5ALWDrIQ",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "9kWWeFIxmBA",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "0hdDLADxuV0",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "TQclC9Ub5ns",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "ARbaRW_sjlc",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "ZhAuSBdSNHI",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "liSTs8xEoCc",
+      "error": "oEmbed HTTP 401"
+    },
+    {
+      "id": "yPwfZyXlOy0",
+      "error": "oEmbed HTTP 401"
+    }
+  ],
+  "note": "Metadata availability checked; full video playback and teaching quality are not automatically verified."
+}
