@@ -2324,12 +2324,90 @@
       color: #ffcb70;
     }
 
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .exam-dropdown {
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .exam-dropdown summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(245,166,35,.1);
+      border: 1px solid rgba(245,166,35,.3);
+      color: #ffcb70;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .exam-dropdown summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .exam-dropdown summary span[aria-hidden] {
+      font-size: 10px;
+      display: inline-block;
+      transition: transform .15s ease;
+    }
+
+    .exam-dropdown[open] summary span[aria-hidden] {
+      transform: rotate(180deg);
+    }
+
+    .exam-options {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      z-index: 20;
+      display: grid;
+      gap: 3px;
+      min-width: 120px;
+      padding: 6px;
+      border-radius: 14px;
+      background: #101f33;
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,.4);
+    }
+
+    .exam-options button {
+      border: 0;
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: transparent;
+      color: #c8d4e5;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .exam-options button:hover {
+      background: rgba(255,255,255,.06);
+    }
+
+    .exam-options button[aria-pressed="true"] {
+      background: rgba(245,166,35,.14);
+      color: #ffcb70;
+    }
+
     .new-chat {
       min-height: 46px;
       border: 1px solid rgba(245,166,35,.42);
       border-radius: 14px;
       color: #07111e;
-      background: linear-gradient(180deg, #ffcb70, #f5a623);
+      background: linear-gradient(180deg, #f6b458, #e2911c);
       font-weight: 950;
       cursor: pointer;
     }
@@ -2705,6 +2783,14 @@
       font-size: 18px;
     }
 
+    .mobile-only {
+      display: none;
+    }
+
+    .mobile-panel-backdrop {
+      display: none;
+    }
+
     .messages {
       display: grid;
       align-content: start;
@@ -2730,7 +2816,7 @@
       justify-self: end;
       color: #07111e;
       font-weight: 700;
-      background: #f5a623;
+      background: linear-gradient(180deg, #f6b458, #e2911c);
       border-color: transparent;
       box-shadow: 0 10px 24px rgba(245,166,35,.18);
     }
@@ -2770,7 +2856,7 @@
       border: 0;
       border-radius: 11px;
       color: #07111e;
-      background: #f5a623;
+      background: linear-gradient(180deg, #f6b458, #e2911c);
       font-weight: 950;
       cursor: pointer;
     }
@@ -2879,7 +2965,7 @@
 
     .send-button {
       color: #07111e;
-      background: #f5a623;
+      background: linear-gradient(180deg, #f6b458, #e2911c);
     }
 
     .composer textarea {
@@ -3043,6 +3129,11 @@
       gap: 14px;
     }
 
+    .flashcard-head > div:first-child {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
     .flashcard-head h3 {
       margin: 0 0 4px;
       font-size: 19px;
@@ -3061,6 +3152,8 @@
       gap: 8px;
       color: #93a3bb;
       font-size: 12.5px;
+      min-width: 0;
+      flex-wrap: wrap;
     }
 
     .lesson-tag {
@@ -3162,7 +3255,7 @@
       border: 0;
       border-radius: 11px;
       color: #07111e;
-      background: #f5a623;
+      background: linear-gradient(180deg, #f6b458, #e2911c);
       font-weight: 900;
       cursor: pointer;
     }
@@ -3339,7 +3432,7 @@
       border: 0;
       border-radius: 13px;
       color: #07111e;
-      background: #f5a623;
+      background: linear-gradient(180deg, #f6b458, #e2911c);
       font-weight: 900;
       cursor: pointer;
     }
@@ -3358,6 +3451,11 @@
       border-radius: 15px;
       background: rgba(255,255,255,.045);
       border: 1px solid rgba(255,255,255,.08);
+      min-width: 0;
+    }
+
+    .plan-step-body {
+      min-width: 0;
     }
 
     .plan-step-num {
@@ -3393,7 +3491,7 @@
       border: 0;
       border-radius: 11px;
       color: #07111e;
-      background: #f5a623;
+      background: linear-gradient(180deg, #f6b458, #e2911c);
       font-weight: 900;
       font-size: 12.5px;
       cursor: pointer;
@@ -4035,25 +4133,66 @@
 
       .student-app {
         grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: 1fr;
+      }
+
+      .mobile-only {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chat-top-copy {
+        min-width: 0;
       }
 
       .app-sidebar,
       .study-panel {
-        position: static;
-        border: 0;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: min(320px, 86vw);
+        z-index: 95;
+        box-shadow: 0 30px 70px rgba(0,0,0,.5);
+        transition: transform .28s ease;
       }
 
       .app-sidebar {
-        grid-template-rows: auto auto auto;
+        left: 0;
+        border-right: 0;
+        transform: translateX(-105%);
+      }
+
+      .app-sidebar.mobile-open {
+        transform: translateX(0);
+      }
+
+      .study-panel {
+        left: auto;
+        right: 0;
+        border-left: 0;
+        max-height: none;
+        transform: translateX(105%);
+      }
+
+      .study-panel.mobile-open {
+        transform: translateX(0);
+      }
+
+      .mobile-panel-backdrop {
+        display: none;
+      }
+
+      .mobile-panel-backdrop.show {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(3,9,16,.6);
+        z-index: 90;
       }
 
       .chat-list {
         grid-template-columns: 1fr;
-      }
-
-      .study-panel {
-        max-height: 420px;
       }
 
       .composer {
@@ -5071,7 +5210,8 @@
 
     <main class="chat-main">
       <header class="chat-top">
-        <div>
+        <button class="top-icon mobile-only" type="button" id="mobileMenuToggle" aria-label="Menü">☰</button>
+        <div class="chat-top-copy">
           <h2>Mento Koç</h2>
           <p id="brainStatus">Soru görseli yükle, soru sor veya konu anlatımı iste. Bağlantı kontrol ediliyor.</p>
           <p id="aiUsage" aria-live="polite"></p>
@@ -5079,6 +5219,7 @@
         <div class="top-actions">
           <button class="top-icon" type="button" id="notifyButton" aria-label="Bildirimler">●</button>
           <button class="top-icon" type="button" id="topThemeToggle" aria-label="Tema değiştir">◐</button>
+          <button class="top-icon mobile-only" type="button" id="mobileTopicsToggle" aria-label="Konular">▤</button>
         </div>
       </header>
 
@@ -5118,6 +5259,7 @@
         <div class="topic-list" id="topicList"></div>
       </div>
     </aside>
+    <div class="mobile-panel-backdrop" id="mobilePanelBackdrop"></div>
   </section>
 
   <div class="flashcard-overlay" id="flashcardOverlay" aria-hidden="true">
@@ -5300,6 +5442,8 @@
     const examPills = document.getElementById('examPills');
     const lessonPills = document.getElementById('lessonPills');
     const topicList = document.getElementById('topicList');
+    const examDropdown = document.getElementById('examDropdown');
+    const currentExamLabel = document.getElementById('currentExamLabel');
     const topicAccents = ['#f5a623', '#4d7df3', '#31b877', '#875ee4'];
     const flashcardOverlay = document.getElementById('flashcardOverlay');
     const flashcardLessonTag = document.getElementById('flashcardLessonTag');
@@ -5978,6 +6122,66 @@
       });
     }
 
+    function setMainExam(exam) {
+      if (!topicBanks[exam] || exam === activeExamBank) {
+        if (examDropdown) examDropdown.open = false;
+        return;
+      }
+      activeExamBank = exam;
+      activeLesson = Object.keys(topicBanks[activeExamBank])[0];
+      if (currentExamLabel) currentExamLabel.textContent = exam;
+      if (examDropdown) {
+        examDropdown.querySelectorAll('[data-main-exam]').forEach(button => {
+          button.setAttribute('aria-pressed', String(button.dataset.mainExam === exam));
+        });
+        examDropdown.open = false;
+      }
+      renderExamModeTabs();
+      renderLessonTabs();
+      renderTopics();
+    }
+
+    if (examDropdown) {
+      examDropdown.querySelectorAll('[data-main-exam]').forEach(button => {
+        button.addEventListener('click', () => setMainExam(button.dataset.mainExam));
+      });
+      document.addEventListener('click', event => {
+        if (examDropdown.open && !examDropdown.contains(event.target)) examDropdown.open = false;
+      });
+    }
+
+    const mobilePanelBackdrop = document.getElementById('mobilePanelBackdrop');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileTopicsToggle = document.getElementById('mobileTopicsToggle');
+    const appSidebarEl = document.querySelector('.app-sidebar');
+    const studyPanelEl = document.querySelector('.study-panel');
+
+    function closeMobilePanels() {
+      if (appSidebarEl) appSidebarEl.classList.remove('mobile-open');
+      if (studyPanelEl) studyPanelEl.classList.remove('mobile-open');
+      if (mobilePanelBackdrop) mobilePanelBackdrop.classList.remove('show');
+    }
+
+    function openMobilePanel(panel) {
+      closeMobilePanels();
+      if (panel) panel.classList.add('mobile-open');
+      if (mobilePanelBackdrop) mobilePanelBackdrop.classList.add('show');
+    }
+
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        if (appSidebarEl && appSidebarEl.classList.contains('mobile-open')) closeMobilePanels();
+        else openMobilePanel(appSidebarEl);
+      });
+    }
+    if (mobileTopicsToggle) {
+      mobileTopicsToggle.addEventListener('click', () => {
+        if (studyPanelEl && studyPanelEl.classList.contains('mobile-open')) closeMobilePanels();
+        else openMobilePanel(studyPanelEl);
+      });
+    }
+    if (mobilePanelBackdrop) mobilePanelBackdrop.addEventListener('click', closeMobilePanels);
+
     function renderLessonTabs() {
       lessonPills.innerHTML = Object.keys(topicBanks[activeExamBank]).map(lesson => `
         <button type="button" class="${lesson === activeLesson ? 'active' : ''}" data-lesson="${lesson}">${lesson}</button>
@@ -6002,6 +6206,7 @@
       `).join('');
       topicList.querySelectorAll('[data-topic]').forEach(button => {
         button.addEventListener('click', () => {
+          closeMobilePanels();
           addMessage(`${activeExamBank} ${activeLesson} - ${button.dataset.topic} konu anlatımı istiyorum.`, 'user');
           openTopicLearning(activeExamBank, activeLesson, button.dataset.topic);
         });
@@ -6675,6 +6880,7 @@
 
     document.querySelectorAll('#chatList button').forEach(button => {
       button.addEventListener('click', () => {
+        closeMobilePanels();
         const title = button.dataset.panelTitle || button.textContent.trim();
         document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item === button));
         writeRoute(button.dataset.panelRoute || '/panel');
@@ -6812,14 +7018,6 @@
         const match = document.querySelector(`[data-panel-route="${route}"]`) || document.querySelector('[data-panel-route="/panel/bugunku-plan"]');
         if (match) {
           document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item === match));
-          const title = match.dataset.panelTitle || match.textContent.trim();
-          if (title === 'Ezber kartları') {
-            openFlashcards();
-          } else if (title === 'Bugünkü plan') {
-            openDailyPlan();
-          } else if (['Oyunlarla öğren', 'Mini testler', 'Hedef takibi'].includes(title)) {
-            addLearningCards(title);
-          }
         }
       }
     }
