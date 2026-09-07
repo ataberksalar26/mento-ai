@@ -30,7 +30,8 @@ let browser;
   await page.locator('#topicNote').fill('Bileşke fonksiyon notum <b>metin</b>');
   await page.locator('#topicPlanned').check();await page.locator('[data-watched]').first().check();
   await page.locator('#topicDone').check();
-  await page.waitForFunction(()=>[...document.querySelectorAll('.video-item img')].every(i=>i.complete&&i.naturalWidth>0),{},{timeout:15000});
+  if(process.env.SKIP_REMOTE_IMAGES==='1')console.log('SKIP: remote thumbnail availability (offline test run).');
+  else await page.waitForFunction(()=>[...document.querySelectorAll('.video-item img')].every(i=>i.complete&&i.naturalWidth>0),{},{timeout:15000});
   await page.screenshot({path:path.join(__dirname,'learning-desktop.png')});
   await page.locator('.close-study').click();
   await page.reload();
@@ -80,13 +81,13 @@ let browser;
   await app.reload();await app.getByText('Merhaba, Deneme',{exact:true}).waitFor();
   await app.getByText('Konular',{exact:true}).click();await app.getByLabel('Konu ara').fill('Çarpanlar');await app.getByText('Çarpanlar ve Katlar',{exact:true}).click();
   assert.equal(await app.getByLabel('Konu notlarım',{exact:true}).inputValue(),'Mobil notum');
-  await app.getByText('30 soruluk testi aç',{exact:true}).click();
+  await app.getByText('Konu testleri',{exact:true}).click();await app.getByText('Test 1',{exact:true}).click();
   const real=require('../data/question-bank.json').tests.find(t=>t.exam==='LGS'&&t.topic==='Çarpanlar ve Katlar');
-  for(let i=0;i<30;i++){await app.getByRole('radio').nth(real.questions[i].correctIndex).click();if(i<29)await app.getByText('Sonraki',{exact:true}).click();}
+  for(let i=0;i<10;i++){await app.getByRole('radio').nth(real.questions[i].correctIndex).click();if(i<9)await app.getByText('Sonraki',{exact:true}).click();}
   await app.getByText('Testi bitir',{exact:true}).click();await app.getByText('Bitir ve sonuçları gör',{exact:true}).click();
-  await app.getByText('30 doğru · 0 yanlış · 0 boş',{exact:true}).waitFor();
+  await app.getByText('10 doğru · 0 yanlış · 0 boş',{exact:true}).waitFor();
   await app.getByText('Konuya dön',{exact:true}).click();
-  await app.getByText('30 soruluk testi aç',{exact:true}).click();await app.getByText('30 doğru · 0 yanlış · 0 boş',{exact:true}).waitFor();
+  await app.getByText('Test 1',{exact:true}).click();await app.getByText('10 doğru · 0 yanlış · 0 boş',{exact:true}).waitFor();
   await app.getByText('Mini test',{exact:true}).first().click();
   for(let i=0;i<3;i++){await app.getByText(['12','Metnin tumunu degerlendirerek','Gece ve gunduzu'][i],{exact:true}).click();await app.getByText(i===2?'Sonucu gör':'Sonraki soru',{exact:true}).click();}
   await app.getByText('Mini test',{exact:true}).first().click();await app.getByText('Alıştırma tamamlandı',{exact:true}).waitFor();

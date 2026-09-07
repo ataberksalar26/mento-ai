@@ -22,6 +22,18 @@ Render ortami otomatik taninir. Istemcinin bildirdigi kullanici ID'sine guvenilm
 
 ## Icerik durumu
 
+7 Eylul 2026: Kullanicinin sagladigi toplam 270 soru, 9 LGS Matematik konusu.
+Her konu Test 1, Test 2, Test 3 olarak 10'ar soruya bolunur.
+Konular: Carpanlar ve Katlar, Uslu Ifadeler, Karekoklu Ifadeler, Veri Analizi,
+Basit Olaylarin Olma Olasiligi, Cebirsel Ifadeler ve Ozdeslikler,
+Dogrusal Denklemler, Esitsizlikler, Ucgenler.
+Web ve mobilde test cevaplari ayri saklanir. Eski 30 soruluk kayitlar bolunur;
+mevcut yeni test kayitlari ezilmez. Depodaki konu basina 30 soru yapisi korunur.
+scripts/import-user-batch.js iki yeni soru dosyasini alir.
+scripts/test-user-batch.js ve scripts/test-user-batch-two.js cevap kontrolleridir.
+119. sorunun C secenegi 2/3 olarak sadelestirildi; dogru cevap D degismedi.
+Ham TeX, ic ice kesir ve kokleri koruyan okunabilir metne donusturulur.
+
 LGS Matematik / Carpanlar ve Katlar: kullanicinin ChatGPT ile hazirlattigi
 30 soru, 6 Eylul 2026 tarihli kullanim talebiyle eklendi. 18 orta / 12 zor
 etiketi kullanicinin dosyasindan korunmustur; uzman kalibrasyonu degildir.

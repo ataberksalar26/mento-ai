@@ -160,7 +160,8 @@
     for(let i=0;i<localStorage.length;i++){
       const key=localStorage.key(i);if(!key.startsWith('mentoReadyQuiz:v1:'+activeExamBank+'|'))continue;
       const quiz=read(key,null);if(!quiz?.finished||!Array.isArray(quiz.questions)||!Array.isArray(quiz.answers))continue;
-      quiz.questions.forEach((q,j)=>{if(quiz.answers[j]!==q.correctIndex)wrong.push({...q,topic:key.split('|').slice(-1)[0]});});
+      if(!key.includes('|test:')&&read(key+'|test:1',null))continue;
+      quiz.questions.forEach((q,j)=>{if(quiz.answers[j]!==q.correctIndex)wrong.push({...q,topic:key.split('|')[2]});});
     }
     body.querySelector('#wrongNotebook').innerHTML=wrong.length?wrong.map(q=>`<details class="wrong-entry"><summary>${escape(q.topic)} · ${escape(q.question)}</summary><p>${escape(q.options[q.correctIndex])}</p><p class="lecture-copy">${escape(q.explanation)}</p></details>`).join(''):'<p>Tamamlanan testlerdeki yanlış ve boş sorular burada listelenir. Henüz kayıt yok.</p>';
     let session=read('mentoFocusSession:v1',null);
@@ -188,21 +189,40 @@
     body.querySelector('input').oninput=render;render();
   };
   function initQuiz(node,key,info,signal) {
-    let state=read('mentoReadyQuiz:v1:'+key,null);
-    let position=0;
-    if(state?.questions?.length!==30)state=null;
-    const persist=()=>save('mentoReadyQuiz:v1:'+key,state);
+    const baseKey='mentoReadyQuiz:v1:'+key;
+    let state=null,position=0,testNumber=1,sets=[];
+    const valid=(saved,questions)=>saved?.questions?.length===questions.length&&saved.questions.every((q,i)=>q.id===questions[i].id)&&Array.isArray(saved.answers)&&saved.answers.length===questions.length&&saved.answers.every((a,i)=>a===null||(Number.isInteger(a)&&a>=0&&a<questions[i].options.length));
+    const persist=()=>save(baseKey+'|test:'+testNumber,{...state,position});
     function entry() {
-      node.innerHTML=`<h3>30 soruluk konu testi</h3><p>${escape(info.exam)} · ${escape(info.lesson)} · ${escape(info.topic)}</p><p>Günlük çalışma hedefin: ${preferences.minutes} dakika</p><button class="primary" id="beginQuiz">${state?(state.finished?'Sonuçları aç':'Teste devam et'):'Testi aç'}</button>`;
-      node.querySelector('button').onclick=()=>state?(state.finished?results():question()):generate();
+      node.innerHTML=`<h3>Konu testleri</h3><p>${escape(info.exam)} · ${escape(info.lesson)} · ${escape(info.topic)}</p><button class="primary" id="beginQuiz">Testleri aç</button>`;
+      node.querySelector('button').onclick=generate;
+    }
+    function list() {
+      node.innerHTML=`<h3>Konu testleri</h3><p>${escape(info.topic)}</p><div class="planned-topics">${sets.map((questions,i)=>{const saved=read(baseKey+'|test:'+(i+1),null);const status=valid(saved,questions)?(saved.finished?'Tamamlandı':saved.answers.some(a=>a!==null)?'Devam et':'Başla'):'Başla';return `<button data-test-number="${i+1}"><span>Test ${i+1}</span><small>${questions.length} soru · ${status}</small></button>`;}).join('')}</div>`;
+      node.querySelectorAll('[data-test-number]').forEach(b=>b.onclick=()=>{
+        testNumber=Number(b.dataset.testNumber);const questions=sets[testNumber-1];const saved=read(baseKey+'|test:'+testNumber,null);
+        state=valid(saved,questions)?{...saved,questions}:{questions,answers:questions.map(()=>null),finished:false};
+        position=Math.max(0,Math.min(questions.length-1,state.position||0));
+        state.finished?results():question();
+      });
+    }
+    function backButton() {
+      node.insertAdjacentHTML('afterbegin',`<button id="backToTests">Testlere dön</button><h3>Test ${testNumber}</h3>`);
+      node.querySelector('#backToTests').onclick=list;
     }
     async function generate() {
       node.innerHTML='<p class="study-status" role="status">Hazır test yükleniyor…</p>';
       try {
         const data=await api('/api/question-bank',info,signal);
         if(signal.aborted)return;
-        if(data.quiz?.questions?.length!==30)throw new Error();
-        state={questions:data.quiz.questions,answers:Array(30).fill(null),finished:false};persist();question();
+        const questions=data.quiz?.questions;
+        if(!Array.isArray(questions)||!questions.length||questions.length%10!==0)throw new Error('Hazır test verisi geçersiz.');
+        sets=Array.from({length:questions.length/10},(_,i)=>questions.slice(i*10,i*10+10));
+        const legacy=read(baseKey,null);
+        if(valid(legacy,questions))sets.forEach((part,i)=>{
+          if(!read(baseKey+'|test:'+(i+1),null))save(baseKey+'|test:'+(i+1),{questions:part,answers:legacy.answers.slice(i*10,i*10+10),finished:!!legacy.finished,position:0});
+        });
+        list();
       }catch(error){if(!signal.aborted){
         node.innerHTML=`<p role="status">${escape(error.message)}</p>`;
         if(error.status===404){
@@ -213,16 +233,18 @@
     function question() {
       const q=state.questions[position];
       const completed=state.answers.filter(a=>a!==null).length;
-      node.innerHTML=`<div class="quiz-nav"><strong>Soru ${position+1} / 30</strong><span>${completed} cevaplandı</span></div><progress max="30" value="${completed}" aria-label="Cevaplanan sorular"></progress><div class="lecture-copy question-copy">${questionMarkup(q.question)}</div><div class="quiz-options">${q.options.map((o,i)=>`<button aria-pressed="${state.answers[position]===i}" data-answer="${i}">${String.fromCharCode(65+i)}. ${escape(o)}</button>`).join('')}</div><button id="clearAnswer" ${state.answers[position]===null?'disabled':''}>Cevabı temizle</button><div class="quiz-nav"><button id="prevQuestion" ${position===0?'disabled':''}>Önceki</button><button id="nextQuestion" ${position===29?'disabled':''}>Sonraki</button><button class="primary" id="finishQuiz">Testi bitir</button></div><div class="quiz-grid" aria-label="Sorular">${state.questions.map((_,i)=>`<button data-jump="${i}" class="${state.answers[i]!==null?'answered':''}" aria-current="${i===position}" aria-label="Soru ${i+1}${state.answers[i]!==null?', cevaplandı':''}">${i+1}</button>`).join('')}</div><div id="finishConfirm"></div>`;
+      const count=state.questions.length;
+      node.innerHTML=`<div class="quiz-nav"><strong>Soru ${position+1} / ${count}</strong><span>${completed} cevaplandı</span></div><progress max="${count}" value="${completed}" aria-label="Cevaplanan sorular"></progress><div class="lecture-copy question-copy">${questionMarkup(q.question)}</div><div class="quiz-options">${q.options.map((o,i)=>`<button aria-pressed="${state.answers[position]===i}" data-answer="${i}">${String.fromCharCode(65+i)}. ${escape(o)}</button>`).join('')}</div><button id="clearAnswer" ${state.answers[position]===null?'disabled':''}>Cevabı temizle</button><div class="quiz-nav"><button id="prevQuestion" ${position===0?'disabled':''}>Önceki</button><button id="nextQuestion" ${position===count-1?'disabled':''}>Sonraki</button><button class="primary" id="finishQuiz">Testi bitir</button></div><div class="quiz-grid" aria-label="Sorular">${state.questions.map((_,i)=>`<button data-jump="${i}" class="${state.answers[i]!==null?'answered':''}" aria-current="${i===position}" aria-label="Soru ${i+1}${state.answers[i]!==null?', cevaplandı':''}">${i+1}</button>`).join('')}</div><div id="finishConfirm"></div>`;
+      backButton();
       node.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{state.answers[position]=Number(b.dataset.answer);persist();question();});
       if(q.image){const image=document.createElement('img');image.src=q.image;image.alt='Soruya ait şekil';image.className='question-image';node.querySelector('.quiz-options').before(image);}
       if(q.source){const published=q.source.origin!=='user-ai'&&/^https:\/\//.test(q.source.url||'');const source=document.createElement(published?'a':'p');if(published){source.href=q.source.url;source.target='_blank';source.rel='noopener noreferrer';}source.className='question-source';source.textContent=q.source.title+(q.source.license?' · '+q.source.license:'');node.appendChild(source);}
       node.querySelector('#clearAnswer').onclick=()=>{state.answers[position]=null;persist();question();};
-      node.querySelector('#prevQuestion').onclick=()=>{position--;question();};
-      node.querySelector('#nextQuestion').onclick=()=>{position++;question();};
-      node.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>{position=Number(b.dataset.jump);question();});
+      node.querySelector('#prevQuestion').onclick=()=>{position--;persist();question();};
+      node.querySelector('#nextQuestion').onclick=()=>{position++;persist();question();};
+      node.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>{position=Number(b.dataset.jump);persist();question();});
       node.querySelector('#finishQuiz').onclick=()=>{
-        if(completed<30){const confirm=node.querySelector('#finishConfirm');confirm.innerHTML=`<p>${30-completed} soru boş. Testi bitirmek istiyor musun?</p><button class="primary">Bitir ve sonuçları gör</button>`;confirm.querySelector('button').onclick=finish;}
+        if(completed<count){const confirm=node.querySelector('#finishConfirm');confirm.innerHTML=`<p>${count-completed} soru boş. Testi bitirmek istiyor musun?</p><button class="primary">Bitir ve sonuçları gör</button>`;confirm.querySelector('button').onclick=finish;}
         else finish();
       };
     }
@@ -230,8 +252,9 @@
     function results() {
       const correct=state.questions.filter((q,i)=>q.correctIndex===state.answers[i]).length;
       const blank=state.answers.filter(a=>a===null).length;
-      node.innerHTML=`<h3>Test sonucu</h3><p>${correct} doğru · ${30-correct-blank} yanlış · ${blank} boş</p><button id="retryQuiz">Aynı testi yeniden çöz</button>${state.questions.map((q,i)=>`<article class="quiz-review ${state.answers[i]===q.correctIndex?'correct':'incorrect'}"><h3>${i+1}. ${escape(q.question)}</h3><p>Cevabın: ${escape(state.answers[i]===null?'Boş':q.options[state.answers[i]])}</p><p>Doğru cevap: ${escape(q.options[q.correctIndex])}</p><p class="lecture-copy">${escape(q.explanation)}</p></article>`).join('')}`;
-      node.querySelector('#retryQuiz').onclick=()=>{state.answers=Array(30).fill(null);state.finished=false;position=0;persist();question();};
+      node.innerHTML=`<h3>Test sonucu</h3><p>${correct} doğru · ${state.questions.length-correct-blank} yanlış · ${blank} boş</p><button id="retryQuiz">Aynı testi yeniden çöz</button>${state.questions.map((q,i)=>`<article class="quiz-review ${state.answers[i]===q.correctIndex?'correct':'incorrect'}"><h3>Soru ${i+1}</h3><div class="question-copy">${questionMarkup(q.question)}</div><p>Cevabın: ${escape(state.answers[i]===null?'Boş':q.options[state.answers[i]])}</p><p>Doğru cevap: ${escape(q.options[q.correctIndex])}</p><p class="lecture-copy">${escape(q.explanation)}</p></article>`).join('')}`;
+      backButton();
+      node.querySelector('#retryQuiz').onclick=()=>{state.answers=state.questions.map(()=>null);state.finished=false;position=0;persist();question();};
     }
     entry();
   }
