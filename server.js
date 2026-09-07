@@ -702,6 +702,7 @@ async function handleRegister(req, res) {
     const birthYear = Number(body.birthYear || 0);
     const gender = String(body.gender || '').trim();
     const goal = String(body.goal || '').trim();
+    const role = body.role === 'teacher' ? 'teacher' : 'student';
 
     if (!name || !email || !password) {
       sendJson(res, 400, { error: 'Ad, e-posta ve şifre zorunlu.' });
@@ -743,6 +744,8 @@ async function handleRegister(req, res) {
       birthYear,
       gender,
       goal,
+      role,
+      points: existing?.points || 0,
       passwordSalt: salt,
       passwordHash: hash,
       verified: false,
@@ -1144,6 +1147,8 @@ function publicUser(user) {
     gender: user.gender,
     goal: user.goal,
     verified: user.verified,
+    role: user.role || 'student',
+    points: user.points || 0,
     authProvider: user.googleAuth ? 'google' : (user.appleAuth ? 'apple' : 'password')
   };
 }
@@ -1202,6 +1207,95 @@ async function handleDeleteAccount(req, res) {
     sendJson(res, 200, { ok: true });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'Hesap silinemedi.' });
+  }
+}
+
+const POSTS_FILE = path.join(ROOT, 'data', 'posts.json');
+
+function readPosts() {
+  if (!fs.existsSync(POSTS_FILE)) return [];
+  try {
+    return JSON.parse(fs.readFileSync(POSTS_FILE, 'utf8'));
+  } catch {
+    return [];
+  }
+}
+
+function writePosts(posts) {
+  fs.writeFileSync(POSTS_FILE, JSON.stringify(posts.slice(0, 200), null, 2), 'utf8');
+}
+
+function publicPost(post) {
+  return {
+    id: post.id,
+    authorName: post.authorName,
+    authorExam: post.authorExam,
+    content: post.content,
+    createdAt: post.createdAt,
+    likes: post.likes || 0
+  };
+}
+
+async function handleListPosts(req, res) {
+  try {
+    const posts = readPosts();
+    sendJson(res, 200, { ok: true, posts: posts.map(publicPost) });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'İçerikler yüklenemedi.' });
+  }
+}
+
+async function handleCreatePost(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const email = normalizeEmail(body.email);
+    const password = String(body.password || '');
+    const content = String(body.content || '').trim();
+
+    const user = readUsers().find(u => u.email === email);
+    if (!user || !user.passwordHash || !verifyPassword(password, user)) {
+      sendJson(res, 401, { error: 'E-posta veya şifre hatalı.' });
+      return;
+    }
+    if (user.role !== 'teacher') {
+      sendJson(res, 403, { error: 'Sadece hoca hesapları içerik paylaşabilir.' });
+      return;
+    }
+    if (!content || content.length > 600) {
+      sendJson(res, 400, { error: 'İçerik 1-600 karakter arasında olmalı.' });
+      return;
+    }
+
+    const post = {
+      id: crypto.randomUUID(),
+      authorId: user.id,
+      authorName: user.name,
+      authorExam: user.exam,
+      content,
+      createdAt: new Date().toISOString(),
+      likes: 0
+    };
+    const posts = [post, ...readPosts()];
+    writePosts(posts);
+    sendJson(res, 200, { ok: true, post: publicPost(post) });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'İçerik paylaşılamadı.' });
+  }
+}
+
+async function handleLikePost(req, res, postId) {
+  try {
+    const posts = readPosts();
+    const post = posts.find(p => p.id === postId);
+    if (!post) {
+      sendJson(res, 404, { error: 'İçerik bulunamadı.' });
+      return;
+    }
+    post.likes = (post.likes || 0) + 1;
+    writePosts(posts);
+    sendJson(res, 200, { ok: true, likes: post.likes });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'İşlem tamamlanamadı.' });
   }
 }
 
@@ -1389,6 +1483,18 @@ function routeRequest(req, res) {
   }
   if (req.method === 'POST' && req.url === '/api/delete-account') {
     handleDeleteAccount(req, res);
+    return;
+  }
+  if (req.method === 'GET' && req.url === '/api/posts') {
+    handleListPosts(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/posts') {
+    handleCreatePost(req, res);
+    return;
+  }
+  if (req.method === 'POST' && /^\/api\/posts\/[a-zA-Z0-9-]+\/like$/.test(req.url)) {
+    handleLikePost(req, res, req.url.split('/')[3]);
     return;
   }
   if (req.method === 'POST' && req.url === '/api/topic-lecture') {
