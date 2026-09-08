@@ -5549,10 +5549,10 @@
       <div class="history-list" id="historyList"></div>
       <div class="chat-list" id="chatList">
         <div class="sidebar-label">Çalışma</div>
-        <button class="active" type="button" data-panel-route="/panel/bugunku-plan" data-panel-title="Bugünkü plan"><span class="nav-ico">✓</span>Bugünkü plan</button>
+        <button type="button" data-panel-route="/panel/bugunku-plan" data-panel-title="Bugünkü plan"><span class="nav-ico">✓</span>Bugünkü plan</button>
         <button type="button" data-panel-route="/panel/soru-coz" data-panel-title="Soru görseliyle çöz"><span class="nav-ico">＋</span>Soru görseliyle çöz</button>
         <button type="button" data-panel-route="/panel/konu-anlatimi" data-panel-title="Konu anlatımı"><span class="nav-ico">▤</span>Konu anlatımı</button>
-        <button type="button" data-panel-route="/panel/akis" data-panel-title="Akış"><span class="nav-ico">✎</span>Akış</button>
+        <button class="active" type="button" data-panel-route="/panel/akis" data-panel-title="Akış"><span class="nav-ico">✎</span>Akış</button>
         <div class="sidebar-label">Pekiştirme</div>
         <button type="button" data-panel-route="/panel/ezber-kartlari" data-panel-title="Ezber kartları"><span class="nav-ico">◆</span>Ezber kartları</button>
         <button type="button" data-panel-route="/panel/oyunlarla-ogren" data-panel-title="Oyunlarla öğren"><span class="nav-ico">▶</span>Oyunlarla öğren</button>
@@ -6693,7 +6693,9 @@
       studentApp.classList.add('open');
       studentApp.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      if (updateUrl) writeRoute('/panel/bugunku-plan');
+      document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item.dataset.panelTitle === 'Akış'));
+      openFeed();
+      if (updateUrl) writeRoute('/panel/akis');
     }
 
     function renderExamModeTabs() {

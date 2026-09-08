@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "id": "seed-post-006",
+    "authorId": "seed-teacher-006",
+    "authorName": "Deniz Hoca",
+    "authorExam": "AYT",
+    "content": "AYT Fizik'te elektrik konusundan gelen soruların çoğu devre şeması yorumlamayı ölçüyor. Formülü ezberlemeden önce şemayı elle çizip akım yönünü işaretleyerek çözmeyi deneyin, kalıcılığı çok artırıyor.",
+    "createdAt": "2026-09-08T08:10:00.000Z",
+    "likes": 9
+  },
+  {
+    "id": "seed-post-005",
+    "authorId": "seed-teacher-005",
+    "authorName": "Sena Öğretmen",
+    "authorExam": "LGS",
+    "content": "LGS Türkçe'de paragraf sorularını çözerken önce soru kökünü okuyun, sonra paragrafa dönün. Ne aradığınızı bilerek okumak zamanınızı neredeyse yarı yarıya kısaltır.",
+    "createdAt": "2026-09-07T15:40:00.000Z",
+    "likes": 14
+  },
+  {
+    "id": "seed-post-004",
+    "authorId": "seed-teacher-004",
+    "authorName": "Kaan Hoca",
+    "authorExam": "TYT",
+    "content": "TYT Matematik'te haftada bir gün sadece yanlış yaptığınız soru tiplerine dönün. Yeni soru çözmek yerine o gün 15-20 dakikanızı geçmiş yanlışlarınıza ayırmak net artışını hızlandırıyor.",
+    "createdAt": "2026-09-06T12:05:00.000Z",
+    "likes": 21
+  },
+  {
+    "id": "seed-post-003",
+    "authorId": "seed-teacher-003",
+    "authorName": "Elif Öğretmen",
+    "authorExam": "AYT",
+    "content": "Edebiyat'ta akım ve dönem karışıklığı yaşayanlar için: her akımın çıkış amacını tek cümleyle yazıp küçük bir kart haline getirin. Sınavda seçenekleri elemek çok daha kolaylaşıyor.",
+    "createdAt": "2026-09-05T09:30:00.000Z",
+    "likes": 11
+  },
+  {
+    "id": "seed-post-002",
+    "authorId": "seed-teacher-002",
+    "authorName": "Mert Hoca",
+    "authorExam": "LGS",
+    "content": "LGS Fen'de deney düzenekli sorularda ilk iş değişkenleri ayırt etmek: sabit tutulan, değiştirilen ve ölçülen. Bunu düzenek üzerinde işaretlemeyi alışkanlık haline getirenler bu soru tipinde neredeyse hiç yanlış yapmıyor.",
+    "createdAt": "2026-09-04T17:20:00.000Z",
+    "likes": 17
+  },
+  {
+    "id": "seed-post-001",
+    "authorId": "seed-teacher-001",
+    "authorName": "Buse Öğretmen",
+    "authorExam": "TYT",
+    "content": "Deneme sonrası sadece net saymakla yetinmeyin. Yanlışlarınızı 'bilgi eksikliği', 'dikkatsizlik' ve 'zaman' diye üç gruba ayırın; hangi grup fazlaysa bir sonraki haftanın çalışma planı ona göre şekillensin.",
+    "createdAt": "2026-09-03T11:00:00.000Z",
+    "likes": 26
+  }
+]
