@@ -2744,7 +2744,9 @@
     .student-app.light .quick-card,
     .student-app.light .topic-card,
     .student-app.light .composer textarea,
-    .student-app.light .photo-button {
+    .student-app.light .photo-button,
+    .student-app.light .exam-pills button,
+    .student-app.light .lesson-pills button {
       color: #172335;
       background: #edf3f8;
       border-color: #c7d3e1;
@@ -2753,6 +2755,12 @@
     .student-app.light .chat-list button.active {
       background: #f7e8bd;
       border-color: #f5a623;
+    }
+
+    .student-app.light .top-icon {
+      color: #172335;
+      background: #edf3f8;
+      border-color: #c7d3e1;
     }
 
     .student-app.light .history-item.active {
@@ -2981,22 +2989,94 @@
 
     .feed-wrap {
       display: grid;
-      gap: 10px;
+      gap: 14px;
       width: min(560px, 100%);
+    }
+
+    .feed-stories {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 4px 2px 8px;
+    }
+
+    .feed-story {
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      flex: 0 0 auto;
+      width: 62px;
+    }
+
+    .feed-story-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 900;
+      font-size: 17px;
+      border: 2.5px solid var(--story-ring, #f5a623);
+      padding: 2px;
+      background-clip: padding-box;
+    }
+
+    .feed-story-avatar span {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--story-ring, #f5a623);
+    }
+
+    .feed-story span.feed-story-name {
+      font-size: 10.5px;
+      color: #aebbd0;
+      max-width: 62px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .feed-story.active .feed-story-name {
+      color: #ffcb70;
+      font-weight: 800;
+    }
+
+    .feed-search {
+      width: 100%;
+      min-height: 38px;
+      padding: 0 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      color: #e9f0f7;
+      background: rgba(255,255,255,.05);
+      font: inherit;
+      font-size: 12.5px;
+      outline: none;
+    }
+
+    .feed-search::placeholder {
+      color: #6f7d92;
     }
 
     .feed-compose {
       display: grid;
       gap: 8px;
-      border: 1px solid rgba(245,166,35,.25);
+      border: 1px solid rgba(255,255,255,.1);
       border-radius: 16px;
       padding: 12px;
-      background: rgba(245,166,35,.06);
+      background: rgba(255,255,255,.04);
     }
 
     .feed-compose textarea {
       resize: vertical;
-      min-height: 60px;
+      min-height: 56px;
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 11px;
       padding: 9px 11px;
@@ -3008,10 +3088,10 @@
 
     .feed-compose button {
       justify-self: end;
-      min-height: 36px;
+      min-height: 34px;
       padding: 0 18px;
       border: 0;
-      border-radius: 11px;
+      border-radius: 999px;
       color: #07111e;
       background: linear-gradient(180deg, #f6b458, #e2911c);
       font-weight: 900;
@@ -3021,52 +3101,107 @@
     .feed-post {
       border: 1px solid rgba(255,255,255,.1);
       border-radius: 16px;
-      padding: 13px 15px;
-      background: rgba(255,255,255,.055);
+      overflow: hidden;
+      background: rgba(255,255,255,.035);
     }
 
     .feed-post-head {
       display: flex;
-      align-items: baseline;
-      gap: 8px;
-      margin-bottom: 6px;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px 8px;
+    }
+
+    .feed-post-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 900;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+
+    .feed-post-head-text {
+      display: grid;
+      line-height: 1.3;
+      min-width: 0;
     }
 
     .feed-post-head strong {
       color: #fff;
-      font-size: 13.5px;
+      font-size: 13px;
     }
 
     .feed-post-head span {
       color: #7c8aa0;
-      font-size: 11.5px;
+      font-size: 11px;
     }
 
     .feed-post p {
-      margin: 0 0 8px;
+      margin: 0;
+      padding: 0 14px 12px;
       color: #d3dcea;
       font-size: 13.5px;
       line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .feed-post-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px 12px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 10px;
     }
 
     .feed-post-like {
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 999px;
-      padding: 4px 12px;
-      background: transparent;
+      border: 0;
+      background: none;
       color: #aebbd0;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 20px;
+      line-height: 1;
       cursor: pointer;
+      padding: 4px 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .feed-post-like:hover {
-      background: rgba(255,255,255,.06);
+    .feed-post-like span {
+      font-size: 12px;
+      font-weight: 700;
+      color: #aebbd0;
+    }
+
+    .feed-post-like.liked {
+      color: #ef5b7a;
     }
 
     .feed-empty {
       color: #7c8aa0;
       font-size: 13px;
+    }
+
+    .student-app.light .feed-search,
+    .student-app.light .feed-compose textarea {
+      color: #172335;
+      background: #edf3f8;
+      border-color: #c7d3e1;
+    }
+
+    .student-app.light .feed-compose,
+    .student-app.light .feed-post {
+      background: #edf3f8;
+      border-color: #c7d3e1;
+    }
+
+    .student-app.light .feed-post-head strong,
+    .student-app.light .feed-post p {
+      color: #172335;
     }
 
     .student-app.light .learning-card {
@@ -3249,6 +3384,27 @@
     .topic-list {
       display: grid;
       gap: 6px;
+    }
+
+    .topic-picker {
+      width: 100%;
+      min-height: 40px;
+      margin-bottom: 10px;
+      padding: 0 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 11px;
+      color: #e9f0f7;
+      background: #111e2e;
+      font: inherit;
+      font-weight: 800;
+      font-size: 12.5px;
+      outline: none;
+    }
+
+    .student-app.light .topic-picker {
+      color: #172335;
+      background: #edf3f8;
+      border-color: #c7d3e1;
     }
 
     .topic-card button {
@@ -5467,6 +5623,7 @@
         <div class="quick-card"><strong>Görselle çözüm</strong><span>Kamera veya galeriden soru yükle, çözüm akışını başlat.</span></div>
       </div>
       <div>
+        <select class="topic-picker" id="topicPicker" aria-label="Konu seç"></select>
         <div class="topic-list" id="topicList"></div>
       </div>
     </aside>
@@ -5653,6 +5810,8 @@
     const examPills = document.getElementById('examPills');
     const lessonPills = document.getElementById('lessonPills');
     const topicList = document.getElementById('topicList');
+    const topicPicker = document.getElementById('topicPicker');
+    let activeTopicChoice = null;
     const examDropdown = document.getElementById('examDropdown');
     const examDropdownBtn = document.getElementById('examDropdownBtn');
     const currentExamLabel = document.getElementById('currentExamLabel');
@@ -6128,6 +6287,26 @@
       }
     }
 
+    let allFeedPosts = [];
+    let feedActiveTeacher = '';
+    let feedSearchQuery = '';
+    const avatarColors = ['#f5a623', '#4d7df3', '#31b877', '#875ee4', '#e2517e'];
+
+    function avatarColor(name) {
+      const sum = String(name || '').split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+      return avatarColors[sum % avatarColors.length];
+    }
+
+    function getLikedPostIds() {
+      try { return new Set(JSON.parse(localStorage.getItem('mentoLikedPosts') || '[]')); } catch { return new Set(); }
+    }
+
+    function markPostLiked(id) {
+      const liked = getLikedPostIds();
+      liked.add(id);
+      localStorage.setItem('mentoLikedPosts', JSON.stringify([...liked]));
+    }
+
     async function openFeed() {
       messages.querySelectorAll('.feed-wrap').forEach(item => item.remove());
       const wrap = document.createElement('div');
@@ -6144,30 +6323,86 @@
       } catch {
         posts = [];
       }
+      feedActiveTeacher = '';
+      feedSearchQuery = '';
       renderFeed(wrap, posts);
       messages.scrollTop = messages.scrollHeight;
     }
 
     function renderFeed(wrap, posts) {
+      allFeedPosts = posts;
+      paintFeed(wrap);
+    }
+
+    function paintFeed(wrap) {
+      const posts = allFeedPosts;
       const isTeacher = currentUserRole === 'teacher';
+      const likedIds = getLikedPostIds();
+
+      const teachers = [...new Map(posts.map(p => [p.authorName, p])).values()];
+      const storiesHtml = teachers.length ? `
+        <div class="feed-stories">
+          ${teachers.map(post => `
+            <button type="button" class="feed-story ${feedActiveTeacher === post.authorName ? 'active' : ''}" data-teacher="${escapeHtml(post.authorName)}">
+              <span class="feed-story-avatar" style="--story-ring:${avatarColor(post.authorName)}"><span>${escapeHtml(post.authorName.trim().charAt(0).toUpperCase())}</span></span>
+              <span class="feed-story-name">${escapeHtml(post.authorName.split(' ')[0])}</span>
+            </button>
+          `).join('')}
+        </div>
+      ` : '';
+
       const composeHtml = isTeacher ? `
         <div class="feed-compose">
           <textarea id="feedComposeText" placeholder="Öğrencilerinle paylaşmak istediğin faydalı bir bilgi, ipucu veya duyuru yaz..." maxlength="600"></textarea>
           <button type="button" id="feedComposeSubmit">Paylaş</button>
         </div>
       ` : '';
-      const postsHtml = posts.length ? posts.map(post => `
+
+      const searchHtml = posts.length ? `<input type="text" class="feed-search" id="feedSearchInput" placeholder="Akışta ara..." value="${escapeHtml(feedSearchQuery)}">` : '';
+
+      const filtered = posts.filter(post => {
+        if (feedActiveTeacher && post.authorName !== feedActiveTeacher) return false;
+        if (feedSearchQuery && !post.content.toLowerCase().includes(feedSearchQuery.toLowerCase()) && !post.authorName.toLowerCase().includes(feedSearchQuery.toLowerCase())) return false;
+        return true;
+      });
+
+      const postsHtml = filtered.length ? filtered.map(post => `
         <article class="feed-post" data-post-id="${escapeHtml(post.id)}">
           <div class="feed-post-head">
-            <strong>${escapeHtml(post.authorName)}</strong>
-            <span>${escapeHtml(post.authorExam || '')} hocası · ${formatFeedTime(post.createdAt)}</span>
+            <span class="feed-post-avatar" style="background:${avatarColor(post.authorName)}">${escapeHtml(post.authorName.trim().charAt(0).toUpperCase())}</span>
+            <div class="feed-post-head-text">
+              <strong>${escapeHtml(post.authorName)}</strong>
+              <span>${escapeHtml(post.authorExam || '')} hocası · ${formatFeedTime(post.createdAt)}</span>
+            </div>
           </div>
           <p>${escapeHtml(post.content)}</p>
-          <button type="button" class="feed-post-like" data-like-id="${escapeHtml(post.id)}">♡ ${post.likes || 0}</button>
+          <div class="feed-post-actions">
+            <button type="button" class="feed-post-like ${likedIds.has(post.id) ? 'liked' : ''}" data-like-id="${escapeHtml(post.id)}">
+              ${likedIds.has(post.id) ? '♥' : '♡'} <span>${post.likes || 0}</span>
+            </button>
+          </div>
         </article>
-      `).join('') : '<p class="feed-empty">Henüz paylaşım yok. Hocalar buradan faydalı içerik paylaşabilir.</p>';
+      `).join('') : `<p class="feed-empty">${posts.length ? 'Aramanla eşleşen paylaşım yok.' : 'Henüz paylaşım yok. Hocalar buradan faydalı içerik paylaşabilir.'}</p>`;
 
-      wrap.innerHTML = composeHtml + postsHtml;
+      wrap.innerHTML = storiesHtml + searchHtml + composeHtml + postsHtml;
+
+      wrap.querySelectorAll('[data-teacher]').forEach(button => {
+        button.addEventListener('click', () => {
+          feedActiveTeacher = feedActiveTeacher === button.dataset.teacher ? '' : button.dataset.teacher;
+          paintFeed(wrap);
+        });
+      });
+
+      const searchInput = document.getElementById('feedSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          feedSearchQuery = searchInput.value;
+          paintFeed(wrap);
+          document.getElementById('feedSearchInput')?.focus();
+          const val = document.getElementById('feedSearchInput');
+          if (val) val.selectionStart = val.selectionEnd = val.value.length;
+        });
+      }
 
       const submitButton = document.getElementById('feedComposeSubmit');
       if (submitButton) {
@@ -6199,12 +6434,19 @@
 
       wrap.querySelectorAll('[data-like-id]').forEach(button => {
         button.addEventListener('click', async () => {
+          if (button.classList.contains('liked')) return;
           const id = button.dataset.likeId;
           button.disabled = true;
           try {
             const res = await fetch(`/api/posts/${id}/like`, { method: 'POST' });
             const data = await res.json();
-            if (res.ok) button.textContent = `♡ ${data.likes}`;
+            if (res.ok) {
+              markPostLiked(id);
+              button.innerHTML = `♥ <span>${data.likes}</span>`;
+              button.classList.add('liked');
+              const post = allFeedPosts.find(p => p.id === id);
+              if (post) post.likes = data.likes;
+            }
           } catch {}
           button.disabled = false;
         });
@@ -6563,13 +6805,27 @@
     }
 
     function renderTopics() {
-      topicList.innerHTML = topicBanks[activeExamBank][activeLesson].map(([title, desc], index) => `
-        <article class="topic-card" style="--topic-accent:${topicAccents[index % topicAccents.length]}">
+      const topics = topicBanks[activeExamBank][activeLesson];
+      if (!activeTopicChoice || !topics.some(([title]) => title === activeTopicChoice)) {
+        activeTopicChoice = topics[0][0];
+      }
+      topicPicker.innerHTML = topics.map(([title]) => `
+        <option value="${title}" ${title === activeTopicChoice ? 'selected' : ''}>${title}</option>
+      `).join('');
+      renderSelectedTopic();
+    }
+
+    function renderSelectedTopic() {
+      const topics = topicBanks[activeExamBank][activeLesson];
+      const index = topics.findIndex(([title]) => title === activeTopicChoice);
+      const [title, desc] = topics[index] || topics[0];
+      topicList.innerHTML = `
+        <article class="topic-card" style="--topic-accent:${topicAccents[Math.max(index, 0) % topicAccents.length]}">
           <strong>${title}</strong>
           <p>${desc}</p>
           <button type="button" data-topic="${title}" data-desc="${desc}">Anlatımı aç →</button>
         </article>
-      `).join('');
+      `;
       topicList.querySelectorAll('[data-topic]').forEach(button => {
         button.addEventListener('click', () => {
           closeMobilePanels();
@@ -6578,6 +6834,11 @@
         });
       });
     }
+
+    topicPicker.addEventListener('change', () => {
+      activeTopicChoice = topicPicker.value;
+      renderSelectedTopic();
+    });
 
     function flashFallbackDeck() {
       const cards = topicBanks[flashLessonExam]?.[flashLessonName] || [];
