@@ -1,0 +1,24 @@
+const assert=require('node:assert/strict');
+const http=require('node:http');
+const fs=require('node:fs');
+const path=require('node:path');
+const {chromium}=require('C:/Users/atabe/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const root=path.resolve(__dirname,'../../mento-expo-ios/dist-review');
+const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+(req.url==='/'?'/index.html':req.url.split('?')[0]));if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}fs.readFile(file,(error,data)=>{res.writeHead(error?404:200,{'Content-Type':file.endsWith('.js')?'text/javascript':file.endsWith('.html')?'text/html':'application/octet-stream'});res.end(error?'Not found':data);});});
+let browser;
+(async()=>{
+ await new Promise(r=>server.listen(3220,'127.0.0.1',r));
+ browser=await chromium.launch({headless:true,channel:'chrome'});
+ const page=await browser.newPage({viewport:{width:390,height:844}});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.addInitScript(()=>localStorage.setItem('mento.mobile.plan.v1',JSON.stringify({name:'Test',exam:'AYT',started:true,record:{score:2},examRecords:{LGS:{score:1}}})));
+ await page.goto('http://127.0.0.1:3220');
+ await page.getByText('LGS ÇALIŞMA PLANI',{exact:true}).waitFor();
+ assert(!/\b(TYT|AYT)\b/.test(await page.locator('body').innerText()));
+ await page.waitForFunction(()=>JSON.parse(localStorage.getItem('mento.mobile.plan.v1')).exam==='LGS');
+ const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('mento.mobile.plan.v1')));
+ assert.equal(state.examRecords.AYT.score,2);assert.equal(state.record.score,1);
+ await page.screenshot({path:path.join(__dirname,'lgs-native.png')});
+ assert.deepEqual(errors,[]);
+ console.log('PASS: native LGS UI, old AYT record preserved, LGS progress restored.');
+})().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{await browser?.close();server.close();});
