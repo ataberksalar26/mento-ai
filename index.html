@@ -4967,7 +4967,7 @@
         <div class="section-kicker">Öğrenciler ne diyor</div>
         <h2>Öğrenciler Mento AI hakkında ne söylüyor?</h2>
         <div class="testimonial-grid">
-          <div class="testimonial-card" hidden>
+          <div class="testimonial-card">
             <span class="testimonial-quote">&rdquo;</span>
             <p>Yanlışlarımın çoğu dikkatsizlikten değil, aynı kavramdan geliyormuş. Bunu görünce nereye çalışacağımı netleştirdim.</p>
             <span class="testimonial-author">Elif Y. · 8. Sınıf, LGS</span>
@@ -4977,10 +4977,25 @@
             <p>Plan hep değişiyordu, hiç oturmuyordu. Mento'nun haftalık planı ilk kez sonuna kadar bitirdiğim plan oldu.</p>
             <span class="testimonial-author">Mert K. · 8. Sınıf, LGS</span>
           </div>
-          <div class="testimonial-card" hidden>
+          <div class="testimonial-card">
             <span class="testimonial-quote">&rdquo;</span>
             <p>Sözel dersler için neye, ne kadar çalışacağımı hiç bilmiyordum. Şimdi her hafta net hedefim var.</p>
             <span class="testimonial-author">Zeynep A. · 8. Sınıf, LGS</span>
+          </div>
+          <div class="testimonial-card">
+            <span class="testimonial-quote">&rdquo;</span>
+            <p>Mini testi bitirince hangi konudan kaç soru yanlış yaptığımı hemen görüyorum. Akşam hangi konuya döneceğimi artık tahmin etmek zorunda kalmıyorum.</p>
+            <span class="testimonial-author">Kaan T. · 8. Sınıf, LGS</span>
+          </div>
+          <div class="testimonial-card">
+            <span class="testimonial-quote">&rdquo;</span>
+            <p>Ezber kartlarıyla tekrar yapmak eskisinden çok daha hızlı oldu. Özellikle sınavdan bir hafta önce gerçekten işime yaradı.</p>
+            <span class="testimonial-author">Defne S. · 8. Sınıf, LGS</span>
+          </div>
+          <div class="testimonial-card">
+            <span class="testimonial-quote">&rdquo;</span>
+            <p>Hedef takibi sayesinde her gün ne kadar ilerlediğimi görüyorum. Rakamları görmek beni çalışmaya devam etmem için motive ediyor.</p>
+            <span class="testimonial-author">Arda Y. · 8. Sınıf, LGS</span>
           </div>
         </div>
       </section>
@@ -5442,9 +5457,7 @@
               </div>
               <div class="auth-fields">
                 <input id="fullName" type="text" placeholder="Ad soyad">
-                <select id="signupExam" data-signup-only>
-                  <option value="LGS">LGS öğrencisiyim</option>
-                </select>
+                <input type="hidden" id="signupExam" value="LGS">
                 <div class="signup-extra-grid" data-signup-only>
                   <input id="birthYear" type="number" min="1900" max="2026" value="2000" placeholder="Doğum yılı">
                   <select id="gender">
@@ -5458,6 +5471,13 @@
                   <input id="isTeacher" type="checkbox">
                   <span>Bir öğretmenim, hoca hesabı olarak kaydolmak istiyorum</span>
                 </label>
+                <div class="signup-extra-grid teacher-extra" id="teacherExtra" data-signup-only hidden>
+                  <select id="teacherType">
+                    <option value="okul">Okulda öğretmenim</option>
+                    <option value="ozel">Özel ders veriyorum</option>
+                  </select>
+                  <input id="teacherSubject" type="text" placeholder="Branş (ör. Matematik)">
+                </div>
                 <input id="email" type="email" placeholder="E-posta">
                 <div class="password-wrap">
                   <input id="password" type="password" placeholder="Şifre">
@@ -5522,12 +5542,6 @@
     <aside class="app-sidebar">
       <div class="sidebar-brand">
         <div class="app-logo"><span class="app-logo-mark">M</span><span>mento ai</span></div>
-        <div class="exam-dropdown" id="examDropdown">
-          <button type="button" class="exam-dropdown-btn" id="examDropdownBtn" aria-label="Sınav seç" aria-haspopup="true" aria-expanded="false"><span id="currentExamLabel">LGS</span><span aria-hidden="true">⌄</span></button>
-          <div class="exam-options" role="group" aria-label="Sınav">
-            <button type="button" data-main-exam="LGS" aria-pressed="true">LGS</button>
-          </div>
-        </div>
       </div>
       <button class="new-chat" type="button" id="newChatButton">+ Yeni sohbet</button>
       <div class="sidebar-label">Sohbet geçmişi</div>
@@ -6262,7 +6276,6 @@
           <div class="testimonial-card">
             <div class="teacher-feed-card-head">
               <strong>${escapeHtml(post.authorName)}</strong>
-              <span>${escapeHtml(post.authorExam || '')} hocası</span>
             </div>
             <p>${escapeHtml(post.content)}</p>
           </div>
@@ -6358,7 +6371,7 @@
             <span class="feed-post-avatar" style="background:${avatarColor(post.authorName)}">${escapeHtml(post.authorName.trim().charAt(0).toUpperCase())}</span>
             <div class="feed-post-head-text">
               <strong>${escapeHtml(post.authorName)}</strong>
-              <span>${escapeHtml(post.authorExam || '')} hocası · ${formatFeedTime(post.createdAt)}</span>
+              <span>${formatFeedTime(post.createdAt)}</span>
             </div>
           </div>
           <p>${escapeHtml(post.content)}</p>
@@ -7227,6 +7240,10 @@
       }
     }
 
+    document.getElementById('isTeacher').addEventListener('change', event => {
+      document.getElementById('teacherExtra').hidden = !event.target.checked;
+    });
+
     async function postJson(url, payload) {
       const response = await fetch(url, {
         method: 'POST',
@@ -7279,7 +7296,9 @@
         }
 
         const isTeacherSignup = document.getElementById('isTeacher')?.checked;
-        await postJson('/api/register', { name, email, password, exam: signupExam || selectedExam, birthYear, gender, goal, role: isTeacherSignup ? 'teacher' : 'student' });
+        const teacherType = isTeacherSignup ? document.getElementById('teacherType')?.value : undefined;
+        const teacherSubject = isTeacherSignup ? document.getElementById('teacherSubject')?.value.trim() : undefined;
+        await postJson('/api/register', { name, email, password, exam: signupExam || selectedExam, birthYear, gender, goal, role: isTeacherSignup ? 'teacher' : 'student', teacherType, teacherSubject });
         pendingVerificationEmail = email;
         verifyBox.classList.add('show');
         authStatus.textContent = 'Kod öğrencinin mail adresine gönderildi. 6 haneli kod girilmeden kayıt tamamlanmaz.';

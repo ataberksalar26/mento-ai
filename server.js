@@ -706,6 +706,8 @@ async function handleRegister(req, res) {
     const gender = String(body.gender || '').trim();
     const goal = String(body.goal || '').trim();
     const role = body.role === 'teacher' ? 'teacher' : 'student';
+    const teacherType = role === 'teacher' && ['okul', 'ozel'].includes(body.teacherType) ? body.teacherType : undefined;
+    const teacherSubject = role === 'teacher' ? String(body.teacherSubject || '').trim().slice(0, 60) : undefined;
 
     if (!name || !email || !password) {
       sendJson(res, 400, { error: 'Ad, e-posta ve şifre zorunlu.' });
@@ -748,6 +750,8 @@ async function handleRegister(req, res) {
       gender,
       goal,
       role,
+      teacherType,
+      teacherSubject,
       points: existing?.points || 0,
       passwordSalt: salt,
       passwordHash: hash,
