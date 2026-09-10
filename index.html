@@ -2308,7 +2308,7 @@
       display: none;
       grid-template-columns: 280px 1fr 340px;
       color: #e9f0f7;
-      background: #07111e;
+      background: linear-gradient(160deg, #0b0f22 0%, #10152b 45%, #0c1120 100%);
       min-height: 100dvh;
       color-scheme: dark;
     }
@@ -2331,7 +2331,7 @@
       gap: 18px;
       padding: 22px;
       border-right: 1px solid rgba(255,255,255,.08);
-      background: #0b1626;
+      background: linear-gradient(190deg, #0d1226 0%, #141b34 100%);
     }
 
     .app-logo {
@@ -2708,7 +2708,8 @@
       min-height: 0;
       background:
         radial-gradient(circle at 50% 0%, rgba(245,166,35,.11), transparent 32%),
-        #091421;
+        radial-gradient(circle at 0% 100%, rgba(77,125,243,.08), transparent 40%),
+        linear-gradient(200deg, #0a0e1e 0%, #101830 100%);
     }
 
     .student-app.light .app-sidebar,
@@ -3298,7 +3299,7 @@
       gap: 12px;
       padding: 18px 20px 18px 18px;
       border-left: 1px solid rgba(255,255,255,.08);
-      background: #0b1626;
+      background: linear-gradient(190deg, #0d1226 0%, #141b34 100%);
       overflow: auto;
     }
 
@@ -3357,6 +3358,117 @@
       border-radius: 14px;
       padding: 11px 12px;
       background: rgba(255,255,255,.055);
+    }
+
+    .week-strip {
+      display: flex;
+      gap: 6px;
+    }
+
+    .week-day {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      gap: 2px;
+      padding: 8px 2px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .week-day .dow {
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 9px;
+      color: #8b98ad;
+    }
+
+    .week-day .dom {
+      font-weight: 900;
+      font-size: 13px;
+      color: #e9f0f7;
+    }
+
+    .week-day.today {
+      background: linear-gradient(180deg, #f6b458, #e2911c);
+      border-color: transparent;
+    }
+
+    .week-day.today .dow,
+    .week-day.today .dom {
+      color: #07111e;
+    }
+
+    .pending-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .pending-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.045);
+    }
+
+    .pending-item-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+
+    .pending-item-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pending-item-text strong {
+      display: block;
+      color: #fff;
+      font-size: 12.5px;
+    }
+
+    .pending-item-text span {
+      color: #aebbd0;
+      font-size: 11px;
+    }
+
+    .pending-item-btn {
+      flex: 0 0 auto;
+      border: 0;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #07111e;
+      background: linear-gradient(180deg, #f6b458, #e2911c);
+      cursor: pointer;
+    }
+
+    .student-app.light .week-day {
+      background: #edf3f8;
+      border-color: #c7d3e1;
+    }
+
+    .student-app.light .week-day .dow {
+      color: #53677f;
+    }
+
+    .student-app.light .week-day .dom {
+      color: #172335;
+    }
+
+    .student-app.light .pending-item {
+      background: #edf3f8;
+      border-color: #c7d3e1;
+    }
+
+    .student-app.light .pending-item-text strong {
+      color: #172335;
     }
 
     .topic-card {
@@ -5617,9 +5729,24 @@
           <div class="lesson-pills" id="lessonPills" role="tablist" aria-label="Ders seç"></div>
         </div>
       </div>
-      <div class="quick-cards">
-        <div class="quick-card"><strong>Bugünün video rotası</strong><span>Video dersleri · Konu anlatımı · Soru kaynakları</span></div>
-        <div class="quick-card"><strong>Görselle çözüm</strong><span>Kamera veya galeriden soru yükle, çözüm akışını başlat.</span></div>
+      <div class="week-strip" id="weekStrip"></div>
+      <div class="pending-list">
+        <div class="pending-item">
+          <div class="pending-item-dot" style="background:#f5a623"></div>
+          <div class="pending-item-text">
+            <strong>Bugünkü plan</strong>
+            <span>Konu tekrarı, yanlış analizi ve mini test</span>
+          </div>
+          <button type="button" class="pending-item-btn" id="pendingPlanBtn">Başla</button>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-dot" style="background:#4d7df3"></div>
+          <div class="pending-item-text">
+            <strong>Mini test</strong>
+            <span>Seçtiğin konudan hızlı bir ölçüm yap</span>
+          </div>
+          <button type="button" class="pending-item-btn" id="pendingTestBtn">Başla</button>
+        </div>
       </div>
       <div>
         <select class="topic-picker" id="topicPicker" aria-label="Konu seç"></select>
@@ -7206,6 +7333,31 @@
       planOverlay.classList.remove('open');
       planOverlay.setAttribute('aria-hidden', 'true');
     }
+
+    function renderWeekStrip() {
+      const strip = document.getElementById('weekStrip');
+      if (!strip) return;
+      const dowLabels = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+      const today = new Date();
+      const isoDay = (today.getDay() + 6) % 7;
+      const monday = new Date(today);
+      monday.setDate(today.getDate() - isoDay);
+      strip.innerHTML = dowLabels.map((label, i) => {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        const isToday = d.toDateString() === today.toDateString();
+        return `<div class="week-day${isToday ? ' today' : ''}"><span class="dow">${label}</span><span class="dom">${d.getDate()}</span></div>`;
+      }).join('');
+    }
+    renderWeekStrip();
+
+    document.getElementById('pendingPlanBtn')?.addEventListener('click', () => {
+      document.querySelectorAll('#chatList button').forEach(item => item.classList.toggle('active', item.dataset.panelTitle === 'Bugünkü plan'));
+      openDailyPlan();
+    });
+    document.getElementById('pendingTestBtn')?.addEventListener('click', () => {
+      document.querySelector('[data-panel-title="Mini testler"]')?.click();
+    });
 
     document.getElementById('planClose').addEventListener('click', closeDailyPlan);
     planOverlay.addEventListener('click', event => { if (event.target === planOverlay) closeDailyPlan(); });
