@@ -3188,6 +3188,80 @@
       font-size: 13px;
     }
 
+    .leaderboard-wrap {
+      display: grid;
+      gap: 8px;
+      width: min(480px, 100%);
+    }
+
+    .leaderboard-you {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(245,166,35,.3);
+      background: rgba(245,166,35,.08);
+      margin-bottom: 4px;
+    }
+
+    .leaderboard-you strong {
+      color: #ffcb70;
+      font-size: 13px;
+    }
+
+    .leaderboard-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.035);
+    }
+
+    .leaderboard-row.you {
+      border-color: rgba(245,166,35,.4);
+      background: rgba(245,166,35,.07);
+    }
+
+    .leaderboard-rank {
+      width: 26px;
+      flex: 0 0 auto;
+      text-align: center;
+      font-weight: 900;
+      color: #8b98ad;
+      font-size: 13px;
+    }
+
+    .leaderboard-row:nth-child(1) .leaderboard-rank { color: #ffd166; }
+    .leaderboard-row:nth-child(2) .leaderboard-rank { color: #cbd5e1; }
+    .leaderboard-row:nth-child(3) .leaderboard-rank { color: #e0a877; }
+
+    .leaderboard-name {
+      flex: 1;
+      min-width: 0;
+      color: #e9f0f7;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .leaderboard-points {
+      flex: 0 0 auto;
+      font-weight: 900;
+      font-size: 13px;
+      color: #ffcb70;
+    }
+
+    .student-app.light .leaderboard-row {
+      background: #edf3f8;
+      border-color: #c7d3e1;
+    }
+
+    .student-app.light .leaderboard-name {
+      color: #172335;
+    }
+
     .student-app.light .feed-search,
     .student-app.light .feed-compose textarea {
       color: #172335;
@@ -5669,6 +5743,7 @@
         <button type="button" data-panel-route="/panel/oyunlarla-ogren" data-panel-title="Oyunlarla öğren"><span class="nav-ico">▶</span>Oyunlarla öğren</button>
         <button type="button" data-panel-route="/panel/mini-testler" data-panel-title="Mini testler"><span class="nav-ico">?</span>Mini testler</button>
         <button type="button" data-panel-route="/panel/hedef-takibi" data-panel-title="Hedef takibi"><span class="nav-ico">↗</span>Hedef takibi</button>
+        <button type="button" data-panel-route="/panel/lider-tablosu" data-panel-title="Lider Tablosu"><span class="nav-ico">🏆</span>Lider Tablosu</button>
       </div>
       <div class="sidebar-tools">
         <button class="tool-button" type="button" id="themeToggle">☀ Tema</button>
@@ -5963,6 +6038,7 @@
     let flashDeck = [];
     let flashIndex = 0;
     let flashKnownIds = new Set();
+    let flashDeckAwarded = false;
     let flashLessonExam = null;
     let flashLessonName = null;
     let flashTopic = null;
@@ -5997,6 +6073,7 @@
     let gameCorrect = 0;
     let gameStreak = 0;
     let gameBestStreak = 0;
+    let gameRoundAwarded = false;
     let gameAnswered = false;
     let gameTimerInterval = null;
     let gameTimeLeft = 15;
@@ -6063,6 +6140,7 @@
     let currentUserPassword = '';
     let currentUserRole = 'student';
     let currentUserName = '';
+    let currentUserPoints = 0;
     let authMode = 'signup';
     let pendingVerificationEmail = '';
     let activeExamBank = 'LGS';
@@ -6374,6 +6452,36 @@
       messages.scrollTop = messages.scrollHeight;
     }
 
+    function clearSpecialPanels() {
+      messages.querySelectorAll('.feed-wrap, .leaderboard-wrap, .learning-grid').forEach(item => item.remove());
+    }
+
+    function updatePointsDisplay() {
+      if (!profileMode) return;
+      profileMode.textContent = currentUserRole === 'teacher'
+        ? 'LGS hocası'
+        : `${selectedExam} hedef modu · ${currentUserPoints} puan`;
+    }
+
+    async function awardPoints(reason, amount, label) {
+      if (!currentUserEmail || !currentUserPassword || currentUserRole === 'teacher') return;
+      try {
+        const res = await fetch('/api/points/award', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: currentUserEmail, password: currentUserPassword, reason, amount })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          currentUserPoints = data.points;
+          updatePointsDisplay();
+          if (data.awarded > 0 && label) {
+            addMessage(`+${data.awarded} puan kazandın (${label}). Toplam: ${data.points} puan.`);
+          }
+        }
+      } catch {}
+    }
+
     function escapeHtml(value) {
       return String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
     }
@@ -6434,7 +6542,7 @@
 
     async function openFeed() {
       if (window.openCommunity) return window.openCommunity();
-      messages.querySelectorAll('.feed-wrap').forEach(item => item.remove());
+      clearSpecialPanels();
       const wrap = document.createElement('div');
       wrap.className = 'feed-wrap';
       wrap.innerHTML = '<p class="feed-empty">Akış yükleniyor...</p>';
@@ -6579,6 +6687,40 @@
       });
     }
 
+    async function openLeaderboard() {
+      clearSpecialPanels();
+      const wrap = document.createElement('div');
+      wrap.className = 'leaderboard-wrap';
+      wrap.innerHTML = '<p class="feed-empty">Lider tablosu yükleniyor...</p>';
+      messages.appendChild(wrap);
+      messages.scrollTop = messages.scrollHeight;
+
+      let leaderboard = [];
+      let you = null;
+      try {
+        const url = '/api/leaderboard' + (currentUserEmail ? `?email=${encodeURIComponent(currentUserEmail)}` : '');
+        const res = await fetch(url);
+        const data = await res.json();
+        leaderboard = data.leaderboard || [];
+        you = data.you || null;
+      } catch {}
+
+      const youHtml = currentUserRole === 'teacher' ? '' : you
+        ? `<div class="leaderboard-you"><span>Senin sıran: <strong>#${you.rank}</strong></span><strong>${you.points} puan</strong></div>`
+        : `<div class="leaderboard-you"><span>Henüz puanın yok.</span><strong>Mini test veya ezber kartı bitirince puan kazanırsın.</strong></div>`;
+
+      const rowsHtml = leaderboard.length ? leaderboard.map(row => `
+        <div class="leaderboard-row${row.isYou ? ' you' : ''}">
+          <span class="leaderboard-rank">${row.rank <= 3 ? ['🥇','🥈','🥉'][row.rank - 1] : row.rank}</span>
+          <span class="leaderboard-name">${escapeHtml(row.name)}${row.isYou ? ' (Sen)' : ''}</span>
+          <span class="leaderboard-points">${row.points} p</span>
+        </div>
+      `).join('') : '<p class="feed-empty">Henüz kimse puan kazanmamış. İlk sırayı sen al.</p>';
+
+      wrap.innerHTML = youHtml + rowsHtml;
+      messages.scrollTop = messages.scrollHeight;
+    }
+
     function addMessage(text, type = 'ai', persist = true) {
       renderMessage(text, type);
       if (persist) saveMessageToCurrent(text, type);
@@ -6617,7 +6759,7 @@
 
     function addLearningCards(mode) {
       activeLearningMode = mode;
-      messages.querySelectorAll('.learning-grid').forEach(item => item.remove());
+      clearSpecialPanels();
       if (mode === 'Mini testler') {
         const topics = (topicBanks[activeExamBank]?.[activeLesson] || []).map(([title]) => title);
         const wrap = document.createElement('div');
@@ -6805,7 +6947,7 @@
       const name = document.getElementById('fullName').value.trim() || 'Mento Öğrencisi';
       profileName.textContent = name;
       if (!profileAvatar.querySelector('img')) profileAvatar.textContent = name.trim().charAt(0).toUpperCase() || 'M';
-      profileMode.textContent = `${selectedExam} hedef modu`;
+      updatePointsDisplay();
       if (topicBanks[selectedExam]) {
         activeExamBank = selectedExam;
         activeLesson = Object.keys(topicBanks[activeExamBank])[0];
@@ -7008,6 +7150,7 @@
       flashcardPlay.style.display = 'none';
       flashcardSummaryBox.style.display = 'none';
       flashcardErrorBox.style.display = 'none';
+      flashDeckAwarded = false;
       const cacheKey = `${flashLessonExam}|${flashLessonName}|${flashTopic}`;
       if (flashcardCache[cacheKey]) {
         flashDeck = flashcardCache[cacheKey];
@@ -7062,6 +7205,10 @@
           ? 'Bu desteyi tamamen biliyorsun. Üstteki listeden başka bir konu seçip devam edebilirsin.'
           : 'Kalan kartları bugün bir kez daha göstereceğim, baştan başlat ve sadece onlara odaklan.';
         flashcardRing.style.strokeDashoffset = '0';
+        if (!flashDeckAwarded && flashKnownIds.size > 0) {
+          flashDeckAwarded = true;
+          awardPoints('flashcard-deck', flashKnownIds.size, 'ezber kartları');
+        }
         return;
       }
       flashcardPlay.style.display = 'block';
@@ -7126,6 +7273,7 @@
     document.getElementById('flashcardRestart').addEventListener('click', () => {
       flashIndex = 0;
       flashKnownIds = new Set();
+      flashDeckAwarded = false;
       renderFlashcard();
     });
     document.getElementById('flashcardRetry').addEventListener('click', () => loadFlashDeck());
@@ -7217,6 +7365,7 @@
       gameCorrect = 0;
       gameStreak = 0;
       gameBestStreak = 0;
+      gameRoundAwarded = false;
       renderGameQuestion();
     }
 
@@ -7228,6 +7377,10 @@
         gameSummaryBox.style.display = 'grid';
         gameSummaryTitle.textContent = `${gameQuestions.length} sorudan ${gameCorrect} tanesini bildin`;
         gameSummaryText.textContent = `En uzun serin ${gameBestStreak} soruydu. Aynı konudan tekrar oynayabilir ya da üstten başka konu seçebilirsin.`;
+        if (!gameRoundAwarded && gameCorrect > 0) {
+          gameRoundAwarded = true;
+          awardPoints('mini-test', gameCorrect * 2, 'mini test');
+        }
         return;
       }
       gameAnswered = false;
@@ -7441,6 +7594,7 @@
           currentUserPassword = password;
           currentUserRole = loginData?.user?.role === 'teacher' ? 'teacher' : 'student';
           currentUserName = loginData?.user?.name || '';
+          currentUserPoints = loginData?.user?.points || 0;
           authStatus.textContent = 'Giriş başarılı. Planın açılıyor.';
           createLocalPlan();
           setTimeout(openStudentPanel, 550);
@@ -7696,6 +7850,10 @@
         }
         if (title === 'Akış') {
           openFeed();
+          return;
+        }
+        if (title === 'Lider Tablosu') {
+          openLeaderboard();
           return;
         }
         if (title === 'Hedef takibi') {

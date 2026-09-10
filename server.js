@@ -1306,6 +1306,63 @@ async function handleLikePost(req, res, postId) {
   }
 }
 
+const POINT_REASONS = {
+  'mini-test': 20,
+  'flashcard-deck': 15,
+  'daily-plan': 10
+};
+
+async function handleAwardPoints(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const email = normalizeEmail(body.email);
+    const password = String(body.password || '');
+    const reason = String(body.reason || '');
+    const maxForReason = POINT_REASONS[reason];
+    if (!maxForReason) {
+      sendJson(res, 400, { error: 'Geçersiz puan nedeni.' });
+      return;
+    }
+    const amount = Math.max(0, Math.min(maxForReason, Number(body.amount) || 0));
+
+    const users = readUsers();
+    const user = users.find(u => u.email === email);
+    if (!user || !user.passwordHash || !verifyPassword(password, user)) {
+      sendJson(res, 401, { error: 'E-posta veya şifre hatalı.' });
+      return;
+    }
+
+    user.points = (user.points || 0) + amount;
+    user.updatedAt = new Date().toISOString();
+    writeUsers(users);
+    sendJson(res, 200, { ok: true, points: user.points, awarded: amount });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'Puan eklenemedi.' });
+  }
+}
+
+function maskName(name) {
+  const parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return 'Öğrenci';
+  const first = parts[0];
+  const lastInitial = parts.length > 1 ? parts[parts.length - 1].charAt(0).toUpperCase() + '.' : '';
+  return lastInitial ? `${first} ${lastInitial}` : first;
+}
+
+async function handleLeaderboard(req, res) {
+  try {
+    const url = new URL(req.url, 'http://localhost');
+    const viewerEmail = normalizeEmail(url.searchParams.get('email') || '');
+    const users = readUsers().filter(u => u.verified && u.role !== 'teacher' && (u.points || 0) > 0);
+    const ranked = users
+      .sort((a, b) => (b.points || 0) - (a.points || 0))
+      .map((u, index) => ({ rank: index + 1, name: maskName(u.name), points: u.points || 0, isYou: !!viewerEmail && u.email === viewerEmail }));
+    sendJson(res, 200, { ok: true, leaderboard: ranked.slice(0, 20), you: ranked.find(r => r.isYou) || null });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'Liderlik tablosu yüklenemedi.' });
+  }
+}
+
 function sendFile(res, filePath, status = 200) {
   fs.readFile(filePath, (err, content) => {
     if (err) {
@@ -1508,6 +1565,14 @@ function routeRequest(req, res) {
   }
   if (req.method === 'POST' && /^\/api\/posts\/[a-zA-Z0-9-]+\/like$/.test(req.url)) {
     handleLikePost(req, res, req.url.split('/')[3]);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/points/award') {
+    handleAwardPoints(req, res);
+    return;
+  }
+  if (req.method === 'GET' && (req.url === '/api/leaderboard' || req.url.startsWith('/api/leaderboard?'))) {
+    handleLeaderboard(req, res);
     return;
   }
   if (req.method === 'POST' && req.url === '/api/topic-lecture') {
