@@ -107,8 +107,8 @@ function buildBrainAnswer(question, student = {}) {
       matches: []
     };
   }
-  const items = readBrainItems();
-  const exam = String(student.exam || '').trim();
+  const items = readBrainItems().filter(item => item.exam === 'LGS');
+  const exam = 'LGS';
   const lesson = String(student.lesson || '').trim();
   const ranked = items
     .map(item => ({ item, score: scoreBrainItem(item, question, exam, lesson) }))
@@ -166,7 +166,7 @@ async function askOpenAI({ question, student = {}, brainContext = null, maxOutpu
         {
           role: 'system',
           content: [
-            'Sen Mento AI adında Türkçe konuşan bir TYT, AYT ve LGS çalışma koçusun.',
+            'Sen Mento AI adında Türkçe konuşan bir LGS çalışma koçusun.',
             'Cevapların doğru, kısa, net, uygulanabilir ve öğrenci dilinde olsun.',
             'Öğrenci basit bir işlem sorarsa önce işlemin doğrudan sonucunu ver; alakasız sınav konusuna bağlama.',
             'Öğrenci belirli bir soru sorarsa genel çalışma planı verme, soruyu çöz.',
@@ -267,7 +267,7 @@ async function askOpenAIVision({ imageDataUrl, instruction, student = {}, maxOut
         {
           role: 'system',
           content: [
-            'Sen Mento AI adında Türkçe konuşan bir TYT, AYT ve LGS çalışma koçusun.',
+            'Sen Mento AI adında Türkçe konuşan bir LGS çalışma koçusun.',
             'Öğrenci sana bir soru fotoğrafı gönderiyor. Görseldeki soruyu dikkatle oku.',
             'Görsel bulanık veya okunaksızsa bunu belirt ve öğrenciden daha net bir fotoğraf iste.',
             'Sınav garantisi verme; tıbbi, hukuki veya resmi garanti dili kullanma.'
@@ -320,7 +320,7 @@ async function askOpenAIQuizFromText({ topic, exam, lesson, variant = 1, questio
         {
           role: 'system',
           content: [
-            'Sen Mento AI adında Türkçe bir TYT, AYT ve LGS quiz üretme motorusun.',
+            'Sen Mento AI adında Türkçe bir LGS quiz üretme motorusun.',
             'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
             'JSON şeması: {"title": string, "questions": [{"question": string, "options": [string,string,string,string], "correctIndex": number (0-3), "explanation": string}]}.',
             `Tam olarak ${questionCount} soru üret. Sorular verilen sınav seviyesine uygun, birbirinden farklı, net ve tek doğru cevaplı olsun. Kolay-orta-zor karışımı olacak şekilde dağıt.${variantNote}`
@@ -328,7 +328,7 @@ async function askOpenAIQuizFromText({ topic, exam, lesson, variant = 1, questio
         },
         {
           role: 'user',
-          content: `Sınav: ${exam || 'TYT'}\nDers: ${lesson || ''}\nKonu / kaynak metin: ${topic}`
+          content: `Sınav: ${exam || 'LGS'}\nDers: ${lesson || ''}\nKonu / kaynak metin: ${topic}`
         }
       ]
     })
@@ -371,7 +371,7 @@ async function askOpenAIQuizFromImage({ imageDataUrl, exam, lesson, questionCoun
         {
           role: 'system',
           content: [
-            'Sen Mento AI adında Türkçe bir TYT, AYT ve LGS quiz üretme motorusun.',
+            'Sen Mento AI adında Türkçe bir LGS quiz üretme motorusun.',
             'Öğrenci bir ders notu veya soru fotoğrafı gönderiyor. Görseldeki konuyu temel alarak yeni bir quiz üret.',
             'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
             'JSON şeması: {"title": string, "questions": [{"question": string, "options": [string,string,string,string], "correctIndex": number (0-3), "explanation": string}]}.',
@@ -381,7 +381,7 @@ async function askOpenAIQuizFromImage({ imageDataUrl, exam, lesson, questionCoun
         {
           role: 'user',
           content: [
-            { type: 'input_text', text: `Sınav: ${exam || 'TYT'}\nDers: ${lesson || ''}\nBu görseldeki konu/soru tipini temel alan yeni bir quiz üret.` },
+            { type: 'input_text', text: `Sınav: ${exam || 'LGS'}\nDers: ${lesson || ''}\nBu görseldeki konu/soru tipini temel alan yeni bir quiz üret.` },
             { type: 'input_image', image_url: imageDataUrl }
           ]
         }
@@ -433,7 +433,8 @@ async function handleGenerateQuiz(req, res) {
   try {
     const body = JSON.parse(await readBody(req, 16000) || '{}');
     const topic = String(body.topic || '').trim();
-    const exam = String(body.exam || '').trim();
+    const exam = 'LGS';
+    if (body.exam && body.exam !== exam) { sendJson(res, 400, { error: 'Şu anda yalnızca LGS destekleniyor.' }); return; }
     const lesson = String(body.lesson || '').trim();
     if (body.image || !questionSources[exam] || !topic || !lesson) {
       sendJson(res, 400, { error: 'Hazır test için sınav, ders ve konu seç.' });
@@ -470,7 +471,7 @@ async function askOpenAIFlashcards({ exam, lesson, topic, count = 10, maxOutputT
         {
           role: 'system',
           content: [
-            'Sen Mento AI adında Türkçe bir TYT, AYT ve LGS ezber kartı (flashcard) üretme motorusun.',
+            'Sen Mento AI adında Türkçe bir LGS ezber kartı (flashcard) üretme motorusun.',
             'Verilen konuyu genel geçme, konunun içindeki gerçek alt kavramlara ve sık sorulan noktalara böl.',
             'Örnek: konu "Çarpanlar ve Katlar" ise kartlar EBOB nedir, EKOK nedir, asal çarpanlara ayırma, ortak bölen/kat bulma gibi somut alt başlıklardan oluşmalı.',
             'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
@@ -481,7 +482,7 @@ async function askOpenAIFlashcards({ exam, lesson, topic, count = 10, maxOutputT
         },
         {
           role: 'user',
-          content: `Sınav: ${exam || 'TYT'}\nDers: ${lesson || ''}\nKonu: ${topic}`
+          content: `Sınav: ${exam || 'LGS'}\nDers: ${lesson || ''}\nKonu: ${topic}`
         }
       ]
     })
@@ -510,7 +511,8 @@ async function handleFlashcards(req, res) {
   try {
     const body = JSON.parse(await readBody(req) || '{}');
     const topic = String(body.topic || '').trim();
-    const exam = String(body.exam || '').trim();
+    const exam = 'LGS';
+    if (body.exam && body.exam !== exam) { sendJson(res, 400, { error: 'Şu anda yalnızca LGS destekleniyor.' }); return; }
     const lesson = String(body.lesson || '').trim();
     const count = Math.min(16, Math.max(4, Number(body.count || 10)));
 
@@ -551,7 +553,7 @@ async function askOpenAITopicLecture({ exam, lesson, topic, weakPoints = [], max
         {
           role: 'system',
           content: [
-            'Sen Mento AI adında Türkçe konuşan bir TYT, AYT ve LGS konu anlatım öğretmenisin.',
+            'Sen Mento AI adında Türkçe konuşan bir LGS konu anlatım öğretmenisin.',
             'Sadece geçerli JSON döndür, başka hiçbir açıklama, markdown veya metin ekleme.',
             'JSON şeması: {"summary": string, "sections": [{"heading": string, "body": string}], "example": {"question": string, "solution": string}, "tip": string}.',
             'summary 1-2 cümlelik kısa özet olsun. sections 3-5 adet, her biri konunun bir alt başlığını 3-6 cümleyle net anlatsın.',
@@ -564,7 +566,7 @@ async function askOpenAITopicLecture({ exam, lesson, topic, weakPoints = [], max
         },
         {
           role: 'user',
-          content: `Sınav: ${exam || 'TYT'}\nDers: ${lesson || ''}\nKonu: ${topic}${weakPointsText}`
+          content: `Sınav: ${exam || 'LGS'}\nDers: ${lesson || ''}\nKonu: ${topic}${weakPointsText}`
         }
       ]
     })
@@ -591,7 +593,8 @@ async function handleTopicLecture(req, res) {
   try {
     const body = JSON.parse(await readBody(req) || '{}');
     const topic = String(body.topic || '').trim();
-    const exam = String(body.exam || '').trim();
+    const exam = 'LGS';
+    if (body.exam && body.exam !== exam) { sendJson(res, 400, { error: 'Şu anda yalnızca LGS destekleniyor.' }); return; }
     const lesson = String(body.lesson || '').trim();
     const weakPoints = Array.isArray(body.weakPoints) ? body.weakPoints.map(String).slice(0, 15) : [];
 
@@ -698,7 +701,7 @@ async function handleRegister(req, res) {
     const name = String(body.name || '').trim();
     const email = normalizeEmail(body.email);
     const password = String(body.password || '');
-    const exam = String(body.exam || 'TYT').trim();
+    const exam = 'LGS';
     const birthYear = Number(body.birthYear || 0);
     const gender = String(body.gender || '').trim();
     const goal = String(body.goal || '').trim();
@@ -1238,7 +1241,7 @@ function publicPost(post) {
 
 async function handleListPosts(req, res) {
   try {
-    const posts = readPosts();
+    const posts = readPosts().filter(post => post.authorExam === 'LGS');
     sendJson(res, 200, { ok: true, posts: posts.map(publicPost) });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'İçerikler yüklenemedi.' });
@@ -1365,6 +1368,7 @@ function serveStatic(req, res) {
     '/plan/hedef',
     '/plan/hesap',
     '/panel',
+    '/panel/akis',
     '/panel/bugunku-plan',
     '/panel/soru-coz',
     '/panel/konu-anlatimi',
@@ -1438,8 +1442,13 @@ async function handleBrainAnswer(req, res) {
   }
 }
 
+const community = require('./community')({ root: ROOT, readUsers, verifyPassword, sendJson, readBody });
 const server = http.createServer((req, res) => aiContext.run({ req, res }, () => routeRequest(req, res)));
 function routeRequest(req, res) {
+  if (req.url === '/api/community' || req.url.startsWith('/api/community/')) {
+    community(req, res);
+    return;
+  }
   if (req.method === 'GET' && req.url === '/api/ai-usage') {
     try { sendJson(res, 200, { ok: true, ...aiBudget.status(req) }); }
     catch (error) { sendJson(res, error.status || 503, { error: error.message }); }

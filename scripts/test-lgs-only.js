@@ -1,0 +1,43 @@
+const assert = require('node:assert/strict');
+const { spawn } = require('node:child_process');
+const path = require('node:path');
+const os = require('node:os');
+const fs = require('node:fs');
+const { chromium } = require('C:/Users/atabe/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const root = path.resolve(__dirname, '..');
+const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'mento-lgs-'));
+const server = spawn(process.execPath, ['server.js'], { cwd:root, windowsHide:true, env:{...process.env,PORT:'3219',OPENAI_API_KEY:'disabled',COMMUNITY_FILE:path.join(temp,'community.json')} });
+let browser;
+(async()=>{
+  await new Promise((resolve,reject)=>{server.stdout.once('data',resolve);server.once('error',reject);setTimeout(()=>reject(new Error('Startup timeout')),10000).unref();});
+  browser=await chromium.launch({headless:true,channel:'chrome'});
+  const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.addInitScript(()=>localStorage.setItem('mentoStudyPreferences',JSON.stringify({exam:'AYT',minutes:60,theme:'dark'})));
+  for(const width of [1440,390]){
+    await page.setViewportSize({width,height:900});
+    await page.goto('http://127.0.0.1:3219/');
+    const visible=await page.locator('body').innerText();
+    assert(!/\b(TYT|AYT)\b/.test(visible),'Non-LGS marketing visible: '+visible.split('\n').filter(line=>/TYT|AYT/.test(line)).join(';'));
+    await page.goto('http://127.0.0.1:3219/panel/akis');
+    await page.locator('.community-heading').waitFor();
+    assert.equal(await page.evaluate(()=>activeExamBank),'LGS');
+    assert.equal(await page.evaluate(()=>selectedExam),'LGS');
+    await page.evaluate(()=>openStudySettings());
+    assert.deepEqual(await page.locator('[name=exam] option').allTextContents(),['LGS']);
+    await page.locator('.close-study').click();
+    assert.equal(await page.locator('[data-story]').count(),3);
+    await page.locator('[data-story]').first().click();
+    assert.match(await page.locator('.community-dialog').innerText(),/Demo/);
+    await page.locator('[data-close]').click();
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    await page.screenshot({path:path.join(__dirname,`lgs-${width}.png`)});
+  }
+  const response=await fetch('http://127.0.0.1:3219/api/question-bank',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({exam:'AYT',lesson:'Matematik',topic:'Fonksiyonlar'})});
+  assert.equal(response.status,400);
+  const unauthorized=await fetch('http://127.0.0.1:3219/api/community/post',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+  assert.equal(unauthorized.status,401);
+  const data=JSON.parse(fs.readFileSync(path.join(temp,'community.json'),'utf8'));data.demoStartedAt=Date.now()-73*3600000;fs.writeFileSync(path.join(temp,'community.json'),JSON.stringify(data));
+  const expired=await (await fetch('http://127.0.0.1:3219/api/community')).json();assert.equal(expired.stories.length,0);
+  assert.deepEqual(errors,[]);
+  console.log('PASS: LGS marketing, saved AYT migration, settings, desktop/mobile, demo stories, 72h expiry, API restriction and authentication.');
+})().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{await browser?.close();server.kill();});

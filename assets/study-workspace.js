@@ -54,6 +54,7 @@
     return data;
   }
   function chooseExam(exam) {
+    exam = 'LGS';
     if (!topicBanks[exam]) return;
     activeExamBank = exam;
     selectedExam = exam;
@@ -67,9 +68,9 @@
     if(activeLearningMode==='Mini testler')addLearningCards('Mini testler');
   }
   const examDropdown=document.getElementById('examDropdown');
-  examDropdown.querySelectorAll('[data-main-exam]').forEach(button=>button.onclick=()=>{chooseExam(button.dataset.mainExam);examDropdown.open=false;examDropdown.querySelector('summary').focus();});
+  examDropdown.querySelectorAll('[data-main-exam]').forEach(button=>button.onclick=()=>{chooseExam('LGS');setExamDropdownOpen(false);document.getElementById('examDropdownBtn')?.focus();});
   document.addEventListener('click',event=>{if(!examDropdown.contains(event.target))examDropdown.open=false;});
-  examDropdown.addEventListener('keydown',event=>{if(event.key==='Escape'){examDropdown.open=false;examDropdown.querySelector('summary').focus();}});
+  examDropdown.addEventListener('keydown',event=>{if(event.key==='Escape'){setExamDropdownOpen(false);document.getElementById('examDropdownBtn')?.focus();}});
   chooseExam(preferences.exam);
   appearance();
   for(const id of ['themeToggle','topThemeToggle']) document.getElementById(id).addEventListener('click',()=>{
@@ -77,7 +78,7 @@
   });
   window.openStudySettings = () => {
     const body=shell('Ayarlar','Mento AI');
-    body.innerHTML=`<form class="settings-form"><label>Görünüm<select name="theme"><option value="dark">Koyu</option><option value="light">Açık</option></select></label><label>Sınav<select name="exam"><option>LGS</option><option>TYT</option><option>AYT</option></select></label><label>Hedef tarihi<input name="targetDate" type="date"></label><label>Günlük çalışma hedefi (dakika)<input name="minutes" type="number" min="10" max="480" step="5" required></label><label class="setting-check"><input name="largeText" type="checkbox">Büyük metin</label><label class="setting-check"><input name="reduceMotion" type="checkbox">Hareketi azalt</label><button class="primary" type="submit">Kaydet</button><p role="status" id="settingsSaved"></p></form><section class="study-section"><h3>Çalışma verileri</h3><button id="exportStudy">Notları ve ilerlemeyi indir</button><p>Bu cihazdaki çalışma verilerin. Hesaplar arasında otomatik eşitlenmez.</p><a class="question-source" href="/gizlilik.html" target="_blank" rel="noopener">Gizlilik politikası</a></section>`;
+    body.innerHTML=`<form class="settings-form"><label>Görünüm<select name="theme"><option value="dark">Koyu</option><option value="light">Açık</option></select></label><label>Sınav<select name="exam"><option>LGS</option></select></label><label>Hedef tarihi<input name="targetDate" type="date"></label><label>Günlük çalışma hedefi (dakika)<input name="minutes" type="number" min="10" max="480" step="5" required></label><label class="setting-check"><input name="largeText" type="checkbox">Büyük metin</label><label class="setting-check"><input name="reduceMotion" type="checkbox">Hareketi azalt</label><button class="primary" type="submit">Kaydet</button><p role="status" id="settingsSaved"></p></form><section class="study-section"><h3>Çalışma verileri</h3><button id="exportStudy">Notları ve ilerlemeyi indir</button><p>Bu cihazdaki çalışma verilerin. Hesaplar arasında otomatik eşitlenmez.</p><a class="question-source" href="/gizlilik.html" target="_blank" rel="noopener">Gizlilik politikası</a></section>`;
     const form=body.querySelector('form');
     form.elements.theme.value=preferences.theme;
     form.elements.exam.value=activeExamBank;

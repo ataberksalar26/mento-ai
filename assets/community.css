@@ -1,0 +1,21 @@
+[data-exam-choice="TYT"],[data-exam-choice="AYT"],[data-main-exam="TYT"],[data-main-exam="AYT"],a[href="#tyt"],a[href="#ayt"],#tyt,#ayt{display:none!important}
+.community{width:100%;max-width:840px;margin:0 auto;color:inherit}
+.chat-main:has(.community)>.composer{display:none}
+.community-heading,.community-tools,.community-post header,.community-post footer,.community-bottom{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.community-heading{justify-content:space-between;margin-bottom:20px}.community h2{font-size:24px;margin:4px 0;letter-spacing:0}.community-heading small{color:#8cccbc}
+.community button,.community-dialog button{cursor:pointer;border:1px solid #617079;background:transparent;color:inherit;padding:8px 12px;border-radius:6px;font:inherit;min-height:40px}
+.community button:hover,.community-dialog button:hover{border-color:#f4bd49}.community button:focus-visible,.community-dialog button:focus-visible{outline:2px solid #f4bd49;outline-offset:3px}
+.community-heading>button,.community-compose button[type=submit]{background:#f4bd49;color:#171b1e;border:0;font-weight:700}
+.community-stories{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 16px;border-bottom:1px solid #53616b}
+.community-stories button{border:0;flex:0 0 108px;display:grid;justify-items:center;gap:6px;padding:2px;font-size:12px}.community-stories strong{font-size:12px;overflow-wrap:anywhere}
+.community-story-icon{width:60px;height:60px;border:3px solid #56baa2;border-radius:50%;display:grid;place-items:center;background:#25453d;color:#fff;font-size:24px;font-weight:700}
+.community-stories button:nth-child(2) .community-story-icon{border-color:#859af7;background:#364581}.community-stories button:nth-child(3) .community-story-icon{border-color:#d989b8;background:#70445e}
+.community-groups{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0}.community-groups button{font-size:13px}.community-groups [aria-pressed=true]{background:#286955;color:#fff;border-color:#65b69e}
+.community-tools input,.community-compose input,.community-compose textarea,.community-compose select{min-width:0;border:1px solid #6b7881;border-radius:6px;background:transparent;color:inherit;padding:12px;font:inherit}
+.community-tools input{flex:1;width:140px}.community-tools{margin-bottom:10px}.community [role=status]{font-size:13px;min-height:20px}
+.community-post{border-bottom:1px solid #52616b;padding:20px 0;overflow-wrap:anywhere}.community-post header small{display:block;margin-top:4px;opacity:.8;font-size:12px}.community-post p{white-space:pre-wrap;line-height:1.7;margin:16px 0}.community-post footer{gap:8px}.community-post footer button{font-size:12px}
+.community-avatar{width:36px;height:36px;flex:0 0 36px;display:grid;place-items:center;border-radius:50%;background:#37705e;color:white;font-weight:700}.community-empty{padding:28px 0;line-height:1.6}.community-bottom{padding:24px 0;font-size:12px}.community-bottom a{color:inherit}
+.community-dialog{box-sizing:border-box;border:1px solid #7b8b87;border-radius:8px;background:#182522;color:#f4f7f5;width:min(540px,calc(100% - 24px));max-height:85dvh;padding:20px;overflow:auto}.community-dialog::backdrop{background:#000a}.community-dialog>header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.community-dialog h2{font-size:20px;margin:0;letter-spacing:0}.community-dialog a{color:#ffce73}
+.community-compose{display:grid;gap:16px}.community-compose label{display:grid;gap:8px}.community-compose small{line-height:1.6}.community-compose option{color:#111;background:white}.community-compose textarea{resize:vertical;max-width:100%;box-sizing:border-box}
+.story-view{min-height:320px;background:var(--story-color);padding:24px;color:white;display:flex;flex-direction:column;justify-content:center;gap:20px}.story-view h3{font-size:28px;line-height:1.2;letter-spacing:0;margin:0}.story-view p{font-size:18px;line-height:1.6;margin:0}.story-view small{line-height:1.5}.community-thread{display:grid;gap:12px}
+@media(max-width:600px){.community h2{font-size:21px}.community-heading{gap:10px}.community-stories{gap:8px}.community-stories button{flex-basis:90px}.community-dialog{padding:16px}.community-groups button{padding:7px 9px}.story-view{padding:18px}}
