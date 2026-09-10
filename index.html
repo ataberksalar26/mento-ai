@@ -5936,45 +5936,6 @@
     </div>
   </div>
 
-  <div class="flashcard-overlay" id="planOverlay" aria-hidden="true">
-    <div class="flashcard-box">
-      <div class="flashcard-head">
-        <div>
-          <h3>Bugünkü plan</h3>
-          <div class="flashcard-meta">
-            <span class="lesson-tag" id="planLessonTag">Matematik</span>
-            <span id="planTopicText">LGS • Çarpanlar ve Katlar</span>
-          </div>
-        </div>
-        <button class="flashcard-close" type="button" id="planClose" aria-label="Kapat">✕</button>
-      </div>
-      <div class="plan-steps">
-        <div class="plan-step">
-          <div class="plan-step-num">1</div>
-          <div class="plan-step-body">
-            <strong>Konu anlatımını izle</strong>
-            <p id="planStep1Desc">Bugünün önerilen konusu yükleniyor…</p>
-          </div>
-          <button type="button" id="planOpenLecture">Aç →</button>
-        </div>
-        <div class="plan-step">
-          <div class="plan-step-num">2</div>
-          <div class="plan-step-body">
-            <strong>20 soruluk test çöz</strong>
-            <p>Aynı konudan gerçek sorularla kendini sına.</p>
-          </div>
-          <button type="button" id="planOpenTest">Başlat →</button>
-        </div>
-        <div class="plan-step">
-          <div class="plan-step-num">3</div>
-          <div class="plan-step-body">
-            <strong>Yanlış sebebini not al</strong>
-            <p>Test bitince hangi soruları neden kaçırdığını gör, ertesi gün ona göre tekrar et.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script>
     const modal = document.getElementById('demoModal');
@@ -6080,10 +6041,6 @@
     let gameQuestionCount = 8;
     const gameCache = {};
 
-    const planOverlay = document.getElementById('planOverlay');
-    const planLessonTag = document.getElementById('planLessonTag');
-    const planTopicText = document.getElementById('planTopicText');
-    const planStep1Desc = document.getElementById('planStep1Desc');
     let planExam = null;
     let planLesson = null;
     let planTopicTitle = null;
@@ -6453,7 +6410,7 @@
     }
 
     function clearSpecialPanels() {
-      messages.querySelectorAll('.feed-wrap, .leaderboard-wrap, .learning-grid').forEach(item => item.remove());
+      messages.querySelectorAll('.feed-wrap, .leaderboard-wrap, .learning-grid, .daily-plan-wrap').forEach(item => item.remove());
     }
 
     function updatePointsDisplay() {
@@ -7475,16 +7432,56 @@
       const picked = pickDailyTopic(planExam, planLesson);
       planTopicTitle = picked ? picked[0] : planLesson;
       planTopicDesc = picked ? picked[1] : '';
-      planLessonTag.textContent = planLesson;
-      planTopicText.textContent = `${planExam} • ${planTopicTitle}`;
-      planStep1Desc.textContent = planTopicDesc || 'Bu ders için önce kısa bir konu tekrarı yap.';
-      planOverlay.classList.add('open');
-      planOverlay.setAttribute('aria-hidden', 'false');
-    }
 
-    function closeDailyPlan() {
-      planOverlay.classList.remove('open');
-      planOverlay.setAttribute('aria-hidden', 'true');
+      clearSpecialPanels();
+      const wrap = document.createElement('div');
+      wrap.className = 'daily-plan-wrap flashcard-box';
+      wrap.innerHTML = `
+        <div class="flashcard-head">
+          <div>
+            <h3>Bugünkü plan</h3>
+            <div class="flashcard-meta">
+              <span class="lesson-tag">${escapeHtml(planLesson)}</span>
+              <span>${escapeHtml(planExam)} • ${escapeHtml(planTopicTitle)}</span>
+            </div>
+          </div>
+        </div>
+        <div class="plan-steps">
+          <div class="plan-step">
+            <div class="plan-step-num">1</div>
+            <div class="plan-step-body">
+              <strong>Konu anlatımını izle</strong>
+              <p>${escapeHtml(planTopicDesc || 'Bu ders için önce kısa bir konu tekrarı yap.')}</p>
+            </div>
+            <button type="button" id="planOpenLecture">Aç →</button>
+          </div>
+          <div class="plan-step">
+            <div class="plan-step-num">2</div>
+            <div class="plan-step-body">
+              <strong>20 soruluk test çöz</strong>
+              <p>Aynı konudan gerçek sorularla kendini sına.</p>
+            </div>
+            <button type="button" id="planOpenTest">Başlat →</button>
+          </div>
+          <div class="plan-step">
+            <div class="plan-step-num">3</div>
+            <div class="plan-step-body">
+              <strong>Yanlış sebebini not al</strong>
+              <p>Test bitince hangi soruları neden kaçırdığını gör, ertesi gün ona göre tekrar et.</p>
+            </div>
+          </div>
+        </div>
+      `;
+      messages.appendChild(wrap);
+      messages.scrollTop = messages.scrollHeight;
+
+      wrap.querySelector('#planOpenLecture').addEventListener('click', () => {
+        addMessage(`${planExam} ${planLesson} - ${planTopicTitle} konu anlatımı istiyorum.`, 'user');
+        openTopicLearning(planExam, planLesson, planTopicTitle);
+      });
+      wrap.querySelector('#planOpenTest').addEventListener('click', () => {
+        openGame('Bugünkü test', { exam: planExam, lesson: planLesson, topic: planTopicTitle, questionCount: 20 });
+      });
     }
 
     function renderWeekStrip() {
@@ -7510,18 +7507,6 @@
     });
     document.getElementById('pendingTestBtn')?.addEventListener('click', () => {
       document.querySelector('[data-panel-title="Mini testler"]')?.click();
-    });
-
-    document.getElementById('planClose').addEventListener('click', closeDailyPlan);
-    planOverlay.addEventListener('click', event => { if (event.target === planOverlay) closeDailyPlan(); });
-    document.getElementById('planOpenLecture').addEventListener('click', () => {
-      closeDailyPlan();
-      addMessage(`${planExam} ${planLesson} - ${planTopicTitle} konu anlatımı istiyorum.`, 'user');
-      openTopicLearning(planExam, planLesson, planTopicTitle);
-    });
-    document.getElementById('planOpenTest').addEventListener('click', () => {
-      closeDailyPlan();
-      openGame('Bugünkü test', { exam: planExam, lesson: planLesson, topic: planTopicTitle, questionCount: 20 });
     });
 
     function setAuthMode(mode) {
