@@ -645,6 +645,19 @@ function verifyPassword(password, user) {
   return crypto.timingSafeEqual(Buffer.from(candidate, 'hex'), Buffer.from(user.passwordHash, 'hex'));
 }
 
+function issueSessionToken(user) {
+  user.sessionToken = crypto.randomBytes(32).toString('hex');
+  return user.sessionToken;
+}
+
+function verifySessionToken(token, user) {
+  if (!token || !user || !user.sessionToken) return false;
+  const a = Buffer.from(String(token));
+  const b = Buffer.from(String(user.sessionToken));
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}
+
 function generateCode() {
   return String(crypto.randomInt(100000, 1000000));
 }
@@ -819,9 +832,10 @@ async function handleVerify(req, res) {
     user.verificationCodeSalt = null;
     user.codeExpiresAt = null;
     user.updatedAt = new Date().toISOString();
+    const sessionToken = issueSessionToken(user);
     writeUsers(users);
 
-    sendJson(res, 200, { ok: true, user: publicUser(user) });
+    sendJson(res, 200, { ok: true, user: publicUser(user), sessionToken });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'Doğrulama hatası.' });
   }
@@ -864,7 +878,8 @@ async function handleLogin(req, res) {
       return;
     }
 
-    const user = readUsers().find(u => u.email === email);
+    const users = readUsers();
+    const user = users.find(u => u.email === email);
 
     if (user && user.googleAuth && !user.passwordHash) {
       sendJson(res, 401, { error: 'Bu hesap Google ile oluşturulmuş. Lütfen Google ile devam et butonunu kullan.' });
@@ -879,9 +894,34 @@ async function handleLogin(req, res) {
       return;
     }
 
-    sendJson(res, 200, { ok: true, user: publicUser(user) });
+    const sessionToken = issueSessionToken(user);
+    user.updatedAt = new Date().toISOString();
+    writeUsers(users);
+
+    sendJson(res, 200, { ok: true, user: publicUser(user), sessionToken });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'Giriş hatası.' });
+  }
+}
+
+async function handleSessionLogin(req, res) {
+  try {
+    const body = JSON.parse(await readBody(req) || '{}');
+    const email = normalizeEmail(body.email);
+    const sessionToken = String(body.sessionToken || '');
+    const users = readUsers();
+    const user = users.find(u => u.email === email);
+    if (!verifySessionToken(sessionToken, user)) {
+      sendJson(res, 401, { error: 'Oturum süresi dolmuş. Tekrar giriş yap.' });
+      return;
+    }
+    if (!user.verified) {
+      sendJson(res, 403, { error: 'Önce e-posta doğrulama kodunu girmen gerekiyor.', needsVerification: true, email });
+      return;
+    }
+    sendJson(res, 200, { ok: true, user: publicUser(user) });
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || 'Oturum doğrulanamadı.' });
   }
 }
 
@@ -926,6 +966,7 @@ async function handleGoogleLogin(req, res) {
     let user = users.find(u => u.email === email);
     let isNewUser = false;
 
+    let nextUsers = users;
     if (!user) {
       isNewUser = true;
       user = {
@@ -943,14 +984,15 @@ async function handleGoogleLogin(req, res) {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
-      writeUsers([...users, user]);
+      nextUsers = [...users, user];
     } else if (!user.verified) {
       user.verified = true;
-      user.updatedAt = new Date().toISOString();
-      writeUsers(users);
     }
+    const sessionToken = issueSessionToken(user);
+    user.updatedAt = new Date().toISOString();
+    writeUsers(nextUsers);
 
-    sendJson(res, 200, { ok: true, isNewUser, user: publicUser(user) });
+    sendJson(res, 200, { ok: true, isNewUser, user: publicUser(user), sessionToken });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'Google girişi başarısız oldu.' });
   }
@@ -1018,6 +1060,7 @@ async function handleAppleLogin(req, res) {
     let isNewUser = false;
     const nameFromApple = [fullName.givenName, fullName.familyName].filter(Boolean).join(' ').trim();
 
+    let nextUsers = users;
     if (!user) {
       isNewUser = true;
       user = {
@@ -1035,15 +1078,16 @@ async function handleAppleLogin(req, res) {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
-      writeUsers([...users, user]);
+      nextUsers = [...users, user];
     } else {
-      let changed = false;
-      if (!user.verified) { user.verified = true; changed = true; }
-      if (nameFromApple && (!user.name || user.name === email.split('@')[0])) { user.name = nameFromApple; changed = true; }
-      if (changed) { user.updatedAt = new Date().toISOString(); writeUsers(users); }
+      if (!user.verified) user.verified = true;
+      if (nameFromApple && (!user.name || user.name === email.split('@')[0])) user.name = nameFromApple;
     }
+    const sessionToken = issueSessionToken(user);
+    user.updatedAt = new Date().toISOString();
+    writeUsers(nextUsers);
 
-    sendJson(res, 200, { ok: true, isNewUser, user: publicUser(user) });
+    sendJson(res, 200, { ok: true, isNewUser, user: publicUser(user), sessionToken });
   } catch (error) {
     sendJson(res, error.status || 401, { error: error.message || 'Apple girişi başarısız oldu.' });
   }
@@ -1136,9 +1180,10 @@ async function handleResetPassword(req, res) {
     user.resetCodeExpiresAt = null;
     user.verified = true;
     user.updatedAt = new Date().toISOString();
+    const sessionToken = issueSessionToken(user);
     writeUsers(users);
 
-    sendJson(res, 200, { ok: true, user: publicUser(user) });
+    sendJson(res, 200, { ok: true, user: publicUser(user), sessionToken });
   } catch (error) {
     sendJson(res, 500, { error: error.message || 'Şifre yenilenemedi.' });
   }
@@ -1189,8 +1234,6 @@ async function handleDeleteAccount(req, res) {
         const verifyResponse = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`);
         const payload = await verifyResponse.json().catch(() => ({}));
         verifiedOk = verifyResponse.ok && !payload.error && normalizeEmail(payload.email) === email;
-      } else {
-        verifiedOk = true;
       }
     } else if (user.appleAuth) {
       if (identityToken) {
@@ -1200,8 +1243,6 @@ async function handleDeleteAccount(req, res) {
         } catch {
           verifiedOk = false;
         }
-      } else {
-        verifiedOk = true;
       }
     }
 
@@ -1317,6 +1358,7 @@ async function handleAwardPoints(req, res) {
     const body = JSON.parse(await readBody(req) || '{}');
     const email = normalizeEmail(body.email);
     const password = String(body.password || '');
+    const sessionToken = String(body.sessionToken || '');
     const reason = String(body.reason || '');
     const maxForReason = POINT_REASONS[reason];
     if (!maxForReason) {
@@ -1327,7 +1369,11 @@ async function handleAwardPoints(req, res) {
 
     const users = readUsers();
     const user = users.find(u => u.email === email);
-    if (!user || !user.passwordHash || !verifyPassword(password, user)) {
+    const authOk = user && (
+      verifySessionToken(sessionToken, user) ||
+      (password && user.passwordHash && verifyPassword(password, user))
+    );
+    if (!authOk) {
       sendJson(res, 401, { error: 'E-posta veya şifre hatalı.' });
       return;
     }
@@ -1533,6 +1579,10 @@ function routeRequest(req, res) {
   }
   if (req.method === 'POST' && req.url === '/api/login') {
     handleLogin(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/session-login') {
+    handleSessionLogin(req, res);
     return;
   }
   if (req.method === 'POST' && req.url === '/api/request-password-reset') {

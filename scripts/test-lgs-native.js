@@ -18,7 +18,7 @@ let browser;
  await page.waitForFunction(()=>JSON.parse(localStorage.getItem('mento.mobile.plan.v1')).exam==='LGS');
  const state=await page.evaluate(()=>JSON.parse(localStorage.getItem('mento.mobile.plan.v1')));
  assert.equal(state.examRecords.AYT.score,2);assert.equal(state.record.score,1);
- await page.getByText('Mini test',{exact:true}).click();
+ await page.getByRole('tab',{name:'Testler',exact:true}).click();
  await page.getByText('33 konu · 990 soru',{exact:true}).waitFor();
  await page.getByText('Eşlik ve Benzerlik',{exact:true}).click();
  for(const title of ['Test 1','Test 2','Test 3'])assert.equal(await page.getByText(title,{exact:true}).count(),1);
