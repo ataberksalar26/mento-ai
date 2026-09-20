@@ -59,7 +59,7 @@
     activeExamBank = exam;
     selectedExam = exam;
     if (!topicBanks[exam][activeLesson]) activeLesson=Object.keys(topicBanks[exam])[0];
-    document.getElementById('currentExamLabel').textContent=exam;
+    const examLabel=document.getElementById('currentExamLabel');if(examLabel)examLabel.textContent=exam;
     document.querySelectorAll('[data-main-exam]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mainExam===exam)));
     profileMode.textContent=exam+' hedef modu';
     preferences.exam=exam;
@@ -68,9 +68,9 @@
     if(activeLearningMode==='Mini testler')addLearningCards('Mini testler');
   }
   const examDropdown=document.getElementById('examDropdown');
-  examDropdown.querySelectorAll('[data-main-exam]').forEach(button=>button.onclick=()=>{chooseExam('LGS');setExamDropdownOpen(false);document.getElementById('examDropdownBtn')?.focus();});
-  document.addEventListener('click',event=>{if(!examDropdown.contains(event.target))examDropdown.open=false;});
-  examDropdown.addEventListener('keydown',event=>{if(event.key==='Escape'){setExamDropdownOpen(false);document.getElementById('examDropdownBtn')?.focus();}});
+  examDropdown?.querySelectorAll('[data-main-exam]').forEach(button=>button.onclick=()=>{chooseExam('LGS');setExamDropdownOpen(false);document.getElementById('examDropdownBtn')?.focus();});
+  document.addEventListener('click',event=>{if(examDropdown&&!examDropdown.contains(event.target))examDropdown.open=false;});
+  examDropdown?.addEventListener('keydown',event=>{if(event.key==='Escape'){setExamDropdownOpen(false);document.getElementById('examDropdownBtn')?.focus();}});
   chooseExam(preferences.exam);
   appearance();
   for(const id of ['themeToggle','topThemeToggle']) document.getElementById(id).addEventListener('click',()=>{
