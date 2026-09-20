@@ -14,7 +14,7 @@ function validateBank(bank) {
     const key = [test.exam, test.lesson, test.topic].join('|');
     if (!sources[test.exam] || !test.lesson || !test.topic || keys.has(key)) throw new Error('Invalid or duplicate topic: ' + key);
     keys.add(key);
-    if (!Array.isArray(test.questions) || test.questions.length !== 30) throw new Error('Each topic needs exactly 30 questions: ' + key);
+    if (!Array.isArray(test.questions) || test.questions.length < 30 || test.questions.length % 30 !== 0) throw new Error('Each topic needs a multiple of 30 questions: ' + key);
     const texts = new Set();
     for (const q of test.questions) {
       if (!q.id || ids.has(q.id) || typeof q.question !== 'string' || !q.question.trim() || texts.has(q.question.trim())) throw new Error('Invalid or duplicate question');

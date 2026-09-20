@@ -5033,6 +5033,12 @@
     .proof-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 32px; }
     .proof-head h2, .faq-section h2, .closing-cta h2 { margin: 9px 0 0; font-size: clamp(30px, 4vw, 50px); line-height: 1.04; letter-spacing: -.035em; }
     .proof-head p { max-width: 430px; color: var(--muted); line-height: 1.65; margin: 0; }
+    .price-card h3 { font-size: 34px; margin: 10px 0 14px; } .price-card h3 small { font-size: 15px; color: var(--muted, #9aa7b8); font-weight: 600; }
+    .price-list { list-style: none; padding: 0; margin: 0 0 18px; display: grid; gap: 9px; } .price-list li { padding-left: 22px; position: relative; } .price-list li::before { content: "✓"; position: absolute; left: 0; color: #f5c263; }
+    .price-featured { border-color: rgba(245,194,99,.6); background: rgba(245,194,99,.07); }
+    .price-soon { display: inline-block; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(245,194,99,.5); color: #f5c263; font-size: 13px; font-weight: 700; }
+    .price-note { margin-top: 18px; font-size: 13px; opacity: .7; text-align: center; }
+    @media (max-width: 860px) { .pricing-section .proof-grid { grid-template-columns: 1fr; } }
     .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .proof-card { min-height: 220px; padding: 25px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.04); }
     .proof-card .case-label { color: var(--gold-light); font-size: 12px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
@@ -5106,6 +5112,7 @@
         <div class="nav-links">
           <a href="#lgs">LGS</a>
           <a href="#nasil-calisir">Nasıl Çalışır?</a>
+          <a href="#fiyatlar">Fiyatlar</a>
           <a href="#sss">SSS</a>
         </div>
         <div class="nav-actions">
@@ -5486,6 +5493,37 @@
             <button class="btn" type="button" data-open-demo>Ücretsiz Dene</button>
           </div>
         </div>
+      </section>
+
+      <section class="proof-section pricing-section" id="fiyatlar" aria-labelledby="pricingTitle">
+        <div class="proof-head">
+          <div>
+            <div class="section-kicker">Fiyatlar</div>
+            <h2 id="pricingTitle">Ücretsiz başla, hazır olunca Plus'a geç.</h2>
+          </div>
+          <p>Konu testleri ve ezber kartlarıyla ücretsiz başlarsın. Mento Plus, sınırsız koç ve fotoğraftan soru çözümü içindir.</p>
+        </div>
+        <div class="proof-grid">
+          <article class="proof-card price-card">
+            <span class="case-label">Ücretsiz</span>
+            <h3>0 ₺</h3>
+            <ul class="price-list"><li>2.130 soruluk LGS soru bankası</li><li>51 konuda testler ve video dersler</li><li>Ezber kartları ve mini oyun</li><li>Günlük plan ve lider tablosu</li></ul>
+            <a href="#" data-open-demo>Ücretsiz başla →</a>
+          </article>
+          <article class="proof-card price-card price-featured">
+            <span class="case-label">Mento Plus · Aylık</span>
+            <h3>199 ₺ <small>/ ay</small></h3>
+            <ul class="price-list"><li>Ücretsizdeki her şey</li><li>Sınırsız Mento Koç sohbeti</li><li>Fotoğraftan soru çözümü</li><li>Kişisel çalışma planı ve eksik analizi</li></ul>
+            <span class="price-soon">Yakında</span>
+          </article>
+          <article class="proof-card price-card">
+            <span class="case-label">Mento Plus · Yıllık</span>
+            <h3>1.499 ₺ <small>/ yıl</small></h3>
+            <ul class="price-list"><li>Aylık plandaki her şey</li><li>Aylığa göre %37 tasarruf</li><li>Sınav dönemi boyunca kesintisiz</li></ul>
+            <span class="price-soon">Yakında</span>
+          </article>
+        </div>
+        <p class="price-note">Fiyatlar KDV dahildir. Abonelik App Store üzerinden yapılır ve istediğin zaman iptal edilebilir.</p>
       </section>
 
       <section class="faq-section" id="sss" aria-labelledby="faqTitle">

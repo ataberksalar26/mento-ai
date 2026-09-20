@@ -445,7 +445,10 @@ async function handleGenerateQuiz(req, res) {
       sendJson(res, 404, { error: 'Bu konu için hazır test henüz eklenmedi.', code: 'QUESTION_BANK_PENDING', sources: questionSources[exam] });
       return;
     }
-    sendJson(res, 200, { ok: true, source: 'question-bank', quiz });
+    const want = Math.max(1, Math.min(Number(body.questionCount) || 30, quiz.questions.length));
+    const pool = quiz.questions.slice();
+    for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+    sendJson(res, 200, { ok: true, source: 'question-bank', quiz: { ...quiz, questions: pool.slice(0, want) } });
   } catch (error) {
     sendJson(res, error.status || 500, { error: error.message || 'Quiz üretilemedi.' });
   }
